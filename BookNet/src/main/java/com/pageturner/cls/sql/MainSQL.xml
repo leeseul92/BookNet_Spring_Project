@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+			PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+					
+<mapper namespace="mainSQL">
+
+	<!-- 로그인한 회원에게 보여주는 메인 게시글 질의명령 -->
+	<select id="MemMain" resultType="mainVO" parameterType="string">
+		SELECT 
+		    pl.pno, mf.id, bname, gname, pl.postcont, pl.cnt, bg.largeimg,
+		    TO_CHAR(pl.postdate, 'yyyy/mm/dd') pdate, TO_CHAR(pl.postdate, 'HH:MI:ss') ptime, 
+		    '#'||LISTAGG(hname, '#') WITHIN GROUP (ORDER BY hname DESC) hash
+		FROM 
+		    hashtab h,
+		    (SELECT
+		        p.pno pno, p.bno, p.mno, postcont, postdate, count(l.pno) cnt
+		    FROM
+		        poststab p, liketab l
+		    WHERE
+		        p.pno = l.pno
+		    GROUP BY
+		        p.pno, postcont, postdate, p.bno, p.mno) pl,
+		    (SELECT
+		        bno, bname, largeimg, g.genre, gname
+		    FROM
+		        booktab b, genretab g
+		    WHERE
+		        b.genre = g.genre) bg,
+		    (SELECT 
+		        DISTINCT mno, id 
+		    FROM 
+		        membertab m, fallowtab 
+		    WHERE
+		        m.mno = (SELECT mno FROM membertab WHERE id = 'jinro' ) 
+		        OR (fallower_no = (SELECT mno FROM membertab WHERE id = 'jinro' ) 
+		        AND m.mno = fallow_no)) mf
+		WHERE 
+		    pl.pno = h.pno(+)
+		    AND pl.mno = mf.mno
+		    AND pl.bno = bg.bno
+		GROUP BY 
+		    pl.pno, pl.postcont, pl.postdate, pl.cnt, mf.id, bname, gname, bg.largeimg
+		ORDER BY
+		    pl.postdate, pl.cnt DESC
+	</select>
+	
+	<!-- 메인화면에 들어갈 자주 작성된 도서를 보여주는 질의명령 -->
+	<select id="OftenBook" resultType="mainVO">
+		SELECT
+		   ROWNUM, often.cnt, often.bno, bname, gname
+		FROM
+		    (SELECT
+		        count(p.bno) cnt, p.bno
+		    FROM
+		        poststab p, booktab b
+		    WHERE
+		        p.bno = b.bno
+		        AND p.isshow = 'Y'
+		    GROUP BY
+		        p.bno) often, booktab b, genretab g
+		WHERE
+		    <![CDATA[ROWNUM <= 5]]>
+		    AND b.bno = often.bno
+		    AND b.genre = g.genre
+		ORDER BY
+		    cnt DESC
+	</select>
+</mapper>							

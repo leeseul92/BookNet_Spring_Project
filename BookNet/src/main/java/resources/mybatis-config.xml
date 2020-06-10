@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+			PUBLIC "-//mybatis.org/DTD Config 3.0//EN"
+					"http://mybatis.org/dtd/mybatis-3-config.dtd">
+		
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false"/>
+		<setting name="useGeneratedKeys" value="true"/>
+		<setting name="defaultExecutorType" value="REUSE"/>
+	</settings>
+	
+	<typeAliases> <!-- package로 고치기 -->
+		<typeAlias alias="mVO" type="com.pageturner.cls.vo.MemberVO"/>
+		<typeAlias alias="mainVO" type="com.pageturner.cls.vo.MainVO"/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="com/pageturner/cls/sql/MemberSQL.xml"/>
+		<mapper resource="com/pageturner/cls/sql/MainSQL.xml"/> 
+	</mappers>
+</configuration>		

@@ -1,0 +1,25 @@
+--------------------------------------------------------------
+*우현우
+# 로그인 페이지 요청
+	요청내용	: /cls/member/login.cls
+	파라미터	: 없음 
+	컨트롤러	: com.pageturner.cls.controller.member.Member
+	처리함수	: Member.loginForm()
+	뷰		: /WEB-INF/views/member/login.jsp
+--------------------------------------------------------------
+# 로그인 처리 요청 
+	요청내용	: /cls/member/login.cls
+	파라미터	: id, pw (mVO)
+	컨트롤러	: com.pageturner.cls.controller.member.Member
+	처리함수	: Member.loginProc()
+	뷰		: redirect(/cls/member/login.cls or /cls/main/main.cls)
+--------------------------------------------------------------
+*김이슬
+# 회원 메인 페이지 요청
+	요청내용	: /cls/main/main.cls
+	파라미터	: id
+	컨트롤러	: com.pageturner.cls.controller.main.Main
+	처리함수	: Main.showMain()
+	뷰		: /WEB-INF/views/main/mem_main.jsp
+--------------------------------------------------------------
+

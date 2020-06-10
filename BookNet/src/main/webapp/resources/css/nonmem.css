@@ -1,0 +1,272 @@
+/**
+ * 	이 CSS는 비회원 메인페이지에 적용되는 CSS입니다.
+ * @author 서동혁
+ * @version v.0.1.0
+ * @since 2020.05.25
+ */
+.logot{
+	color:black;
+	text-decoration: none;
+}
+.logot:visited{ 
+	color: black;
+}
+
+.linktop {
+         width:100%; height: 150px; top: 0px; position: fixed;  text-align: center; font-size:30pt; color: blue;
+}
+.op-4{
+opacity:0.4;
+}
+.op-6{
+opacity:0.6;
+}
+.linkfoot {
+         width:100%; height: 100px; bottom: 0px; position: fixed; text-align: center; font-size:30pt; color: blue;
+}
+.galss{
+   /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ebe9f9+0,d8d0ef+54,c1bfea+100 */
+background: #ebe9f9; /* Old browsers */
+background: -moz-linear-gradient(-45deg,  #ebe9f9 0%, #d8d0ef 54%, #c1bfea 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg,  #ebe9f9 0%,#d8d0ef 54%,#c1bfea 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg,  #ebe9f9 0%,#d8d0ef 54%,#c1bfea 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebe9f9', endColorstr='#c1bfea',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+.bgalss{
+   width: 100%;
+   background-color: rgba(0,0,0,.8);
+   backdrop-filter: blur(10px);
+}
+.rBNOH {
+   -webkit-box-align: center;
+   -webkit-align-items: center;
+   -ms-flex-align: center;
+   align-items: center
+}
+
+
+.Igw0E {
+   -webkit-align-content: stretch;
+   -ms-flex-line-pack: stretch;
+   align-content: stretch
+}
+.pmxbr {
+   -webkit-align-self: center;
+   -ms-flex-item-align: center;
+   align-self: center
+}
+.xqRnw {
+    border: 0;
+    padding: 6px;
+    position: inherit;
+    bottom: 120px;
+    top: 0px;
+    z-index: 1;
+}
+.afkep {
+    min-height: 64px;
+    min-width: 100px;
+}
+.dCJp8{
+   background: 0 0;
+   display: flex;
+}
+.dCJb6{
+   display: flex;
+}
+.HcJZg {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.HcThg {
+    padding-bottom: 16px;
+    padding-top: 16px;
+}
+.XfCBB {
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.IY_1{
+       margin-right: auto;
+       margin-left: auto;
+}
+.4EzTm{
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+}
+.insbak{
+   background-image: url(https://www.instagram.com/static/bundles/es6/sprite_glyphs_c14ffe44a4f6.png/c14ffe44a4f6.png);
+}.insbak:hover{
+   cursor:pointer;
+    transform:scale(1.1);
+}
+.insgreyClose{
+   background-position: -185px -273px;
+    height: 9px;
+    width: 9px;
+}
+.insheart-empty{
+   background-position: -233px -370px;
+    height: 25px;
+    width: 25px;
+}
+/*.insheart-empty:active{/*클릭 하고있을 때*/
+   /*.insheart{}*//*
+   background-position: -207px -370px;
+    height: 25PX;
+    width: 25px;
+    cursor:pointer;
+    transform:scale(1.2);
+}*/
+/*.insheart-empty:visited{클릭 한 후
+   background-position: -207px -370px;
+    height: 25PX;
+    width: 25px;
+}*/
+.insheart{
+   background-position: -207px -370px;
+    height: 25PX;
+    width: 25px;
+}
+/*.insheart:active{
+   background-position: -233px -370px;
+    height: 25PX;
+    width: 25px;
+    cursor:pointer;
+    transform:scale(1.2);
+}*/
+
+.mg-left{
+       margin-left: 12px;
+    margin-top: 0;
+}
+.bd-rad{
+   border-radius: 50%;
+}
+.posit{
+   margin: 0;
+    padding: 0;
+    position: relative;
+}
+.divflex{
+   flex-wrap: wrap;
+   display: flex;
+}
+.dblock{
+   display: block;
+}
+.rG18m{
+   margin: 0px auto 0px 12px;
+}
+.dife{
+   display: flex;
+}
+.full0{
+   margin: 0;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+.mg-whtie{
+   margin-bottom: 12px;
+   color: white;
+}
+.footbody{
+   overflow-wrap: break-word;
+    white-space: normal;
+    flex-wrap: wrap;
+    text-align: left;
+    display: block;
+    color: #fff;
+    color: rgba(var(--eca,255,255,255),1);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 18px;
+    margin: -3px 0 -4px;
+}
+.ft-btn{
+   min-width: 112px;
+   margin-left: 12px;
+}
+.mt-12{
+   margin-top:12px;
+}
+.ft-log{
+   border:1px solid transparent;
+   background: rgba(var(--d69,0,149,246),1);
+    font-weight: 600;
+    font-size:18px;
+   text-decoration: none;
+}
+.ft-join{
+   border: 0;
+   display: inline;
+    padding: 0;
+    position: relative;
+}
+.joinc0l0{
+   text-align: center;
+    font-weight: 600;
+    font-size:18px;
+   text-decoration: none;
+   margin-bottom: 12px;
+   color: rgba(var(--d69,0,149,246),1);
+    width: auto;
+}
+.foot-box{
+    border-radius: 4px;
+    padding: 5px 35px;
+}
+.bdcolor{
+	color: green;
+}
+
+*{
+    overflow-y: none;
+   -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}*::-webkit-scrollbar {
+display: none; /*Chrome, Safari, Opera*/
+}
+
+#logolink{
+	text-decoration: none;
+	color:black;
+	 font-weight: 400;
+}#logolink:active{
+	color:black;
+	 font-weight: 400;
+}
+	input[type=text]:-ms-clear{
+    display: none;
+    }
+    #searchclear {
+	position: relative;
+    left: 135px;
+    top: -52px;
+    bottom: 0;
+    width: 10px;
+    /* height: 14px; */
+    /* margin: auto; */
+    font-size: 12px;
+    cursor: pointer;
+    color: #ccc;
+    background-color: #fff;
+}
+	/* transition css */
+	.eachPost{
+		overflow: hidden;
+	}
+	.eachPostTran{
+		position: relative;
+		right: 205px;
+		hegiht: 157.5px;
+		width: 205px; 
+	}
+		.swal-overlay {  background-color: rgba(43, 165, 137, 0.45);
+} 
