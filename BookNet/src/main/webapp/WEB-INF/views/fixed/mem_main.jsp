@@ -6,6 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>회원 메인페이지</title>
+<link rel="stylesheet" href="/cls/css/proj_fixed.css?v=<%=System.currentTimeMillis() %>">
+<link rel="stylesheet" href="/cls/css/modal.css?v=<%=System.currentTimeMillis() %>">
+<link rel="stylesheet" href="/cls/css/w3.css?v=<%=System.currentTimeMillis() %>">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> -->
+<script type="text/javascript" src="/cls/js/jquery-3.5.0.min.js"></script>
+<script type="text/javascript" src="/cls/js/fixed.js?v=<%=System.currentTimeMillis() %>"></script>
+<script type="text/javascript" src="/cls/js/clock.js?v=<%=System.currentTimeMillis() %>"></script>
 <style>
 </style>	
 <script type="text/javascript">
@@ -13,25 +20,34 @@
 </head>
 <body onload="printClock()"/>
 <!-- 파라미터로 넘길 데이터값 -->
+<form method="POST" id="frm">
+	<input type="hidden" id="bno" name="bno"> <!-- 글 작성할때 넘겨줄 책 번호 -->
+	<input type="hidden" id="eno" name="eno"> <!-- 글 작성할때 넘겨줄 감정번호 -->
+	<input type="hidden" id="body" name="body"> <!-- 글 작성할때 넘겨줄 게시글 본문 -->
+	<input type="hidden" id="tags" name="tags"> <!-- 글 작성할때 넘겨줄 해시태그 -->
+</form>
 <form method="POST" id="frm2">
 	<input type="hidden" id="pno" name="pno"> <!-- 게시글 삭제시 넘겨줄 게시글 번호 -->
 </form>
-	<!-- 추천도서, 베스트셀러 모달 슬라이드 처리 -->
+<form method="POST" id="frm3">
+	<input type="hidden" id="searchinput" name="searchinput"> <!-- 검색시 넘겨줄 키워드 값 -->
+</form>
+	<!-- 추천도서, 베스트셀러, 신간도서 모달 슬라이드 처리 -->
 	<div class="firstModal slideRank" role="none">
-		<div class="r-modal-content">
+		<div class="r-modal-content" id="">
 			<div style="width: 100%; height: 10px; margin: 0 atuo;">
 				<span class="close r-x-btn" id="r-close_butt" style="color: #fefefe;">x</span>
 			</div>
 			<div style="width: 100%; height: 10px; margin: 5px auto;">
-				<div class="w3-col"><a class="w3-third w3-card w3-bar-item" style="color: white; font-size: 18px; text-align: center;" href="">금주의 베스트셀러</a></div>
+				<div class="w3-col"><a class="w3-third" style="color: white; font-size: 18px; text-align: center;" href="">신간도서</a></div>
 				<!-- <div><a class="w3-third w3-border" style="color: white; text-align: center;" href="">베스트셀러</a></div>
 				<div><a class="w3-third w3-border" style="color: white; text-align: center;" href="">추천도서</a></div> -->
 			</div>
-			<!-- 베스트셀러 정보를 담을 div -->
-			<div class="w100-h390 mgt15" id=""> 
-				
-			</div>
-			<input type="checkbox" name="closeForDay" value="OK" id="closeForDay" /> 하루동안 창을 열지 않음
+			<c:forEach begin="0" end="2" varStatus="status">
+				<div class="w100-h290 mgt15" style="border-bottom: dashed 1px white"> <!-- 신간도서 정보를 담을 div -->
+					<div style="width: 100%; height: 30px; line-height: 30px;"><a style="font-size: 25px; color: white;"><b>${status.count}</b></a></div>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 	<div>
@@ -55,12 +71,7 @@
 									</div>
 								</c:if>
 								<div class="like-butt" id="${data.pno}" style="display: flex;'">
-									<c:if test="${data.ischeck eq NULL}">
-										<span style="font-size: 12px; line-height: 0px;" class="like-img likebtn" id="like${data.pno}"></span>
-									</c:if>
-									<c:if test="${data.ischeck eq 'Y'}">
-										<span style="font-size: 12px; line-height: 0px; background-position: -208px -370px;" class="like-img likebtn" id="like${data.pno}"></span>
-									</c:if>
+									<span style="font-size: 12px; line-height: 0px;" class="like-img likebtn" id="like${data.pno}"></span>
 								</div>
 							</div>
 							<!-- 게시글의 본문부분::도서사진,도서이름,본문 -->
@@ -175,8 +186,122 @@
 				<!-- 우측 정보 끝! -->
 			</div>
 		</div>
-		<!-- 고정페이지부분 -->
-		<jsp:include page="/WEB-INF/views/fixed.jsp" />
+		<!-- 헤더부분 -->
+		<div id="header-wrap">
+			<div class="header">
+				<div class="logobox">
+					<div style="box-sizing: border-box; font-size: 30px; text-align: center;">
+						<!-- 로고 이미지 혹은 링크 들어갈 자리 class="div_logo" -->
+						<a href="/cls/main/main.cls" style="color: #6b70b2;"><b>PageTurner</b></a>
+					</div>
+				</div>
+				<div class="searchbox">
+					<input class="searchinput" type="text" placeholder="search">
+				</div>
+				<div class="iconsbox">
+					<div style="float: left; width:80px;"> 
+						<a href="/cls/member/logoutProc.cls">로그아웃</a>
+						<!-- <img class="iconimg" id="" src="/cls/img/iconmonstr-compass-4-240.png"> -->
+					</div> 
+					<!-- 알람표시아이콘 -->
+					<div class="span_icons">
+						<button type="button" class="butt" id="aBtn">
+							<img class="iconimg" id="" src="/cls/img/iconmonstr-bell-7-240.png">
+						</button>
+						<!-- The Modal -->
+						<div id="actModal" class="modal" role="none">
+							<!-- Modal Content -->
+							<div style="width: 900px; height: auto; margin: 0 auto;">
+								<div id="modal-content" class="a-modal-content">
+									<span class="close w-x-btn" id="a-close_butt">x</span>
+									<!-- onclick="document.getElementById('actModal').style.display='none'" -->
+									<p>Some Text....</p>
+									<div style="width: 100%; height: 30px; line-height: 30px; background-color: rgba(0, 0, 0, 0.4);">
+										<!-- <input type="button" value="MORE" id="more_butt" style="width: 100%; box-sizing: border-box;"/> -->
+										<div style="width: 100%; text-align: center" id="more_butt">MORE</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="span_icons" id=""> 
+						<button type="button" class="butt" id="wBtn">
+							<img class="iconimg" id="" src="/cls/img/iconmonstr-pen-15-240.png">
+						</button>
+						<!-- The Modal -->
+						<div id="writeModal" style="padding-top: 50px;" class="w3-modal">
+							<div id="" class="w-modal-content">
+								<span class="close w-x-btn" id="w-close_butt">x</span>
+									<!-- onclick="document.getElementById('actModal').style.display='none'" -->
+								<!-- 도서검색 -->
+								<div class="w-b-input">
+									<!-- 도서장르 선택 -->
+									<div style="float: left; wdith: 100px; height: 40px; line-height: 40px; margin-right: 10px;">
+										<select name="selGenre" id="setGenre">
+											<option value="">도서장르</option>
+											<c:forEach var="genre" items="${GENRE}">
+												<option value="${genre.genre}">${genre.gname}</option>
+											</c:forEach>
+										</select>
+									</div>
+									<input type="search" id="findBook" placeholder="도서검색" style="float: left; width: 190px; height: 40px; line-height: 40px;"/>
+									<input type="button" id="book-search" value="검색" style="float: left; width: 40px; height: 40px; line-height: 40px; margin-left: 10px;"/>
+									<!-- 감정 셀렉트 -->
+									<div class="w-e-sel">
+										<select name="emotion" id="selEmo">
+											<option value="">감정을 선택해주세요X)</option>
+											<option value="2">덜덜;무서워욧!</option>
+											<option value="3">ㅠ_ㅠ불안해요..</option>
+											<option value="4">very exciting!</option>
+											<option value="1">행복해요X)</option>
+											<option value="5">그리워요;ㅁ;</option>
+										</select>
+									</div>
+	 							</div>
+	 							<div class="wrt-div">
+									<div class="wrt-b-img">
+										<img id="sel-wrt-b-img"/>
+									</div>
+		 							<div class="sel-wrt-b-info" id="sel-wrt-b-info">
+		 								<div style="width: 100%; height: 20px; margin-top: 10px;" id="rst-book-gname"></div>
+		 								<div style="width: 100%; height: 20px; margin-top: 10px;" id="rst-book-bname"></div>
+		 							</div>
+		 							<div class="wrt-body">
+	 									<textarea class="-a-t" id="postBody" wrap="hard"></textarea>
+	 								</div>
+	 							</div>
+	 							<div class="wrt-last">
+	 								<input type="button" value="취소하기" class="wrt-butt" id="c-submit"/>
+	 								<input type="button" value="등록하기" class="wrt-butt" style="float: right;" id="p-submit"/>
+	 							</div>
+							</div>
+							<!-- 도서검색 결과 모달창 -->
+ 							<div class="w3-modal" id="-s-b-modal">
+ 								<div id="" class="s-modal-content">
+ 									<span class="close w-x-btn" style="position: fixed;" id="s-close_butt">x</span>
+ 									<div class="-s-rst" id="rst-cont">
+ 										<b>검색 결과</b>
+ 									</div>
+ 									<div class="rstPage">
+ 										<!-- 검색결과 리스트 -->
+	 								</div>
+ 								</div>
+ 							</div>
+						</div>
+					</div> 
+					<div class="span_icons"> 
+						<button type="button" class="butt" id="myBtn">
+							<img class="iconimg" id="" src="/cls/img/iconmonstr-user-19-240.png">
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+     	<!-- /Footer Link -->
+     	<!-- 풋터부분 -->
+      <footer>
+      	<jsp:include page="/WEB-INF/views/include/seoFooter.jsp"/>
+      </footer>
 	</div>
 </body>
 </html>

@@ -1,27 +1,155 @@
 /*
- * 이 스크립트는 jquery 진행을 위한 스크립트 파일입니다.
+ * 이 스크립트는 javascript 및 jquery 진행을 위한 스크립트 파일입니다.
  * 웹 내 이벤트 처리를 담당하며 ajax 처리 또한 존재합니다.
  * @author leeseul kim
  * @since 25th May 2020
  * 
  */
 
-function selrstbook(){
-	var selno = $(this).parents().attr('id'); //도서 isbn 번호 
-//	alert(selno);
-	var selimg = $('#b-image').attr('src'); //도서 이미지
-	var selttl = $('#b-title').text(); //도서 제목 
-//	alert(selttl); 
-	$('#-s-b-modal').css('display', 'none');
-$('.rstPage').html('');
-	//값 셋팅 
-	$('#bno').val(selno);
-	$('#sel-wrt-b-img').attr('src', selimg);
-	$('#sel-wrt-b-ttl').html('<b>' + selttl + '</b>');
+
+//글쓰기모달에서 검색된 도서 중 하나를 클릭했을 때 정보를 가져오도록 하는 함수 
+function selrstbook(id){ 
+	//도서번호 가져오기 
+	var sbno= id;
+	var simg = document.getElementById('img'+sbno).getAttribute('src'); 
+	var sbname = document.getElementById('bname'+sbno).innerText; 
+	var sgname = document.getElementById('gname'+sbno).innerText;
+	document.getElementById('-s-b-modal').style.display = "none";
+	$('.rstPage').html('');
+	$('#findBook').val(''); //검색어부분 사라지게 하기 
+	//값을 frm에 저장 
+	$('#bno').val(sbno);
+	$('#sel-wrt-b-img').attr('src', simg);
+	$('#rst-book-gname').html('<small>' + sgname + '</small>');
+	$('#rst-book-bname').html('<b>' + sbname + '</b>');
 }
 
+//replaceAll 함수 만들기
+String.prototype.replaceAll = function(org, dest){
+	return this.split(org).join(dest);
+}
+
+//작성한 글에서 해시태그 분리해주는 자바스크립트 함수 
+function splitedHash(body){
+	var content = body;
+//	var content = document.getElementById('postBody').innerText();
+	content = content.replaceAll(/(\n)/g, ' ');
+	var splitedArr = content.split(' '); //게시글 전체를 띄어쓰기로 구분하여 배열에 저장
+	var regExp = /^[#]([_가-힣ㅏ-ㅣㄱ-ㅎ0-9a-zA-Z]{1,20})$/i;
+	var tags = '';
+	for(var hash in splitedArr){
+		hash = splitedArr[hash];
+		
+		//#으로 시작하는 단어만 추출하기
+		//단, 연속으로 # 표시가 오거나, 하나의 #만 오는 경우는 추출하지 않는다.
+		if(regExp.test(hash)){
+			tags += hash;
+		}
+	}
+	
+	return tags;
+}
+
+//댓글 리스트 불러주는 비동기통신 함수 
+function showCmtList(pno, tid){
+	
+	$.ajax({
+		url: '/cls/posts/showCmtList.cls',
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			'pno': pno
+		},
+		success: function(obj){
+			var len = obj.length;
+//			alert(obj[0].comnt);
+//			alert(len);
+			if(len != 0){
+				for(var i = 0; i < len; i++){
+					if(obj[i].sid == obj[i].id){
+						$('#'+tid).append('<div style="width: 100%; height: 30px;" id="' + tid + '">' +
+								'<div style="float: left; width: 30px; height: 30px; margin-left: 10px; border: 1px dashed black;">' +
+								'<img src="" style="box-sizing: border-box;"/>' +
+								'</div>' +
+								'<div class="h30-m10" style="width: 60px;"><a href="">' + obj[i].id + '</a></div>' +
+								'<div class="h30-m10" style="width: 150px;"><small>' + obj[i].cdate + ' ' + obj[i].ctime + '</small></div>' +
+								'<button class="h30-m10 butt"  style="float: right; width: 60px;" onclick="">Reply</button>' +
+								'<button class="h30-m10 butt" id="' + obj[i].cno + '" style="float: right; width: 60px;" onclick="delCmt(this);">Delete</button>' +
+								'</div>' +
+								'<div class="h30-m10" style="width: 100%;">' + obj[i].comnt + '</div>');
+					} else {
+						$('#'+tid).append('<div style="width: 100%; height: 30px;"id="' + tid + '">' +
+								'<div style="float: left; width: 30px; height: 30px; margin-left: 10px; border: 1px dashed black;">' +
+								'<img src="" style="box-sizing: border-box;"/>' +
+								'</div>' +
+								'<div class="h30-m10" style="width: 60px;"><a href="">' + obj[i].id + '</a></div>' +
+								'<div class="h30-m10" style="width: 150px;"><small>' + obj[i].cdate + ' ' + obj[i].ctime + '</small></div>' +
+								'<button class="h30-m10 butt" style="float: right; width: 60px;" onclick="">Reply</button>' +
+								'</div>' +
+								'<div class="h30-m10" style="width: 100%;">' + obj[i].comnt + '</div>');
+					}
+					$('.detailPost').css('display', 'block');
+				}
+			} else {
+				$('.detailPost').css('display', 'block');
+			}
+		},
+		error: function(){
+			alert("실패!");
+		}
+	});
+}
+
+//댓글 삭제처리해주는 함수 
+function delCmt(element){
+	var tid = element.parentNode.getAttribute('id'); // cmt+숫자 의 형태임.
+	var pno = tid.substr(3);
+	alert(pno);
+	
+	var cno = element.getAttribute('id');
+//	alert(cno);
+	
+	//비동기처리 
+	$.ajax({
+		url: '/cls/posts/delCmt.cls',
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			'cno': cno
+		},
+		success: function(rst){
+			if(rst != 1){
+				alert('댓글삭제 실패!');
+			}
+			
+			if(rst == 1){
+				$('#'+tid).html('');
+				showCmtList(pno, tid);
+			}
+		},
+		error: function(){
+			alert('실패!');
+		}
+	});
+}
 
 $(document).ready(function(){
+	
+	// search clear
+	var $ipt = $('#searchinput'),
+	    $clearIpt = $('#searchclear');
+			// keyup시 x표시
+		$ipt.keyup(function(){
+		  $("#searchclear").toggle(Boolean($(this).val()));
+		});
+			
+			
+		$clearIpt.toggle(Boolean($ipt.val()));
+		$clearIpt.click(function(){ 
+		  $("#searchinput").val('').focus();
+		  // display 속성을 none으로 바꾼다. : 감춘다
+		  $(this).hide();
+		});
 	
 	$(document).scroll(function() {
 		var maxHeight = $(document).height();
@@ -32,41 +160,18 @@ $(document).ready(function(){
 		
 	});
 	
-	// footerUp
-	var hei = $('#footer-wrap').css("height"); 
-	 $("#footer-wrap").mouseenter(function(){
-			if($('#footer-wrap').css("height") == "86.438px"){
-				$('#footer-wrap').css("transition","all 0.6s");
-				$('#footer-wrap').css("background-color","#F7B3D2");
-				$('#footer-wrap').css("color","#FFF");
-				$('#footer-wrap').css("height","186.438px");
-				
-			} else if($('#footer-wrap').css("height") == hei){
-				$('#footer-wrap').css("transition","all 0.6s");
-				$('#footer-wrap').css("background-color","#F7B3D2");
-				$('#footer-wrap').css("color","#FFF");
-				$('#footer-wrap').css("height","186.438px");
-			}
-	 	$("#footer-wrap").mouseleave(function(){
-	 		if($('#footer-wrap').css("height") == "186.438px"){
-	 			$('#footer-wrap').css("height", "86.438px");
-				$('#footer-wrap').css("background-color","#F3F0F7");
-				$('#footer-wrap').css("color","#FFF");
-				$('#footer-wrap').css("transition","all 0.6s");
-				$('#footer-wrap').css("overflow","hidden");
-	 		}
-		});
-	});
-	
 	// 엔터검색
 	$('.searchinput').keyup(function(e) {
 		if (e.keyCode == 13) {
 			var key = $('.searchinput').val();
-//			alert(key);
 			$('#searchinput').val(key);
 			$('#frm3').attr('action', '/BookNet/search/searchAll.cls');
 			$('#frm3').submit();
 		}
+	});
+	
+	$('#r-close_butt').click(function(){
+		$('.slideRank').css('display', 'none');
 	});
 	
 	$('#more_butt').click(function() { //modal에서 알림페이지로 이동 
@@ -84,7 +189,7 @@ $(document).ready(function(){
 	$('#s-close_butt').click(function() { //modal 닫기버튼 
 		$('#-s-b-modal').css('display', 'none');
 		$('.rstPage').html('');
-		$('#findBook').value('');
+		$('#findBook').val('');
 	});
 	
 	$('#myBtn').click(function(){
@@ -94,7 +199,6 @@ $(document).ready(function(){
 	$('.likebtn').click(function(){ //like 버튼 클릭시 빨강하트로 변경 
 		$(this).css('background-position', '-208px -370px');
 		var pno = $(this).parents().attr('id');
-//		alert(pno);
 		
 		//비동기처리 
 		$.ajax({
@@ -119,7 +223,6 @@ $(document).ready(function(){
 		$('.edit-del-modal').css('display', 'block');
 		//frm2에 값을 전달해주어야함. 
 		var pno = $(this).parents().attr('id');
-//		alert(pno);
 		$('#pno').val(pno); 
 	});
 	
@@ -139,7 +242,7 @@ $(document).ready(function(){
 	
 	$('.comtbtn').click(function(){ //댓글버튼 클릭시 댓글 달 수 있는 창 보여주기 
 		$('.wrtcomt').css('display', '');
-		$('.p-modal-content').css('height','590px');
+		$('.wrt-hid').css('height','460px');
 	});
 	
 	$('.modi_post').click(function(){ //게시물 상세보기 모달 
@@ -152,6 +255,7 @@ $(document).ready(function(){
 		var pbody = $('#'+'pbody'+pno).text(); //본문 
 		var htags = $('#'+'hash'+pno).text(); //해시태그 
 		$('.p-modal-content').attr('id', pno);
+		$('.w-x-btn').attr('id', 'd-close_butt'+pno);
 		$('b.wrter').html(sid);
 		$('#time').html(stime);
 		$('#bimg').attr('src', simg);
@@ -159,46 +263,28 @@ $(document).ready(function(){
 		$('b#genre-name').html(bname);
 		$('#p-body').html(pbody);
 		$('#gethash').html(htags);
-//		alert(sgen);
-		$.ajax({
-			url: '/BookNet/ajax/showRplList.cls',
-			type: 'POST',
-			dataType: 'json',
-			data: {
-				'pno': pno
-			},
-			success: function(obj){
-				var len = obj.length;
-//				alert(obj[0].comnt);
-//				alert(len);
-				if(len != 0){
-					for(var i = 0; i < len; i++){
-						$('.w100-h95').attr('id', obj[i].cno);
-						var str = $('.w100-h95').attr('id');
-						$('#'+str).append('<div style="float: left; width: 30px; height: 30px; margin-left: 10px; border: 1px dashed black;">' +
-											'<img src="" style="box-sizing: border-box;"/>' +
-											'</div>' +
-											'<div class="h30-m10" style="width: 60px;">' + obj[i].id + '</div>' +
-											'<div class="h30-m10" style="width: 150px;">' + obj[i].sdate + '</div>' +
-											'<div class="h30-m10" style="width: 280px;">' + obj[i].comnt + '</div>');
-						$('.detailPost').css('display', 'block');
-					}
-				} else{
-					$('.detailPost').css('display', 'block');
-				}
-			},
-			error: function(){
-				alert("실패!");
-			}
+		
+		//댓글부분 큰 div에 해당게시글 번호를 id 값으로 준다.
+		var tid = 'cmt' + pno;
+		$('.post-comment').attr('id', tid);
+
+		$('#d-close_butt'+pno).click(function(){ //게시물 상세보기 닫기 
+			$('.detailPost').css('display', 'none');
+			$('#'+tid).html('');
 		});
+
+		//상세보기 게시물에서 보여줄 댓글리스트 비동기통신 함수호출
+		showCmtList(pno, tid);
+		
 	});
 	
 	$('.comsubbtn').click(function(){ //댓글 등록하기 
 		var pno = $('.p-modal-content').attr('id');
 		var cbody = $('.combody').val();
+		var tid = 'cmt' + pno;
 		
 		$.ajax({
-			url: '/BookNet/post/addRplProc.cls',
+			url: '/cls/posts/wrtCmt.cls',
 			type: 'POST',
 			dataType: 'json',
 			data: {
@@ -209,27 +295,27 @@ $(document).ready(function(){
 				if(data.cnt != 1){
 					alert('댓글등록에 실패하였습니다.');
 				}
-				
-				$('.combody').val('');
-				$('.w100-h95').append('<div style="float: left; width: 30px; height: 30px; margin-left: 10px; border: 1px dashed black;">' +
-						'<img src="" style="box-sizing: border-box;"/>' +
-						'</div>' +
-						'<div class="h30-m10" style="width: 60px;">'+ data.id +'</div>' +
-						'<div class="h30-m10" style="width: 150px;">'+  data.date +'</div>' +
-						'<div class="h30-m10" style="width: 280px;">' + data.body + '</div>');
-				
+				if(data.cnt == 1){
+					$('.combody').val('');
+//					showCmtList(pno, tid); 댓글등록에 성공하면 다시 댓글리스트 비동기통신 함수호출 
+					$('.post-comment').prepend('<div style="width: 100%; height: 30px;" id="' + tid + '">' +
+							'<div style="float: left; width: 30px; height: 30px; margin-left: 10px; border: 1px dashed black;">' +
+							'<img src="" style="box-sizing: border-box;"/>' +
+							'</div>' +
+							'<div class="h30-m10" style="width: 60px;"><a href="">' + data.id + '</a></div>' +
+							'<div class="h30-m10" style="width: 150px;"><small>' + data.cdate + ' ' + data.ctime + '</small></div>' +
+							'<button class="h30-m10 butt" style="float: right; width: 60px;">Reply</button>' +
+							'<button class="h30-m10 butt" style="float: right; width: 60px;" onclick="delCmt(this);">Delete</button>' +
+							'</div>' +
+							'<div class="h30-m10" style="width: 100%;">' + data.cbody + '</div>');
+				}
 			},
 			error: function(){
-//				console.log('code: ' + request.status + '\n message: ' + request.responseText + '\n error: ' + error);
 				alert("###통신에러###");
 			}
 		});
 	});
 	
-	$('#d-close_butt').click(function(){ //게시물 상세보기 닫기 
-		$('.detailPost').css('display', 'none');
-		$('.w100-h95').html('');
-	});
 	
 	$('#wBtn').click(function(){ //글쓰기 modal 열기 
 		$('#writeModal').css('display', 'block');
@@ -237,83 +323,68 @@ $(document).ready(function(){
 	
 	$('#w-close_butt').click(function(){ //글쓰기 모달 닫기 
 		$('#writeModal').css('display', 'none');
+		$('.rstPage').html('');
+		$('#findBook').val('');
+		$('#sel-wrt-b-info').attr('src', '');
+		$('#rst-book-gname').val('');
+		$('#rst-book-bname').val('');
 	});
 	
 	$('#changeInfo').click(function(){ //정보수정페이지로 이동 
-		$(location).attr('href', '/BookNet/member/editMemInfo.cls');
+		$(location).attr('href', '/cls/member/editMemInfo.cls');
 	});
 	
 
 	//글작성 도서검색 ajax 처리 구문
 	$('#book-search').click(function(){ //글쓰기 모달에서 읽은 도서 검색 클릭시 처리해주는 함수 
-		$('#-s-b-modal').css('display', 'block');
-		
 		//입력한 검색어를 변수에 저장한다.
 		var book = $('#findBook').val();
-//		alert(book);
-		//InterParkAPI 
+		//검색어 유효성 검사
+		if(!book){
+			$('#findBook').focus();
+			return;
+		}
+		
+		//검색결과 모달 띄우기 
+		$('#-s-b-modal').css('display', 'block');
+		
 		$.ajax({ 
-			url : '/BookNet/ajax/searchBook.cls',
+			url : '/cls/posts/searchBook.cls',
 			type : 'POST',
 			dataType : 'json',
 			data : {
-				'searchWord' : book
+				'searchword' : book
 			},
-//			tranditional: true,
 			success : function(obj){ //SearchBook.java 에서 gstr json 문서가 들어오게 된다.
-				var len = obj.length;
-				
-//				console.log(len);
-//				alert(obj[0].isbn);
-				for(var i = 0; i < len; i++){
-					$('.rstPage').append('<div class="w100perh300 rstbook" id="' + obj[i].isbn + '">' +
+				//정보 들어갈 부분 생성해주기 
+				$('#w-modal-content').css('height', '580px');
+				$('#wrt-b-img').css('display', '');
+				$('#sel-wrt-b-info').css('display', '');
+				for(var i = 0; i < obj.length; i++){
+					$('.rstPage').append('<div class="w100perh300 rstbook" id="' + obj[i].bno + '">' +
 							'<div class="-s-b-img">' +
-							'<img style="width: 150px; height: auto; margin-top: 20px;" src="' + obj[i].coverLargeUrl + '"id="b-image"/>' +
+							'<img style="width: 150px; height: auto; margin-top: 20px;" src="' + obj[i].largeimg + '"id="img' + obj[i].bno + '"/>' +
 							'</div>' +
 							'<div class="-s-b-info">' +
 							'<div style="float: left; margin-right: 15px; font-size: 15px;"><b>도서장르</b> : </div>' + 
-							'<div style="float: left; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="b-genre">' + obj[i].categoryId + '</div>' +
+							'<div style="float: left; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="gname' + obj[i].bno + '">' + obj[i].gname + '</div>' +
 							'</div>' +
 							'<div class="-s-b-info">' +
 							'<div style="float: left; margin-right: 15px; font-size: 15px;"><b>도서명</b> : </div>' + 
-							'<div style="float: left; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="b-title">' + obj[i].title + '</div>' +
+							'<div style="float: left; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="bname' + obj[i].bno + '">' + obj[i].bname + '</div>' +
 							'</div>' +
 							'<div class="-s-b-info">' +
 							'<div style="float: left; margin-right: 15px; font-size: 15px;"><b>저 자</b> : </div>' + 
-							'<div style="float: left; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="b-author">' + obj[i].author + '</div>' +
+							'<div style="float: left; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="writer' + obj[i].bno + '">' + obj[i].writer + '</div>' +
 							'</div>' +
 							'<div class="-s-b-info" id="notrans">' +
-							'<div style="float: left; margin-right: 15px; font-size: 15px;"><b>옮긴이</b> : </div>' + 
-							'<div style="float: left; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="b-author">' + obj[i].translator + '</div>' +
+							'<div style="float: left; margin-right: 15px; font-size: 15px;"><b>옮긴이</b> : </div>' +
+							'<div style="float: left; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="trans' + obj[i].bno + '">' + obj[i].trans + '</div>' +
 							'</div>' +
-							'<div class="-s-b-submit" id="' + obj[i].isbn + '">' +
-							'<input type="button" value="책 등록" class="sel-b-submit" onclick="selrstbook()"/>' +
+							'<div class="-s-b-submit" >' +
+							'<input type="button" value="책 등록" id="' + obj[i].bno + '" class="sel-b-submit" onClick="selrstbook(this.id)"/>' +
 							'</div>' +
 					'</div>');
-//					$('.rstPage').append('<div class="w100perh300 rstbook" id="">' +
-//							'<div class="-s-b-img">' +
-//								'<img style="width: 150px; height: auto; margin-top: 20px;" src="' + obj[i].largeimg + '"id="b-image"/>' +
-//							'</div>' +
-//							'<div class="-s-b-info">' +
-//								'<div style="float: left; margin-right: 15px; font-size: 15px;"><b>도서장르</b> : </div>' + 
-//								'<div style="float: left; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="b-genre">' + obj[i].gname + '</div>' +
-//							'</div>' +
-//							'<div class="-s-b-info">' +
-//								'<div style="float: left; margin-right: 15px; font-size: 15px;"><b>도서명</b> : </div>' + 
-//								'<div style="float: left; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="b-title">' + obj[i].bname + '</div>' +
-//							'</div>' +
-//							'<div class="-s-b-info">' +
-//								'<div style="float: left; margin-right: 15px; font-size: 15px;"><b>저 자</b> : </div>' + 
-//								'<div style="float: left; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="b-author">' + obj[i].writer + '</div>' +
-//							'</div>' +
-//							'<div class="-s-b-info" id="notrans">' +
-//								'<div style="float: left; margin-right: 15px; font-size: 15px;"><b>옮긴이</b> : </div>' + 
-//								'<div style="float: left; font-size: 15px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" id="b-author">' + obj[i].trans + '</div>' +
-//							'</div>' +
-//							'<div class="-s-b-submit" id="' + obj[i].bno + '">' +
-//								'<input type="button" value="책 등록" id="sel-b-submit"/>' +
-//							'</div>' +
-//						'</div>');
 				}
 			},
 			error : function(){
@@ -322,25 +393,33 @@ $(document).ready(function(){
 		});
 	});
 	
-	$('.sel-b-submit').click(selrstbook); //검색된 도서 중 맞는 결과를 선택해주는 클릭이벤트 
-	
 	$(document).on('click', '#p-submit', function(){
-		//이미 도서번호는 input name=bno 에 담겨져 있다.
+		var bno = $('#bno').val();
 		//select로 선택된 감정을 변수에 대입하기 
 		var emo = $('#selEmo').val();
 		var body = $('#postBody').val();
-		var htag = $('#hash-input').val();
+		//게시글본문 안에 있는 해시태그만 골라내기 
+		var htag = splitedHash(body);
 		alert(htag);
+		
+		//데이터 집어넣기 
 		$('#eno').val(emo);
 		$('#body').val(body);
 		$('#tags').val(htag);
 //		alert(len);
 		
+		if(!bno){		//도서선택 여부 확인
+			alert('작성할 책을 검색해주세요!');
+			$('#findBook').focus();
+			return;
+		}
 		if(!emo){
+			alert('당시의 감정을 선택해주세요!');
 			$('#selEmo').focus();
 			return
 		}
 		if(!body){
+			alert('게시글 본문을 입력해주세요!');
 			$('#postBody').focus();
 			return
 		}
@@ -349,16 +428,5 @@ $(document).ready(function(){
 		$('#frm').attr('action','/BookNet/post/postWriteProc.cls');
 		$('#frm').submit();
 	});
-	
-//	var tagfunc = function(){
-//		var str = $('#hash-input').val();
-//	};
-//	
-//	$(document).on('keyup', '#hash-input', function(){ //해시태그 작성시
-//		if(keyCode == 32){
-//			//스페이스바 입력시 #으로 대체해준다.
-//			var str = $('#hash-input')
-//		}
-//	});
 	
 });

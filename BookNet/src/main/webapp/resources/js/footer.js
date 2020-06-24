@@ -15,13 +15,8 @@ $(function(){
 				$('#footer-wrap').css("background-color","#F7B3D2");
 				$('#footer-wrap').css("color","#FFF");
 				$('#footer-wrap').css("height","186.438px");
-			} else if($('#footer-wrap').css("height") == wei){
-				$('#footer-wrap').css("transition","all 0.6s");
-				$('#footer-wrap').css("background-color","#F7B3D2");
-				$('#footer-wrap').css("color","#FFF");
-				$('#footer-wrap').css("height","186.438px");
+				$('#arrow').fadeOut();
 			}
-
 	// 내리기
 	 	$("#footer-wrap").mouseleave(function(){
 	 		 wei = $('#footer-wrap').css("height");
@@ -31,7 +26,11 @@ $(function(){
 				$('#footer-wrap').css("color","#FFF");
 				$('#footer-wrap').css("transition","all 0.6s");
 				$('#footer-wrap').css("overflow","hidden");
+				$('#arrow').css("display","");
 	 		}
-		});
-	});
+		})
+	})
+	$('#influencer').click(function(){
+		$('#influencer').attr('href','/BookNet/search/searchAll.cls');
+	})
 })

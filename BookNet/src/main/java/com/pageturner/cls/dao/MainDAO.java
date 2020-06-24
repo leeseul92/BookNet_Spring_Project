@@ -6,24 +6,28 @@ package com.pageturner.cls.dao;
  *
  */
 
-import com.pageturner.cls.vo.*;
-
-import java.util.*;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+import com.pageturner.cls.vo.MainVO;
+import com.pageturner.cls.vo.PostsVO;
+
+@Repository
 public class MainDAO {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 	
 	//로그인한 회원에게 보여질 메인 게시글 
-	public List<MainVO> showMemMain(String id) {
+	public List<PostsVO> showMemMain(String id) {
 		return sqlSession.selectList("mainSQL.MemMain", id);
 	}
 	
 	//본문 우측부분에 들어갈 자주 작성된 도서 5선 
-	public List<MainVO> oftenList(){
+	public List<MainVO> oftenList() {
 		return sqlSession.selectList("mainSQL.OftenBook");
 	}
+	
 }
