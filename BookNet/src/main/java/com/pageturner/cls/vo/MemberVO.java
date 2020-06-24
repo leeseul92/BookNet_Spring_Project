@@ -10,9 +10,6 @@ import java.sql.Date;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 
-import org.apache.ibatis.type.Alias;
-
-@Alias("mVO")
 public class MemberVO {
 	private int mno;
 	private String id, pw, name, nickname, birthdate, gen, mail, tel, interest, 

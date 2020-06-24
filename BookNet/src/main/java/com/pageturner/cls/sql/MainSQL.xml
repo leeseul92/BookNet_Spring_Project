@@ -8,36 +8,42 @@
 
 	<!-- 로그인한 회원에게 보여주는 메인 게시글 질의명령 -->
 	<select id="MemMain" resultType="mainVO" parameterType="string">
-		SELECT
-		    pt.pno, mt.id, bname, gname, postcont, largeimg,
-		    TO_CHAR(postdate, 'yyyy/mm/dd') pdate, TO_CHAR(postdate, 'HH:MI:ss') ptime, lt.ischeck
-		FROM
-		    poststab pt, booktab bt, genretab gt,
+		SELECT 
+		    pl.pno, mf.id, bname, gname, pl.postcont, pl.cnt, bg.largeimg,
+		    TO_CHAR(pl.postdate, 'yyyy/mm/dd') pdate, TO_CHAR(pl.postdate, 'HH:MI:ss') ptime, 
+		    '#'||LISTAGG(hname, '#') WITHIN GROUP (ORDER BY hname DESC) hash
+		FROM 
+		    hashtab h,
 		    (SELECT
-		        DISTINCT mno, id
+		        p.pno pno, p.bno, p.mno, postcont, postdate, count(l.pno) cnt
 		    FROM
-		        membertab, fallowtab
+		        poststab p, liketab l
 		    WHERE
-		        (fallower_no = (SELECT mno FROM membertab WHERE id = #{id})
-		        AND mno = fallow_no
-		        AND ischeck = 'Y')
-		        OR mno = (SELECT mno FROM membertab WHERE id = #{id})
-		    ) mt,
+		        p.pno = l.pno
+		    GROUP BY
+		        p.pno, postcont, postdate, p.bno, p.mno) pl,
 		    (SELECT
-		        pno, ischeck
+		        bno, bname, largeimg, g.genre, gname
 		    FROM
-		        liketab
+		        booktab b, genretab g
 		    WHERE
-		        mno = (SELECT mno FROM membertab WHERE id = #{id})
-		    ) lt
-		WHERE
-		    pt.mno = mt.mno
-		    AND pt.isshow = 'Y'
-		    AND pt.bno = bt.bno
-		    AND bt.genre = gt.genre
-		    AND pt.pno = lt.pno(+)
+		        b.genre = g.genre) bg,
+		    (SELECT 
+		        DISTINCT mno, id 
+		    FROM 
+		        membertab m, fallowtab 
+		    WHERE
+		        m.mno = (SELECT mno FROM membertab WHERE id = 'jinro' ) 
+		        OR (fallower_no = (SELECT mno FROM membertab WHERE id = 'jinro' ) 
+		        AND m.mno = fallow_no)) mf
+		WHERE 
+		    pl.pno = h.pno(+)
+		    AND pl.mno = mf.mno
+		    AND pl.bno = bg.bno
+		GROUP BY 
+		    pl.pno, pl.postcont, pl.postdate, pl.cnt, mf.id, bname, gname, bg.largeimg
 		ORDER BY
-		    postdate DESC
+		    pl.postdate, pl.cnt DESC
 	</select>
 	
 	<!-- 메인화면에 들어갈 자주 작성된 도서를 보여주는 질의명령 -->
@@ -61,5 +67,4 @@
 		ORDER BY
 		    cnt DESC
 	</select>
-	
 </mapper>							

@@ -41,32 +41,6 @@
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>
-		
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjweaver</artifactId>
-			<version>${org.aspectj-version}</version>
-		</dependency>
-
-		<!-- AspectJ Tools -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjtools</artifactId>
-			<version>${org.aspectj-version}</version>
-		</dependency>
-		
-		<!-- AspectJ Weaver -->
-		<dependency>
-		   <groupId>org.aspectj</groupId>
-		   <artifactId>aspectjweaver</artifactId>
-		   <version>${org.aspectj-version}</version>
-		</dependency>
-		<!-- AspectJ Tools -->
-		<dependency>
-		   <groupId>org.aspectj</groupId>
-		   <artifactId>aspectjtools</artifactId>
-		   <version>${org.aspectj-version}</version>
-		</dependency>
 
 		<!-- Logging -->
 		<dependency>
@@ -130,6 +104,11 @@
 			<artifactId>javax.servlet.jsp-api</artifactId>
 			<version>2.3.1</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>

@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.*;
 
-import com.pageturner.cls.service.*;
+import com.pageturner.cls.dao.*;
 import com.pageturner.cls.vo.*;
 
 @Controller
 @RequestMapping("/member")
 public class Member {
 	@Autowired
-	MemberService membSrvc;
+	MemberDAO mDAO;
 	
 	//로그인form 요청
 	@RequestMapping("/login.cls")
@@ -44,24 +44,24 @@ public class Member {
 	
 	//로그인 처리 요청
 	@RequestMapping(value="/loginProc.cls", method=RequestMethod.POST, params= {"id", "pw"})
-	public ModelAndView loginProc(MemberVO mVO, ModelAndView mv, HttpSession session) {
-		//jsp로부터 로그인요청이 들어오게 되면 id 와 pw 를 받아올 수 있는데, 이때 매개변수로 선언된 mVO에 자동으로 셋팅됨.
+	public ModelAndView loginProc(String id, String pw, MemberVO mVO, ModelAndView mv, HttpSession session) {
 		//제대로 처리가 진행되는지 확인
-		System.out.println("#### id: " + mVO.getId());
-		System.out.println("#### pw: " + mVO.getPw());
+		System.out.println("#### id: " + id);
+		System.out.println("#### pw: " + pw);
+		
+		System.out.println(mVO.getId());
+		System.out.println(mVO.getPw());
+		
+		int cnt = mDAO.loginProc(mVO);
 		
 		RedirectView rv = null;
 		
-		//서비스 클래스 호출 
-		String id = membSrvc.loginService(mVO);
-		
-		if(id == null || id.length() == 0) {
-			//서비스클래스로부터 넘어온 id 값이 없음 = db에 id, pw가 일치하는 회원정보가 없음.
-			rv = new RedirectView("/cls/member/login.cls"); //재로그인 시키기 
+		if(cnt == 1) {
+			session.setAttribute("SID", id); //세션에 아이디 등록해놓는다.
+			rv = new RedirectView("/cls/main/main.cls");
 		} else {
-			//세션에 아이디 저장
-			session.setAttribute("SID", id);
-			rv = new RedirectView("/cls/main/main.cls"); //로그인한 회원용 메인으로 넘기기 
+			//아이디와 비밀번호가 일치하는 회원이 존재하지 않으므로 다시 로그인페이지로 이동.
+			rv = new RedirectView("/cls/member/login.cls");
 		}
 		
 		mv.setView(rv);

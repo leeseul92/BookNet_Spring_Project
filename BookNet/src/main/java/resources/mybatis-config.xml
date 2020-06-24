@@ -10,20 +10,13 @@
 		<setting name="defaultExecutorType" value="REUSE"/>
 	</settings>
 	
-	<typeAliases> 
-		<package name="com.pageturner.cls.vo" />
-		<!-- <typeAlias alias="mVO" type="com.pageturner.cls.vo.MemberVO"/>
+	<typeAliases> <!-- package로 고치기 -->
+		<typeAlias alias="mVO" type="com.pageturner.cls.vo.MemberVO"/>
 		<typeAlias alias="mainVO" type="com.pageturner.cls.vo.MainVO"/>
-		<typeAlias alias="pVO" type="com.pageturner.cls.vo.PostsVO" />
-		<typeAlias alias="bVO" type="com.pageturner.cls.vo.BookVO"/>
-		<typeAlias alias="fVO" type="com.pageturner.cls.vo.ProfileVO"/> -->
 	</typeAliases>
 	
 	<mappers>
-		<!-- <package name="com/pageturner/cls/sql" /> -->
 		<mapper resource="com/pageturner/cls/sql/MemberSQL.xml"/>
-		<mapper resource="com/pageturner/cls/sql/MainSQL.xml"/>
-		<mapper resource="com/pageturner/cls/sql/PostsSQL.xml" />
-		<!-- <mapper resource="com/pageturner/cls/sql/*SQL.xml" /> --> 
+		<mapper resource="com/pageturner/cls/sql/MainSQL.xml"/> 
 	</mappers>
 </configuration>		
