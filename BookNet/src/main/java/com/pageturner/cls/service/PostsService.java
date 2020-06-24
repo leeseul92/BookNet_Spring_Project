@@ -29,9 +29,10 @@ public class PostsService {
 	}
 	
 	//댓글 작성 처리
-	public PostsVO wrtCmt(HttpSession session, PostsVO pVO) {
+	public PostsVO wrtCmt(PostsVO pVO) {
 		int cnt = pDAO.wrtCmt(pVO); //insert 되었는지 확인용 (1 또는 0)
 		pVO.setCnt(cnt);
+		
 		return pVO;
 	}
 	

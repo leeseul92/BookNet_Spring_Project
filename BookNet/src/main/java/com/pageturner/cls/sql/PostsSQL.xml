@@ -32,12 +32,6 @@
 			FROM
 				commenttab
 		</selectKey>
-		<selectKey keyProperty="cno" resultType="int" order="AFTER">
-			SELECT
-				MAX(cno)
-			FROM
-				commenttab
-		</selectKey>
 		INSERT INTO 
 		    commenttab(cno, pno, comnt, mno) 
 		VALUES( 

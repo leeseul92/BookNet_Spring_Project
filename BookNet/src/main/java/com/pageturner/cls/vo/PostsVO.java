@@ -3,6 +3,8 @@ package com.pageturner.cls.vo;
  * 이 클래스는 게시물과 관련한 변수들의 vo 클래스입니다.
  * @author leeseulkim
  * @since 13th Jun 2020
+ * @see
+ * 		MainVO
  *
  */
 
@@ -14,13 +16,26 @@ import org.apache.ibatis.type.Alias;
 @Alias("pVO")
 public class PostsVO {
 	private int pno, linkno, mno, eno, bno, cno, genre, cnt;
-	private String id, profile, postcont, pdate, ptime, largeimg,
-				emotion, cbody, comnt, cdate, ctime, gname, sid, ischeck;
-	private Date postdate;
-	private Time posttime;
+	private String id, profile, postcont, pdate, largeimg, smallimg,
+				emotion, cbody, comnt, cdate, gname, sid, ischeck;
+//	private Date postdate;
+//	private Time posttime;
+	private MainVO mainVO;
 	
+	public MainVO getMainVO() {
+		return mainVO;
+	}
+	public void setMainVO(MainVO mainVO) {
+		this.mainVO = mainVO;
+	}
 	public String getIscheck() {
 		return ischeck;
+	}
+	public String getSmallimg() {
+		return smallimg;
+	}
+	public void setSmallimg(String smallimg) {
+		this.smallimg = smallimg;
 	}
 	public void setIscheck(String ischeck) {
 		this.ischeck = ischeck;
@@ -118,12 +133,6 @@ public class PostsVO {
 	public void setPdate(String pdate) {
 		this.pdate = pdate;
 	}
-	public String getPtime() {
-		return ptime;
-	}
-	public void setPtime(String ptime) {
-		this.ptime = ptime;
-	}
 	public String getLargeimg() {
 		return largeimg;
 	}
@@ -148,32 +157,12 @@ public class PostsVO {
 	public void setCdate(String cdate) {
 		this.cdate = cdate;
 	}
-	public String getCtime() {
-		return ctime;
-	}
-	public void setCtime(String ctime) {
-		this.ctime = ctime;
-	}
-	public Date getPostdate() {
-		return postdate;
-	}
-	public void setPostdate(Date postdate) {
-		this.postdate = postdate;
-	}
-	public Time getPosttime() {
-		return posttime;
-	}
-	public void setPosttime(Time posttime) {
-		this.posttime = posttime;
-	}
 	@Override
 	public String toString() {
 		return "PostsVO [pno=" + pno + ", linkno=" + linkno + ", mno=" + mno + ", eno=" + eno + ", bno=" + bno
-				+ ", genre=" + genre + ", cno=" + cno + ", cnt=" + cnt + ", id=" + id + ", profile=" + profile
-				+ ", postcont=" + postcont + ", pdate=" + pdate + ", ptime=" + ptime + ", largeimg=" + largeimg
-				+ ", emotion=" + emotion + ", cbody=" + cbody + ", comnt=" + comnt + ", cdate=" + cdate + ", ctime="
-				+ ctime + ", gname=" + gname + ", sid=" + sid + ", ischeck=" + ischeck + ", postdate=" + postdate
-				+ ", posttime=" + posttime + "]";
+				+ ", cno=" + cno + ", genre=" + genre + ", cnt=" + cnt + ", id=" + id + ", profile=" + profile
+				+ ", postcont=" + postcont + ", pdate=" + pdate + ", largeimg=" + largeimg + ", smallimg=" + smallimg
+				+ ", emotion=" + emotion + ", cbody=" + cbody + ", comnt=" + comnt + ", cdate=" + cdate + ", gname="
+				+ gname + ", sid=" + sid + ", ischeck=" + ischeck + ", mainVO=" + mainVO + "]";
 	}
-	
 }

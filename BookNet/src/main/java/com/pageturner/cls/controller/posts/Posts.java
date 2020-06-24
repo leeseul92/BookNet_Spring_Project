@@ -46,23 +46,19 @@ public class Posts {
 	//게시물 상세보기 내 댓글작성 비동기 통신
 	@RequestMapping("/wrtCmt.cls")
 	@ResponseBody
-	public PostsVO wrtCmt(int pno, String id, String cbody, HttpSession session, PostsVO pVO) {
-		id = (String)session.getAttribute("SID");
-		
+	public PostsVO wrtCmt(int pno, String cbody, HttpSession session, PostsVO pVO) {
 		//현재시간 받기
 		Date date = new Date();
 		
 		SimpleDateFormat form1 = new SimpleDateFormat("yyyy/MM/dd");
 		SimpleDateFormat form2 = new SimpleDateFormat("HH:mm:ss");
-		String cdate = form1.format(date);
-		String ctime = form2.format(date);
+		String cdate = form1.format(date) + " " + form2.format(date);
 		
-		pVO.setId(id); //id값 vo 클래스에 담기
+		pVO.setSid((String)session.getAttribute("SID")); //로그인 되어있는 id값 vo 클래스에 담기
 		pVO.setCdate(cdate); //댓글작성시간 vo 클래스에 담기
-		pVO.setCtime(ctime);
 		
-		int cnt = pDAO.wrtCmt(pVO);
-		pVO.setCnt(cnt);
+		//service 호출 
+		pVO = postsSrvc.wrtCmt(pVO);
 		
 		return pVO;
 	}
