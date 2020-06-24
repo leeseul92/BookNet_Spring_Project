@@ -1,17 +1,16 @@
 package com.pageturner.cls.vo;
-
-import org.apache.ibatis.type.Alias;
-
 /**
  * 	이 클래스는 도서 정보를 저장할 VO 클래스이다.
  * @author	박기윤
- * @since	2020.05.25
+ * @since	2020.06.24
  *
  */
+import org.apache.ibatis.type.*;
 
 @Alias("bVO")
 public class BookVO {
-	private String title, saleStatus, cvrsUrl, cvrlUrl, publisher, author, translator, link, isbn;
+	private String title, smallimg, largeimg, gname, publisher,
+					author, translator, link, isbn;
 	private int categoryId;
 	public String getTitle() {
 		return title;
@@ -19,23 +18,23 @@ public class BookVO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getSaleStatus() {
-		return saleStatus;
+	public String getSmallimg() {
+		return smallimg;
 	}
-	public void setSaleStatus(String saleStatus) {
-		this.saleStatus = saleStatus;
+	public void setSmallimg(String cvrsUrl) {
+		this.smallimg = cvrsUrl;
 	}
-	public String getCvrsUrl() {
-		return cvrsUrl;
+	public String getLargeimg() {
+		return largeimg;
 	}
-	public void setCvrsUrl(String cvrsUrl) {
-		this.cvrsUrl = cvrsUrl;
+	public void setLargeimg(String cvrlUrl) {
+		this.largeimg = cvrlUrl;
 	}
-	public String getCvrlUrl() {
-		return cvrlUrl;
+	public String getGname() {
+		return gname;
 	}
-	public void setCvrlUrl(String cvrlUrl) {
-		this.cvrlUrl = cvrlUrl;
+	public void setGname(String gname) {
+		this.gname = gname;
 	}
 	public String getPublisher() {
 		return publisher;
