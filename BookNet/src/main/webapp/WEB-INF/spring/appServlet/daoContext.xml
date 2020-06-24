@@ -13,4 +13,10 @@
 	
 	<!-- 메인화면 관련 데이터베이스 처리 dao bean 처리 -->
 	<bean id="mainDAO" class="com.pageturner.cls.dao.MainDAO" />
+	
+	<!-- 게시글 관련 데이터베이스 처리 dao bean 처리 -->
+	<bean id="pDAO" class="com.pageturner.cls.dao.PostsDAO" />
+	
+	<!-- 프로필 사진 업로드 관련 데이터베이스 처리 dao bean 처리 -->
+	<!-- <bean id="fDAO" class="com.pageturner.cls.dao.ProfileDAO" /> -->
 </beans>

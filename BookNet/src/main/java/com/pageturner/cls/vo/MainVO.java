@@ -6,9 +6,12 @@ package com.pageturner.cls.vo;
  * @since 10th Jun 2020
  * 
  */
+import java.sql.Date;
+import java.sql.Time;
 
-import java.sql.*;
+import org.apache.ibatis.type.Alias;
 
+@Alias("mainVO")
 public class MainVO {
 	private int pno, mno, eno, bno, cnt;
 	private String id, profile, bname, writer, trans, largeimg, 
