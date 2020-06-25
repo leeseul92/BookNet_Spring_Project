@@ -15,11 +15,9 @@ import org.apache.ibatis.type.Alias;
 @Alias("mVO")
 public class MemberVO {
 	private int mno;
-	private String id, pw, name, nickname, birthdate, gen, mail, tel, interest, 
-					describe, isshow, sdate, yy, mm, dd, intershow, birthshow, genshow, isinflu,
+	private String id, pw, name, birthdate, gen, mail, interest, 
+					describe, isshow, sdate, intershow, birthshow, genshow, isinflu,
 					ori_name, save_name, save_loc;
-	private Date mdate;
-	private Time mtime;
 	
 	public int getMno() {
 		return mno;
@@ -45,19 +43,8 @@ public class MemberVO {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getNickname() {
-		return nickname;
-	}
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
 	public String getBirthdate() {
 		return birthdate;
-	}
-	public void setBirthdate() {
-		SimpleDateFormat form1 = new SimpleDateFormat("yyyy/MM/dd");
-		SimpleDateFormat form2 = new SimpleDateFormat("HH:mm");
-		this.birthdate = form1.format(mdate) + " " + form2.format(mtime);
 	}
 	public void setBirthdate(String birthdate) {
 		this.birthdate = birthdate;
@@ -73,12 +60,6 @@ public class MemberVO {
 	}
 	public void setMail(String mail) {
 		this.mail = mail;
-	}
-	public String getTel() {
-		return tel;
-	}
-	public void setTel(String tel) {
-		this.tel = tel;
 	}
 	public String getInterest() {
 		return interest;
@@ -103,36 +84,6 @@ public class MemberVO {
 	}
 	public void setSdate(String sdate) {
 		this.sdate = sdate;
-	}
-	public String getYy() {
-		return yy;
-	}
-	public void setYy(String yy) {
-		this.yy = yy;
-	}
-	public String getMm() {
-		return mm;
-	}
-	public void setMm(String mm) {
-		this.mm = mm;
-	}
-	public String getDd() {
-		return dd;
-	}
-	public void setDd(String dd) {
-		this.dd = dd;
-	}
-	public Date getMdate() {
-		return mdate;
-	}
-	public void setMdate(Date mdate) {
-		this.mdate = mdate;
-	}
-	public Time getMtime() {
-		return mtime;
-	}
-	public void setMtime(Time mtime) {
-		this.mtime = mtime;
 	}
 	public String getIntershow() {
 		return intershow;
@@ -176,4 +127,5 @@ public class MemberVO {
 	public void setSave_loc(String save_loc) {
 		this.save_loc = save_loc;
 	}
+	
 }
