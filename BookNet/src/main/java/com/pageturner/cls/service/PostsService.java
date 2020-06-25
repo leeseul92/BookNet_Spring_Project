@@ -31,7 +31,7 @@ public class PostsService {
 	public PostsVO wrtCmt(PostsVO pVO) {
 		int cnt = pDAO.wrtCmt(pVO); //insert 되었는지 확인용 (1 또는 0)
 		pVO.setCnt(cnt);
-		System.out.println(pVO.getCno()); //selectKey로부터 값이 제대로 입력되었는지 확인 
+		System.out.println("작성된 댓글번호 : " + pVO.getCno()); //selectKey로부터 값이 제대로 입력되었는지 확인 
 		return pVO;
 	}
 	

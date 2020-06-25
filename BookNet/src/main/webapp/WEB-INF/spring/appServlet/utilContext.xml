@@ -10,4 +10,8 @@
 
 <!-- CountDays util 빈처리 -->
 <bean id="cntDayUtil" class="com.pageturner.cls.util.CountDays" />
+
+<!-- SelectAPI util 빈처리 -->
+<bean id="selApiUtil" class="com.pageturner.cls.util.SelectAPI" />
+
 </beans>

@@ -52,7 +52,6 @@ function splitedHash(body){
 
 //댓글 리스트 불러주는 비동기통신 함수 
 function showCmtList(pno, tid){
-	
 	$.ajax({
 		url: '/cls/posts/showCmtList.cls',
 		type: 'POST',
@@ -62,8 +61,6 @@ function showCmtList(pno, tid){
 		},
 		success: function(obj){
 			var len = obj.length;
-//			alert(obj[0].comnt);
-//			alert(len);
 			if(len != 0){
 				for(var i = 0; i < len; i++){
 					if(obj[i].sid == obj[i].id){
@@ -73,8 +70,8 @@ function showCmtList(pno, tid){
 								'</div>' +
 								'<div class="h30-m10" id="id' + obj[i].cno + '" style="width: 60px;"><a href="">' + obj[i].id + '</a></div>' +
 								'<div class="h30-m10" style="width: 150px;"><small>' + obj[i].cdate + '</small></div>' +
-								'<button class="h30-m10 butt"  style="float: right; width: 60px;" onclick="replyCmt();">Reply</button>' +
-								'<button class="h30-m10 butt" id="' + obj[i].cno + '" style="float: right; width: 60px;" onclick="delCmt(this);">Delete</button>' +
+								'<button class="h30-m10 butt" id="' + obj[i].cno + '" style="float: right; width: 60px;" onclick="replyCmt(this);">Reply</button>' +
+								'<button class="h30-m10 butt" style="float: right; width: 60px;" onclick="delCmt(this);">Delete</button>' +
 								'</div>' +
 								'<div class="h30-m10" style="width: 100%;">' + obj[i].comnt + '</div>');
 					} else {
@@ -84,7 +81,7 @@ function showCmtList(pno, tid){
 								'</div>' +
 								'<div class="h30-m10" style="width: 60px;"><a href="">' + obj[i].id + '</a></div>' +
 								'<div class="h30-m10" style="width: 150px;"><small>' + obj[i].cdate + '</small></div>' +
-								'<button class="h30-m10 butt" style="float: right; width: 60px;" onclick="replyCmt();">Reply</button>' +
+								'<button class="h30-m10 butt" id="' + obj[i].cno + '" style="float: right; width: 60px;" onclick="replyCmt(this);">Reply</button>' +
 								'</div>' +
 								'<div class="h30-m10" style="width: 100%;">' + obj[i].comnt + '</div>');
 					}
@@ -100,14 +97,20 @@ function showCmtList(pno, tid){
 	});
 }
 
+//대댓글 달아주기 
+function replyCmt(element){
+	var cno = element.getAttribute('id');
+	
+}
+
 //댓글 삭제처리해주는 함수 
 function delCmt(element){
 	var tid = element.parentNode.getAttribute('id'); // cmt+숫자 의 형태임.
 	var pno = tid.substr(3);
-	alert(pno);
+//	alert(pno);
 	
-	var cno = element.getAttribute('id');
-//	alert(cno);
+	var cno = element.previousSibling.getAttribute('id');
+	alert(cno);
 	
 	//비동기처리 
 	$.ajax({
@@ -133,10 +136,6 @@ function delCmt(element){
 	});
 }
 
-//대댓글 달아주기 
-function replyCmt(){
-	
-}
 
 $(document).ready(function(){
 	
@@ -309,8 +308,8 @@ $(document).ready(function(){
 							'</div>' +
 							'<div class="h30-m10" style="width: 60px;"><a href="">' + data.id + '</a></div>' +
 							'<div class="h30-m10" style="width: 150px;"><small>' + data.cdate + '</small></div>' +
-							'<button class="h30-m10 butt" style="float: right; width: 60px;">Reply</button>' +
-							'<button class="h30-m10 butt" style="float: right; width: 60px;" id="' + data.cno + '" onclick="delCmt(this);">Delete</button>' +
+							'<button class="h30-m10 butt" id="' + data.cno + '" style="float: right; width: 60px;" onclick="replyCmt(this);">Reply</button>' +
+							'<button class="h30-m10 butt" style="float: right; width: 60px;" onclick="delCmt(this);">Delete</button>' +
 							'</div>' +
 							'<div class="h30-m10" style="width: 100%;">' + data.cbody + '</div>');
 				}
