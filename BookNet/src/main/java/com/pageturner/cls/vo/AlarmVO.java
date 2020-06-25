@@ -4,16 +4,12 @@ package com.pageturner.cls.vo;
  *	@author	박기윤
  *	@since	2020.06.24
  */
-import java.sql.*;
-import java.text.*;
 import org.apache.ibatis.type.*;
 
 @Alias("alVO")
 public class AlarmVO {
 	private String type, extime, bname, id, save_loc, dday;
 	private int pno;
-	private Date date;
-	private Time time;
 	
 	public String getSave_loc() {
 		return save_loc;
@@ -32,11 +28,6 @@ public class AlarmVO {
 	}
 	public void setExtime(String extime) {
 		this.extime = extime;
-	}
-	public void setExtime() {
-		SimpleDateFormat formD = new SimpleDateFormat("yyyy-MM-dd");
-		SimpleDateFormat formT = new SimpleDateFormat("HH:mm:ss");
-		this.extime = formD.format(date) + " " + formT.format(time);
 	}
 	public String getDday() {
 		return dday;
@@ -61,17 +52,5 @@ public class AlarmVO {
 	}
 	public void setPno(int pno) {
 		this.pno = pno;
-	}
-	public Date getDate() {
-		return date;
-	}
-	public void setDate(Date date) {
-		this.date = date;
-	}
-	public Time getTime() {
-		return time;
-	}
-	public void setTime(Time time) {
-		this.time = time;
 	}
 }

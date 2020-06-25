@@ -5,16 +5,12 @@ package com.pageturner.cls.vo;
  * @since	2020.06.24
  *
  */
-import java.sql.*;
-import java.text.*;
 import org.apache.ibatis.type.*;
 
-@Alias("fVO")
+@Alias("falVO")
 public class FallowVO {
 	private int fallow_no, fallower_no;
 	private String id, sname, sloc, faldate, ischeck;
-	private Date fDate;
-	private Time fTime;
 
 	public int getFallow_no() {
 		return fallow_no;
@@ -34,28 +30,11 @@ public class FallowVO {
 	public void setFaldate(String faldate) {
 		this.faldate = faldate;
 	}
-	public void setFaldate() {
-		SimpleDateFormat form1 = new SimpleDateFormat("yyyy년 MM월 dd일");
-		SimpleDateFormat form2 = new SimpleDateFormat("HH:mm:ss");
-		this.faldate = form1.format(fDate) + " " + form2.format(fTime);
-	}
 	public String getIscheck() {
 		return ischeck;
 	}
 	public void setIscheck(String ischeck) {
 		this.ischeck = ischeck;
-	}
-	public Date getfDate() {
-		return fDate;
-	}
-	public void setfDate(Date fDate) {
-		this.fDate = fDate;
-	}
-	public Time getfTime() {
-		return fTime;
-	}
-	public void setfTime(Time fTime) {
-		this.fTime = fTime;
 	}
 	public String getId() {
 		return id;
