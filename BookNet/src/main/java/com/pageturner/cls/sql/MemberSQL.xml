@@ -19,4 +19,68 @@
 		<include refid="selIdCNT" /> #{id}
 			AND pw = #{pw}
 	</select>
+	
+	<!-- 정보수정(pw) -->
+	<update id="editPW" parameterType="mVO">
+		update
+			membertab
+		set
+			pw = #{pw}
+		where
+			id = #{id}
+	</update>
+	
+	<!-- 정보수정 -->
+	<update id="editUser" parameterType="mVO">
+		update
+			membertab
+		set
+			interest = #{interest}
+			describe = #{describe}
+			intershow = #{intershow}
+			birthshow = #{birthshow}
+			genshow = #{genshow}
+		where
+			id = #{id}
+	</update>
+	
+	<!-- 정보수정(프사추가) -->
+	<insert id="insertProfile" parameterType="fVO">
+		insert into
+			profilepictab(pf_pt_no, mno, ori_name, save_name, save_loc)
+		values(
+			(select nvl(max(pf_pt_no)+1, 1000) from profilepictab),
+			(select mno from membertab where id = #{id}),
+			#{ori_name}, #{save_name}, #{save_loc}
+		)
+	</insert>
+	
+	<!-- 회원탈퇴 -->
+	<update id="delUser" parameterType="mVO">
+		update
+			membertab
+		set
+			isshow = N
+		where
+			id = #{id}
+	</update>
+	
+	<!-- 아디비번찾기 -->
+	<select id="findID" resultType="String" parameterType="String">
+		select
+			id
+		from
+			member
+		where
+			mail = #{mail}
+	</select>
+	<select id="findPW" resultType="String" parameterType="mVO">
+		select
+			pw
+		from
+			member
+		where
+			id = #{id}
+			and mail = #{mail}
+	</select>
 </mapper>					
