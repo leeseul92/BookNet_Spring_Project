@@ -71,9 +71,9 @@ function showCmtList(pno, tid){
 								'<div style="float: left; width: 30px; height: 30px; margin-left: 10px; border: 1px dashed black;">' +
 								'<img src="" style="box-sizing: border-box;"/>' +
 								'</div>' +
-								'<div class="h30-m10" style="width: 60px;"><a href="">' + obj[i].id + '</a></div>' +
-								'<div class="h30-m10" style="width: 150px;"><small>' + obj[i].cdate + ' ' + obj[i].ctime + '</small></div>' +
-								'<button class="h30-m10 butt"  style="float: right; width: 60px;" onclick="">Reply</button>' +
+								'<div class="h30-m10" id="id' + obj[i].cno + '" style="width: 60px;"><a href="">' + obj[i].id + '</a></div>' +
+								'<div class="h30-m10" style="width: 150px;"><small>' + obj[i].cdate + '</small></div>' +
+								'<button class="h30-m10 butt"  style="float: right; width: 60px;" onclick="replyCmt();">Reply</button>' +
 								'<button class="h30-m10 butt" id="' + obj[i].cno + '" style="float: right; width: 60px;" onclick="delCmt(this);">Delete</button>' +
 								'</div>' +
 								'<div class="h30-m10" style="width: 100%;">' + obj[i].comnt + '</div>');
@@ -83,8 +83,8 @@ function showCmtList(pno, tid){
 								'<img src="" style="box-sizing: border-box;"/>' +
 								'</div>' +
 								'<div class="h30-m10" style="width: 60px;"><a href="">' + obj[i].id + '</a></div>' +
-								'<div class="h30-m10" style="width: 150px;"><small>' + obj[i].cdate + ' ' + obj[i].ctime + '</small></div>' +
-								'<button class="h30-m10 butt" style="float: right; width: 60px;" onclick="">Reply</button>' +
+								'<div class="h30-m10" style="width: 150px;"><small>' + obj[i].cdate + '</small></div>' +
+								'<button class="h30-m10 butt" style="float: right; width: 60px;" onclick="replyCmt();">Reply</button>' +
 								'</div>' +
 								'<div class="h30-m10" style="width: 100%;">' + obj[i].comnt + '</div>');
 					}
@@ -131,6 +131,11 @@ function delCmt(element){
 			alert('실패!');
 		}
 	});
+}
+
+//대댓글 달아주기 
+function replyCmt(){
+	
 }
 
 $(document).ready(function(){
@@ -303,9 +308,9 @@ $(document).ready(function(){
 							'<img src="" style="box-sizing: border-box;"/>' +
 							'</div>' +
 							'<div class="h30-m10" style="width: 60px;"><a href="">' + data.id + '</a></div>' +
-							'<div class="h30-m10" style="width: 150px;"><small>' + data.cdate + ' ' + data.ctime + '</small></div>' +
+							'<div class="h30-m10" style="width: 150px;"><small>' + data.cdate + '</small></div>' +
 							'<button class="h30-m10 butt" style="float: right; width: 60px;">Reply</button>' +
-							'<button class="h30-m10 butt" style="float: right; width: 60px;" onclick="delCmt(this);">Delete</button>' +
+							'<button class="h30-m10 butt" style="float: right; width: 60px;" id="' + data.cno + '" onclick="delCmt(this);">Delete</button>' +
 							'</div>' +
 							'<div class="h30-m10" style="width: 100%;">' + data.cbody + '</div>');
 				}

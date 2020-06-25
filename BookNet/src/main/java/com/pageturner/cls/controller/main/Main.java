@@ -18,8 +18,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.pageturner.cls.service.MainService;
 import com.pageturner.cls.service.PostsService;
-import com.pageturner.cls.vo.MainVO;
-import com.pageturner.cls.vo.PostsVO;
+import com.pageturner.cls.vo.*;
 
 @Controller
 @RequestMapping("/main")
@@ -37,7 +36,7 @@ public class Main {
 
 		//서비스클래스 불러오기
 		List<PostsVO> list = mainSrvc.membMain(session);
-		List<MainVO> mList = mainSrvc.mostRefRank();
+		List<PostsVO> mList = mainSrvc.mostRefRank();
 		List<PostsVO> genre = postsSrvc.genresList();
 
 		if(list == null) { //재로그인 시키기 

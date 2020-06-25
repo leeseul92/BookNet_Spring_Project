@@ -16,20 +16,44 @@ import org.apache.ibatis.type.Alias;
 @Alias("pVO")
 public class PostsVO {
 	private int pno, linkno, mno, eno, bno, cno, genre, cnt;
-	private String id, profile, postcont, pdate, largeimg, smallimg,
-				emotion, cbody, comnt, cdate, gname, sid, ischeck;
+	private String id, profile, postcont, pdate, largeimg, smallimg, bname, writer, trans,
+	 				hash, publish, emotion, cbody, comnt, cdate, gname, sid, ischeck;
 //	private Date postdate;
 //	private Time posttime;
-	private MainVO mainVO;
-	
-	public MainVO getMainVO() {
-		return mainVO;
-	}
-	public void setMainVO(MainVO mainVO) {
-		this.mainVO = mainVO;
-	}
+//	private MainVO mainVO;
+
 	public String getIscheck() {
 		return ischeck;
+	}
+	public String getBname() {
+		return bname;
+	}
+	public void setBname(String bname) {
+		this.bname = bname;
+	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
+	public String getTrans() {
+		return trans;
+	}
+	public void setTrans(String trans) {
+		this.trans = trans;
+	}
+	public String getHash() {
+		return hash;
+	}
+	public void setHash(String hash) {
+		this.hash = hash;
+	}
+	public String getPublish() {
+		return publish;
+	}
+	public void setPublish(String publish) {
+		this.publish = publish;
 	}
 	public String getSmallimg() {
 		return smallimg;
@@ -162,7 +186,10 @@ public class PostsVO {
 		return "PostsVO [pno=" + pno + ", linkno=" + linkno + ", mno=" + mno + ", eno=" + eno + ", bno=" + bno
 				+ ", cno=" + cno + ", genre=" + genre + ", cnt=" + cnt + ", id=" + id + ", profile=" + profile
 				+ ", postcont=" + postcont + ", pdate=" + pdate + ", largeimg=" + largeimg + ", smallimg=" + smallimg
-				+ ", emotion=" + emotion + ", cbody=" + cbody + ", comnt=" + comnt + ", cdate=" + cdate + ", gname="
-				+ gname + ", sid=" + sid + ", ischeck=" + ischeck + ", mainVO=" + mainVO + "]";
+				+ ", bname=" + bname + ", writer=" + writer + ", trans=" + trans + ", hash=" + hash + ", publish="
+				+ publish + ", emotion=" + emotion + ", cbody=" + cbody + ", comnt=" + comnt + ", cdate=" + cdate
+				+ ", gname=" + gname + ", sid=" + sid + ", ischeck=" + ischeck + "]";
 	}
+	
+	
 }

@@ -8,8 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pageturner.cls.dao.MainDAO;
-import com.pageturner.cls.vo.MainVO;
-import com.pageturner.cls.vo.PostsVO;
+import com.pageturner.cls.vo.*;
 
 /**
  * 이 클래스는 Main 컨트롤러에 들어온 요청에 대한 dao 처리를 해주기 위한 서비스클래스입니다.
@@ -42,8 +41,8 @@ public class MainService {
 	}
 	
 	//가장 많이 참조된 도서 목록 (비회원용)
-	public List<MainVO> mostRefRank() {
-		List<MainVO> list = mainDAO.oftenList();
+	public List<PostsVO> mostRefRank() {
+		List<PostsVO> list = mainDAO.oftenList();
 		return list;
 	}
 	

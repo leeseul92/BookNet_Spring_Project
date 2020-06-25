@@ -22,17 +22,16 @@ public class PostsService {
 	@Autowired
 	PostsDAO pDAO;
 	
-	//게시글 작성시 도서장르선택부분 처리
-	public List<PostsVO> genresList() {
-		List<PostsVO> list = pDAO.listGenres();
-		return list;
+	//게시글 상세보기 내 댓글 리스트
+	public List<PostsVO> showCmtList(PostsVO pVO){
+		return pDAO.showCmtList(pVO);
 	}
 	
 	//댓글 작성 처리
 	public PostsVO wrtCmt(PostsVO pVO) {
 		int cnt = pDAO.wrtCmt(pVO); //insert 되었는지 확인용 (1 또는 0)
 		pVO.setCnt(cnt);
-		
+		System.out.println(pVO.getCno()); //selectKey로부터 값이 제대로 입력되었는지 확인 
 		return pVO;
 	}
 	
@@ -41,4 +40,12 @@ public class PostsService {
 		int rst = pDAO.delCmt(cno);
 		return rst;
 	}
+	
+	//게시글 작성시 도서장르선택부분 처리
+	public List<PostsVO> genresList() {
+		List<PostsVO> list = pDAO.listGenres();
+		return list;
+	}
+	
+	
 }

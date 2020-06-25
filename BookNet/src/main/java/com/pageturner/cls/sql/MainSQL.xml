@@ -7,10 +7,9 @@
 <mapper namespace="mainSQL">
 
 	<!-- 로그인한 회원에게 보여주는 메인 게시글 질의명령 -->
-	<select id="MemMain" resultType="mainVO" parameterType="string">
+	<select id="MemMain" resultType="pVO" parameterType="string">
 		SELECT
-		    pt.pno, mt.id, bname, gname, postcont, largeimg,
-		    TO_CHAR(postdate, 'yyyy/mm/dd') pdate, TO_CHAR(postdate, 'HH:MI:ss') ptime, lt.ischeck
+		    pt.pno, mt.id, bname, gname, postcont, largeimg, postdate pdate, lt.ischeck
 		FROM
 		    poststab pt, booktab bt, genretab gt,
 		    (SELECT
@@ -41,7 +40,7 @@
 	</select>
 	
 	<!-- 메인화면에 들어갈 자주 작성된 도서를 보여주는 질의명령 -->
-	<select id="OftenBook" resultType="mainVO">
+	<select id="OftenBook" resultType="pVO">
 		SELECT
 		   ROWNUM, often.cnt, often.bno, bname, gname
 		FROM

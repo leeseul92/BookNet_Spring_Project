@@ -23,9 +23,6 @@ public class PostsDAO {
 	
 	//게시물 상세보기 내 댓글 작성 처리 전담함수
 	public int wrtCmt(PostsVO pVO) {
-//		System.out.println(pVO.getId());
-//		System.out.println(pVO.getPno());
-//		System.out.println(pVO.getCbody());
 		return sqlSession.insert("pSQL.WrtCmt", pVO);
 	}
 	

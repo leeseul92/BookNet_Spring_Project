@@ -9,8 +9,7 @@
 	<!-- 게시물 상세보기 내 댓글리스트 가져오는 질의명령 -->
 	<select id="CmtList" resultType="pVO" parameterType="pVO">
 		SELECT
-		    ROWNUM rno, cno, c.pno, comnt, c.mno,
-		    TO_CHAR(cdate, 'yyyy/mm/dd') cdate, TO_CHAR(cdate, 'HH:MI:ss') ctime, m.id,
+		    ROWNUM rno, cno, c.pno, comnt, c.mno, cdate, m.id,
 		    s.id sid
 		FROM
 		    commenttab c, poststab p, membertab m,
@@ -26,16 +25,17 @@
 	
 	<!-- 댓글 입력 질의명령 -->	
 	<insert id="WrtCmt" parameterType="pVO">
-		<selectKey keyProperty="cno" resultType="int" order="BEFORE">
+		<selectKey keyProperty="cno" resultType="int" order="AFTER">
 			SELECT
-				NVL(MAX(cno)+1, 3000)
+				MAX(cno)
 			FROM
 				commenttab
 		</selectKey>
 		INSERT INTO 
 		    commenttab(cno, pno, comnt, mno) 
 		VALUES( 
-		    #{cno}, #{pno}, #{cbody}, 
+		    (SELECT MAX(cno)+1 FROM commenttab),
+		    #{pno}, #{cbody}, 
 			(SELECT mno FROM membertab WHERE id = #{id}))
 	</insert>
 	

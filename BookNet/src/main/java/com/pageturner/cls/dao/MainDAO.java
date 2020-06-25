@@ -12,8 +12,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.pageturner.cls.vo.MainVO;
-import com.pageturner.cls.vo.PostsVO;
+import com.pageturner.cls.vo.*;
 
 @Repository
 public class MainDAO {
@@ -26,7 +25,7 @@ public class MainDAO {
 	}
 	
 	//본문 우측부분에 들어갈 자주 작성된 도서 5선 
-	public List<MainVO> oftenList() {
+	public List<PostsVO> oftenList() {
 		return sqlSession.selectList("mainSQL.OftenBook");
 	}
 	

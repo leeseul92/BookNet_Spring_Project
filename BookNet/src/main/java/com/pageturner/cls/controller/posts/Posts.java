@@ -33,13 +33,11 @@ public class Posts {
 	//게시물 상세보기 내 댓글리스트 비동기 통신
 	@RequestMapping("/showCmtList.cls")
 	@ResponseBody
-	public List<PostsVO> showCmtList(int pno, HttpSession session) {
-		PostsVO pVO = new PostsVO();
+	public List<PostsVO> showCmtList(int pno, PostsVO pVO, HttpSession session) {
 		pVO.setSid((String)session.getAttribute("SID")); //세션에 담긴 id 값 VO 클래스에 담기 
 		pVO.setPno(pno);
-		List<PostsVO> list = pDAO.showCmtList(pVO);
+		List<PostsVO> list = postsSrvc.showCmtList(pVO);
 		System.out.println("###### pVO의 sid : " + pVO.getSid());
-		System.out.println(list);
 		return list;
 	}
 	
@@ -54,7 +52,7 @@ public class Posts {
 		SimpleDateFormat form2 = new SimpleDateFormat("HH:mm:ss");
 		String cdate = form1.format(date) + " " + form2.format(date);
 		
-		pVO.setSid((String)session.getAttribute("SID")); //로그인 되어있는 id값 vo 클래스에 담기
+		pVO.setId((String)session.getAttribute("SID")); //로그인 되어있는 id값 vo 클래스에 담기
 		pVO.setCdate(cdate); //댓글작성시간 vo 클래스에 담기
 		
 		//service 호출 
