@@ -27,10 +27,10 @@ public class InterParkService implements InterParkAPI {
 	String json = null;
 	
 	//게시글 작성시 도서검색 요청이 들어온 경우 
-	public String interparkAPI(int categoryId, String keyword) {
+	public String interparkAPI(int code, int categoryId, String keyword) {
 		// TODO Auto-generated method stub
-		String base = selApiUtil.selectAPI(SelectAPI.SEARCH);
-		System.out.println("********");
+		System.out.println("********" + code);
+		String base = selApiUtil.selectUrl(code);
 		System.out.println(base);
 		
 		try {
@@ -53,7 +53,7 @@ public class InterParkService implements InterParkAPI {
 	
 	public static void main(String[] args) {
 		InterParkService iapi = new InterParkService();
-		iapi.interparkAPI(100, "코로나");
-		System.out.println(iapi.json);
+		String json = iapi.interparkAPI(SelectAPI.SEARCH, 100, "코로나");
+		System.out.println(json);
 	}
 }

@@ -14,28 +14,29 @@ public class SelectAPI {
 	public final static int RECOMM = 1002;
 	public final static int BESTSELL = 1003;
 	
-	String api;
-	String query;
-	String base;
 	
-	public String selectAPI(int code) {
+	public String selectUrl(int code) {
+		String api = null;
+		String query = null;
+		String base;
 		switch(code) {
 		case SEARCH:
-			this.api = "http://book.interpark.com/api/search.api";
-			this.query = "query";
+			api = "http://book.interpark.com/api/search.api";
+			query = "query";
 			break;
 		case RECOMM:
-			this.api = "http://book.interpark.com/api/recommend.api";
-			this.query = "categoryId";
+			api = "http://book.interpark.com/api/recommend.api";
+			query = "categoryId";
 			break;
 		case BESTSELL:
-			this.api = "http://book.interpark.com/api/bestSeller.api";
-			this.query = "categoryId";
+			api = "http://book.interpark.com/api/bestSeller.api";
+			query = "categoryId";
 			break;
 		}
 		
-		this.base = api + "?key=" + KEY + "&" + query + "=";
+		base = api + "?key=" + KEY + "&" + query + "=";
 		System.out.println(base);
 		return base;
 	}
+
 }
