@@ -15,7 +15,7 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("pVO")
 public class PostsVO {
-	private int pno, linkno, mno, eno, bno, cno, genre, cnt;
+	private int pno, linkno, mno, eno, bno, cno, genre, cnt, rst;
 	private String id, profile, postcont, pdate, largeimg, smallimg, bname, writer, trans,
 	 				hash, publish, emotion, cbody, comnt, cdate, gname, sid, ischeck, likepost;
 //	private Date postdate;
@@ -24,6 +24,12 @@ public class PostsVO {
 	
 	public String getIscheck() {
 		return ischeck;
+	}
+	public int getRst() {
+		return rst;
+	}
+	public void setRst(int rst) {
+		this.rst = rst;
 	}
 	public String getLikepost() {
 		return likepost;
@@ -190,11 +196,11 @@ public class PostsVO {
 	@Override
 	public String toString() {
 		return "PostsVO [pno=" + pno + ", linkno=" + linkno + ", mno=" + mno + ", eno=" + eno + ", bno=" + bno
-				+ ", cno=" + cno + ", genre=" + genre + ", cnt=" + cnt + ", id=" + id + ", profile=" + profile
-				+ ", postcont=" + postcont + ", pdate=" + pdate + ", largeimg=" + largeimg + ", smallimg=" + smallimg
-				+ ", bname=" + bname + ", writer=" + writer + ", trans=" + trans + ", hash=" + hash + ", publish="
-				+ publish + ", emotion=" + emotion + ", cbody=" + cbody + ", comnt=" + comnt + ", cdate=" + cdate
-				+ ", gname=" + gname + ", sid=" + sid + ", ischeck=" + ischeck + ", likepost=" + likepost + "]";
+				+ ", cno=" + cno + ", genre=" + genre + ", cnt=" + cnt + ", rst=" + rst + ", id=" + id + ", profile="
+				+ profile + ", postcont=" + postcont + ", pdate=" + pdate + ", largeimg=" + largeimg + ", smallimg="
+				+ smallimg + ", bname=" + bname + ", writer=" + writer + ", trans=" + trans + ", hash=" + hash
+				+ ", publish=" + publish + ", emotion=" + emotion + ", cbody=" + cbody + ", comnt=" + comnt + ", cdate="
+				+ cdate + ", gname=" + gname + ", sid=" + sid + ", ischeck=" + ischeck + ", likepost=" + likepost + "]";
 	}
 	
 }

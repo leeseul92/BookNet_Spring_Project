@@ -55,10 +55,12 @@
 									</div>
 								</c:if>
 								<div class="like-butt" id="${data.pno}" style="display: flex;'">
-									<c:if test="${data.ischeck eq NULL}">
+									<c:if test="${data.rst eq 0}"> 
+									<!-- 좋아요 누른 횟수가 짝수이거나 null 값이면, 빈하트모양 -->
 										<span style="font-size: 12px; line-height: 0px;" class="like-img likebtn" id="like${data.pno}"></span>
 									</c:if>
-									<c:if test="${data.ischeck eq 'Y'}">
+									<c:if test="${data.rst eq 1}">
+									<!-- 좋아요 누른 횟수가 홀수이면, 빨간하트모양 -->
 										<span style="font-size: 12px; line-height: 0px; background-position: -208px -370px;" class="like-img likebtn" id="like${data.pno}"></span>
 									</c:if>
 								</div>

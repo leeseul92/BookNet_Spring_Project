@@ -36,6 +36,11 @@ public class Main {
 
 		//서비스클래스 불러오기
 		List<PostsVO> list = mainSrvc.membMain(session);
+		/*
+		for(int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).toString());
+		}
+		*/
 		List<PostsVO> mList = mainSrvc.mostRefRank();
 		List<PostsVO> genre = postsSrvc.genresList();
 
