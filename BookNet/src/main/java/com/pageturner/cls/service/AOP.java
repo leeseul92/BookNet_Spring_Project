@@ -20,19 +20,17 @@ import org.springframework.web.servlet.view.RedirectView;
 @Aspect
 public class AOP {
 	
-	@Before("execution(* com.pageturner.cls.controller.member.*.*(..)) || " +
-			"execution(* com.pageturner.cls.controller.posts.*.*(..))"
-			)
+	@Before("execution(* com.pageturner.cls.controller.posts.*.*(..))")
 	public void loginCK(JoinPoint join) {
 		System.out.println("loginCK");
 		Object[] obj = join.getArgs();
 		HttpServletRequest req = (HttpServletRequest) obj[0];
 
 		String sid = (String) req.getSession().getAttribute("SID");
-		if (sid == null) {
+		if (sid == null) { // 로그인 안되있는 경우
 			((ModelAndView) obj[1]).addObject("isLogin", false);
 			((ModelAndView) obj[1]).setView(new RedirectView("/member/login.cls"));
-		} else {
+		} else { // 로그인 되있는 경우
 			((ModelAndView) obj[1]).addObject("isLogin", true);
 		}
 	}

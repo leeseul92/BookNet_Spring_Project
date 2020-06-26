@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.*;
 
+import com.pageturner.cls.dao.MemberDAO;
 import com.pageturner.cls.service.*;
 import com.pageturner.cls.vo.*;
 import com.pageturner.cls.util.Dice;
@@ -30,6 +31,8 @@ import com.pageturner.cls.util.Dice;
 public class Member {
 	@Autowired
 	MemberService membSrvc;
+	@Autowired
+	MemberDAO mDAO;
 	@Inject
 	JavaMailSender mailSender;
 
@@ -78,7 +81,7 @@ public class Member {
 	}
 
 	// 이명환
-	// 아디비번찾기
+	// 아디비번찾기 뷰
 	@RequestMapping("/findID.cls")
 	public ModelAndView findID(ModelAndView mv) {
 		String view = "member/findID";
@@ -87,7 +90,7 @@ public class Member {
 	}
 
 	// 이명환
-	// 메일인증
+	// 메일인증 처리
 	@RequestMapping("/mail.cls")
 	@ResponseBody
 	public String mailProc(HttpServletRequest req) {
@@ -111,4 +114,57 @@ public class Member {
 
 		return str;
 	}
+	
+	// 이명환
+	// 정보수정 뷰
+	@RequestMapping("/edit.cls")
+	public ModelAndView edit(HttpServletRequest req, ModelAndView mv) {
+		mv.setViewName("mypage/editMemb");
+		return mv;
+	}
+	
+	// 이명환
+	// 정보수정(비번) 처리
+	@RequestMapping("/editPW.cls")
+	public ModelAndView editPW(HttpServletRequest req, ModelAndView mv, MemberVO mVO) {
+		mVO.setId((String)req.getSession().getAttribute("SID"));
+		int cnt = mDAO.editPW(mVO);
+		
+		if(cnt == 0) {
+			System.out.println("정보수정(비번)처리 에러");
+		}
+		mv.setView(new RedirectView("마이페이지"));
+		
+		return mv;
+	}
+	
+	// 이명환
+	// 정보수정(유저) 처리
+	@RequestMapping("/editUser.cls")
+	public ModelAndView editUser(HttpServletRequest req, ModelAndView mv, MemberVO mVO) {
+		mVO.setId((String)req.getSession().getAttribute("SID"));
+		int cnt = mDAO.editUser(mVO);
+		
+		if(cnt == 0) {
+			System.out.println("정보수정(유저)처리 에러");
+		}
+		mv.setView(new RedirectView("마이페이지"));
+		return mv;
+	}
+	
+	// 이명환
+	// 회원탈퇴 처리
+	@RequestMapping("/delUser.cls")
+	public ModelAndView delUser(HttpServletRequest req, ModelAndView mv, MemberVO mVO) {
+		mVO.setId((String)req.getSession().getAttribute("SID"));
+		int cnt = mDAO.delUser(mVO);
+		
+		if(cnt == 0) {
+			System.out.println("정보수정(유저)처리 에러");
+		}
+		req.getSession().removeAttribute("SID");
+		mv.setView(new RedirectView("비회원메인페이지"));
+		return mv;
+	}
+	
 }

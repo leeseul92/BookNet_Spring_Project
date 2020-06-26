@@ -22,5 +22,19 @@ public class MemberDAO {
 		return sqlSession.selectOne("mSQL.Login", mVO);
 	}
 	
+	// 정보수정(비번)
+	public int editPW(MemberVO mVO) {
+		return sqlSession.update("mSQL.editPW", mVO);
+	}
+	
+	// 정보수정
+	public int editUser(MemberVO mVO) {
+		return sqlSession.update("mSQL.editUser", mVO);
+	}
+	
+	// 회원탈퇴
+	public int delUser(MemberVO mVO) {
+		return sqlSession.update("mSQL.delUser", mVO);
+	}
 
 }

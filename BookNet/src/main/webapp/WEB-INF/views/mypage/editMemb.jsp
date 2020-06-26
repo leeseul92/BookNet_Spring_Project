@@ -43,14 +43,19 @@
 			$('#img').attr('src', img);
 		});
 		
-		// 수정/홈 얼럿
-		$('#ebtn').click(function(){
+		// 비번 변경
+		$('#pbtn').click(function(){
 			// 데이터 무결성 검사해야됨
 			
-			$('#frm').submit();
+			$('#frm1').submit();
 		});
+		
+		// 정보 수정
+		$('#ebtn').click(function(){
+			$('#frm2').submit();
+		});
+		
 		$('#hbtn').click(function(){
-//			alert('홈으로돌아감 홈링크안만듦');
 			$(location).attr('href', '/cls/main.cls');
 		});
 	});
@@ -59,7 +64,7 @@
 <body>
 	<div class="w3-col l3 m3"><p></p></div>
 	<div class="w3-col l6 m6 s12">
-		<form class="w3-col" method="post" action="" name="frm" id="frm" encType="multipart/form-data">
+		<form class="w3-col" method="post" action="/cls/member/editPW.cls" name="frm" id="frm1" encType="multipart/form-data">
 			<div class="w3-col w3-padding w3-black w3-card">
 				<h3 class="w3-center">정보수정</h3>
 			</div>
@@ -85,10 +90,10 @@
 					</div>
 				</div>
 			</div>
-			</form>
-		<form class="w3-col" method="post" action="" name="frm" id="frm" encType="multipart/form-data">
-			<div class="w3-col m12 w3-padding w3-card w3-center w3-blue w3-button" id="ebtn">비밀번호 변경</div>
+		</form>
+			<div class="w3-col m12 w3-padding w3-card w3-center w3-blue w3-button" id="pbtn">비밀번호 변경</div>
 				<!-- 프로필사진 -->
+		<form class="w3-col" method="post" action="" name="frm" id="frm2" encType="multipart/form-data">
 			<div class="w3-col w3-padding w3-border w3-card" style="margin-top: 10px;">
 				<div class="w3-row">
 					<label class="w3-col m3 w3-right-align w3-padding w3-border" for="file">프로필 사진</label>
@@ -97,13 +102,6 @@
 					</div>
 					<div class="w3-row w3-center w3-border" >
 						<img id="img" style="width: 100px; height: auto;" src="" />
-					</div>
-				</div>
-				<!-- 닉네임 -->
-				<div class="w3-row">
-					<label class="w3-col m3 w3-right-align w3-padding w3-border" for="nickname">닉네임</label>
-					<div class="w3-col m9 w3-padding w3-border">
-						<input class="w3-col m12" type="text" id="nickame" name="nickname">
 					</div>
 				</div>
 				<!-- 관심분야 -->
@@ -125,18 +123,18 @@
 					<label class="w3-col m3 w3-right-align w3-padding w3-border" for="gen">정보공개설정</label>
 					<div class="w3-col m9 w3-padding w3-border">
 						<span class="w3-col m10">관심분야
-							<input type="radio" id="Y" name="gen">공개
-							<input type="radio" id="N" name="gen">비공개
+							<input type="radio" id="intershowY" name="intershow">공개
+							<input type="radio" id="intershowN" name="intershow">비공개
 						</span>
 						</br>
 						<span class="w3-col m10">생년월일
-							<input type="radio" id="Y" name="gen">공개
-							<input type="radio" id="N" name="gen">비공개
+							<input type="radio" id="birthshowY" name="birthshow">공개
+							<input type="radio" id="birthshowN" name="birthshow">비공개
 						</span>
 						</br>
 						<span class="w3-col m10">성별
-							<input type="radio" id="Y" name="gen">공개
-							<input type="radio" id="N" name="gen">비공개
+							<input type="radio" id="genshowY" name="genshow">공개
+							<input type="radio" id="genshowN" name="genshow">비공개
 						</span>
 						</br>
 					</div>
