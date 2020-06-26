@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+	이 파일은 팔로우와 관련된 작업을 처리할 질의명령을 담고 있는 파일이다.
+	작성자 : 박기윤
+	작성일 : 2020.06.26
+	버전 : v.1.0
+-->
+<mapper namespace="falSQL">
+	<select id="cntFal" parameterType="falVO" resultType="int">
+		SELECT
+			COUNT(*) cnt
+		FROM
+			fallowtab
+		<trim prefix="WHERE" prefixOverrides="AND | OR">
+			<if test="fallow_no != null">
+				AND fallow_no = ${fallow_no}
+			</if>
+			<if test="fallower_no != null">
+				AND fallower_no = ${fallower_no}
+			</if>
+		</trim>
+	</select>
+	
+	<select id="falList" parameterType="falVO" resultType="falVO">
+		SELECT
+			fallow_no, fallower_no, id, save_name sname, save_loc sloc, ischeck
+		FROM
+			membertab mt, profilepictab ppt, fallowtab ft
+		WHERE
+			mt.mno = ppt.mno
+			AND ft.ischeck = 'Y'
+			AND mt.isshow = 'Y'
+			AND mt.mno =
+			<choose>
+				<when test="fallower_no != null">
+					fallow_no
+					AND fallower_no = ${fallower_no}
+				</when>
+				<otherwise>
+					fallower_no
+					AND fallow_no = ${fallow_no}
+				</otherwise>
+			</choose>
+	</select>
+	
+	<insert id="newFal" parameterType="falVO">
+		<selectKey keyProperty="fal_no" resultType="int" order="BEFORE">
+			SELECT
+				NVL(MAX(fal_no) + 1, 1)
+			FROM
+				fallowtab
+		</selectKey>
+		INSERT
+			fallowtab(fal_no, fallow_no, fallower_no)
+		VALUES(
+			${fal_no}, ${fallow_no}, ${fallower_no}
+		)
+	</insert>
+	
+	<update id="falStateChange" parameterType="falVO">
+		UPDATE
+			fallowtab
+		SET
+			<choose>
+				<when test="ischeck == 'Y'">
+					ischeck = 'N'
+				</when>
+				<otherwise>
+					ischeck = 'Y',
+					fal_time = sysdate
+				</otherwise>
+			</choose>
+		WHERE
+			fallow_no = ${fallow_no}
+			AND fallower_no = ${fallower_no}
+	</update>
+</mapper>

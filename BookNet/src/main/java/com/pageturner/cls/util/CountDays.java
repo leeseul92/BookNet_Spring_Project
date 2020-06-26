@@ -1,5 +1,11 @@
 package com.pageturner.cls.util;
-
+/**
+ * 이 클래스는 게시글과 현재 시간의 차이를 구하여 시간의 단위로 구분하여
+ * 제공하는 유틸 클래스이다.
+ * @author	박기윤
+ * @since	2020.06.25
+ * @version	v.1.0
+ */
 import java.util.*;
 import java.text.*;
 

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+	이 파일은 알람 리스트를 불러올 질의명령을 담고 있는 파일이다.
+	작성자 : 박기윤
+	작성일 : 2020.06.26
+	버전 : v.1.0
+-->
+<mapper namespace="almSQL">
+	<sql id="cont">
+		SELECT
+			extime, id, save_loc
+	</sql>
+	
+	<sql id="bname">
+		CASE
+			WHEN LENGTH(bname) <![CDATA[<]]>= 10 THEN bname
+			ELSE SUBSTR(bname, 1, 10) || '...'
+		END AS bname
+	</sql>
+	
+	<select id="fal" parameterType="mVO" resultType="alVO">
+		<include refid="cont" />
+		FROM
+			(SELECT
+				id, fal_time extime, save_loc
+			FROM
+				fallowtab ft, membertab mt, profilepictab ppt
+			WHERE
+				fallow_no = ${mno}
+				AND fallower_no = mt.mno
+				AND ppt.mno = mt.mno
+				AND ischeck = 'Y'
+				AND mt.isshow = 'Y'
+				AND ppt.isshow = 'Y'
+			)
+	</select>
+	
+	<select id="like" parameterType="mVO" resultType="alVO">
+		<include refid="cont" />, bname, pno
+		FROM
+			(SELECT
+				pt.pno, id, lk_time extime, save_loc,
+			    <include refid="bname" />
+			FROM
+				poststab pt, booktab bt, liketab lt,
+				membertab mt, profilepictab ppt
+			WHERE
+				pt.bno = bt.bno
+				AND pt.isshow = 'Y'
+				AND pt.mno = ${mno}
+				AND ppt.mno = mt.mno
+				AND mt.isshow = 'Y'
+				AND ppt.isshow = 'Y'
+				AND pt.pno = lt.pno
+				AND mt.mno = lt.mno
+				AND ischeck = 'Y'
+				AND lt.mno != ${mno}
+			)
+	</select>
+	
+	<select id="comnt" parameterType="mVO" resultType="alVO">
+		<include refid="cont" />, bname, pno
+		FROM
+			(SELECT
+				pt.pno, id, cdate extime, save_loc,
+			    <include refid="bname" />
+			FROM
+				poststab pt, booktab bt, commenttab ct,
+				membertab mt, profilepictab ppt
+			WHERE
+				pt.bno = bt.bno
+				AND pt.isshow = 'Y'
+				AND pt.mno = ${mno}
+				AND ppt.mno = mt.mno
+				AND mt.isshow = 'Y'
+				AND ppt.isshow = 'Y'
+				AND pt.pno = ct.pno
+				AND mt.mno = ct.mno
+				AND ct.isshow = 'Y'
+				AND ct.mno != ${mno}
+			)
+	</select>
+</mapper>
