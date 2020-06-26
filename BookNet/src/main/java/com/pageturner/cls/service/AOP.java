@@ -20,7 +20,7 @@ import org.springframework.web.servlet.view.RedirectView;
 @Aspect
 public class AOP {
 	
-	@Before("execution(* com.pageturner.cls.controller.posts.*.*(..))")
+	@Before("execution(* com.pageturner.cls.controller.main.*.*(..))")
 	public void loginCK(JoinPoint join) {
 		System.out.println("loginCK");
 		Object[] obj = join.getArgs();
