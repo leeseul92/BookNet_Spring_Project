@@ -8,6 +8,7 @@ package com.pageturner.cls.controller.main;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.pageturner.cls.service.MainService;
 import com.pageturner.cls.service.PostsService;
-import com.pageturner.cls.vo.*;
+import com.pageturner.cls.vo.PostsVO;
 
 @Controller
 @RequestMapping("/main")
@@ -29,9 +30,23 @@ public class Main {
 	@Autowired
 	PostsService postsSrvc;
 	
+	//비로그인 회원 메인화면
+	@RequestMapping("/non.cls")
+	public ModelAndView showMainNon(HttpServletRequest req, ModelAndView mv) {
+		String view = "main/none_main";
+		
+		List<PostsVO> list = mainSrvc.nonMain();
+		
+		mv.addObject("LIST", list);
+		
+		mv.setViewName(view);
+		
+		return mv;
+	}
+	
 	//로그인한 회원 메인화면
 	@RequestMapping("/main.cls")
-	public ModelAndView showMain(HttpSession session, ModelAndView mv) {
+	public ModelAndView showMain(HttpServletRequest req, ModelAndView mv, HttpSession session) {
 		String view = "main/mem_main";
 
 		//서비스클래스 불러오기

@@ -4,14 +4,5 @@
  */
 
 $(document).ready(function(){
-	$('#slickModal').slick({
-		infinite: true,
-		slidesToShow: 1,
-		arrows: true,
-		dots: true,
-		autoplay: true,
-		autoplaySpeed: 10000,
-		speed: 1000,
-		pauseOnHover: true
-	});
+	
 });

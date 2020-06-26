@@ -39,7 +39,7 @@
 		<!-- header -->
 		<div id="header">
 			<h1 style="text-align: center">
-				<a href="/BookNet/main/non.cls" class="logo_font"><b>PageTurner</b></a>
+				<a href="/cls/main/non.cls" class="logo_font"><b>PageTurner</b></a>
 			</h1>
 		</div>
 		<!-- //header -->

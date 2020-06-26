@@ -6,6 +6,21 @@
 					
 <mapper namespace="mainSQL">
 
+	<!-- 비로그인 회원에게 보여주는 메인 게시글 질의명령 -->
+	<select id="nonMain" resultType="pVO">
+		SELECT 
+		    p.pno pno, p.bno, p.mno, postcont, postdate, isshow, count(l.pno) cnt, ischeck
+		FROM 
+		    poststab p, liketab l 
+		WHERE 
+		    p.pno = l.pno(+) 
+		    AND isshow = 'Y' 
+		GROUP BY 
+		    p.pno, postcont, postdate, p.bno, p.mno, isshow, ischeck
+		ORDER BY
+		    postdate DESC
+	</select>
+	
 	<!-- 로그인한 회원에게 보여주는 메인 게시글 질의명령 -->
 	<select id="MemMain" resultType="pVO" parameterType="string">
 		SELECT

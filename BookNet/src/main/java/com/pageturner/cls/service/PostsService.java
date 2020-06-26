@@ -47,5 +47,8 @@ public class PostsService {
 		return list;
 	}
 	
-	
+	//게시글 작성시 도서검색 처리
+ 	public List<PostsVO> searchBook(String word) {
+		return pDAO.searchBook(word);
+	}
 }

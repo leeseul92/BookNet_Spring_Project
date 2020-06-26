@@ -58,7 +58,7 @@
 	</select>
 	
 	<!-- 게시글작성시 입력된 키워드 도서검색 결과 질의명령 -->
-	<select id="SearchBook" resultType="bVO" parameterType="string">
+	<select id="SearchBook" resultType="pVO" parameterType="string">
 		SELECT 
 		    mg.* 
 		FROM 

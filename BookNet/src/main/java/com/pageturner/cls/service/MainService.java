@@ -23,6 +23,11 @@ public class MainService {
 	@Autowired
 	MainDAO mainDAO;
 	
+	//비로그인 회원용 메인게시글화면
+	public List<PostsVO> nonMain(){
+		return mainDAO.showNonMain();
+	}
+	
 	//로그인한 회원용 메인게시글화면  
 	public List<PostsVO> membMain(HttpSession session){
 		List<PostsVO> list = null;

@@ -19,6 +19,11 @@ public class MainDAO {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 	
+	//비로그인 회원에게 보여질 메인 게시글
+	public List<PostsVO> showNonMain() {
+		return sqlSession.selectList("mainSQL.nonMain");
+	}
+	
 	//로그인한 회원에게 보여질 메인 게시글 
 	public List<PostsVO> showMemMain(String id) {
 		return sqlSession.selectList("mainSQL.MemMain", id);

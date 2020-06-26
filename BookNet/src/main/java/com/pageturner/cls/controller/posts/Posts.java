@@ -25,9 +25,6 @@ import com.pageturner.cls.vo.*;
 @RequestMapping("/posts")
 public class Posts {
 	@Autowired
-	PostsDAO pDAO;
-	
-	@Autowired
 	PostsService postsSrvc;
 	
 	//게시물 상세보기 내 댓글리스트 비동기 통신
@@ -73,9 +70,9 @@ public class Posts {
 	//게시글 작성시 도서검색 결과 비동기통신 처리 
 	@RequestMapping("/searchBook.cls")
 	@ResponseBody
-	public List<BookVO> searchBook(String searchword, BookVO bVO){
+	public List<PostsVO> searchBook(String searchword, PostsVO pVO){
 		String word = "%" + searchword + "%";
-		List<BookVO> list = pDAO.searchBook(word);
+		List<PostsVO> list = postsSrvc.searchBook(word);
 		System.out.println(list.size());
 		return list;
 	}

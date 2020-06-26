@@ -48,5 +48,11 @@
 	처리함수	: Posts.searchBook()
 	뷰		: 
 --------------------------------------------------------------
-
+# 비로그인 회원 메인페이지 요청
+	요청내용	: /cls/main/non.cls
+	파라미터	: 없음 
+	컨트롤러	: com.pageturner.cls.controller.main.Main
+	처리함수	: Main.showMainNon()
+	뷰		: /WEB-INF/views/main/non_main.jsp
+--------------------------------------------------------------
 

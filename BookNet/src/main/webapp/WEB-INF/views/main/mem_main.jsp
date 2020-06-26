@@ -105,57 +105,7 @@
 							</div>
 						</div>
 					</div>
-					<!-- 게시물 상세보는 모달 -->
-					<div class="modal detailPost" role="none">
-						<div class="p-modal-content" id="" style="height: 540px;">
-							<span class="close w-x-btn" id="">x</span>
-							<div class="w100-pt10">
-								<div class="wrtProf" style="width: 45px; height: 45px;">
-									<img src="">
-								</div>
-								<div class="wrter" style="line-height: 40px;" id="">
-									<a href="" style="font-size: 18px;"><b class="wrter"></b></a>
-								</div>
-								<div class="time" style="line-height: 40px;" id="time"></div>
-							</div>
-							<div class="w100-h500">
-								<div class="w500-h450">
-									<div class="genre-pad" id="genre-pad"></div>
-									<div class="genre-pad" style="height: 35px; font-size: 25px; line-height: 25px;"><b id="genre-name"><b></b></b></div>
-									<div class="book-pic">
-										<!-- 도서 사진 들어갈 부분 -->
-										<img id="bimg" src="" style="float: left; box-sizing: border-box;" />
-									</div>
-									<div class="detail-body">
-										<!-- 게시글 부분 -->
-										<a style="box-sizing: border-box; font-size: 13px;" id="p-body"></a>
-									</div>
-								<div class="w100-h35">
-									<div style="float: left; margin-left: 20px; text-align: left; font-size: 12px;" id="gethash"></div>
-									<div class="like-butt" style="margin-right: 20px;" id="">
-										<span style="font-size: 12px; line-height: 0px;" class="comt-img comtbtn"></span>
-									</div>
-									<div class="like-butt" id="" style="display: flex;'">
-										<span style="font-size: 12px; line-height: 0px;" class="like-img likebtn" id=""></span>
-									</div>
-								</div>
-								</div>
-								<div class="w450-h400">
-									<div class="w450-h400 post-comment" style="height: 350px;" id="">
-										<!-- 댓글 리스트 뽑아오기 -->
-									</div>
-									<div class="wrtcomt hidcommt" style="display: none;" id="">
-										<div class="comwrter">
-											<input type="hidden">
-											<a>${SID}</a>
-										</div>
-										<input type="text" id="-comt-id" class="combody" placeholder="댓글을 입력하세요." />
-										<input type="button" class="comsubbtn" value="등록" id=""/>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+					<jsp:include page="/WEB-INF/views/postsDetail.jsp" />
 				</div>
 				<!-- 우측 정보 부분 : 고정페이지로 들어갈 것-->
 				<div class="info_area">
@@ -171,7 +121,9 @@
 						</c:forEach>
 					</div>
 					<div style="width: 100%; height: 200px; margin-top: 15px; border: solid 1px white;">
-						<a></a>
+						<div class="w100-h40" style="/* background-position: inherit; background-image: url('/BookNet/img/manuscript_img.png');  */border-bottom: solid 1px black;">
+							<a class="w3-third fl-fs13">베스트셀러</a>
+						</div>
 					</div>
 				</div>
 				<!-- 우측 정보 끝! -->
