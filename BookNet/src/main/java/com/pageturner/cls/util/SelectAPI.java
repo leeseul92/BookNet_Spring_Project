@@ -35,7 +35,7 @@ public class SelectAPI {
 		}
 		
 		this.base = api + "?key=" + KEY + "&" + query + "=";
-		
+		System.out.println(base);
 		return base;
 	}
 }

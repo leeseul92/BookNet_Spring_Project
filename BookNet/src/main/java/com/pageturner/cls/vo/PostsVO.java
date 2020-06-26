@@ -17,13 +17,19 @@ import org.apache.ibatis.type.Alias;
 public class PostsVO {
 	private int pno, linkno, mno, eno, bno, cno, genre, cnt;
 	private String id, profile, postcont, pdate, largeimg, smallimg, bname, writer, trans,
-	 				hash, publish, emotion, cbody, comnt, cdate, gname, sid, ischeck;
+	 				hash, publish, emotion, cbody, comnt, cdate, gname, sid, ischeck, likepost;
 //	private Date postdate;
 //	private Time posttime;
 //	private MainVO mainVO;
-
+	
 	public String getIscheck() {
 		return ischeck;
+	}
+	public String getLikepost() {
+		return likepost;
+	}
+	public void setLikepost(String likepost) {
+		this.likepost = likepost;
 	}
 	public String getBname() {
 		return bname;
@@ -188,8 +194,7 @@ public class PostsVO {
 				+ ", postcont=" + postcont + ", pdate=" + pdate + ", largeimg=" + largeimg + ", smallimg=" + smallimg
 				+ ", bname=" + bname + ", writer=" + writer + ", trans=" + trans + ", hash=" + hash + ", publish="
 				+ publish + ", emotion=" + emotion + ", cbody=" + cbody + ", comnt=" + comnt + ", cdate=" + cdate
-				+ ", gname=" + gname + ", sid=" + sid + ", ischeck=" + ischeck + "]";
+				+ ", gname=" + gname + ", sid=" + sid + ", ischeck=" + ischeck + ", likepost=" + likepost + "]";
 	}
-	
 	
 }

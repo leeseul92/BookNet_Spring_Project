@@ -14,4 +14,7 @@
 <!-- SelectAPI util 빈처리 -->
 <bean id="selApiUtil" class="com.pageturner.cls.util.SelectAPI" />
 
+<!-- WebConnectino util	빈처리 -->
+<bean id="webConn" class="com.pageturner.cls.util.WebConnection" />
+
 </beans>
