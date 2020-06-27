@@ -12,13 +12,13 @@
 <head>
 <meta charset="UTF-8">
 <title>비회원 메인페이지</title>
-<link rel="stylesheet" href="/BookNet/css/nonmem.css">
-<link rel="stylesheet" href="/BookNet/css/proj_fixed.css">
-<link rel="stylesheet" href="/BookNet/css/modal.css">
-<link rel="stylesheet" href="/BookNet/css/w3.css">
-<link rel="stylesheet" href="/BookNet/css/non_search.css">
-<script type="text/javascript" src="/BookNet/js/jquery-3.5.0.min.js"></script>
-<script type="text/javascript" src="/BookNet/js/nonmem.js"></script>
+<link rel="stylesheet" href="/cls/css/nonmem.css">
+<link rel="stylesheet" href="/cls/css/proj_fixed.css">
+<link rel="stylesheet" href="/cls/css/modal.css">
+<link rel="stylesheet" href="/cls/css/w3.css">
+<link rel="stylesheet" href="/cls/css/non_search.css">
+<script type="text/javascript" src="/cls/js/jquery-3.5.0.min.js"></script>
+<script type="text/javascript" src="/cls/js/nonmem.js"></script>
 <script src = "https://unpkg.com/sweetalert/dist/sweetalert.min.js" ></script>
 </head>
 <body onload="printClock()"/>

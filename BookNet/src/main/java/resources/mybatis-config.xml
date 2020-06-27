@@ -24,6 +24,10 @@
 		<mapper resource="com/pageturner/cls/sql/MemberSQL.xml"/>
 		<mapper resource="com/pageturner/cls/sql/MainSQL.xml"/>
 		<mapper resource="com/pageturner/cls/sql/PostsSQL.xml" />
+		<mapper resource="com/pageturner/cls/sql/MyPageSQL.xml"/>
+		<mapper resource="com/pageturner/cls/sql/FallowSQL.xml"/>
+		<mapper resource="com/pageturner/cls/sql/AlarmSQL.xml"/>
+		<mapper resource="com/pageturner/cls/sql/BookSQL.xml"/>
 		<!-- <mapper resource="com/pageturner/cls/sql/*SQL.xml" /> --> 
 	</mappers>
 </configuration>		

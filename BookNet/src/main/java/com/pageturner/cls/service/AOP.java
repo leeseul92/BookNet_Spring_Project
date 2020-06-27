@@ -16,11 +16,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-@Component
-@Aspect
+//@Component
+//@Aspect
 public class AOP {
 	
-	@Before("execution(* com.pageturner.cls.controller.main.Main.membMain(..))")
+//	@Before("execution(* com.pageturner.cls.controller.mypage.MyPage(..))")
 	public void loginCK(JoinPoint join) {
 		System.out.println("loginCK");
 		Object[] obj = join.getArgs();

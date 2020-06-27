@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-<html style="background-color: #F3F0F7">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>회원 메인페이지</title>

@@ -197,7 +197,7 @@ $(document).ready(function(){
 	});
 	
 	$('#myBtn').click(function(){
-		$(location).attr('href', '/BookNet/mypage/mypage.cls');
+		$(location).attr('href', '/cls/myPage/myPage.cls');
 	});
 	
 	$('.likebtn').click(function(){ //like 버튼 클릭시 빨강하트로 변경 

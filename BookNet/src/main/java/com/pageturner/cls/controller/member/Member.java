@@ -1,9 +1,7 @@
 package com.pageturner.cls.controller.member;
 
-import javax.inject.Inject;
-
 /**
- * 이 클래스는 회원정보와 관련된 요청을 처리해주기 위한 컨트롤러입니다.
+ * 이 클래스는 회원정보(로그인, 회원가입 등)와 관련된 요청을 처리해주기 위한 컨트롤러입니다.
  * @author leeseulkim
  * @since 5th Jun 2020
  *
@@ -11,6 +9,7 @@ import javax.inject.Inject;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.*;
+import javax.inject.Inject;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
@@ -21,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.*;
 
-import com.pageturner.cls.dao.MemberDAO;
+import com.pageturner.cls.dao.*;
 import com.pageturner.cls.service.*;
 import com.pageturner.cls.vo.*;
 import com.pageturner.cls.util.Dice;

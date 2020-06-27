@@ -1,58 +1,65 @@
 --------------------------------------------------------------
-# 로그인 페이지 요청
+# 로그인 페이지 요청 --> 김이슬 
 	요청내용	: /cls/member/login.cls
 	파라미터	: 없음 
 	컨트롤러	: com.pageturner.cls.controller.member.Member
 	처리함수	: Member.loginForm()
 	뷰		: /WEB-INF/views/member/login.jsp
 --------------------------------------------------------------
-# 로그인 처리 요청 
+# 로그인 처리 요청 --> 김이슬
 	요청내용	: /cls/member/login.cls
 	파라미터	: id, pw (mVO)
 	컨트롤러	: com.pageturner.cls.controller.member.Member
 	처리함수	: Member.loginProc()
 	뷰		: redirect(/cls/member/login.cls or /cls/main/main.cls)
 --------------------------------------------------------------
-# 회원 메인 페이지 요청
+# 회원 메인 페이지 요청 --> 김이슬 
 	요청내용	: /cls/main/main.cls
 	파라미터	: id
 	컨트롤러	: com.pageturner.cls.controller.main.Main
 	처리함수	: Main.showMain()
 	뷰		: /WEB-INF/views/main/mem_main.jsp
 --------------------------------------------------------------
-# 게시글 상세보기 내 댓글리스트 비동기통신 요청
+# 게시글 상세보기 내 댓글리스트 비동기통신 요청 --> 김이슬 
 	요청내용	: /cls/posts/showCmt.cls
 	파라미터	: pno
 	컨트롤러	: com.pageturner.cls.controller.posts.Posts
 	처리함수	: Posts.showCmtList()
 	뷰		: /WEB-INF/views/main/mem_main.jsp
 --------------------------------------------------------------
-# 게시글 상세보기 내 댓글 달기 비동기통신 요청
+# 게시글 상세보기 내 댓글 달기 비동기통신 요청 --> 김이슬 
 	요청내용	: /cls/posts/wrtCmt.cls
 	파라미터	: pno, id, cbody
 	컨트롤러	: com.pageturner.cls.controller.posts.Posts
 	처리함수	: Posts.wrtCmt()
 	뷰		: /WEB-INF/views/main/mem_main.jsp
 --------------------------------------------------------------
-# 게시글 상세보기 내 댓글 삭제 비동기통신 요청
+# 게시글 상세보기 내 댓글 삭제 비동기통신 요청 --> 김이슬 
 	요청내용	: /cls/posts/delCmt.cls
 	파라미터	: cno
 	컨트롤러	: com.pageturner.cls.controller.posts.Posts
 	처리함수	: Posts.delCmt()
 	뷰		: /WEB-INF/views/main/mem_main.jsp
 --------------------------------------------------------------
-# 글 작성시 도서 검색 비동기통신 요청
+# 글 작성시 도서 검색 비동기통신 요청 --> 김이슬 
 	요청내용	: /cls/posts/searchBook.cls
 	파라미터	: searchword 
 	컨트롤러	: com.pageturner.cls.controller.posts.Posts
 	처리함수	: Posts.searchBook()
 	뷰		: 
 --------------------------------------------------------------
-# 비로그인 회원 메인페이지 요청
+# 비로그인 회원 메인페이지 요청 --> 서동혁 
 	요청내용	: /cls/main/non.cls
 	파라미터	: 없음 
 	컨트롤러	: com.pageturner.cls.controller.main.Main
 	처리함수	: Main.showMainNon()
 	뷰		: /WEB-INF/views/main/non_main.jsp
+--------------------------------------------------------------
+# 본인 마이페이지 요청 --> 박기윤 
+	요청내용	: /cls/myPage/myPage.cls
+	파라미터	: 없음  
+	컨트롤러	: com.pageturner.cls.controller.mypage.MyPage
+	처리함수	: MyPage.showMyPage()
+	뷰		: /WEB-INF/views/mypage/myPage.jsp
 --------------------------------------------------------------
 
