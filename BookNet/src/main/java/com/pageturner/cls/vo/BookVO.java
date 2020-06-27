@@ -72,6 +72,11 @@ public class BookVO {
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
-	
+	@Override
+	public String toString() {
+		return "BookVO [title=" + title + ", smallimg=" + smallimg + ", largeimg=" + largeimg + ", gname=" + gname
+				+ ", publisher=" + publisher + ", author=" + author + ", translator=" + translator + ", link=" + link
+				+ ", isbn=" + isbn + ", categoryId=" + categoryId + "]";
+	}
 	
 }

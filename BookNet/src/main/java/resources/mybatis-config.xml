@@ -11,6 +11,7 @@
 	</settings>
 	
 	<typeAliases> 
+	<!-- vo클래스 별칭주기 -->
 		<package name="com.pageturner.cls.vo" />
 		<!-- <typeAlias alias="mVO" type="com.pageturner.cls.vo.MemberVO"/>
 		<typeAlias alias="mainVO" type="com.pageturner.cls.vo.MainVO"/>

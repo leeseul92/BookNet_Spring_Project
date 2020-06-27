@@ -8,13 +8,7 @@
 						http://www.springframework.org/schema/context
 						https://www.springframework.org/schema/context/spring-context.xsd">
 
-<!-- CountDays util 빈처리 -->
-<bean id="cntDayUtil" class="com.pageturner.cls.util.CountDays" />
-
-<!-- SelectAPI util 빈처리 -->
-<bean id="selApiUtil" class="com.pageturner.cls.util.SelectAPI" />
-
-<!-- WebConnectino util	빈처리 -->
-<bean id="webConn" class="com.pageturner.cls.util.WebConnection" />
-
+	<!-- CountDays util 빈처리 -->
+	<bean id="cntDayUtil" class="com.pageturner.cls.util.CountDays" />
+	
 </beans>

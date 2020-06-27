@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+<!-- 
+	해당 sql 파일은 인터파크도서 api로부터 불러온 데이터를 db에 저장시키기 위한 질의명령입니다.
+	@author leeseul kim
+	@since 27th Jun 2020
+ -->
 <mapper namespace="bookSQL">
 	<select id="pbCk" parameterType="bVO" resultType="int">
 		SELECT
