@@ -11,7 +11,7 @@ import org.apache.ibatis.type.*;
 public class BookVO {
 	private String title, smallimg, largeimg, gname, publisher,
 					author, translator, link, isbn;
-	private int categoryId;
+	private int categoryId, publish_no;
 	public String getTitle() {
 		return title;
 	}
@@ -71,6 +71,12 @@ public class BookVO {
 	}
 	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
+	}
+	public int getPublish_no() {
+		return publish_no;
+	}
+	public void setPublish_no(int publish_no) {
+		this.publish_no = publish_no;
 	}
 	
 	

@@ -11,4 +11,74 @@
 		WHERE
 		    publish = #{publisher}
 	</select>
+	
+	<select id="bookCk" parameterType="bVO" resultType="int">
+		SELECT
+		    COUNT(*) cnt
+		FROM
+		    booktab
+		WHERE
+		    isbn = #{isbn}
+	</select>
+	
+	<insert id="addPb" parameterType="bVO">
+		<selectKey keyProperty="publish_no" resultType="int" order="BEFORE">
+			SELECT
+				NVL(MAX(publish_no) + 1, 1)
+			FROM
+				publishtab
+		</selectKey>
+		INSERT INTO
+			publishtab(publish_no, publish)
+		VALUES(
+			${publish_no}, #{publish}
+		)
+	</insert>
+	
+	<insert id="addBook" parameterType="bVO">
+		<selectKey keyProperty="bno, publish_no"
+					resultType="hashmap" order="BEFORE">
+			SELECT
+				NVL(MAX(bno) + 1, 1) bno,
+				publishtab.publish_no
+			FROM
+				booktab, publishtab
+			WHERE
+				publishtab.publish = #{publish}
+			GROUP BY
+				publishtab.publish_no
+		</selectKey>
+		INSERT INTO
+			booktab(bno, title, genre, smallimg, largeimg,
+					author, translator, isbn, publish_no)
+		VALUES(
+			${bno}, #{title}, #{genre}, #{smallimg},
+			#{largeimg}, #{author}, #{translator},
+			#{isbn}, ${publish_no}
+		)
+	</insert>
+	
+	<insert id="addRcmdDays" parameterType="rcmdVO">
+		<selectKey keyProperty="recomdate_no, recomdate_start, recomdate_end"
+					resultType="hashmap" order="BEFORE">
+			SELECT
+				NVL(MAX(recomdate_no) + 1, 1) recomdate_no,
+				NVL(MAX(recomdate_start) + 7, '2020/06/30') recomdate_start,
+				NVL(MAX(recomdate_end) + 7, '2020/07/06') recomdate_end
+			FROM
+				recomdatetab
+		</selectKey>
+		INSERT INTO
+			recomdatetab(recomdate_no, recomdate_start, recomdate_end)
+		VALUES(
+			recomdate_no, recomdate_start, recomdate_end
+		)
+	</insert>
+	
+	<insert id="addRcmdBook" parameterType="rcmdVO">
+		<selectKey keyProperty="recom_no, recomdate_no"
+					resultType="hashmap" order="BEFORE">
+			
+		</selectKey>
+	</insert>
 </mapper>
