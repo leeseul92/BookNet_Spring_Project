@@ -9,5 +9,5 @@ package com.pageturner.cls.util;
  */
 
 public interface InterParkAPI {
-	void interparkAPI();
+	public String interparkAPI(int code, int categoryId, String keyword);
 }

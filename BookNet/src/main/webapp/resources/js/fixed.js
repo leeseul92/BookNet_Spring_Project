@@ -52,6 +52,7 @@ function splitedHash(body){
 
 //댓글 리스트 불러주는 비동기통신 함수 
 function showCmtList(pno, tid){
+	
 	$.ajax({
 		url: '/cls/posts/showCmtList.cls',
 		type: 'POST',
@@ -249,9 +250,9 @@ $(document).ready(function(){
 		$('.wrt-hid').css('height','460px');
 	});
 	
-	$('.modi_post').click(function(){ //게시물 상세보기 모달 
+	$('.modi_post').click(function(){ //게시물 상세보기 모달
 		var pno = $(this).attr('id'); //게시글번호
-		var sid = $('#'+'id'+pno).text(); //작성자 아이디
+		var id = $('#'+'id'+pno).text(); //작성자 아이디
 		var stime = $('#'+'time'+pno).html(); //작성시간 
 		var simg = $('#'+'img'+pno).attr('src'); //선택도서 사진
 		var sgen = $('#'+'genre'+pno).text(); //선택도서 장르 
@@ -260,7 +261,7 @@ $(document).ready(function(){
 		var htags = $('#'+'hash'+pno).text(); //해시태그 
 		$('.p-modal-content').attr('id', pno);
 		$('.w-x-btn').attr('id', 'd-close_butt'+pno);
-		$('b.wrter').html(sid);
+		$('b.wrter').html(id);
 		$('#time').html(stime);
 		$('#bimg').attr('src', simg);
 		$('#genre-pad').html(sgen);

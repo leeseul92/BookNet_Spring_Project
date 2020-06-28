@@ -7,9 +7,12 @@ package com.pageturner.cls.util;
  * @version v.1.0
  *
  */
-
 import java.io.*;
 import java.net.*;
+import java.util.*;
+
+import com.google.gson.*;
+import com.pageturner.cls.vo.*;
 
 public class WebConnection {
 	public String webConnection(String address) throws Exception {
@@ -28,4 +31,5 @@ public class WebConnection {
 		
 		return json;
 	}
+	
 }

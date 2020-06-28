@@ -14,6 +14,7 @@
 <body onload="printClock()"/>
 <!-- 파라미터로 넘길 데이터값 -->
 <form method="POST" id="frm2">
+	<%-- <input type="hidden" id="sid" name="sid" value="${SID}" /> --%>
 	<input type="hidden" id="pno" name="pno"> <!-- 게시글 삭제시 넘겨줄 게시글 번호 -->
 </form>
 	<!-- 추천도서, 베스트셀러 모달 슬라이드 처리 -->

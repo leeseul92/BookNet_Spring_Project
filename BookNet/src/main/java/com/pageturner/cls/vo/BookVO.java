@@ -78,6 +78,10 @@ public class BookVO {
 	public void setPublish_no(int publish_no) {
 		this.publish_no = publish_no;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "BookVO [title=" + title + ", smallimg=" + smallimg + ", largeimg=" + largeimg + ", gname=" + gname
+				+ ", publisher=" + publisher + ", author=" + author + ", translator=" + translator + ", link=" + link
+				+ ", isbn=" + isbn + ", categoryId=" + categoryId + ", publish_no=" + publish_no + "]";
+	}
 }
