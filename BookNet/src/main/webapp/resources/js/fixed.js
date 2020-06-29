@@ -344,9 +344,16 @@ $(document).ready(function(){
 	$('#book-search').click(function(){ //글쓰기 모달에서 읽은 도서 검색 클릭시 처리해주는 함수 
 		//입력한 검색어를 변수에 저장한다.
 		var book = $('#findBook').val();
+		//선택된 도서장르 번호를 변수에 저장
+		var genre = $('#setGenre').val();
+		alert(book+genre);
 		//검색어 유효성 검사
 		if(!book){
 			$('#findBook').focus();
+			return;
+		}
+		if(!genre){
+			$('#setGenre').focus();
 			return;
 		}
 		
@@ -358,7 +365,8 @@ $(document).ready(function(){
 			type : 'POST',
 			dataType : 'json',
 			data : {
-				'searchword' : book
+				'searchword' : book,
+				'genre' : genre
 			},
 			success : function(obj){ //SearchBook.java 에서 gstr json 문서가 들어오게 된다.
 				//정보 들어갈 부분 생성해주기 

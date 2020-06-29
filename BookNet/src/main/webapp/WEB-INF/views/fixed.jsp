@@ -82,8 +82,8 @@
 									<div style="float: left; wdith: 100px; height: 40px; line-height: 40px; margin-right: 10px;">
 										<select name="selGenre" id="setGenre">
 											<option value="">도서장르</option>
-											<c:forEach var="genre" items="${GENRE}">
-												<option value="${genre.genre}">${genre.gname}</option>
+											<c:forEach var="genre" items="${GENRE}" varStatus="status">
+												<option value="${genre.genre}" id="genre${status.count}">${genre.gname}</option>
 											</c:forEach>
 										</select>
 									</div>

@@ -106,6 +106,7 @@
 							</div>
 						</div>
 					</div>
+					<!-- 게시물 상세보는 모달 include -->
 					<jsp:include page="/WEB-INF/views/postsDetail.jsp" />
 				</div>
 				<!-- 우측 정보 부분 : 고정페이지로 들어갈 것-->

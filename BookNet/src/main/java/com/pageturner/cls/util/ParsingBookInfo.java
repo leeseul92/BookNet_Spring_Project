@@ -25,6 +25,7 @@ public class ParsingBookInfo {
 		jPar = new JsonParser();
 		jObj = (JsonObject)jPar.parse(json);
 		jArr = jObj.get("item").getAsJsonArray();
+		System.out.println(jObj);
 		System.out.println("item 사이즈 : " + jArr.size());
 		
 		for(int i = 0; i < jArr.size(); i++) {

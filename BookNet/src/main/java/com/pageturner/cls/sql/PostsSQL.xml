@@ -58,20 +58,23 @@
 	</select>
 	
 	<!-- 게시글작성시 입력된 키워드 도서검색 결과 질의명령 -->
-	<select id="SearchBook" resultType="pVO" parameterType="string">
-		SELECT 
-		    mg.* 
-		FROM 
-		    (SELECT 
-		        bno, bname, gname, writer, trans, largeimg 
-		    FROM 
-		        booktab b, genretab g 
-		    WHERE 
-		        b.genre = g.genre) mg 
-		WHERE 
-		    bname LIKE #{searchword} 
-		    OR writer LIKE #{seachword} 
-		    OR trans LIKE #{searchword}
+	<select id="SearchBook" resultType="pVO" parameterType="pVO">
+		SELECT
+		   mg.*
+		FROM
+		    (SELECT
+		        bno, bname, gname, writer, trans, largeimg, publish
+		    FROM    
+		        booktab b, genretab g, publishtab pb
+		    WHERE
+		        b.genre = g.genre
+		        AND b.genre = #{genre}
+		        AND b.publish_no = pb.publish_no) mg
+		WHERE
+		    bname LIKE #{keyword}
+		    OR writer LIKE #{keyword}
+		    OR trans LIKE #{keyword}
+		    OR publish LIKE #{keyword}
 	</select>
 	
 </mapper>					

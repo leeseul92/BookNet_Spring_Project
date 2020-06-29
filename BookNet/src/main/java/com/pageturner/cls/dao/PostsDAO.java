@@ -37,7 +37,8 @@ public class PostsDAO {
 	}
 	
 	//게시글 작성시 도서 검색결과 작성 처리 전담함수 
-	public List<PostsVO> searchBook(String searchword){
-		return sqlSession.selectList("pSQL.SearchBook", searchword);
+	public List<PostsVO> searchBook(PostsVO pVO){
+		System.out.println(pVO.getKeyword() + " " + pVO.getGenre());
+		return sqlSession.selectList("pSQL.SearchBook", pVO);
 	}
 }

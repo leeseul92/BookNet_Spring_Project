@@ -27,6 +27,9 @@ public class Posts {
 	@Autowired
 	PostsService postsSrvc;
 	
+	@Autowired
+	InterParkService ipSrvc;
+	
 	//게시물 상세보기 내 댓글리스트 비동기 통신
 	@RequestMapping("/showCmtList.cls")
 	@ResponseBody
@@ -70,9 +73,14 @@ public class Posts {
 	//게시글 작성시 도서검색 결과 비동기통신 처리 
 	@RequestMapping("/searchBook.cls")
 	@ResponseBody
-	public List<PostsVO> searchBook(String searchword, PostsVO pVO){
-		String word = "%" + searchword + "%";
-		List<PostsVO> list = postsSrvc.searchBook(word);
+	public List<PostsVO> searchBook(String searchword, int genre, PostsVO pVO){
+		System.out.println(searchword);
+		String keyword = "%" + searchword + "%";
+		pVO.setKeyword(keyword);
+		//InterParkAPI를 통해 검색된 결과가 db 에 저장될 수 있게하는 서비스클래스 호출 
+		String json = ipSrvc.interparkAPI(genre, keyword);
+		//db에서 결과 가지고 올 서비스클래스호출
+		List<PostsVO> list = postsSrvc.searchBook(pVO);
 		System.out.println(list.size());
 		return list;
 	}

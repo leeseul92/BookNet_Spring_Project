@@ -8,6 +8,10 @@ package com.pageturner.cls.util;
  *
  */
 
+import java.util.*;
+
+import com.pageturner.cls.vo.*;
+
 public interface InterParkAPI {
-	public String interparkAPI(int code, int categoryId, String keyword);
+	public String interparkAPI(int categoryId, String keyword);
 }
