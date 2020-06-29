@@ -63,7 +63,7 @@
 		)
 	</insert>
 	
-	<insert id="addRcmdDays" parameterType="rcmdVO">
+	<insert id="addPeriod" parameterType="rcmdVO">
 		<selectKey keyProperty="recomdate_no, recomdate_start, recomdate_end"
 					resultType="hashmap" order="BEFORE">
 			SELECT
