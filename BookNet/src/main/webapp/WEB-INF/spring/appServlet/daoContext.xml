@@ -20,6 +20,15 @@
 	<!-- 마이페이지 관련 데이터베이스 처리 dao bean 처리 -->
 	<bean id="mpDAO" class="com.pageturner.cls.dao.MyPageDAO" /> 
 	
+	<!-- 알람 관련 데이터베이스 처리 dao bean 처리 -->
+	<bean id="alDAO" class="com.pageturner.cls.dao.AlarmDAO" />
+	
+	<!-- 팔로우 관련 데이터베이스 처리 dao bean 처리 -->
+	<bean id="falDAO" class="com.pageturner.cls.dao.FallowDAO" />
+	
+	<!-- 책 정보 데이터베이스 처리 dao bean 처리 -->
+	<bean id="bookDAO" class="com.pageturner.cls.dao.BookDAO" />
+	
 	<!-- 프로필 사진 업로드 관련 데이터베이스 처리 dao bean 처리 -->
 	<!-- <bean id="fDAO" class="com.pageturner.cls.dao.ProfileDAO" /> -->
 </beans>
