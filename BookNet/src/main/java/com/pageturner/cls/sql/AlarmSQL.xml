@@ -3,9 +3,9 @@
 					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--
 	이 파일은 알람 리스트를 불러올 질의명령을 담고 있는 파일이다.
-	작성자 : 박기윤
-	작성일 : 2020.06.26
-	버전 : v.1.0
+	작성자	: 박기윤
+	작성일	: 2020.06.26
+	버전	: v.1.0
 -->
 <mapper namespace="almSQL">
 	<sql id="cont">

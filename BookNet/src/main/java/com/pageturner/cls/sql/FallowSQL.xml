@@ -3,9 +3,9 @@
 					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--
 	이 파일은 팔로우와 관련된 작업을 처리할 질의명령을 담고 있는 파일이다.
-	작성자 : 박기윤
-	작성일 : 2020.06.26
-	버전 : v.1.0
+	작성자	: 박기윤
+	작성일	: 2020.06.26
+	버전	: v.1.0
 -->
 <mapper namespace="falSQL">
 	<select id="cntFal" parameterType="falVO" resultType="int">

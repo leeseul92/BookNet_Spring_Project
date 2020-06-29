@@ -2,9 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 
-	해당 sql 파일은 인터파크도서 api로부터 불러온 데이터를 db에 저장시키기 위한 질의명령입니다.
-	@author leeseul kim
-	@since 27th Jun 2020
+	이 파일은 출판사, 책, 추천도서에 관한 데이터베이스 작업을 할 질의명령을 담은 파일이다.
+	작성자	: 박기윤
+	작성일	: 2020.06.28
+	버전	: v.1.0
  -->
 <mapper namespace="bookSQL">
 	<select id="pbCk" parameterType="bVO" resultType="int">
@@ -82,7 +83,18 @@
 	<insert id="addRcmdBook" parameterType="rcmdVO">
 		<selectKey keyProperty="recom_no, recomdate_no"
 					resultType="hashmap" order="BEFORE">
-			
+			SELECT
+				rt.recom_no recom_no, MAX(recomdatetab.recomdate_no) recomdate_no
+			FROM
+				recomdatetab,
+				(SELECT NVL(MAX(recom_no) + 1, 1) recom_no FROM recomtab) rt
+			GROUP BY
+				rt.recom_no
 		</selectKey>
+		INSERT INTO
+			recomtab(recom_no, bno, recomdate_no, classify)
+		VALUES(
+			${recom_no}, ${bno}, ${recomdate_no}, #{classify}
+		)
 	</insert>
 </mapper>
