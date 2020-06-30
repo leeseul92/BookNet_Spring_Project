@@ -59,6 +59,16 @@
 		)
 	</insert>
 	
+	<select id="ckFal" parameterType="falVO" resultType="string">
+		SELECT
+			ischeck
+		FROM
+			liketab
+		WHERE
+			fallow_no = ${fallow_no}
+			AND fallower_no = ${fallower_no}
+	</select>
+	
 	<update id="falStateChange" parameterType="falVO">
 		UPDATE
 			fallowtab

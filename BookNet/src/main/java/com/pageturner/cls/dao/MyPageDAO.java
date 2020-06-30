@@ -19,7 +19,7 @@ public class MyPageDAO {
 	SqlSessionTemplate sqlSession;
 	
 	// id로 mno를 찾아줄 처리함수
-	public MemberVO getMno(MemberVO mVO) {
+	public int getMno(MemberVO mVO) {
 		// 해당함수가 실행되면 조회된 mno가 MemberVO에 setting 될 것. 
 		return sqlSession.selectOne("mpSQL.getMno", mVO);
 	}

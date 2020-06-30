@@ -19,7 +19,7 @@
 	</sql>
 	
 	<!-- 회원 id로 회원번호를 조회하는 질의명령 -->
-	<select id="getMno" parameterType="mVO" resultType="mVO">
+	<select id="getMno" parameterType="mVO" resultType="int">
 		<include refid="selMno" />
 	</select>
 	
@@ -27,7 +27,7 @@
 	<select id="getMembInfo" parameterType="mVO" resultType="mVO">
 		SELECT
 		    id, DECODE(gen, 'M', '남성', 'F', '여성') gen, birthdate, interest,
-		    describe, intershow, birthshow, genshow, isinflu, save_loc
+		    describe, intershow, birthshow, genshow, isinflu, save_loc, mt.mno
 		FROM
 		    membertab mt, profilepictab pt
 		WHERE
@@ -51,7 +51,7 @@
 		SELECT
 		    pt.pno, postcont, postdate pdate, linkno,
 		    (substr(bname, 1, 10) || '...') bname,
-		    writer, gname, smallimg, id, ischeck
+		    writer, gname, smallimg, id, ischeck, mt.mno
 		FROM
 		    poststab pt, liketab lt, booktab bt, membertab mt, genretab gt
 		where

@@ -23,14 +23,15 @@ import com.pageturner.cls.vo.*;
 public class MyPage {
 	@Autowired
 	MyPageService mpSrvc;
-	@Autowired
-	MyPageDAO mpDAO;
 
-	//마이페이지 화면 요청
+	// 마이페이지 화면 요청
 	@RequestMapping("/myPage.cls")
 	public ModelAndView showMyPage(HttpServletRequest req, ModelAndView mv, HttpSession session, MemberVO mVO) {
-		//AOP를 통해 로그인되어있는지 확인 
+		// AOP를 통해 로그인되어있는지 확인
 		String view = "mypage/myPage";
+		
+		mpSrvc.getInfo(mVO);
+		int cnt = mpSrvc.countPosts(mVO);
 		
 		mv.setViewName(view);
 		return mv;

@@ -1,6 +1,5 @@
 package com.pageturner.cls.service;
 
-
 /**
  * 이 클래스는 MyPage와 관련된 작업을 처리할 서비스적인 기능을 전담할 클래스이다.
  * @author	박기윤
@@ -21,15 +20,10 @@ public class MyPageService {
 	@Autowired
 	MyPageDAO mpDAO;
 	
-	// 세션에 입력된 ID값을 통해 mno를 조회하여 mVO와 pVO에 입력하는 서비스처리 함수
-	public void getMno(MemberVO mVO, PostsVO pVO) {
-		mVO = mpDAO.getMno(mVO);
-		pVO.setMno(mVO.getMno());
-	}
-	
-	// 마이페이지에 보여줄 회원정보를 mVO에 입력하는 서비스처리 함수 
-	public void getMembInfo(MemberVO mVO, String id) {
-		mVO.setId(id);
+	// 세션에 입력된 ID값을 통해 mno를 조회하여 mVO에 입력,
+	// 회원정보를 조회하는 서비스처리 함수
+	public void getInfo(MemberVO mVO) {
+		mVO.setMno(mpDAO.getMno(mVO));
 		mVO = mpDAO.membInfo(mVO);
 	}
 	
@@ -39,7 +33,9 @@ public class MyPageService {
 	}
 	
 	// 회원이 작성한 게시글이나 회원이 좋아요를 누른 게시글 목록을 조회하는 서비스처리 함수
-	public ArrayList<PostsVO> getPostList(PostsVO pVO, String likepost){
+	public ArrayList<PostsVO> getPostList(MemberVO mVO, String likepost){
+		PostsVO pVO = new PostsVO();
+		pVO.setMno(mVO.getMno());
 		pVO.setLikepost(likepost);
 		ArrayList<PostsVO> list = (ArrayList<PostsVO>)mpDAO.getPost(pVO);
 		return list;

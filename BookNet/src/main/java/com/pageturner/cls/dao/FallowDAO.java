@@ -28,6 +28,10 @@ public class FallowDAO {
 		sqlSession.insert("falSQL.newFal", falVO);
 	}
 	
+	public String checkFal(FallowVO falVO) {
+		return sqlSession.selectOne("falSQL.ckFal", falVO);
+	}
+	
 	public void falStateChange(FallowVO falVO) {
 		sqlSession.update("falSQL.falStateChange", falVO);
 	}

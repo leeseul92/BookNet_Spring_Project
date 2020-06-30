@@ -9,6 +9,8 @@
 						https://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- CountDays util 빈처리 -->
-	<bean id="cntDayUtil" class="com.pageturner.cls.util.CountDays" />
-	
+	<bean id="cntDays" class="com.pageturner.cls.util.CountDays" />
+
+	<!-- SortAlarmList util 빈처리 -->
+	<bean id="alarmSorter" class="com.pageturner.cls.util.SortAlarmList" />
 </beans>
