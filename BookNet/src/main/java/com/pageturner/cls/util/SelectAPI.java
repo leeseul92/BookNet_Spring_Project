@@ -10,9 +10,9 @@ package com.pageturner.cls.util;
 
 public class SelectAPI {
 	private final String KEY = "756476FCE177C662B901F60050D436CDFFDF8BCC7C44966D95B67471225CF8EF"; //인터파크 API를 위한 KEY 값
-	public final static int SEARCH = 1001;
-	public final static int RECOMM = 1002;
-	public final static int BESTSELL = 1003;
+	public final int SEARCH = 1001;
+	public final int RECOMM = 1002;
+	public final int BESTSELL = 1003;
 	
 	
 	public String selectUrl(int code) {

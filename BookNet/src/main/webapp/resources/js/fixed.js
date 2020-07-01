@@ -208,7 +208,7 @@ $(document).ready(function(){
 	});
 	
 	$('#myBtn').click(function(){
-		$(location).attr('href', '/cls/myPage/myPage.cls');
+		$(location).attr('href', '/cls/mypage/mypage.cls');
 	});
 	
 	$('.likebtn').click(function(){ //like 버튼 클릭시 빨강하트로 변경 
@@ -281,13 +281,13 @@ $(document).ready(function(){
 	
 	$('.modi_post').click(function(){ //게시물 상세보기 모달
 		var pno = $(this).attr('id'); //게시글번호
-		var id = $('#'+'id'+pno).text(); //작성자 아이디
-		var stime = $('#'+'time'+pno).html(); //작성시간 
-		var simg = $('#'+'img'+pno).attr('src'); //선택도서 사진
-		var sgen = $('#'+'genre'+pno).text(); //선택도서 장르 
-		var bname = $('#'+'bname'+pno).text(); //선택도서 제목
-		var pbody = $('#'+'pbody'+pno).text(); //본문 
-		var htags = $('#'+'hash'+pno).text(); //해시태그 
+		var id = $('#id'+pno).text(); //작성자 아이디
+		var stime = $('#time'+pno).html(); //작성시간 
+		var simg = $('#img'+pno).attr('src'); //선택도서 사진
+		var sgen = $('#genre'+pno).text(); //선택도서 장르 
+		var bname = $('#bname'+pno).text(); //선택도서 제목
+		var pbody = $('#pbody'+pno).text(); //본문 
+		var htags = $('#hash'+pno).text(); //해시태그 
 		$('.p-modal-content').attr('id', pno);
 		$('.w-x-btn').attr('id', 'd-close_butt'+pno);
 		$('b.wrter').html(id);
@@ -362,7 +362,6 @@ $(document).ready(function(){
 		$('#sel-wrt-b-info').attr('src', '');
 		$('#rst-book-gname').val('');
 		$('#rst-book-bname').val('');
-		
 	});
 	
 	$('#changeInfo').click(function(){ //정보수정페이지로 이동 

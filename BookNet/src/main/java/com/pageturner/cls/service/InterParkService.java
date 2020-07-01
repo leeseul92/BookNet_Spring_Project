@@ -19,19 +19,24 @@ import com.pageturner.cls.dao.*;
 
 @Service
 public class InterParkService implements InterParkAPI {
+	@Autowired
 	SelectAPI selApi;
+	
+	@Autowired
 	WebConnection webConn;
+	
+	@Autowired
 	ParsingBookInfo parsing;
 
 	String address = null;
 	String json = null;
 	ArrayList<BookVO> list;
 	
-	public InterParkService() {
-		selApi = new SelectAPI();
-		webConn = new WebConnection();
-		parsing = new ParsingBookInfo();
-	}//Default Constructor
+//	public InterParkService() {
+//		selApi = new SelectAPI();
+//		webConn = new WebConnection();
+//		parsing = new ParsingBookInfo();
+//	}//Default Constructor
 	
 	//게시글 작성시 도서검색 요청이 들어온 경우 
 	@Override
@@ -57,6 +62,24 @@ public class InterParkService implements InterParkAPI {
 		return json;
 	}
 	
+	//베스트셀러 
+	public ArrayList<BookVO> interparkAPI(int categoryId) {
+		String base = selApi.selectUrl(selApi.BESTSELL);//이때 base는 categoryId= 로 마무리 되어 있음.
+		
+		try {
+			address = base + categoryId + "&output=json&maxResults=5";
+			
+			json = webConn.webConnection(address);
+			
+			this.list = parsing.parsingBookInfo(json);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
+	
+	/*
 	//데이터 파싱이 완료되었는지 확인용 main
 	public static void main(String[] args) {
 		InterParkService iapi = new InterParkService();
@@ -66,4 +89,5 @@ public class InterParkService implements InterParkAPI {
 //		}
 		System.out.println(iapi.json);
 	}
+	*/
 }
