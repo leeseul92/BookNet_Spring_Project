@@ -22,8 +22,10 @@
 <form method="POST" id="frm">
 	<input type="hidden" id="bno" name="bno"> <!-- 글 작성할때 넘겨줄 책 번호 -->
 	<input type="hidden" id="eno" name="eno"> <!-- 글 작성할때 넘겨줄 감정번호 -->
-	<input type="hidden" id="body" name="body"> <!-- 글 작성할때 넘겨줄 게시글 본문 -->
-	<input type="hidden" id="tags" name="tags"> <!-- 글 작성할때 넘겨줄 해시태그 -->
+	<input type="hidden" id="sid" name="sid" value="${SID}"> <!-- 세션에 저장된 아이디값 -->
+	<input type="hidden" id="postcont" name="postcont"> <!-- 글 작성할때 넘겨줄 게시글 본문 -->
+	<input type="hidden" id="hash" name="hash"> <!-- 글 작성할때 넘겨줄 해시태그 -->
+	<input type="hidden" id="domain" name="domain"> <!-- 글 작성할때 넘겨줄 뷰 주소값 -->
 </form>
 <form method="POST" id="frm3">
 	<input type="hidden" id="searchinput" name="searchinput"> <!-- 검색시 넘겨줄 키워드 값 -->

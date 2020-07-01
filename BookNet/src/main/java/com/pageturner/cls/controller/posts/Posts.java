@@ -7,6 +7,7 @@ package com.pageturner.cls.controller.posts;
  */
 
 import javax.servlet.http.*;
+import javax.swing.JOptionPane;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -83,5 +84,30 @@ public class Posts {
 		List<PostsVO> list = postsSrvc.searchBook(pVO);
 		System.out.println(list.size());
 		return list;
+	}
+	
+	//게시글 등록처리
+	@RequestMapping("/addPost.cls")
+	public ModelAndView addPost(ModelAndView mv, HttpSession session, PostsVO pVO) {
+		pVO.setSid((String)session.getAttribute("SID"));
+
+		RedirectView rv = new RedirectView(pVO.getDomain());
+		mv.setView(rv);
+
+		//서비스클래스 호출
+		int rst = postsSrvc.addPost(pVO);
+		if(rst != 1) {
+			//게시글 등록 실패 
+			JOptionPane.showMessageDialog(null, "게시글 업로드에 실패하였습니다.");
+		}
+		
+		return mv;
+	}
+	
+	//게시글 삭제처리
+	@RequestMapping("/delPost.cls")
+	@ResponseBody
+	public int delPost(int pno) {
+		return postsSrvc.delPost(pno);
 	}
 }

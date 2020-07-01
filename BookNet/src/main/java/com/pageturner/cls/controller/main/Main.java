@@ -66,7 +66,7 @@ public class Main {
 			System.out.println("*****회원용 메인게시글 불러오기 완료*****");
 			mv.addObject("LIST", list); //게시글을 뷰로 넘기기
 			mv.addObject("OLIST", mList); //**이후에 회원용 리스트로 꼭 변경하기!**
-			mv.addObject("GENRE", genre); //도서장르 선택할 수 있게 목록넘기기 
+			session.setAttribute("GENRE", genre);//도서장르 선택할 수 있게 목록넘기기
 			mv.setViewName(view);
 		}
 		

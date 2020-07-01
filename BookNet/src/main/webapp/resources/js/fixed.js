@@ -7,6 +7,17 @@
  */
 
 
+//모달 밖의 뷰 url을 가지고오는 함수
+function getDomain(){
+	var dom = document.location.href.split('/');
+	var domain = "";
+	for(var i = 3; i < dom.length; i++){
+		var tmp = "/" + dom[i];
+		domain += tmp;
+	}
+	return domain;
+}
+
 //글쓰기모달에서 검색된 도서 중 하나를 클릭했을 때 정보를 가져오도록 하는 함수 
 function selrstbook(id){ 
 	//도서번호 가져오기 
@@ -137,7 +148,6 @@ function delCmt(element){
 	});
 }
 
-
 $(document).ready(function(){
 	
 	// search clear
@@ -235,9 +245,28 @@ $(document).ready(function(){
 		
 	});
 	
-	$('#d-btn').click(function(){ //삭제 버튼을 눌렀을 때 처리이벤트 
-		$('#frm2').attr('action', '/BookNet/post/postDelProc.cls')
+	$('#d-btn').click(function(){ //삭제 버튼을 눌렀을 때 처리이벤트
+		var pno = $('#pno').val();
 		$('#frm2').submit();
+		
+		$.ajax({
+			url: '/cls/posts/delPost.cls',
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				'pno' : pno
+			},
+			success: function(rst){
+				if(rst == 1){
+					alert('삭제가 완료되었습니다.');
+				} else {
+					alert('삭제에 실패하였습니다.');
+				}
+			},
+			error: function(){
+				alert('##통신에러##');
+			}
+		});
 	});
 	
 	$('#c-btn').click(function(){ //취소 버튼을 눌렀을 때 처리이벤트 
@@ -326,13 +355,14 @@ $(document).ready(function(){
 		$('#writeModal').css('display', 'block');
 	});
 	
-	$('#w-close_butt').click(function(){ //글쓰기 모달 닫기 
+	$('#w-close_butt, #c-submit').click(function(){ //글쓰기 모달 닫기 
 		$('#writeModal').css('display', 'none');
 		$('.rstPage').html('');
 		$('#findBook').val('');
 		$('#sel-wrt-b-info').attr('src', '');
 		$('#rst-book-gname').val('');
 		$('#rst-book-bname').val('');
+		
 	});
 	
 	$('#changeInfo').click(function(){ //정보수정페이지로 이동 
@@ -346,7 +376,7 @@ $(document).ready(function(){
 		var book = $('#findBook').val();
 		//선택된 도서장르 번호를 변수에 저장
 		var genre = $('#setGenre').val();
-		alert(book+genre);
+//		alert(book+genre);
 		//검색어 유효성 검사
 		if(!book){
 			$('#findBook').focus();
@@ -407,18 +437,26 @@ $(document).ready(function(){
 	});
 	
 	$(document).on('click', '#p-submit', function(){
+//		alert($('#sid').val());
+		var dom = document.location.href.split('/');
+		var domain = "";
+		for(var i = 3; i < dom.length; i++){
+			var tmp = "/" + dom[i];
+			domain += tmp;
+		}
+		
 		var bno = $('#bno').val();
 		//select로 선택된 감정을 변수에 대입하기 
 		var emo = $('#selEmo').val();
 		var body = $('#postBody').val();
 		//게시글본문 안에 있는 해시태그만 골라내기 
 		var htag = splitedHash(body);
-		alert(htag);
 		
 		//데이터 집어넣기 
 		$('#eno').val(emo);
-		$('#body').val(body);
-		$('#tags').val(htag);
+		$('#postcont').val(body);
+		$('#hash').val(htag);
+		$('#domain').val(domain);
 //		alert(len);
 		
 		if(!bno){		//도서선택 여부 확인
@@ -438,8 +476,9 @@ $(document).ready(function(){
 		}
 		
 		//데이터 넘기기
-		$('#frm').attr('action','/BookNet/post/postWriteProc.cls');
+		$('#frm').attr('action','/cls/posts/addPost.cls');
 		$('#frm').submit();
 	});
+
 	
 });

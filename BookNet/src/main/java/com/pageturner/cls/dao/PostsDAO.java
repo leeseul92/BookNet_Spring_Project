@@ -41,4 +41,20 @@ public class PostsDAO {
 		System.out.println(pVO.getKeyword() + " " + pVO.getGenre());
 		return sqlSession.selectList("pSQL.SearchBook", pVO);
 	}
+	
+	//게시글 등록 처리 전담함수
+	public int addPost(PostsVO pVO) {
+		System.out.println(pVO.getPostcont() + " " + pVO.getDomain());
+		return sqlSession.insert("pSQL.addPost", pVO);
+	}
+	
+	//해시태그 등록 처리 전담함수
+	public int addHash(PostsVO pVO) {
+		return sqlSession.insert("pSQL.addHash", pVO);
+	}
+	
+	//게시글 삭제 처리 전담함수
+	public int delPost(int pno) {
+		return sqlSession.update("pSQL.delPost", pno);
+	}
 }

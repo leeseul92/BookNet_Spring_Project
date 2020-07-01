@@ -77,4 +77,47 @@
 		    OR publish LIKE #{keyword}
 	</select>
 	
+	<!-- 게시글 등록 질의명령 -->
+	<insert id="addPost" parameterType="pVO">
+		<selectKey keyProperty="pno" resultType="int" order="BEFORE">
+			SELECT
+				NVL(MAX(pno)+1, 5000)
+			FROM
+				poststab
+		</selectKey>
+		
+		INSERT INTO
+			poststab(pno, mno, bno, postcont, eno)
+		VALUES(
+			#{pno}, 
+			(SELECT mno FROM membertab WHERE id = #{sid}),
+			#{bno}, #{postcont}, #{eno}
+		)
+	</insert>
+	
+	<!-- 해시태그 등록 질의명령 -->
+	<insert id="addHash" parameterType="pVO">
+		<selectKey keyProperty="hno" resultType="int" order="BEFORE">
+			SELECT
+				NVL(MAX(hno)+1, 100)
+			FROM
+				hashtab
+		</selectKey>
+		
+		INSERT INTO
+			hashtab(hno, pno, hname)
+		VALUES(
+			#{hno}, #{pno}, #{hash}
+		)
+	</insert>
+	
+	<!-- 게시글 삭제 질의명령 -->
+	<update id="delPost" parameterType="int">
+		UPDATE
+			poststab
+		SET
+			isshow = 'N'
+		WHERE
+			pno = #{pno}
+	</update>
 </mapper>					

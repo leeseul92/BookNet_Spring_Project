@@ -15,15 +15,27 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("pVO")
 public class PostsVO {
-	private int pno, linkno, mno, eno, bno, cno, genre, cnt, rst;
-	private String id, profile, postcont, pdate, largeimg, smallimg, bname, writer, trans,
+	private int pno, linkno, mno, eno, bno, cno, genre, hno, cnt, rst;
+	private String id, profile, postcont, pdate, largeimg, smallimg, bname, writer, trans, domain,
 	 				hash, publish, emotion, cbody, comnt, cdate, gname, sid, ischeck, likepost, keyword;
 //	private Date postdate;
 //	private Time posttime;
 //	private MainVO mainVO;
 	
+	public int getHno() {
+		return hno;
+	}
+	public void setHno(int hno) {
+		this.hno = hno;
+	}
 	public String getIscheck() {
 		return ischeck;
+	}
+	public String getDomain() {
+		return domain;
+	}
+	public void setDomain(String domain) {
+		this.domain = domain;
 	}
 	public String getKeyword() {
 		return keyword;
@@ -204,10 +216,10 @@ public class PostsVO {
 		return "PostsVO [pno=" + pno + ", linkno=" + linkno + ", mno=" + mno + ", eno=" + eno + ", bno=" + bno
 				+ ", cno=" + cno + ", genre=" + genre + ", cnt=" + cnt + ", rst=" + rst + ", id=" + id + ", profile="
 				+ profile + ", postcont=" + postcont + ", pdate=" + pdate + ", largeimg=" + largeimg + ", smallimg="
-				+ smallimg + ", bname=" + bname + ", writer=" + writer + ", trans=" + trans + ", hash=" + hash
-				+ ", publish=" + publish + ", emotion=" + emotion + ", cbody=" + cbody + ", comnt=" + comnt + ", cdate="
-				+ cdate + ", gname=" + gname + ", sid=" + sid + ", ischeck=" + ischeck + ", likepost=" + likepost
-				+ ", keyword=" + keyword + "]";
+				+ smallimg + ", bname=" + bname + ", writer=" + writer + ", trans=" + trans + ", domain=" + domain
+				+ ", hash=" + hash + ", publish=" + publish + ", emotion=" + emotion + ", cbody=" + cbody + ", comnt="
+				+ comnt + ", cdate=" + cdate + ", gname=" + gname + ", sid=" + sid + ", ischeck=" + ischeck
+				+ ", likepost=" + likepost + ", keyword=" + keyword + "]";
 	}
 
 }
