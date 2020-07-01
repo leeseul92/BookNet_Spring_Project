@@ -52,12 +52,17 @@ public class MyPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		if(!sid.equals(id)) {
 			ckFal = falSrvc.checkFal(mVO, session);
 			mv.addObject("CKFAL", ckFal);
 		}
 		
+		if(id == null || id.equals(sid)) {
+			mVO.setId(sid);
+		} else {
+			mVO.setId(id);
+		}
 		mv.addObject("INFO", mVO);
 		mv.addObject("CNTPOST", cnt);
 		mv.addObject("CNTFALLOW", cntFallow);

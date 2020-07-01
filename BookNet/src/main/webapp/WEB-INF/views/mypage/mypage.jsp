@@ -4,15 +4,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript" src="cls/js/jquery-3.5.0.min.js"></script>
+<script type="text/javascript" src="/cls/js/jquery-3.5.0.min.js"></script>
 <script type="text/javascript">
-	$(document).ready(function(){
-		
-	});
 </script>
 <title>마이페이지</title>
 </head>
 <body onload="printClock()"/>
+<c:if test="${SID eq INFO.id}">
+	<script type="text/javascript">
+		history.replaceState({}, null, location.pathname);
+	</script>
+</c:if>
 <div>
 	<div id="contents-wrap">
 <!-- 페이지 가로 길이 지정 -->
