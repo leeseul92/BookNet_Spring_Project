@@ -141,8 +141,40 @@ public class Member {
 		return mv;
 	}
 	
+	//우현우
+	//로그인 처리
+	@RequestMapping(value = "/loginProc", method = RequestMethod.POST, params = {"id","pw"})
+	public ModelAndView loginProc(MemberVO mVO, ModelAndView mv, HttpSession session, RedirectView rv) {
+		
+		int cnt = mDAO.getLogin(mVO);
+		rv = null;
+		String view = "member/login";
+		//sid가 null이 아니면 메인으로 Redirect시키고 null이면 로그인 창에 머물게 하기
+		if(cnt == 1) {
+			session.setAttribute("SID", mVO.getId());
+			rv = new RedirectView("/cls/main/main.cls");
+		}else {
+			rv = new RedirectView("/cls/member/login.cls");
+		}
+		mv.setView(rv);
+		return mv;
+	}
+	
+	//우현우
+	//로그아웃 처리
+	@RequestMapping("/logoutProc.cls")
+	public ModelAndView logout(ModelAndView mv, HttpSession session, RedirectView rv) {
+		String view = "/cls/member/login.cls";
+		rv = null;
+		session.removeAttribute("SID");
+		if(session.getAttribute("SID") != null) {
+			view = "/cls/main";
+		}
+		rv = new RedirectView(view);
+		mv.setView(rv);
+		return mv;
+	}
 }
-
 /*
 	// 로그인 처리 요청
 	@RequestMapping(value = "/loginProc.cls", method = RequestMethod.POST, params = { "id", "pw" })
