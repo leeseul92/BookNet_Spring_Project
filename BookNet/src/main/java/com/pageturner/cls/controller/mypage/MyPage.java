@@ -73,10 +73,4 @@ public class MyPage {
 		mv.setViewName(view);
 		return mv;
 	}
-	
-	@RequestMapping("/alarm.cls")
-	public ModelAndView showAlarmList(ModelAndView mv, HttpSession session, MemberVO mVO) {
-		
-		return mv;
-	}
 }
