@@ -13,4 +13,13 @@
 
 	<!-- SortAlarmList util 빈처리 -->
 	<bean id="alarmSorter" class="com.pageturner.cls.util.SortAlarmList" />
+	
+	<!-- SelectAPI util 빈처리 -->
+	<bean id="selApi" class="com.pageturner.cls.util.SelectAPI" />
+	
+	<!-- WebConnection util 빈처리 -->
+	<bean id="webConn" class="com.pageturner.cls.util.WebConnection" />
+	
+	<!-- ParsingBookInfo util 빈처리 -->
+	<bean id="parsing" class="com.pageturner.cls.util.ParsingBookInfo" />
 </beans>
