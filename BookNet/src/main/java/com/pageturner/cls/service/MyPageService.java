@@ -22,9 +22,9 @@ public class MyPageService {
 	
 	// 세션에 입력된 ID값을 통해 mno를 조회하여 mVO에 입력,
 	// 회원정보를 조회하는 서비스처리 함수
-	public void getInfo(MemberVO mVO) {
+	public MemberVO getInfo(MemberVO mVO) {
 		mVO.setMno(mpDAO.getMno(mVO));
-		mVO = mpDAO.membInfo(mVO);
+		return mpDAO.membInfo(mVO);
 	}
 	
 	// 회원이 작성한 게시글의 갯수를 조회하는 서비스처리 함수

@@ -14,10 +14,10 @@
 		FROM
 			fallowtab
 		<trim prefix="WHERE" prefixOverrides="AND | OR">
-			<if test="fallow_no != null">
+			<if test="fallow_no != 0">
 				AND fallow_no = ${fallow_no}
 			</if>
-			<if test="fallower_no != null">
+			<if test="fallower_no != 0">
 				AND fallower_no = ${fallower_no}
 			</if>
 		</trim>
@@ -34,7 +34,7 @@
 			AND mt.isshow = 'Y'
 			AND mt.mno =
 			<choose>
-				<when test="fallower_no != null">
+				<when test="fallower_no != 0">
 					fallow_no
 					AND fallower_no = ${fallower_no}
 				</when>

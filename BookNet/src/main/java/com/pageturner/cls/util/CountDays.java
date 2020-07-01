@@ -11,11 +11,10 @@ import java.text.*;
 
 public class CountDays {
 	Date date;
-	SimpleDateFormat form;
+	SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	public void setToday(Date date) {
 		this.date = date;
-		form = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	}
 	
 	public Date parseDate(String cdate) throws Exception {

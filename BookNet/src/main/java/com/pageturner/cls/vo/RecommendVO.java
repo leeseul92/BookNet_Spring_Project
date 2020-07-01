@@ -3,7 +3,7 @@ package com.pageturner.cls.vo;
 import org.apache.ibatis.type.Alias;
 
 @Alias("rcmdVO")
-public class RecommandVO {
+public class RecommendVO {
 	private int recomdate_no, recom_no, bno;
 	private String classify, recomdate_start, recomdate_end;
 	public int getRecomdate_no() {

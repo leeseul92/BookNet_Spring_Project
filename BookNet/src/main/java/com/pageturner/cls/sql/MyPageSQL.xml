@@ -9,18 +9,14 @@
 	버전	: v.1.0
 -->
 <mapper namespace="mpSQL">
-	<sql id="selMno">
+	<!-- 회원 id로 회원번호를 조회하는 질의명령 -->
+	<select id="getMno" parameterType="mVO" resultType="int">
 		SELECT
 			mno
 		FROM
 			membertab
 		WHERE
 			id = #{id}
-	</sql>
-	
-	<!-- 회원 id로 회원번호를 조회하는 질의명령 -->
-	<select id="getMno" parameterType="mVO" resultType="int">
-		<include refid="selMno" />
 	</select>
 	
 	<!-- 회원번호로 회원 상세 정보를 조회하는 질의명령 -->
@@ -62,7 +58,7 @@
 		    AND pt.isshow = 'Y'
 		    AND mt.isshow = 'Y'
 		    <choose>
-		    	<when test="likepost == 'Y'">
+		    	<when test="likepost eq 'YES'">
 		    		AND lt.mno = ${mno}
 		    		AND lt.ischeck = 'Y'
 		    	</when>

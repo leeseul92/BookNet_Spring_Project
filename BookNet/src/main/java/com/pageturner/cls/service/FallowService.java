@@ -42,12 +42,12 @@ public class FallowService {
 		return cnt;
 	}
 	
-	public int checkFal(MemberVO mVO, HttpServletRequest req) {
+	public int checkFal(MemberVO mVO, HttpSession session) {
 		int cnt = 0;
 		FallowVO falVO = new FallowVO();
 		
 		falVO.setFallow_no(mVO.getMno());
-		mVO.setId((String)req.getSession().getAttribute("SID"));
+		mVO.setId((String)session.getAttribute("SID"));
 		falVO.setFallower_no(mpDAO.getMno(mVO));
 		cnt = falDAO.cntFal(falVO);
 		
@@ -74,12 +74,12 @@ public class FallowService {
 		return list;
 	}
 	
-	public void fallowingState(MemberVO mVO, HttpServletRequest req) {
-		int cnt = checkFal(mVO, req);
+	public void fallowingState(MemberVO mVO, HttpSession session) {
+		int cnt = checkFal(mVO, session);
 		FallowVO falVO = new FallowVO();
 		
 		falVO.setFallow_no(mVO.getMno());
-		mVO.setId((String)req.getSession().getAttribute("SID"));
+		mVO.setId((String)session.getAttribute("SID"));
 		falVO.setFallower_no(mpDAO.getMno(mVO));
 		
 		if(cnt == 0) {

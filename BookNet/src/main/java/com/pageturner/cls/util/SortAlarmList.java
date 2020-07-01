@@ -14,7 +14,7 @@ public class SortAlarmList implements Comparator<AlarmVO> {
 
 	@Override
 	public int compare(AlarmVO o1, AlarmVO o2) {
-		SimpleDateFormat form = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		SimpleDateFormat form = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date day1 = null;
 		Date day2 = null;
 		try {

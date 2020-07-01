@@ -20,23 +20,18 @@ public class AlarmService {
 	@Autowired
 	AlarmDAO alDAO;
 	@Autowired
-	MyPageDAO mpDAO;
-	@Autowired
 	CountDays cntDays;
 	@Autowired
 	SortAlarmList alarmSorter;
 	
-	public ArrayList<AlarmVO> getAlarmList(MemberVO mVO, HttpServletRequest req) throws Exception{
+	public ArrayList<AlarmVO> getAlarmList(MemberVO mVO) throws Exception{
 		ArrayList<AlarmVO> list = new ArrayList<AlarmVO>();
 		Date today = new Date();
-		String id = (String)req.getSession().getAttribute("SID");
 		String cdate = null;
 		Date ddate = null;
 		String dday = null;
 		
 		cntDays.setToday(today);
-		mVO.setId(id);
-		mVO.setMno(mpDAO.getMno(mVO));
 		
 		ArrayList<AlarmVO> likeList = (ArrayList<AlarmVO>)alDAO.likeList(mVO);
 		ArrayList<AlarmVO> falList = (ArrayList<AlarmVO>)alDAO.falList(mVO);

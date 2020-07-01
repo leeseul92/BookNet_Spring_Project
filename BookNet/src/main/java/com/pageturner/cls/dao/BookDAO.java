@@ -34,11 +34,11 @@ public class BookDAO {
 		sqlSession.insert("bookSQL.addBook", bVO);
 	}
 	
-	public void addPeriod(RecommandVO rcmdVO) {
+	public void addPeriod(RecommendVO rcmdVO) {
 		sqlSession.insert("bookSQL.addPeriod", rcmdVO);
 	}
 	
-	public void addRcmdBook(RecommandVO rcmdVO) {
+	public void addRcmdBook(RecommendVO rcmdVO) {
 		sqlSession.insert("bookSQL.addRcmdBook", rcmdVO);
 	}
 }
