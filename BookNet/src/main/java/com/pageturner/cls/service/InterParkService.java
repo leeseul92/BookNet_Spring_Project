@@ -32,12 +32,6 @@ public class InterParkService implements InterParkAPI {
 	String json = null;
 	ArrayList<BookVO> list;
 	
-//	public InterParkService() {
-//		selApi = new SelectAPI();
-//		webConn = new WebConnection();
-//		parsing = new ParsingBookInfo();
-//	}//Default Constructor
-	
 	//게시글 작성시 도서검색 요청이 들어온 경우 
 	@Override
 	public String interparkAPI(int categoryId, String keyword) {
@@ -79,15 +73,4 @@ public class InterParkService implements InterParkAPI {
 		return list;
 	}
 	
-	/*
-	//데이터 파싱이 완료되었는지 확인용 main
-	public static void main(String[] args) {
-		InterParkService iapi = new InterParkService();
-		iapi.interparkAPI(100, "코로나");
-//		for(BookVO bVO : iapi.list) {
-//			System.out.println(bVO.toString());
-//		}
-		System.out.println(iapi.json);
-	}
-	*/
 }

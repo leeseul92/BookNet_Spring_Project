@@ -17,10 +17,10 @@ public class MemberDAO {
 	@Autowired //DI 자동의존주입 
 	SqlSessionTemplate sqlSession;
 	
-	//로그인 질의명령 전담처리함수
-	public int loginProc(MemberVO mVO) {
-		return sqlSession.selectOne("mSQL.Login", mVO);
-	}
+//	//로그인 질의명령 전담처리함수
+//	public int loginProc(MemberVO mVO) {
+//		return sqlSession.selectOne("mSQL.Login", mVO);
+//	}
 	
 	// 정보수정(비번)
 	public int editPW(MemberVO mVO) {

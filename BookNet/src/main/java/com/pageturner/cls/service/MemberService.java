@@ -20,6 +20,10 @@ public class MemberService {
 	@Autowired
 	MemberDAO mDAO;
 	
+}
+
+
+/*
 	//로그인처리요청 
 	public String loginService(MemberVO mVO) {
 		//dao 호출
@@ -35,4 +39,4 @@ public class MemberService {
 		
 		return sid;
 	}
-}
+	*/

@@ -72,9 +72,9 @@
 
 				<!-- 아이디, 비번, 회원가입-->
 				<div class="find_info">
-					<a target="_blank" id="idinquiry" href="/BookNet/member/findID.cls">계정을 잊어버리셨나요?</a> 
+					<a target="_blank" id="idinquiry" href="/cls/member/findID.cls">계정을 잊어버리셨나요?</a> 
 					<span class="bar" aria-hidden="true">|</span> 
-					<a target="_blank" id="join" href="/BookNet/member/join.cls">회원가입</a>
+					<a target="_blank" id="join" href="/cls/member/join.cls">회원가입</a>
 				</div>
 			</div>
 			<!-- //content -->
