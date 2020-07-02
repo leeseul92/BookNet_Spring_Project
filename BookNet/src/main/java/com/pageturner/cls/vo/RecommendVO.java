@@ -4,7 +4,7 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("rcmdVO")
 public class RecommendVO {
-	private int recomdate_no, recom_no, bno;
+	private int recomdate_no, recom_no, bno, cat_id;
 	private String classify, recomdate_start, recomdate_end;
 	public int getRecomdate_no() {
 		return recomdate_no;
@@ -23,6 +23,12 @@ public class RecommendVO {
 	}
 	public void setBno(int bno) {
 		this.bno = bno;
+	}
+	public int getCat_id() {
+		return cat_id;
+	}
+	public void setCat_id(int cat_id) {
+		this.cat_id = cat_id;
 	}
 	public String getClassify() {
 		return classify;

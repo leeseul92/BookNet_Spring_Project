@@ -1,5 +1,7 @@
 package com.pageturner.cls.dao;
 
+import java.util.HashMap;
+
 /**
  * 	이 클래스는 api로부터 받아온 도서정보를
  * 	데이터베이스에 존재여부 확인 및 추가하는 기능을

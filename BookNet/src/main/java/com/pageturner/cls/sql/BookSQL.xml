@@ -64,8 +64,8 @@
 	</insert>
 	
 	<insert id="addPeriod" parameterType="rcmdVO">
-		<selectKey keyProperty="recomdate_no, recomdate_start, recomdate_end"
-					resultType="hashmap" order="BEFORE">
+		<selectKey keyProperty="recomdate_no,recomdate_start,recomdate_end"
+					resultType="rcmdVO" order="BEFORE">
 			SELECT
 				NVL(MAX(recomdate_no) + 1, 1) recomdate_no,
 				NVL(MAX(recomdate_start) + 7, '2020/06/30') recomdate_start,
@@ -76,13 +76,13 @@
 		INSERT INTO
 			recomdatetab(recomdate_no, recomdate_start, recomdate_end)
 		VALUES(
-			recomdate_no, recomdate_start, recomdate_end
+			#{recomdate_no}, #{recomdate_start}, #{recomdate_end}
 		)
 	</insert>
 	
 	<insert id="addRcmdBook" parameterType="rcmdVO">
 		<selectKey keyProperty="recom_no, recomdate_no"
-					resultType="hashmap" order="BEFORE">
+					resultType="rcmdVO" order="BEFORE">
 			SELECT
 				rt.recom_no recom_no, MAX(recomdatetab.recomdate_no) recomdate_no
 			FROM
@@ -92,9 +92,9 @@
 				rt.recom_no
 		</selectKey>
 		INSERT INTO
-			recomtab(recom_no, bno, recomdate_no, classify)
+			recomtab(recom_no, bno, recomdate_no, classify, cat_id)
 		VALUES(
-			${recom_no}, ${bno}, ${recomdate_no}, #{classify}
+			${recom_no}, ${bno}, ${recomdate_no}, #{classify}, ${cat_id}
 		)
 	</insert>
 </mapper>
