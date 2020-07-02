@@ -83,4 +83,23 @@
 			id = #{id}
 			and mail = #{mail}
 	</select>
+	<!-- 아이디 중복 확인(우현우)  -->
+	<select id="idck" resultType="int" parameterType="mVO">
+		<include refid="selIdCNT"/>#{id}	
+	</select>
+	
+	<!-- 회원가입 처리(우현우) -->
+	<insert id="join"  parameterType="mVO">
+		<selectKey keyProperty="mno" resultType="int" order="BEFORE">
+			SELECT 
+				NVL(MAX(mno) + 1, 1000)
+			FROM
+				membertab
+		</selectKey>
+		insert into
+			membertab(mno, id, pw, name, mail, tel, gen, birthdate, joindate, describe)
+		VALUES(
+			#{id}, #{pw}, #{name}, #{mail}, #{tel}, #{gen}, #{birthdate}, sysdate, #{describe}
+		)	
+	</insert>
 </mapper>					

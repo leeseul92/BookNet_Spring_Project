@@ -52,9 +52,6 @@ public class MemberDAO {
       return sqlSession.selectOne("mSQL.idck",id);
    }
    
-   //회원가입
-   public int join(MemberVO mVO) {
-      return sqlSession.insert("mSQL.join",mVO);
-   } 
+   
 
 }

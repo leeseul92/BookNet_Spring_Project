@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.*;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.*;
@@ -185,7 +186,7 @@ public class Member {
 	//로그아웃 처리
 	@RequestMapping("/logoutProc.cls")
 	public ModelAndView logout(ModelAndView mv, HttpSession session, RedirectView rv) {
-		String view = "/cls/member/login.cls";
+		String view = "/cls/main/non.cls";
 		rv = null;
 		session.removeAttribute("SID");
 		if(session.getAttribute("SID") != null) {
@@ -195,6 +196,40 @@ public class Member {
 		mv.setView(rv);
 		return mv;
 	}
+	//우현우
+	//회원가입 폼 요청
+	@RequestMapping("/join.cls")
+	public ModelAndView joinForm(ModelAndView mv, HttpSession session) {
+		String sid = (String)session.getAttribute("SID");
+		String view = "member/join";
+		if(sid != null) {
+			RedirectView rv = new RedirectView("main");
+			mv.setView(rv);
+		}else {
+			mv.setViewName(view);
+		}
+		return mv;
+	}
+	
+	//우현우
+	//아이디 중복여부 확인 요청
+	@RequestMapping("/idck.cls")
+	@ResponseBody
+	public Map idcheck(String id) {
+		HashMap map = new HashMap();
+		map.put("cnt",mDAO.idcheck(id));
+		return map;
+	}
+	
+	//우현우 
+	//회원가입 처리
+	/*
+	 * @RequestMapping("/joinProc.cls") public ModelAndView joinProc(HttpSession
+	 * session, ModelAndView mv, MemberVO mVO, RedirectView rv) { int cnt =
+	 * mDAO.join(mVO); rv = null; if(cnt == 1) { session.setAttribute("SID",
+	 * mVO.getId()); rv = new RedirectView("/cls/main"); }else { rv = new
+	 * RedirectView("/cls/main/non.cls"); } mv.setView(rv); return mv; }
+	 */
 }
 /*
 	// 로그인 처리 요청

@@ -128,4 +128,5 @@ public class MemberVO {
 		this.save_loc = save_loc;
 	}
 	
+	
 }
