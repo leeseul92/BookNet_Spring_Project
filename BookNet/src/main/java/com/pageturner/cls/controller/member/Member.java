@@ -56,10 +56,31 @@ public class Member {
 
 	// 이명환
 	// 아디비번찾기 뷰
-	@RequestMapping("/findID.cls")
-	public ModelAndView findID(ModelAndView mv) {
-		String view = "member/findID";
+	@RequestMapping("/findUser.cls")
+	public ModelAndView findUser(ModelAndView mv) {
+		String view = "member/findUser";
 		mv.setViewName(view);
+		return mv;
+	}
+	
+	// 이명환
+	// 아이디 찾기 처리
+	@RequestMapping("/findIDProc.cls")
+	public ModelAndView findIDProc(ModelAndView mv, MemberVO mVO) {
+		String fid = mDAO.findID(mVO);
+		mv.addObject("FID", fid);
+		mv.setView(new RedirectView("비회원메인"));
+		return mv;
+	}
+	
+	// 이명환
+	// 비번 찾기 처리
+	// **사용자에게 비번을 어떻게 제공해줄건지?**
+	@RequestMapping("/findPWProc.cls")
+	public ModelAndView findPWProc(ModelAndView mv, MemberVO mVO) {
+		String fpw = mDAO.findPW(mVO);
+		mv.addObject("FPW", fpw);
+		mv.setView(new RedirectView("비회원메인"));
 		return mv;
 	}
 

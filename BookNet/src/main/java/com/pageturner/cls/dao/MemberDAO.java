@@ -36,5 +36,15 @@ public class MemberDAO {
 	public int delUser(MemberVO mVO) {
 		return sqlSession.update("mSQL.delUser", mVO);
 	}
+	
+	// 아디비번찾기(아이디)
+	public String findID(MemberVO mVO) {
+		return sqlSession.selectOne("mSQL.findID", mVO);
+	}
+	
+	// 아디비번찾기(비번)
+	public String findPW(MemberVO mVO) {
+		return sqlSession.selectOne("mSQL.findPW", mVO);
+	}
 
 }
