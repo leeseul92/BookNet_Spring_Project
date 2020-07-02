@@ -1,4 +1,5 @@
 /*
+
  * 이 스크립트는 javascript 및 jquery 진행을 위한 스크립트 파일입니다.
  * 웹 내 이벤트 처리를 담당하며 ajax 처리 또한 존재합니다.
  * @author leeseul kim
@@ -63,6 +64,7 @@ function splitedHash(body){
 
 //댓글 리스트 불러주는 비동기통신 함수 
 function showCmtList(pno, tid){
+	var sid = document.getElementById('sid').value;
 	
 	$.ajax({
 		url: '/cls/posts/showCmtList.cls',
@@ -75,12 +77,12 @@ function showCmtList(pno, tid){
 			var len = obj.length;
 			if(len != 0){
 				for(var i = 0; i < len; i++){
-					if(obj[i].sid == obj[i].id){
+					if(sid == obj[i].id){
 						$('#'+tid).append('<div style="width: 100%; height: 30px;" id="' + tid + '">' +
 								'<div style="float: left; width: 30px; height: 30px; margin-left: 10px; border: 1px dashed black;">' +
 								'<img src="" style="box-sizing: border-box;"/>' +
 								'</div>' +
-								'<div class="h30-m10" id="id' + obj[i].cno + '" style="width: 60px;"><a href="">' + obj[i].id + '</a></div>' +
+								'<div class="h30-m10" style="width: 60px;"><a href="" id="id' + obj[i].cno + '" >' + obj[i].id + '</a></div>' +
 								'<div class="h30-m10" style="width: 150px;"><small>' + obj[i].cdate + '</small></div>' +
 								'<button class="h30-m10 butt" id="' + obj[i].cno + '" style="float: right; width: 60px;" onclick="replyCmt(this);">Reply</button>' +
 								'<button class="h30-m10 butt" style="float: right; width: 60px;" onclick="delCmt(this);">Delete</button>' +
@@ -91,7 +93,7 @@ function showCmtList(pno, tid){
 								'<div style="float: left; width: 30px; height: 30px; margin-left: 10px; border: 1px dashed black;">' +
 								'<img src="" style="box-sizing: border-box;"/>' +
 								'</div>' +
-								'<div class="h30-m10" style="width: 60px;"><a href="">' + obj[i].id + '</a></div>' +
+								'<div class="h30-m10" style="width: 60px;"><a href="" id="id' + obj[i].cno + '" >' + obj[i].id + '</a></div>' +
 								'<div class="h30-m10" style="width: 150px;"><small>' + obj[i].cdate + '</small></div>' +
 								'<button class="h30-m10 butt" id="' + obj[i].cno + '" style="float: right; width: 60px;" onclick="replyCmt(this);">Reply</button>' +
 								'</div>' +
@@ -112,6 +114,9 @@ function showCmtList(pno, tid){
 //대댓글 달아주기 
 function replyCmt(element){
 	var cno = element.getAttribute('id');
+	var id = $('#id'+cno).html();
+	$('.wrtcomt').css('display', '');
+	$('.wrt-hid').css('height','460px');
 	
 }
 
@@ -148,6 +153,7 @@ function delCmt(element){
 	});
 }
 
+//jQuery 시작 
 $(document).ready(function(){
 	
 	// search clear
@@ -180,7 +186,7 @@ $(document).ready(function(){
 		if (e.keyCode == 13) {
 			var key = $('.searchinput').val();
 			$('#searchinput').val(key);
-			$('#frm3').attr('action', '/BookNet/search/searchAll.cls');
+			$('#frm3').attr('action', '/cls/search/searchAll.cls');
 			$('#frm3').submit();
 		}
 	});
@@ -397,7 +403,7 @@ $(document).ready(function(){
 				'searchword' : book,
 				'genre' : genre
 			},
-			success : function(obj){ //SearchBook.java 에서 gstr json 문서가 들어오게 된다.
+			success : function(obj){ 
 				//정보 들어갈 부분 생성해주기 
 				$('#w-modal-content').css('height', '580px');
 				$('#wrt-b-img').css('display', '');

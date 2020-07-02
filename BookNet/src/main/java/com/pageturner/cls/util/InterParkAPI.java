@@ -13,5 +13,5 @@ import java.util.*;
 import com.pageturner.cls.vo.*;
 
 public interface InterParkAPI {
-	public String interparkAPI(int categoryId, String keyword);
+	public void interparkAPI(int categoryId, String keyword);
 }

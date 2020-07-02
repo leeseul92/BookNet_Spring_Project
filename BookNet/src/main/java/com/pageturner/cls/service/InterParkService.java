@@ -30,11 +30,12 @@ public class InterParkService implements InterParkAPI {
 
 	String address = null;
 	String json = null;
+	String jStr = null;
 	ArrayList<BookVO> list;
 	
 	//게시글 작성시 도서검색 요청이 들어온 경우 
 	@Override
-	public String interparkAPI(int categoryId, String keyword) {
+	public void interparkAPI(int categoryId, String keyword) {
 		// TODO Auto-generated method stub
 		String base = selApi.selectUrl(selApi.SEARCH);
 		
@@ -53,7 +54,6 @@ public class InterParkService implements InterParkAPI {
 		
 		//검색된 결과를 db에 저장시켜줄 처리전담 dao 호출 
 		
-		return json;
 	}
 	
 	//베스트셀러 
@@ -65,7 +65,7 @@ public class InterParkService implements InterParkAPI {
 			
 			json = webConn.webConnection(address);
 			
-			this.list = parsing.parsingBookInfo(json);
+//			this.list = parsing.parsingBookInfo(json);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}

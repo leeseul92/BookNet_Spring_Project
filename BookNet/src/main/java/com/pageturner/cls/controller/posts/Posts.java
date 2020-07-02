@@ -77,10 +77,10 @@ public class Posts {
 	public List<PostsVO> searchBook(String searchword, int genre, PostsVO pVO){
 		System.out.println(searchword);
 		String keyword = "%" + searchword + "%";
-		pVO.setKeyword(keyword);
+		pVO.setKeyword(keyword); //vo 변수에 데이터 저장 
 		//InterParkAPI를 통해 검색된 결과가 db 에 저장될 수 있게하는 서비스클래스 호출 
-		String json = ipSrvc.interparkAPI(genre, keyword);
-		//db에서 결과 가지고 올 서비스클래스호출
+		ipSrvc.interparkAPI(genre, keyword);
+		//검색된 결과가 저장된 db로부터 결과값을 가지고 오게 할 서비스클래스 호출 
 		List<PostsVO> list = postsSrvc.searchBook(pVO);
 		System.out.println(list.size());
 		return list;

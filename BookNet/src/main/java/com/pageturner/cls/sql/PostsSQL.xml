@@ -67,9 +67,19 @@
 		    FROM    
 		        booktab b, genretab g, publishtab pb
 		    WHERE
-		        b.genre = g.genre
-		        AND b.genre = #{genre}
-		        AND b.publish_no = pb.publish_no) mg
+		    	b.genre = g.genre
+		    	AND b.publish_no = pb.publish_no
+		    	<choose>
+		    		<when test="genre == 100">
+		    			AND gname LIKE '%국내도서%'
+		    		</when>
+		    		<when test="genre == 200">
+		    			AND gname LIKE '%외국도서%'
+		    		</when>
+		    		<otherwise>
+		    			AND b.genre = #{genre}
+		    		</otherwise>
+		    	</choose> ) mg
 		WHERE
 		    bname LIKE #{keyword}
 		    OR writer LIKE #{keyword}

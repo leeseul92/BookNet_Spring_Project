@@ -18,18 +18,22 @@ public class ParsingBookInfo {
 	public JsonParser jPar;
 	public JsonObject jObj;
 	public JsonArray jArr;
+	public String jStr;
 
 	public ArrayList<BookVO> parsingBookInfo(String json) throws Exception {
+//	public String parsingBookInfo(String json) throws Exception {
 		ArrayList<BookVO> list = new ArrayList<BookVO>();
 		
 		jPar = new JsonParser();
 		jObj = (JsonObject)jPar.parse(json);
+//		jStr = jObj.get("item").getAsString();
 		jArr = jObj.get("item").getAsJsonArray();
-		System.out.println(jObj);
+//		System.out.println(jObj);
 		System.out.println("item 사이즈 : " + jArr.size());
 		
 		for(int i = 0; i < jArr.size(); i++) {
 			BookVO bVO = new BookVO();
+//			PostsVO pVO = new PostsVO();
 			JsonObject obj = (JsonObject) jArr.get(i);
 			
 			bVO.setTitle(obj.get("title").getAsString());
@@ -44,6 +48,7 @@ public class ParsingBookInfo {
 			bVO.setCategoryId(obj.get("categoryId").getAsInt());
 			
 			list.add(bVO);
+//			System.out.println(bVO.toString());
 		}
 		
 		return list;

@@ -46,5 +46,10 @@ public class MemberDAO {
 	public String findPW(MemberVO mVO) {
 		return sqlSession.selectOne("mSQL.findPW", mVO);
 	}
+	
+	//아이디 중복 확인
+   public int idcheck(String id) {
+      return sqlSession.selectOne("mSQL.idck",id);
+   }
 
 }
