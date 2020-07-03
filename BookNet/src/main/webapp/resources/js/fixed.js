@@ -196,7 +196,7 @@ $(document).ready(function(){
 	});
 	
 	$('#more_butt').click(function() { //modal에서 알림페이지로 이동 
-		$(location).attr('href', '/BookNet/alarm/alarmPage.cls');
+		$(location).attr('href', '/cls/alarm/alarmPage.cls');
 	});
 
 	$('#aBtn').click(function() { //modal 열기
@@ -223,7 +223,7 @@ $(document).ready(function(){
 		
 		//비동기처리 
 		$.ajax({
-			url: '/BookNet/ajax/clickLikeBtn.cls',
+			url: '//ajax/clickLikeBtn.cls',
 			type: 'POST',
 			dataType: 'json',
 			data: {
@@ -311,6 +311,11 @@ $(document).ready(function(){
 		$('#d-close_butt'+pno).click(function(){ //게시물 상세보기 닫기 
 			$('.detailPost').css('display', 'none');
 			$('#'+tid).html('');
+			var str = $('.combody').val();
+			if(str){
+				$('.combody').val('');
+			}
+			$('.wrtcomt').css('display', 'none'); //댓글달기위한 창 닫기 
 		});
 
 		//상세보기 게시물에서 보여줄 댓글리스트 비동기통신 함수호출

@@ -15,13 +15,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.pageturner.cls.dao.PostsDAO;
-import com.pageturner.cls.vo.PostsVO;
+import com.pageturner.cls.dao.*;
+import com.pageturner.cls.vo.*;
 
 @Service
 public class PostsService {
 	@Autowired
 	PostsDAO pDAO;
+	
+	@Autowired
+	LikeDAO lDAO;
 	
 	//게시글 상세보기 내 댓글 리스트
 	public List<PostsVO> showCmtList(PostsVO pVO){

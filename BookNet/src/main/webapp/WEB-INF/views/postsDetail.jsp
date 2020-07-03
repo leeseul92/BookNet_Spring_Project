@@ -40,6 +40,9 @@
 				<div class="like-butt" id="" style="display: flex;'">
 					<span style="font-size: 12px; line-height: 0px;" class="like-img likebtn" id=""></span>
 				</div>
+				<div class="like-butt" id="" style="display: flex;'">
+					<span style="font-size: 12px; line-height: 0px;" class="rev-img revbtn" id=""></span>
+				</div>
 			</div>
 			</div>
 			<div class="w450-h400">
@@ -52,7 +55,7 @@
 						<a>${SID}</a>
 					</div>
 					<input type="text" id="-comt-id" class="combody" placeholder="댓글을 입력하세요." />
-					<input type="button" class="comsubbtn" name="등록" id=""/>
+					<input type="button" class="comsubbtn" value="등록">
 				</div>
 			</div>
 		</div>

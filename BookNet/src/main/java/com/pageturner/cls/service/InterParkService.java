@@ -27,6 +27,9 @@ public class InterParkService implements InterParkAPI {
 	
 	@Autowired
 	ParsingBookInfo parsing;
+	
+	@Autowired
+	BookService bSrvc;
 
 	String address = null;
 	String json = null;
@@ -52,8 +55,10 @@ public class InterParkService implements InterParkAPI {
 			e.printStackTrace();
 		}
 		
-		//검색된 결과를 db에 저장시켜줄 처리전담 dao 호출 
-		
+		//검색된 결과를 db에 저장시켜줄 처리전담 service 호출 
+		for(int i = 0; i < list.size(); i++) {
+			bSrvc.addBookData(list.get(i));
+		}
 	}
 	
 	//베스트셀러 
@@ -65,10 +70,13 @@ public class InterParkService implements InterParkAPI {
 			
 			json = webConn.webConnection(address);
 			
-//			this.list = parsing.parsingBookInfo(json);
+			this.list = parsing.parsingBookInfo(json);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+		//베스트셀러, 추천도서 결과를 db에 저장시켜줄 처리전담 service 호출 
+
 		
 		return list;
 	}

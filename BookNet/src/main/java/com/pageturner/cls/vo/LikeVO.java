@@ -11,6 +11,9 @@ import java.sql.Date;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 
+import org.apache.ibatis.type.Alias;
+
+@Alias("lVO")
 public class LikeVO {
 	private int lk_no, pno, mno;
 	private String ischeck, liketime;

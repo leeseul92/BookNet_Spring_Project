@@ -277,6 +277,21 @@
 	transform: scale(1.1);
 }
 
+.rev-img {
+	margin: auto auto;
+	margin-top: 7px;
+	background-position: -130px -370px;
+	height: 24px;
+	width: 24px;
+	background-image:
+		url(https://www.instagram.com/static/bundles/es6/sprite_glyphs_c14ffe44a4f6.png/c14ffe44a4f6.png);
+}
+
+.rev-img:hover { /* img 마우스 오버시*/
+	cursor: pointer;
+	transform: scale(1.1);
+}
+
 .etcdiv {
 	float: left;
 	width: 300px;
