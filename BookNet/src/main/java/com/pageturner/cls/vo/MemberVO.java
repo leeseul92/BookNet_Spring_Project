@@ -12,6 +12,10 @@ import java.text.SimpleDateFormat;
 
 import org.apache.ibatis.type.Alias;
 
+/**
+ * @author class02
+ *
+ */
 @Alias("mVO")
 public class MemberVO {
 	private int mno;
@@ -128,5 +132,12 @@ public class MemberVO {
 		this.save_loc = save_loc;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "MemberVO [mno=" + mno + ", id=" + id + ", pw=" + pw + ", name=" + name + ", birthdate=" + birthdate
+				+ ", gen=" + gen + ", mail=" + mail + ", interest=" + interest + ", describe=" + describe + ", isshow="
+				+ isshow + ", sdate=" + sdate + ", intershow=" + intershow + ", birthshow=" + birthshow + ", genshow="
+				+ genshow + ", isinflu=" + isinflu + ", ori_name=" + ori_name + ", save_name=" + save_name
+				+ ", save_loc=" + save_loc + "]";
+	}
 }
