@@ -54,7 +54,6 @@ public class Member {
 		return mv;
 	}
 
-
 	// 이명환
 	// 아디비번찾기 뷰
 	@RequestMapping("/findUser.cls")
@@ -63,7 +62,7 @@ public class Member {
 		mv.setViewName(view);
 		return mv;
 	}
-	
+
 	// 이명환
 	// 아이디 찾기 처리
 	@RequestMapping("/findIDProc.cls")
@@ -73,7 +72,7 @@ public class Member {
 		mv.setView(new RedirectView("비회원메인"));
 		return mv;
 	}
-	
+
 	// 이명환
 	// 비번 찾기 처리
 	// **사용자에게 비번을 어떻게 제공해줄건지?**
@@ -110,7 +109,7 @@ public class Member {
 
 		return str;
 	}
-	
+
 	// 이명환
 	// 정보수정 뷰
 	@RequestMapping("/edit.cls")
@@ -118,143 +117,125 @@ public class Member {
 		mv.setViewName("mypage/editMemb");
 		return mv;
 	}
-	
+
 	// 이명환
 	// 정보수정(비번) 처리
 	@RequestMapping("/editPW.cls")
 	public ModelAndView editPW(HttpServletRequest req, ModelAndView mv, MemberVO mVO) {
-		mVO.setId((String)req.getSession().getAttribute("SID"));
+		mVO.setId((String) req.getSession().getAttribute("SID"));
 		int cnt = mDAO.editPW(mVO);
-		
-		if(cnt == 0) {
+
+		if (cnt == 0) {
 			System.out.println("정보수정(비번)처리 에러");
 		}
 		mv.setView(new RedirectView("마이페이지"));
-		
+
 		return mv;
 	}
-	
+
 	// 이명환
 	// 정보수정(유저) 처리
 	@RequestMapping("/editUser.cls")
 	public ModelAndView editUser(HttpServletRequest req, ModelAndView mv, MemberVO mVO) {
-		mVO.setId((String)req.getSession().getAttribute("SID"));
+		mVO.setId((String) req.getSession().getAttribute("SID"));
 		int cnt = mDAO.editUser(mVO);
-		
-		if(cnt == 0) {
+
+		if (cnt == 0) {
 			System.out.println("정보수정(유저)처리 에러");
 		}
 		mv.setView(new RedirectView("마이페이지"));
 		return mv;
 	}
-	
+
 	// 이명환
 	// 회원탈퇴 처리
 	@RequestMapping("/delUser.cls")
 	public ModelAndView delUser(HttpServletRequest req, ModelAndView mv, MemberVO mVO) {
-		mVO.setId((String)req.getSession().getAttribute("SID"));
+		mVO.setId((String) req.getSession().getAttribute("SID"));
 		int cnt = mDAO.delUser(mVO);
-		
-		if(cnt == 0) {
+
+		if (cnt == 0) {
 			System.out.println("정보수정(유저)처리 에러");
 		}
 		req.getSession().removeAttribute("SID");
 		mv.setView(new RedirectView("비회원메인페이지"));
 		return mv;
 	}
-	
-	//우현우
-	//로그인 처리
-	@RequestMapping(value = "/loginProc", method = RequestMethod.POST, params = {"id","pw"})
+
+	// 우현우
+	// 로그인 처리
+	@RequestMapping(value = "/loginProc", method = RequestMethod.POST, params = { "id", "pw" })
 	public ModelAndView loginProc(MemberVO mVO, ModelAndView mv, HttpSession session, RedirectView rv) {
-		
+
 		int cnt = mDAO.getLogin(mVO);
 		rv = null;
 		String view = "member/login";
-		//sid가 null이 아니면 메인으로 Redirect시키고 null이면 로그인 창에 머물게 하기
-		if(cnt == 1) {
+		// sid가 null이 아니면 메인으로 Redirect시키고 null이면 로그인 창에 머물게 하기
+		if (cnt == 1) {
 			session.setAttribute("SID", mVO.getId());
 			rv = new RedirectView("/cls/main/main.cls");
-		}else {
+		} else {
 			rv = new RedirectView("/cls/member/login.cls");
 		}
 		mv.setView(rv);
 		return mv;
 	}
-	
-	//우현우
-	//로그아웃 처리
+
+	// 우현우
+	// 로그아웃 처리
 	@RequestMapping("/logoutProc.cls")
 	public ModelAndView logout(ModelAndView mv, HttpSession session, RedirectView rv) {
 		String view = "/cls/main/non.cls";
 		rv = null;
 		session.removeAttribute("SID");
-		if(session.getAttribute("SID") != null) {
+		if (session.getAttribute("SID") != null) {
 			view = "/cls/main";
 		}
 		rv = new RedirectView(view);
 		mv.setView(rv);
 		return mv;
 	}
-	//우현우
-	//회원가입 폼 요청
+
+	// 우현우
+	// 회원가입 폼 요청
 	@RequestMapping("/join.cls")
 	public ModelAndView joinForm(ModelAndView mv, HttpSession session) {
-		String sid = (String)session.getAttribute("SID");
+		String sid = (String) session.getAttribute("SID");
 		String view = "member/join";
-		if(sid != null) {
+		if (sid != null) {
 			RedirectView rv = new RedirectView("main");
 			mv.setView(rv);
-		}else {
+		} else {
 			mv.setViewName(view);
 		}
 		return mv;
 	}
-	
-	//우현우
-	//아이디 중복여부 확인 요청
+
+	// 우현우
+	// 아이디 중복여부 확인 요청
 	@RequestMapping("/idck.cls")
 	@ResponseBody
 	public Map idcheck(String id) {
 		HashMap map = new HashMap();
-		map.put("cnt",mDAO.idcheck(id));
+		map.put("cnt", mDAO.idcheck(id));
 		return map;
 	}
-	
-	//우현우 
-	//회원가입 처리
-	/*
-	 * @RequestMapping("/joinProc.cls") public ModelAndView joinProc(HttpSession
-	 * session, ModelAndView mv, MemberVO mVO, RedirectView rv) { int cnt =
-	 * mDAO.join(mVO); rv = null; if(cnt == 1) { session.setAttribute("SID",
-	 * mVO.getId()); rv = new RedirectView("/cls/main"); }else { rv = new
-	 * RedirectView("/cls/main/non.cls"); } mv.setView(rv); return mv; }
-	 */
-}
-/*
-	// 로그인 처리 요청
-	@RequestMapping(value = "/loginProc.cls", method = RequestMethod.POST, params = { "id", "pw" })
-	public ModelAndView loginProc(MemberVO mVO, ModelAndView mv, HttpSession session) {
-		// jsp로부터 로그인요청이 들어오게 되면 id 와 pw 를 받아올 수 있는데, 이때 매개변수로 선언된 mVO에 자동으로 셋팅됨.
-		// 제대로 처리가 진행되는지 확인
-		System.out.println("#### id: " + mVO.getId());
-		System.out.println("#### pw: " + mVO.getPw());
 
-		RedirectView rv = null;
-
-		// 서비스 클래스 호출
-		String id = membSrvc.loginService(mVO);
-
-		if (id == null || id.length() == 0) {
-			// 서비스클래스로부터 넘어온 id 값이 없음 = db에 id, pw가 일치하는 회원정보가 없음.
-			rv = new RedirectView("/cls/member/login.cls"); // 재로그인 시키기
+	// 우현우
+	// 회원가입 처리
+	@RequestMapping("/joinProc.cls")
+	public ModelAndView joinProc(HttpSession session, ModelAndView mv, MemberVO mVO, RedirectView rv) {
+		System.out.println(mVO);
+		int cnt = mDAO.join(mVO);
+		rv = null;
+		if (cnt == 1) {
+			session.setAttribute("SID", mVO.getId());
+			rv = new RedirectView("/cls/main");
 		} else {
-			// 세션에 아이디 저장
-			session.setAttribute("SID", id);
-			rv = new RedirectView("/cls/main/main.cls"); // 로그인한 회원용 메인으로 넘기기
+			rv = new RedirectView("/cls/main/non.cls");
 		}
-
 		mv.setView(rv);
 		return mv;
 	}
- */
+
+}

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,11 +26,11 @@
   <link rel="stylesheet" href="/cls/css/bootstrap.min.css">
   <link href="/cls/css/c845a517197b04b7f694e3e7bdf31371-register.css" rel="stylesheet">
   <link rel="stylesheet" href="/cls/css/w3.css"> 
+  <link rel="stylesheet" href="/cls/css/whw_join.css"> 
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="/cls/js/join.js"></script>
-  
+  <script type="text/javascript" src="/cls/js/join.js"></script>  
 
 
     
@@ -37,7 +38,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
-  <style type="text/css">@keyframes tawkMaxOpen{0%{opacity:0;transform:translate(0, 30px);;}to{opacity:1;transform:translate(0, 0px);}}@-moz-keyframes tawkMaxOpen{0%{opacity:0;transform:translate(0, 30px);;}to{opacity:1;transform:translate(0, 0px);}}@-webkit-keyframes tawkMaxOpen{0%{opacity:0;transform:translate(0, 30px);;}to{opacity:1;transform:translate(0, 0px);}}#tZkykce-1592724540309{outline:none!important;visibility:visible!important;resize:none!important;box-shadow:none!important;overflow:visible!important;background:none!important;opacity:1!important;filter:alpha(opacity=100)!important;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity1)!important;-moz-opacity:1!important;-khtml-opacity:1!important;top:auto!important;right:10px!important;bottom:90px!important;left:auto!important;position:fixed!important;border:0!important;min-height:0!important;min-width:0!important;max-height:none!important;max-width:none!important;padding:0!important;margin:0!important;-moz-transition-property:none!important;-webkit-transition-property:none!important;-o-transition-property:none!important;transition-property:none!important;transform:none!important;-webkit-transform:none!important;-ms-transform:none!important;width:auto!important;height:auto!important;display:none!important;z-index:2000000000!important;background-color:transparent!important;cursor:auto!important;float:none!important;border-radius:unset!important;pointer-events:auto!important}#du7KaVW-1592724540310.open{animation : tawkMaxOpen .25s ease!important;}</style></head>
+</head>
   <body>
     <section id="accounts-header">
       <div class="container-fluid">
@@ -109,7 +110,7 @@
           </header>
 
           
-<form action="https://shiftee.io/ko/accounts/register" method="POST" id="frm">
+<form action="/cls/member/joinProc.cls" method="POST" id="frm" name="frm">
   <!-- 회원 정보 입력 -->
 	<div class="">
             
@@ -162,7 +163,7 @@
   <div class="controls">
     
               <label for="nicname">닉네임</label>
-              <input type="text" class="form-control" id="confirm-password" name="password_matching">
+              <input type="text" class="form-control" id="nickname" name="nickname">
              
   </div>
 </div>
@@ -177,7 +178,7 @@
   <div class="controls">
     
                 <label for="sft-full-name-input">이름</label>
-                <input type="text" class="form-control" id="sft-full-name-input">
+                <input type="text" class="form-control" id="sft-full-name-input" name="name">
               
     
   </div>
@@ -202,29 +203,29 @@
 </div>
 
 </div>
-<div class="controls">
+<div class="controls" >
 
               <label for="email-address">이메일</label>
               <input type="email" class="form-control" id="email-address" name="email" value="" size="5">
-      		   <button class="btn btn-primary btn-block" id="sft-register-button" type="submit" data-track-click="register">
+      		   <button class="btn btn-primary btn-block" id="mailck" type="button">
             인증번호 발송
             </button>
     </div>
-	<div class="controls">
+	<form class="controls" id="efrm">
 
-              <label for="email-address">인증 번호</label>
-              <input type="email" class="form-control" id="email-address" name="email" value="" size="5">
-              <button type="button" class="btn btn-primary btn-block" id="sft-register-button"  data-track-click="register">
+              <label for="email-ck">인증 번호</label>
+              <input type="email" class="form-control" id="email-ck" name="email" value="" size="5">
+              <button type="button" class="btn btn-primary btn-block" id="emailck"  data-track-click="register">
             인증하기
             </button>
-    </div>
+    </form>
     <div class="controls">
 
               <label for="gen">성별</label>
               <select class="form-control" id="gen" name="gen" value="gen">
               	<option>선택하세요</option>
-              	<option id="male">남</option>
-              	<option id="fmale">여</option>
+              	<option id="male" name="male">남</option>
+              	<option id="fmale" name="fmale">여</option>
               </select>
     </div>
     
@@ -242,57 +243,57 @@
 			  <label>관심 장르(국내도서)</label>
 			</div>
             <div class="row sft-terms-and-privacy-agreement-container">
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="social" name="social">
               <p class="gangre">소설</p>
-			  <input type="checkbox" id="sft-terms-and-privacy-agreement">
+			  <input type="checkbox" id="Pessay" name="Pessay">
               <p class="gangre">시/에세이</p>
-			  <input type="checkbox" id="sft-terms-and-privacy-agreement">
+			  <input type="checkbox" id="apculture" name="apculture">
               <p class="gangre">예술/대중문화</p>
-			  <input type="checkbox" id="sft-terms-and-privacy-agreement">
+			  <input type="checkbox" id="sscience" name="sscience">
               <p class="gangre">사회과학</p>
-			  <input type="checkbox" id="sft-terms-and-privacy-agreement">
+			  <input type="checkbox" id="hculture" name="hculture">
               <p class="gangre">역사와문화</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="magazine" name="magazine">
               <p class="gangre">잡지</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="comic" name="comic">
               <p class="gangre">만화</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="inchild" name="inchild">
               <p class="gangre">유아</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="child" name="child">
               <p class="gangre">아동</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="famliylife" name="famliylife">
               <p class="gangre">가정과생활</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="youth" name="youth">
               <p class="gangre">청소년</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="elementary" name="elementary">
               <p class="gangre">초등학습서</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="High" name="High">
               <p class="gangre">고등학습서</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="nforgin" name="nforgin">
               <p class="gangre">국/외국어/사전</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
-              <p class="gangre">자연과 과학                </p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="nscience" name="nscience">
+              <p class="gangre">자연과 과학  </p>
+              <input type="checkbox" id="emanagement" name="emanagement">
               <p class="gangre">경제경영</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="Sdevelopment" name="Sdevelopment">
               <p class="gangre">자기개발</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="humanities" name="humanities">
               <p class="gangre">인문</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="rmechanics" name="rmechanics">
               <p class="gangre">종교/역학</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="cinternet" name="cinternet">
               <p class="gangre">컴퓨터/인터넷</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="licence" name="licence">
               <p class="gangre">자격서/수험서</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="hobby" name="hobby">
               <p class="gangre">취미/레져</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="majar" name="majar">
               <p class="gangre">전공/대학도서</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="haelth" name="haelth">
               <p class="gangre">건강/뷰티</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="trapic" name="trapic">
               <p class="gangre">여행</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="middle" name="middle">
               <p class="gangre">중등학습서</p>
               
             </div>
@@ -300,53 +301,48 @@
 			  <label>관심 장르(해외도서)</label>
 			</div>
 			<div class="row sft-terms-and-privacy-agreement-container">
-			<input type="checkbox" id="sft-terms-and-privacy-agreement">
+			<input type="checkbox" id="ochild" name="ochild">
               <p class="gangre">어린이</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="ELT" name="ELT">
               <p class="gangre">ELT/사전</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="Literature" name="Literature">
               <p class="gangre">문학</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="mpersonnel" name="mpersonnel">
               <p class="gangre">경영/인문</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="aDesign" name="aDesign">
               <p class="gangre">예술/디자인</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="practicaluse" name="practicaluse">
               <p class="gangre">실용</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="omagazine" name="omagazine">
               <p class="gangre">해외잡지</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="universitybooks" name="universitybooks">
               <p class="gangre">대학/전문서적</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="computer" name="computer">
               <p class="gangre">컴퓨터</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="jbooks" name="jbooks">
               <p class="gangre">일본도서</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="fbooks" name="fbooks">
               <p class="gangre">프랑스도서</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="cbooks" name="cbooks">
               <p class="gangre">중국도서</p>
-              <input type="checkbox" id="sft-terms-and-privacy-agreement">
+              <input type="checkbox" id="ooapplication" name="ooapplication">
               <p class="gangre">해외주문원서</p>
 			</div>
 			
-			<div class="controls">
+	<div class="controls">
 
               <label for="introduce">간단소개</label>
-              <textarea style="resize: none" rows="10" cols="50" class="form-control" id="introduce" name="introduce" value="introduce">
-             	
-              </textarea>
+              <textarea style="resize: none" rows="10" cols="50" class="form-control" id="introduce" name="introduce" value="introduce" placeholder="자기소개 100자이내로 입력해주세요." name="introduce"></textarea>
+              <span id="count"></span>
     </div>
 
-            <button type="button" onclick="location.href='http://www.naver.com';" class="btn btn-primary btn-block" id="submit"  data-track-click="register">
+            <button type="button" class="btn btn-primary btn-block" id="submit">
             가입하기
             </button>
 
          
 </form>
             </div>
-          
-
-
-
         </div>
       </div>
     </div>

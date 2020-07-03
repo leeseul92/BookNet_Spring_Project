@@ -90,3 +90,24 @@
 	처리함수	: Posts.delPost()
 	뷰		: 비동기통신 
 --------------------------------------------------------------
+# 회원가입 폼 요청 --> 우현우 
+	요청내용	: /cls/member/join.cls
+	파라미터	: 무
+	컨트롤러	: com.pageturner.cls.controller.member.member
+	처리함수	: Member.join.cls()
+	뷰		: /WEB-INF/views/member/join.jsp
+--------------------------------------------------------------
+# 회원가입 처리 요청 --> 우현우 
+	요청내용	: /cls/member/joinProc.cls
+	파라미터	: 무
+	컨트롤러	: com.pageturner.cls.controller.member.member
+	처리함수	: Member.joinProc()
+	뷰		: redirect(/main/main.jsp)
+--------------------------------------------------------------
+# 아이디 중복 확인 요청 --> 우현우 
+	요청내용	: /cls/member/idck.cls
+	파라미터	: id
+	컨트롤러	: com.pageturner.cls.controller.member.member
+	처리함수	: Member.idCheck()
+	뷰		: 비동기통신
+--------------------------------------------------------------
