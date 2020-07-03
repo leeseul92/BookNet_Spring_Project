@@ -54,42 +54,39 @@
 				publishtab.publish_no
 		</selectKey>
 		INSERT INTO
-			booktab(bno, title, genre, smallimg, largeimg,
-					author, translator, isbn, publish_no)
+			booktab(bno, bname, genre, smallimg, largeimg,
+					writer, trans, isbn, publish_no)
 		VALUES(
-			${bno}, #{title}, #{genre}, #{smallimg},
+			${bno}, #{title}, ${genre}, #{smallimg},
 			#{largeimg}, #{author}, #{translator},
 			#{isbn}, ${publish_no}
 		)
 	</insert>
 	
 	<insert id="addPeriod" parameterType="rcmdVO">
-		<selectKey keyProperty="recomdate_no,recomdate_start,recomdate_end"
-					resultType="rcmdVO" order="BEFORE">
+		<selectKey keyProperty="map"
+					resultType="map" order="BEFORE">
 			SELECT
 				NVL(MAX(recomdate_no) + 1, 1) recomdate_no,
-				NVL(MAX(recomdate_start) + 7, '2020/06/30') recomdate_start,
-				NVL(MAX(recomdate_end) + 7, '2020/07/06') recomdate_end
+				TO_CHAR(NVL(MAX(recomdate_start) + 7, '2020-06-30'), 'yyyy-MM-dd') recomdate_start,
+				TO_CHAR(NVL(MAX(recomdate_end) + 7, '2020-07-06'), 'yyyy-MM-dd') recomdate_end
 			FROM
 				recomdatetab
 		</selectKey>
 		INSERT INTO
 			recomdatetab(recomdate_no, recomdate_start, recomdate_end)
 		VALUES(
-			#{recomdate_no}, #{recomdate_start}, #{recomdate_end}
+			#{map.RECOMDATE_NO}, #{map.RECOMDATE_START}, #{map.RECOMDATE_END}
 		)
 	</insert>
 	
 	<insert id="addRcmdBook" parameterType="rcmdVO">
-		<selectKey keyProperty="recom_no, recomdate_no"
+		<selectKey keyProperty="recom_no"
 					resultType="rcmdVO" order="BEFORE">
 			SELECT
-				rt.recom_no recom_no, MAX(recomdatetab.recomdate_no) recomdate_no
+				NVL(MAX(recom_no) + 1, 1) recom_no
 			FROM
-				recomdatetab,
-				(SELECT NVL(MAX(recom_no) + 1, 1) recom_no FROM recomtab) rt
-			GROUP BY
-				rt.recom_no
+				recomtab
 		</selectKey>
 		INSERT INTO
 			recomtab(recom_no, bno, recomdate_no, classify, cat_id)
@@ -97,4 +94,19 @@
 			${recom_no}, ${bno}, ${recomdate_no}, #{classify}, ${cat_id}
 		)
 	</insert>
+	
+	<select id="seldRcmdlist" resultType="bVO">
+		SELECT
+			bname title, largeimg, gname, writer author,
+			publish publisher, cat_id, classify
+		FROM
+			booktab bt, genretab gt, publishtab pt,
+			recomdatetab rdt, recomtab rt
+		WHERE
+			sysdate BETWEEN recomdate_start AND recomdate_end
+			AND rt.recomdate_no = rdt.recomdate_no
+			AND bt.bno = rt.bno
+			AND gt.genre = bt.genre
+			AND pt.publish_no = bt.publish_no
+	</select>
 </mapper>

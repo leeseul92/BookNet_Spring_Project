@@ -5,13 +5,14 @@ package com.pageturner.cls.vo;
  * @since	2020.06.24
  *
  */
+
 import org.apache.ibatis.type.*;
 
 @Alias("bVO")
 public class BookVO {
 	private String title, smallimg, largeimg, gname, publisher,
-					author, translator, link, isbn;
-	private int categoryId, publish_no;
+					author, translator, classify, isbn;
+	private int categoryId, publish_no, bno, cat_id;
 	public String getTitle() {
 		return title;
 	}
@@ -54,11 +55,11 @@ public class BookVO {
 	public void setTranslator(String translator) {
 		this.translator = translator;
 	}
-	public String getLink() {
-		return link;
+	public String getClassify() {
+		return classify;
 	}
-	public void setLink(String link) {
-		this.link = link;
+	public void setClassify(String link) {
+		this.classify = link;
 	}
 	public String getIsbn() {
 		return isbn;
@@ -78,10 +79,23 @@ public class BookVO {
 	public void setPublish_no(int publish_no) {
 		this.publish_no = publish_no;
 	}
+	public int getBno() {
+		return bno;
+	}
+	public void setBno(int bno) {
+		this.bno = bno;
+	}
+	public int getCat_id() {
+		return cat_id;
+	}
+	public void setCat_id(int cat_id) {
+		this.cat_id = cat_id;
+	}
 	@Override
 	public String toString() {
 		return "BookVO [title=" + title + ", smallimg=" + smallimg + ", largeimg=" + largeimg + ", gname=" + gname
-				+ ", publisher=" + publisher + ", author=" + author + ", translator=" + translator + ", link=" + link
-				+ ", isbn=" + isbn + ", categoryId=" + categoryId + ", publish_no=" + publish_no + "]";
+				+ ", publisher=" + publisher + ", author=" + author + ", translator=" + translator + ", classify="
+				+ classify + ", isbn=" + isbn + ", categoryId=" + categoryId + ", publish_no=" + publish_no + ", bno="
+				+ bno + ", cat_id=" + cat_id + "]";
 	}
 }

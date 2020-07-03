@@ -43,7 +43,7 @@ public class ParsingBookInfo {
 			bVO.setPublisher(obj.get("publisher").getAsString());
 			bVO.setAuthor(obj.get("author").getAsString());
 			bVO.setTranslator(obj.get("translator").getAsString());
-			bVO.setLink(obj.get("link").getAsString());
+			bVO.setClassify(obj.get("link").getAsString());
 			bVO.setIsbn(obj.get("isbn").getAsString());
 			bVO.setCategoryId(obj.get("categoryId").getAsInt());
 			

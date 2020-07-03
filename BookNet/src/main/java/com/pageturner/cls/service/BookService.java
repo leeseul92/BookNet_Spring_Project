@@ -1,7 +1,5 @@
 package com.pageturner.cls.service;
 
-import java.util.*;
-import org.springframework.beans.factory.annotation.Autowired;
 /**
  * 	이 클래스는 책과 관련된 작업을 수행할 서비스 클래스이다.
  * @author	박기윤
@@ -9,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @version	v.1.0
  * 
  */
+
+import java.util.*;
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import com.pageturner.cls.dao.*;
 import com.pageturner.cls.vo.*;
@@ -33,13 +34,19 @@ public class BookService {
 		}
 	}
 	
-	public void name() {
+	public void addRecommend(ArrayList<BookVO> list) {
 		RecommendVO rcmdVO = new RecommendVO();
+		System.out.println("!" + rcmdVO.getRecomdate_no());
 		bookDAO.addPeriod(rcmdVO);
+		System.out.println("@" + rcmdVO.getRecomdate_no());
+		
+		for (int i = 0; i < list.size(); i++) {
+			rcmdVO.setBno(list.get(i).getBno());
+			rcmdVO.setCat_id(list.get(i).getCat_id());
+			rcmdVO.setClassify(list.get(i).getClassify());
+			bookDAO.addRcmdBook(rcmdVO);
+			System.out.println(rcmdVO.toString());
+		}
 	}
 	
-	public void addRecommend(RecommendVO rcmdVO) {
-//		bookDAO.addPeriod();
-		bookDAO.addRcmdBook(rcmdVO);
-	}
 }
