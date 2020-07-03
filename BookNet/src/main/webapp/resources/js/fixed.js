@@ -117,7 +117,7 @@ function replyCmt(element){
 	var id = $('#id'+cno).html();
 	$('.wrtcomt').css('display', '');
 	$('.wrt-hid').css('height','460px');
-	
+	$('.combody').val('@'+id);
 }
 
 //댓글 삭제처리해주는 함수 
