@@ -33,7 +33,7 @@ public class Main {
 	//비로그인 회원 메인화면
 	@RequestMapping("/non.cls")
 	public ModelAndView showMainNon(HttpServletRequest req, ModelAndView mv) {
-		String view = "main/none_main";
+		String view = "/main/non_main";
 		
 		List<PostsVO> list = mainSrvc.nonMain();
 		
