@@ -17,6 +17,7 @@
 		<typeAlias alias="mainVO" type="com.pageturner.cls.vo.MainVO"/>
 		<typeAlias alias="pVO" type="com.pageturner.cls.vo.PostsVO" />
 		<typeAlias alias="bVO" type="com.pageturner.cls.vo.BookVO"/>
+		<typeAlias alias="lVO" type="com.pageturner.cls.vo.LikeVO"/>
 		<typeAlias alias="fVO" type="com.pageturner.cls.vo.ProfileVO"/> -->
 	</typeAliases>
 	
@@ -29,6 +30,7 @@
 		<mapper resource="com/pageturner/cls/sql/FallowSQL.xml"/>
 		<mapper resource="com/pageturner/cls/sql/AlarmSQL.xml"/>
 		<mapper resource="com/pageturner/cls/sql/BookSQL.xml"/>
+		<mapper resource="com/pageturner/cls/sql/LikeSQL.xml"/>
 		<!-- <mapper resource="com/pageturner/cls/sql/*SQL.xml" /> --> 
 	</mappers>
 </configuration>		

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+			PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 이명환 -->
+
+<mapper namespace="lSQL">
+	<!-- 좋아요 등록 -->
+	<select id="add_like" resultType="int" parameterType="lVO">
+		insert into liketab(lk_no, pno, mno)
+		values(
+			(select nvl(max(lk_no)+1, 4001) from liketab),
+			#{pno},
+			(select mno from membertab where id = #{id})
+		)
+	</select>
+	
+	<!-- 좋아요 취소 -->
+	<select id="cancel_like" resultType="int" parameterType="lVO">
+		update
+			liketab
+		set
+			ischeck = N
+		where
+			pno = #{pno}
+			and mno = (select mno from membertab where id = #{id})
+	</select>
+	
+	<!-- 취소했던 글에 다시 좋아요 -->
+	<select id="re_like" resultType="int" parameterType="lVO">
+		update
+			liketab
+		set
+			ischeck = Y,
+			lk_time = sysdate
+		where
+			pno = #{pno}
+			and mno = (select mno from membertab where id = #{id})
+	</select>
+	
+	<!-- 좋아요 기록여부 조회 -->
+	<select id="sel_like" resultType="int" parameterType="lVO">
+		select
+			count(*) cnt
+		from
+			liketab
+		where
+			pno = #{pno}
+			and mno = (select mno from membertab where id = #{id})
+	</select>
+	
+	<!-- 좋아요 상태여부 조회 -->
+	<select id="sel_ischeck" resultType="int" parameterType="lVO">
+		select
+			count(*) cnt
+		from
+			liketab
+		where
+			pno = #{pno}
+			and mno = (select mno from membertab where id = #{id})
+			and ischeck = Y
+	</select>
+</mapper>
