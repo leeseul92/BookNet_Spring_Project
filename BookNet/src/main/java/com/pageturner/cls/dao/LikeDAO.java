@@ -3,7 +3,7 @@ package com.pageturner.cls.dao;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.pageturner.cls.vo.LikeVO;
+import com.pageturner.cls.vo.PostsVO;
 
 /**
  * 좋아요 관련 sql 처리 클래스
@@ -17,28 +17,28 @@ public class LikeDAO {
 	SqlSessionTemplate sqlSession;
 	
 	// 좋아요 등록
-	public int addLike(LikeVO lVO) {
-		return sqlSession.insert("lSQL.add_like", lVO);
+	public int addLike(PostsVO pVO) {
+		return sqlSession.insert("lSQL.add_like", pVO);
 	}
 	
 	// 좋아요 취소
-	public int cancelLike(LikeVO lVO) {
-		return sqlSession.insert("lSQL.cancel_like", lVO);
+	public int cancelLike(PostsVO pVO) {
+		return sqlSession.insert("lSQL.cancel_like", pVO);
 	}
 	
 	// 취소했던 글에 다시 좋아요
-	public int reLike(LikeVO lVO) {
-		return sqlSession.insert("lSQL.re_like", lVO);
+	public int reLike(PostsVO pVO) {
+		return sqlSession.insert("lSQL.re_like", pVO);
 	}
 	
 	// 좋아요 기록여부 조회
-	public int selLike(LikeVO lVO) {
-		return sqlSession.insert("lSQL.sel_like", lVO);
+	public int selLike(PostsVO pVO) {
+		return sqlSession.insert("lSQL.sel_like", pVO);
 	}
 	
 	// 좋아요 상태여부 조회
-	public int selIscheck(LikeVO lVO) {
-		return sqlSession.insert("lSQL.sel_ischeck", lVO);
+	public int selIscheck(PostsVO pVO) {
+		return sqlSession.insert("lSQL.sel_ischeck", pVO);
 	}
 	
 }

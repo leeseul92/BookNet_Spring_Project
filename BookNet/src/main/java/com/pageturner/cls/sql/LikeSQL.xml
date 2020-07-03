@@ -8,7 +8,7 @@
 
 <mapper namespace="lSQL">
 	<!-- 좋아요 등록 -->
-	<select id="add_like" resultType="int" parameterType="lVO">
+	<select id="add_like" resultType="int" parameterType="pVO">
 		insert into liketab(lk_no, pno, mno)
 		values(
 			(select nvl(max(lk_no)+1, 4001) from liketab),
@@ -18,7 +18,7 @@
 	</select>
 	
 	<!-- 좋아요 취소 -->
-	<select id="cancel_like" resultType="int" parameterType="lVO">
+	<select id="cancel_like" resultType="int" parameterType="pVO">
 		update
 			liketab
 		set
@@ -29,7 +29,7 @@
 	</select>
 	
 	<!-- 취소했던 글에 다시 좋아요 -->
-	<select id="re_like" resultType="int" parameterType="lVO">
+	<select id="re_like" resultType="int" parameterType="pVO">
 		update
 			liketab
 		set
@@ -41,7 +41,7 @@
 	</select>
 	
 	<!-- 좋아요 기록여부 조회 -->
-	<select id="sel_like" resultType="int" parameterType="lVO">
+	<select id="sel_like" resultType="int" parameterType="pVO">
 		select
 			count(*) cnt
 		from
@@ -52,7 +52,7 @@
 	</select>
 	
 	<!-- 좋아요 상태여부 조회 -->
-	<select id="sel_ischeck" resultType="int" parameterType="lVO">
+	<select id="sel_ischeck" resultType="int" parameterType="pVO">
 		select
 			count(*) cnt
 		from
