@@ -61,11 +61,16 @@ public class InterParkService implements InterParkAPI {
 		}
 	}
 	
-	//베스트셀러 
-	public ArrayList<BookVO> interparkAPI(int categoryId) {
-		String base = selApi.selectUrl(selApi.BESTSELL);//이때 base는 categoryId= 로 마무리 되어 있음.
-		
+	//베스트셀러 & 추천도서 
+	public ArrayList<BookVO> interparkAPI(int code, int categoryId) {
 		try {
+			String base = null;
+			//베스트셀러 추천도서의 코드를 0과 1로 구분시켜준다.
+			if(code == 0) { //베스트셀러 
+				base = selApi.selectUrl(selApi.BESTSELL);
+			} else {
+				base = selApi.selectUrl(selApi.RECOMM);
+			}
 			address = base + categoryId + "&output=json&maxResults=5";
 			
 			json = webConn.webConnection(address);
@@ -74,9 +79,6 @@ public class InterParkService implements InterParkAPI {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		//베스트셀러, 추천도서 결과를 db에 저장시켜줄 처리전담 service 호출 
-		bSrvc.addRecommend(list);
 		
 		return list;
 	}
