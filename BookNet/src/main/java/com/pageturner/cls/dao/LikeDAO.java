@@ -23,22 +23,22 @@ public class LikeDAO {
 	
 	// 좋아요 취소
 	public int cancelLike(PostsVO pVO) {
-		return sqlSession.insert("lSQL.cancel_like", pVO);
+		return sqlSession.update("lSQL.cancel_like", pVO);
 	}
 	
 	// 취소했던 글에 다시 좋아요
 	public int reLike(PostsVO pVO) {
-		return sqlSession.insert("lSQL.re_like", pVO);
+		return sqlSession.update("lSQL.re_like", pVO);
 	}
 	
 	// 좋아요 기록여부 조회
 	public int selLike(PostsVO pVO) {
-		return sqlSession.insert("lSQL.sel_like", pVO);
+		return sqlSession.selectOne("lSQL.sel_like", pVO);
 	}
 	
 	// 좋아요 상태여부 조회
 	public int selIscheck(PostsVO pVO) {
-		return sqlSession.insert("lSQL.sel_ischeck", pVO);
+		return sqlSession.selectOne("lSQL.sel_ischeck", pVO);
 	}
 	
 }
