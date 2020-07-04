@@ -217,22 +217,31 @@ $(document).ready(function(){
 		$(location).attr('href', '/cls/mypage/mypage.cls');
 	});
 	
-	$('.likebtn').click(function(){ //like 버튼 클릭시 빨강하트로 변경 
-		$(this).css('background-position', '-208px -370px');
+	$('.likebtn').click(function(){ //like 버튼 클릭시 하트 변경되어야함.
+		if($(this).css('background-position') == '-208px -370px') {
+			//만일, 하트가 빨간색이라면 ischeck에 'Y' 대입
+			$('#ischeck').val('Y');
+		} else {
+			//만일, 하트가 비어있다면 ischeck에 'N' 대입 (NULL값은 자바에서 확인)
+			$('#ischeck').val('N');
+		}
+		var ischeck = $('#ischeck').val();
+		alert(ischeck);
 		var pno = $(this).parents().attr('id');
+		var sid = $('#sid').val();
 		
 		//비동기처리 
 		$.ajax({
-			url: '//ajax/clickLikeBtn.cls',
+			url: '/cls/posts/likePosts.cls',
 			type: 'POST',
 			dataType: 'json',
 			data: {
-				'pno': pno
+				'ischeck' : ischeck,
+				'pno': pno,
+				'id': sid
 			},
 			success: function(data){
-				if(data.cnt == 1){
-					//cnt 값이 1이면 디비에 저장 완료 
-				}
+				
 			},
 			error: function(){
 				alert("###통신에러###");
@@ -379,7 +388,6 @@ $(document).ready(function(){
 		$(location).attr('href', '/cls/member/editMemInfo.cls');
 	});
 	
-
 	//글작성 도서검색 ajax 처리 구문
 	$('#book-search').click(function(){ //글쓰기 모달에서 읽은 도서 검색 클릭시 처리해주는 함수 
 		//입력한 검색어를 변수에 저장한다.

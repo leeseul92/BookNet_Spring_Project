@@ -76,7 +76,7 @@ public class InterParkService implements InterParkAPI {
 		}
 		
 		//베스트셀러, 추천도서 결과를 db에 저장시켜줄 처리전담 service 호출 
-
+		bSrvc.addRecommend(list);
 		
 		return list;
 	}

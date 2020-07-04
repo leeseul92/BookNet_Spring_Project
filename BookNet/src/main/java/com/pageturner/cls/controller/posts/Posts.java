@@ -39,6 +39,7 @@ public class Posts {
 		pVO.setPno(pno);
 		List<PostsVO> list = postsSrvc.showCmtList(pVO);
 		System.out.println("###### pVO의 sid : " + pVO.getSid());
+		System.out.println("###### pVO의 mention : " + pVO.getMention());
 		return list;
 	}
 	
@@ -109,5 +110,12 @@ public class Posts {
 	@ResponseBody
 	public int delPost(int pno) {
 		return postsSrvc.delPost(pno);
+	}
+	
+	//게시글 좋아요처리
+	@RequestMapping("/likePosts.cls")
+	@ResponseBody
+	public String likePosts(PostsVO pVO) {
+		return postsSrvc.likeProc(pVO);
 	}
 }

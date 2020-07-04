@@ -28,7 +28,20 @@ public class PostsService {
 	
 	//게시글 상세보기 내 댓글 리스트
 	public List<PostsVO> showCmtList(PostsVO pVO){
-		return pDAO.showCmtList(pVO);
+		List<PostsVO> list = pDAO.showCmtList(pVO);
+		System.out.println(pVO.getComnt());
+		
+		for(int i = 0; i < list.size(); i++) {
+			//mention 값 찾기 위해 공백으로 댓글내용 분리하기 
+			StringTokenizer str = new StringTokenizer(list.get(i).getComnt(), " ");
+			while(str.hasMoreElements()) {
+				String tmp = str.nextToken();
+				if(tmp.charAt(0) == '@') {
+					pVO.setMention(tmp);
+				}
+			}
+		}
+		return list;
 	}
 	
 	//댓글 작성 처리
@@ -101,5 +114,18 @@ public class PostsService {
  	//게시글 삭제해주는 서비스함수
  	public int delPost(int pno) {
  		return pDAO.delPost(pno);
+ 	}
+ 	
+ 	//게시글 좋아요 처리해주는 서비스함수 
+ 	public String likeProc(PostsVO pVO) {
+ 		//ischeck를 반환받아 Y / N 을 판별하여 그에 맞는 처리 해주기 
+ 		if(pVO.getIscheck().equals("Y")) {
+ 			//좋아요 취소해주기
+ 			lDAO.cancelLike(pVO);
+ 		} else {
+ 			//정확히 NULL 값인지 N인지 확인해주어야함.
+ 			
+ 		}
+ 		return "";
  	}
 }

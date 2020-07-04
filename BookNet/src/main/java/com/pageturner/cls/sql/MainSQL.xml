@@ -24,7 +24,7 @@
 	<!-- 로그인한 회원에게 보여주는 메인 게시글 질의명령 -->
 	<select id="MemMain" resultType="pVO" parameterType="string">
 		SELECT
-		    pt.pno, mt.id, lt.ischeck, NVL(MOD(lt.cnt, 2), 0) rst, bname, gname, postcont, largeimg, postdate pdate, postdate ptime
+		    pt.pno, mt.id, lt.ischeck, bname, gname, postcont, largeimg, postdate pdate, postdate ptime
 		FROM
 		    poststab pt, booktab bt, genretab gt,
 		    (SELECT
@@ -32,20 +32,17 @@
 		    FROM
 		        membertab, fallowtab
 		    WHERE
-		        (fallower_no = (SELECT mno FROM membertab WHERE id = 'jinro')
+		        (fallower_no = (SELECT mno FROM membertab WHERE id = #{id})
 		        AND mno = fallow_no
 		        AND ischeck = 'Y')
-		        OR mno = (SELECT mno FROM membertab WHERE id = 'jinro')
+		        OR mno = (SELECT mno FROM membertab WHERE id = #{id})
 		    ) mt,
 		    (SELECT
-		        pno, ischeck, count(pno) cnt
+		        pno, ischeck
 		    FROM
 		        liketab
 		    WHERE
-		        mno = (SELECT mno FROM membertab WHERE id = 'jinro')
-		    GROUP BY
-		        pno, ischeck
-		    ) lt
+		        mno = (SELECT mno FROM membertab WHERE id = #{id})) lt
 		WHERE
 		    pt.mno = mt.mno
 		    AND pt.isshow = 'Y'
