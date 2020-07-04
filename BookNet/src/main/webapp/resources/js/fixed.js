@@ -226,25 +226,32 @@ $(document).ready(function(){
 			$('#ischeck').val('N');
 		}
 		var ischeck = $('#ischeck').val();
-		alert(ischeck);
 		var pno = $(this).parents().attr('id');
 		var sid = $('#sid').val();
+		var likeStatus = $(this).attr('id');
 		
 		//비동기처리 
 		$.ajax({
 			url: '/cls/posts/likePosts.cls',
 			type: 'POST',
-			dataType: 'json',
+			dataType: 'text',
 			data: {
 				'ischeck' : ischeck,
 				'pno': pno,
 				'id': sid
 			},
 			success: function(data){
-				
+				alert(data);
+				if(data == 'Y'){
+					$('#'+likeStatus).css('background-position', '-208px -370px');
+					$('#ischeck').val('Y');
+				} else {
+					$('#'+likeStatus).css('background-position', ' -233px -370px');
+					$('#ischeck').val('N');
+				}
 			},
-			error: function(){
-				alert("###통신에러###");
+			error: function(request, status, error){
+				alert("code = " + request.status + " message = " + request.responseText + " error = " + error);
 			}
 		});
 	});
@@ -303,7 +310,17 @@ $(document).ready(function(){
 		var bname = $('#bname'+pno).text(); //선택도서 제목
 		var pbody = $('#pbody'+pno).text(); //본문 
 		var htags = $('#hash'+pno).text(); //해시태그 
-		$('.p-modal-content').attr('id', pno);
+		if($('#like'+pno).css('background-position') == '-208px -370px') {
+			//만일, 하트가 빨간색이라면 ischeck에 'Y' 대입
+			$('#ischeck').val('Y');
+		} else {
+			//만일, 하트가 비어있다면 ischeck에 'N' 대입 (NULL값은 자바에서 확인)
+			$('#ischeck').val('N');
+		}
+		var likebtn = $('#ischeck').val();
+		
+//		$('.p-modal-content').attr('id', pno);
+		$('.realLkBtn').attr('id', pno);
 		$('.w-x-btn').attr('id', 'd-close_butt'+pno);
 		$('b.wrter').html(id);
 		$('#time').html(stime);
@@ -312,6 +329,14 @@ $(document).ready(function(){
 		$('b#genre-name').html(bname);
 		$('#p-body').html(pbody);
 		$('#gethash').html(htags);
+		
+		if(likebtn == 'Y'){
+			//빨간하트
+			$('#lkStatus').css('background-position', '-208px -370px');
+		} else{
+			//빈하트
+			$('#lkStatus').css('background-position', '-233px -370px');
+		}
 		
 		//댓글부분 큰 div에 해당게시글 번호를 id 값으로 준다.
 		var tid = 'cmt' + pno;

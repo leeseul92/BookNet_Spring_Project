@@ -22,7 +22,7 @@
 		update
 			liketab
 		set
-			ischeck = N
+			ischeck = 'N'
 		where
 			pno = #{pno}
 			and mno = (select mno from membertab where id = #{id})
@@ -33,7 +33,7 @@
 		update
 			liketab
 		set
-			ischeck = Y,
+			ischeck = 'Y',
 			lk_time = sysdate
 		where
 			pno = #{pno}
@@ -60,6 +60,6 @@
 		where
 			pno = #{pno}
 			and mno = (select mno from membertab where id = #{id})
-			and ischeck = Y
+			and ischeck = 'Y'
 	</select>
 </mapper>

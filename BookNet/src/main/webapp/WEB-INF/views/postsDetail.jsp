@@ -9,6 +9,8 @@
 <body>
 <!-- 게시물 상세보는 모달 -->
 <div class="modal detailPost" role="none">
+	<!-- 좋아요 처리해주기 위한 하트값 저장 -->
+	<input type="hidden" id="ischeckDetail" name="ischeckDetail" />
 	<div class="p-modal-content" id="" style="height: 540px;">
 		<span class="close w-x-btn" id="">x</span>
 		<div class="w100-pt10">
@@ -33,11 +35,10 @@
 					<a style="box-sizing: border-box; font-size: 13px;" id="p-body"></a>
 				</div>
 			<div class="w100-h35">
-				<div style="float: left; margin-left: 20px; text-align: left; font-size: 12px;" id="gethash"></div>
 				<div class="like-butt" style="margin-right: 20px;" id="">
 					<span style="font-size: 12px; line-height: 0px;" class="comt-img comtbtn"></span>
 				</div>
-				<div class="like-butt" id="" style="display: flex;'">
+				<div class="like-butt realLkBtn" id="" style="display: flex;'">
 					<span style="font-size: 12px; line-height: 0px;" class="like-img likebtn" id=""></span>
 				</div>
 				<div class="like-butt" id="" style="display: flex;'">

@@ -116,6 +116,8 @@ public class Posts {
 	@RequestMapping("/likePosts.cls")
 	@ResponseBody
 	public String likePosts(PostsVO pVO) {
-		return postsSrvc.likeProc(pVO);
+		System.out.println("Controller : " + pVO.getIscheck() + " " + pVO.getPno() + " " + pVO.getId());
+		String ischeck = postsSrvc.likeProc(pVO);
+		return ischeck;
 	}
 }

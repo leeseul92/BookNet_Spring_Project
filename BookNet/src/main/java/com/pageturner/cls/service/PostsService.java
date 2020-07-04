@@ -29,7 +29,7 @@ public class PostsService {
 	//게시글 상세보기 내 댓글 리스트
 	public List<PostsVO> showCmtList(PostsVO pVO){
 		List<PostsVO> list = pDAO.showCmtList(pVO);
-		System.out.println(pVO.getComnt());
+		System.out.println("service에서 comnt : " + pVO.getComnt());
 		
 		for(int i = 0; i < list.size(); i++) {
 			//mention 값 찾기 위해 공백으로 댓글내용 분리하기 
@@ -118,14 +118,35 @@ public class PostsService {
  	
  	//게시글 좋아요 처리해주는 서비스함수 
  	public String likeProc(PostsVO pVO) {
+ 		String ischeck = null;
  		//ischeck를 반환받아 Y / N 을 판별하여 그에 맞는 처리 해주기 
  		if(pVO.getIscheck().equals("Y")) {
  			//좋아요 취소해주기
  			lDAO.cancelLike(pVO);
+ 			ischeck = "N";
  		} else {
  			//정확히 NULL 값인지 N인지 확인해주어야함.
- 			
+ 			int cnt1 = lDAO.selLike(pVO); //로그인한 회원이 해당 게시글에 좋아요 처리 해준 적이 있는지 확인 
+ 			if(cnt1 == 0) {
+ 				//liketab 등록처리
+ 				lDAO.addLike(pVO);
+ 				ischeck = "Y";
+ 			} else {
+ 				//이미 liketab 등록처리는 되어있고, 현재 상태값만 확인해야함.
+ 				cnt1 = lDAO.selIscheck(pVO);
+ 				if(cnt1 == 1) {
+ 					//'Y' 인 경우이므로 좋아요 취소해줘야한다.
+ 					lDAO.cancelLike(pVO);
+ 					ischeck = "N";
+ 				} else {
+ 					lDAO.reLike(pVO);
+ 					ischeck = "Y";
+ 				}
+ 			}
  		}
- 		return "";
+ 		
+ 		System.out.println(ischeck); 
+ 		
+ 		return ischeck;
  	}
 }
