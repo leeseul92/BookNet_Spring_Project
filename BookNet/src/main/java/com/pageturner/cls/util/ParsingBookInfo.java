@@ -46,6 +46,7 @@ public class ParsingBookInfo {
 			bVO.setClassify(obj.get("link").getAsString());
 			bVO.setIsbn(obj.get("isbn").getAsString());
 			bVO.setCategoryId(obj.get("categoryId").getAsInt());
+			bVO.setCat_id(jObj.get("searchCategoryId").getAsInt());
 			
 			list.add(bVO);
 //			System.out.println(bVO.toString());
