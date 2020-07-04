@@ -14,10 +14,12 @@ import org.springframework.stereotype.*;
 import com.pageturner.cls.dao.*;
 import com.pageturner.cls.vo.*;
 
-@Service
+@Service("bSrvc")
 public class BookService {
 	@Autowired
 	BookDAO bookDAO;
+	@Autowired
+	InterParkService interparkSrvc;
 	
 	public void addBookData(BookVO bVO) {
 		int ckPb = 0;
@@ -34,12 +36,15 @@ public class BookService {
 		}
 	}
 	
-	public void addRecommend(ArrayList<BookVO> list) {
+	public RecommendVO addPeriod() {
 		RecommendVO rcmdVO = new RecommendVO();
 		System.out.println("!" + rcmdVO.getRecomdate_no());
 		bookDAO.addPeriod(rcmdVO);
 		System.out.println("@" + rcmdVO.getRecomdate_no());
-		
+		return rcmdVO;
+	}
+	
+	public void addRcmd_AND_Bestsell(ArrayList<BookVO> list, RecommendVO rcmdVO) {
 		for (int i = 0; i < list.size(); i++) {
 			rcmdVO.setBno(list.get(i).getBno());
 			rcmdVO.setCat_id(list.get(i).getCat_id());
@@ -48,5 +53,4 @@ public class BookService {
 			System.out.println(rcmdVO.toString());
 		}
 	}
-	
 }

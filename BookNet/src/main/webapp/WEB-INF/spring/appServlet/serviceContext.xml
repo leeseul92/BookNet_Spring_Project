@@ -12,5 +12,6 @@
 	<bean id="membSrvc" class="com.pageturner.cls.service.MemberService"/>
 	<bean id="profSrvc" class="com.pageturner.cls.service.ProfileService"/>  -->
 	<!-- <bean id="postsSrvc" class="com.pageturner.cls.service.PostsService"/> -->
+<!-- 	<bean id="bSrvc" class="com.pageturner.cls.service.BookService" /> -->
 	
 </beans>						

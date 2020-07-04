@@ -67,7 +67,7 @@
 		<selectKey keyProperty="map"
 					resultType="map" order="BEFORE">
 			SELECT
-				NVL(MAX(recomdate_no) + 1, 1) recomdate_no,
+				TO_CHAR(NVL(MAX(recomdate_no) + 1, 1)) recomdate_no,
 				TO_CHAR(NVL(MAX(recomdate_start) + 7, '2020-06-30'), 'yyyy-MM-dd') recomdate_start,
 				TO_CHAR(NVL(MAX(recomdate_end) + 7, '2020-07-06'), 'yyyy-MM-dd') recomdate_end
 			FROM
@@ -95,7 +95,7 @@
 		)
 	</insert>
 	
-	<select id="seldRcmdlist" resultType="bVO">
+	<select id="seldRcmdList" resultType="bVO">
 		SELECT
 			bname title, largeimg, gname, writer author,
 			publish publisher, cat_id, classify
@@ -108,5 +108,12 @@
 			AND bt.bno = rt.bno
 			AND gt.genre = bt.genre
 			AND pt.publish_no = bt.publish_no
+	</select>
+	
+	<select id="selGenreList" resultType="int">
+		SELECT
+			genre
+		FROM
+			genretab
 	</select>
 </mapper>

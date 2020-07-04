@@ -58,8 +58,8 @@ public class BookVO {
 	public String getClassify() {
 		return classify;
 	}
-	public void setClassify(String link) {
-		this.classify = link;
+	public void setClassify(String classify) {
+		this.classify = classify;
 	}
 	public String getIsbn() {
 		return isbn;

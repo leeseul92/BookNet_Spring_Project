@@ -1,6 +1,5 @@
 package com.pageturner.cls.dao;
 
-import java.util.HashMap;
 
 /**
  * 	이 클래스는 api로부터 받아온 도서정보를
@@ -12,6 +11,7 @@ import java.util.HashMap;
  *
  */
 
+import java.util.*;
 import org.mybatis.spring.*;
 import org.springframework.beans.factory.annotation.*;
 import com.pageturner.cls.vo.*;
@@ -42,5 +42,13 @@ public class BookDAO {
 	
 	public void addRcmdBook(RecommendVO rcmdVO) {
 		sqlSession.insert("bookSQL.addRcmdBook", rcmdVO);
+	}
+	
+	public List getRcmdList() {
+		return sqlSession.selectList("bookSQL.selRcmdList");
+	}
+	
+	public List<Integer> getGenreList() {
+		return sqlSession.selectList("bookSQL.selGenreList");
 	}
 }
