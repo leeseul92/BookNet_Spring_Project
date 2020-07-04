@@ -15,6 +15,7 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.*;
 import com.pageturner.cls.dao.*;
+import com.pageturner.cls.util.SelectAPI;
 import com.pageturner.cls.vo.*;
 
 @Service
@@ -22,17 +23,18 @@ public class SchedulerService {
 	@Autowired
 	BookDAO bDAO;
 	@Autowired
+	SelectAPI selApi;
+	@Autowired
 	BookService bSrvc;
 	@Autowired
 	InterParkService interparkSrvc;
 	
-	@PostConstruct
 	public void bestseller() {
 		RecommendVO rcmdVO = bSrvc.addPeriod();
 		List<Integer> gList = bDAO.getGenreList();
 		
 		for (int cat_id : gList) {
-			ArrayList<BookVO> bList = interparkSrvc.interparkAPI(cat_id);
+			ArrayList<BookVO> bList = interparkSrvc.interparkAPI(selApi.BESTSELL,cat_id);
 			
 			for (int i = 0; i < bList.size(); i++) {
 				BookVO bVO = bList.get(i);

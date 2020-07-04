@@ -36,20 +36,20 @@
 		INSERT INTO
 			publishtab(publish_no, publish)
 		VALUES(
-			${publish_no}, #{publish}
+			${publish_no}, #{publisher}
 		)
 	</insert>
 	
 	<insert id="addBook" parameterType="bVO">
-		<selectKey keyProperty="bno, publish_no"
-					resultType="hashmap" order="BEFORE">
+		<selectKey keyProperty="bno,publish_no"
+					resultType="bVO" order="BEFORE">
 			SELECT
 				NVL(MAX(bno) + 1, 1) bno,
 				publishtab.publish_no
 			FROM
 				booktab, publishtab
 			WHERE
-				publishtab.publish = #{publish}
+				publishtab.publish = #{publisher}
 			GROUP BY
 				publishtab.publish_no
 		</selectKey>

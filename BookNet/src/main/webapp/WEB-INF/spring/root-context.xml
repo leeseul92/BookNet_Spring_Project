@@ -60,22 +60,22 @@
 	<!-- 스케줄러 구성 -->
 	<!-- 스케줄러로 구동할 작업 -->
 	<!-- 베스트셀러 -->
-	<!-- <bean id="bestseller" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
-		<property name="targetObject" ref="schedulerService" />
-		<property name="targetMethod" value="bestseller" />
-		<property name="concurrent" value="false" />
-	</bean> -->
+<!-- 	<bean id="bestseller" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean"> -->
+<!-- 		<property name="targetObject" ref="schedulerService" /> -->
+<!-- 		<property name="targetMethod" value="bestseller" /> -->
+<!-- 		<property name="concurrent" value="false" /> -->
+<!-- 	</bean> -->
 	
 	<!-- 베스트셀러 트리거 -->
-	<!-- <bean id="test_best" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-		<property name="jobDetail" ref="bestseller" />
-		<property name="cronExpression" value="0 0 22 ? * SAT *" />
-	</bean> -->
+<!-- 	<bean id="test_best" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean"> -->
+<!-- 		<property name="jobDetail" ref="bestseller" /> -->
+<!-- 		<property name="cronExpression" value="0 30 20 ? * SAT *" /> -->
+<!-- 	</bean> -->
 	
 	<!-- 구동할 스케줄러 -->
-	<!-- <bean id="test_schedule" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-		<property name="triggers">
-			<list><ref bean="test_best" /></list>
-		</property>
-	</bean> -->
+<!-- 	<bean id="test_schedule" class="org.springframework.scheduling.quartz.SchedulerFactoryBean"> -->
+<!-- 		<property name="triggers"> -->
+<!-- 			<list><ref bean="test_best" /></list> -->
+<!-- 		</property> -->
+<!-- 	</bean> -->
 </beans>
