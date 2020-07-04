@@ -57,7 +57,7 @@
 			booktab(bno, bname, genre, smallimg, largeimg,
 					writer, trans, isbn, publish_no)
 		VALUES(
-			${bno}, #{title}, ${genre}, #{smallimg},
+			${bno}, #{title}, ${categoryId}, #{smallimg},
 			#{largeimg}, #{author}, #{translator},
 			#{isbn}, ${publish_no}
 		)
