@@ -39,8 +39,8 @@ $(function(){
 	
 	$('#submit').click(function(){
 		// 데이터 무결성 검사하고
-		
 		$('#frm').submit();
+		
 	});
 	
 	
@@ -103,7 +103,7 @@ $(function(){
 			alert('인증이 완료되었습니다.');
 		}else if(mailck != count){
 			alert('인증 번호가 맞지 않습니다. 다시 입력해주세요');
-			$('#email-ck').text('');
+			$('#email-ck').html('');
 		}
 	});
 	

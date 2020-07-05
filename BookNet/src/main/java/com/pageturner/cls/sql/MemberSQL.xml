@@ -90,17 +90,13 @@
 	
 	<!-- 회원가입 처리(우현우) -->
 	<insert id="join"  parameterType="mVO">
-		<!--  <selectKey keyProperty="mno" resultType="int" order="BEFORE">
-			
-		</selectKey>
-		-->
 		insert into
-			membertab(mno, id, pw, name, mail, tel, gen, birthdate, joindate, interest, nickname, describe)
+			MEMBERTAB(mno, id, pw, name, mail, gen, birthdate, JOINDATE, interest,  describe)
 		VALUES(
 			(SELECT 
-				NVL(MAX(mno) + 1, 1000)
+				NVL(MAX(MNO) + 1, 1000)
 			FROM
-				membertab),#{id}, #{pw}, #{name}, #{mail}, #{tel}, #{gen}, #{birthdate}, sysdate, #{interest}, #{nickname} ,#{describe}
+				MEMBERTAB),#{id}, #{pw}, #{name}, #{mail}, #{gen}, #{birthdate}, SYSDATE, #{interest} ,#{describe}
 		)	
 	</insert>
 </mapper>					
