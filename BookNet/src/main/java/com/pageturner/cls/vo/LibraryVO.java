@@ -7,7 +7,7 @@ import org.apache.ibatis.type.Alias;
  * @author 서동혁
  * @since 2020-06-30
  */
-@Alias("lVO")
+@Alias("libVO")
 public class LibraryVO {
 	private String lbrry_name, gu_code, code_value, adres, tel_no, fxnum, hmpg_url, op_time, fdrm_close_date, lbrry_se_name, charger_email, lbrry_intrcn, mber_sbscrbroqisit, longdcc, tfcmn,floor_dc ;
 	// 도서관 일렬번호, 위도, 경도, 설립연도
