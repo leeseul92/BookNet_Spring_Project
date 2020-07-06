@@ -34,4 +34,8 @@
 	
 	<!-- 좋아요 처리 관련 데이터베이스 처리 dao bean 처리 -->
 	<bean id="lDAO" class="com.pageturner.cls.dao.LikeDAO" />
+	
+	<!-- 검색 관련 데이터베이스 처리 dao bean 처리 -->
+	<bean id="sDAO" class="com.pageturner.cls.dao.SearchDAO" />
+	
 </beans>
