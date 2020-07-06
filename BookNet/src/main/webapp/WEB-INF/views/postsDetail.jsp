@@ -36,13 +36,13 @@
 				</div>
 			<div class="w100-h35">
 				<div class="like-butt" style="margin-right: 20px;" id="">
-					<span style="font-size: 12px; line-height: 0px;" class="comt-img comtbtn"></span>
+					<span style="font-size: 12px; line-height: 0px;" class="comt-img dComtbtn"></span>
 				</div>
 				<div class="like-butt realLkBtn" id="" style="display: flex;'">
-					<span style="font-size: 12px; line-height: 0px;" class="like-img likebtn" id=""></span>
+					<span style="font-size: 12px; line-height: 0px;" class="like-img dLikebtn" id=""></span>
 				</div>
 				<div class="like-butt" id="" style="display: flex;'">
-					<span style="font-size: 12px; line-height: 0px;" class="rev-img revbtn" id=""></span>
+					<span style="font-size: 12px; line-height: 0px;" class="rev-img dRevbtn" id=""></span>
 				</div>
 			</div>
 			</div>

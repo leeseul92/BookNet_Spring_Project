@@ -155,6 +155,30 @@ function delCmt(element){
 
 //jQuery 시작 
 $(document).ready(function(){
+	//like 버튼 눌리는 뷰가 모달인지 아닌지 판별해주는 함수
+	var checkModal = function(){
+		var str = null;
+		
+		if($('.detailPost').css('display') == 'none'){
+			//모달 열리지 않았음.
+			str = 'ischeck';
+		} else {
+			str = 'ischeckDetail';
+		}
+		
+		return str;
+	}
+	
+	//like 버튼 뷰와 모달 서로 동기화시켜서 서로 같은 모양띄워주도록 하는 함수
+	var checkIf = function(element1, element2){
+		if($('#'+element1).css('background-position') == '-208px -370px'){
+			//빨간하트
+			$('#'+element2).css('background-position', '-208px -370px');
+		} else{
+			//빈하트
+			$('#'+element2).css('background-position', '-233px -370px');
+		}
+	}
 	
 	// search clear
 	var $ipt = $('#searchinput'),
@@ -217,18 +241,26 @@ $(document).ready(function(){
 		$(location).attr('href', '/cls/mypage/mypage.cls');
 	});
 	
-	$('.likebtn').click(function(){ //like 버튼 클릭시 하트 변경되어야함.
-		if($(this).css('background-position') == '-208px -370px') {
-			//만일, 하트가 빨간색이라면 ischeck에 'Y' 대입
-			$('#ischeck').val('Y');
-		} else {
-			//만일, 하트가 비어있다면 ischeck에 'N' 대입 (NULL값은 자바에서 확인)
-			$('#ischeck').val('N');
-		}
-		var ischeck = $('#ischeck').val();
+	
+	$('.likebtn, .dLikebtn').click(function(){ //like 버튼 클릭시 하트 변경되어야함.
 		var pno = $(this).parents().attr('id');
 		var sid = $('#sid').val();
 		var likeStatus = $(this).attr('id');
+		alert(likeStatus);
+//		alert($('#dLikebtn').attr('id'));
+		
+		//뷰인지 모달인지 체크해줄 함수 선언 
+		var str = checkModal();
+		
+		if($(this).css('background-position') == '-208px -370px') {
+			//만일, 하트가 빨간색이라면 ischeck에 'Y' 대입
+			$('#'+str).val('Y');
+		} else {
+			//만일, 하트가 비어있다면 ischeck에 'N' 대입 (NULL값은 자바에서 확인)
+			$('#'+str).val('N');
+		}
+		
+		var ischeck = $('#'+str).val();
 		
 		//비동기처리 
 		$.ajax({
@@ -241,13 +273,13 @@ $(document).ready(function(){
 				'id': sid
 			},
 			success: function(data){
-				alert(data);
+//				alert(data);
 				if(data == 'Y'){
 					$('#'+likeStatus).css('background-position', '-208px -370px');
-					$('#ischeck').val('Y');
+					$('#'+str).val('Y');
 				} else {
 					$('#'+likeStatus).css('background-position', ' -233px -370px');
-					$('#ischeck').val('N');
+					$('#'+str).val('N');
 				}
 			},
 			error: function(request, status, error){
@@ -296,7 +328,7 @@ $(document).ready(function(){
 		$('.edit-del-modal').css('display', 'none');
 	});
 	
-	$('.comtbtn').click(function(){ //댓글버튼 클릭시 댓글 달 수 있는 창 보여주기 
+	$('.dComtbtn').click(function(){ //댓글버튼 클릭시 댓글 달 수 있는 창 보여주기 
 		$('.wrtcomt').css('display', '');
 		$('.wrt-hid').css('height','460px');
 	});
@@ -310,17 +342,9 @@ $(document).ready(function(){
 		var bname = $('#bname'+pno).text(); //선택도서 제목
 		var pbody = $('#pbody'+pno).text(); //본문 
 		var htags = $('#hash'+pno).text(); //해시태그 
-		if($('#like'+pno).css('background-position') == '-208px -370px') {
-			//만일, 하트가 빨간색이라면 ischeck에 'Y' 대입
-			$('#ischeck').val('Y');
-		} else {
-			//만일, 하트가 비어있다면 ischeck에 'N' 대입 (NULL값은 자바에서 확인)
-			$('#ischeck').val('N');
-		}
-		var likebtn = $('#ischeck').val();
 		
-//		$('.p-modal-content').attr('id', pno);
 		$('.realLkBtn').attr('id', pno);
+		$('.dLikebtn').attr('id', 'dLike'+pno);
 		$('.w-x-btn').attr('id', 'd-close_butt'+pno);
 		$('b.wrter').html(id);
 		$('#time').html(stime);
@@ -330,19 +354,15 @@ $(document).ready(function(){
 		$('#p-body').html(pbody);
 		$('#gethash').html(htags);
 		
-		if(likebtn == 'Y'){
-			//빨간하트
-			$('#lkStatus').css('background-position', '-208px -370px');
-		} else{
-			//빈하트
-			$('#lkStatus').css('background-position', '-233px -370px');
-		}
+		//if로 뷰와 모달의 좋아요 버튼을 연동시켜줄 함수 호출
+		checkIf('like'+pno, 'dLike'+pno);
 		
 		//댓글부분 큰 div에 해당게시글 번호를 id 값으로 준다.
 		var tid = 'cmt' + pno;
 		$('.post-comment').attr('id', tid);
 
 		$('#d-close_butt'+pno).click(function(){ //게시물 상세보기 닫기 
+			checkIf('dLike'+pno, 'like'+pno);
 			$('.detailPost').css('display', 'none');
 			$('#'+tid).html('');
 			var str = $('.combody').val();
@@ -358,7 +378,8 @@ $(document).ready(function(){
 	});
 	
 	$('.comsubbtn').click(function(){ //댓글 등록하기 
-		var pno = $('.p-modal-content').attr('id');
+		var pno = $('.realLkBtn').attr('id');
+		alert(pno);
 		var cbody = $('.combody').val();
 		var tid = 'cmt' + pno;
 		

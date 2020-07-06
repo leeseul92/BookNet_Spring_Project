@@ -45,6 +45,7 @@
 				<!-- 좌측 게시글 부분 -->
 				<div class="posts_area">
 					<c:forEach var="data" items="${LIST}">
+					<form method="POST" id="toDetailFrm" >
 						<article class="eachPost"><!-- id="${data.pno}" -->
 							<!-- 작성자 정보 & 버튼 :: 아이디 불러와야함  -->
 							<div class="wrtInfo">
@@ -61,11 +62,15 @@
 								<div class="like-butt" id="${data.pno}" style="display: flex;'">
 									<c:if test="${data.ischeck ne 'Y'}"> 
 									<!-- 좋아요 값이 N이거나 null 값이면, 빈하트모양 -->
-										<span style="font-size: 12px; line-height: 0px;" class="like-img likebtn" id="like${data.pno}"></span>
+										<span style="font-size: 12px; line-height: 0px;" class="like-img likebtn" id="like${data.pno}">
+											<input type="hidden" value="N" />
+										</span>
 									</c:if>
 									<c:if test="${data.ischeck eq 'Y'}">
 									<!-- 좋아요 값이 Y이면, 빨간하트모양 -->
-										<span style="font-size: 12px; line-height: 0px; background-position: -208px -370px;" class="like-img likebtn" id="like${data.pno}"></span>
+										<span style="font-size: 12px; line-height: 0px; background-position: -208px -370px;" class="like-img likebtn" id="like${data.pno}">
+											<input type="hidden" value="Y"/>
+										</span>
 									</c:if>
 								</div>
 							</div>
@@ -94,6 +99,7 @@
 								<span class="modifdiv modi_post" id="${data.pno}"></span>
 							</div>
 						</article>
+					</form>	
 					</c:forEach>
 					<!-- 게시물 수정 삭제 선택 띄워주는 모달 -->
 					<div class="modal edit-del-modal" role="none">
