@@ -24,25 +24,15 @@
 		// 엔터검색
 		$('#searchinput').keyup(function(e) {
 			if (e.keyCode == 13) {
+				$('#hashKey').val('${KEYWORD}');
 				$('#frm').attr('action', '/cls/search/searchHash.cls');
 				$('#frm').submit();
 			}
 		})
-	// 검색된 해시태그 클릭
-	$('#searchHashBtn').click(function(){
-	//	$(this).attr('href','/cls/search/searchHash.cls');
-		$('#hashKey').val('${KEYWORD}');
-		$('#test').val('${KEYWORD}');
-		$('#frm2').attr('action','/cls/search/searchHash.cls');
-		$('#frm2').submit();
-	})
 	})
 </script>
 </head>
 <body onload="printClock()" />
-<form method="GET" action="" id="frm2">
-	<input type="hidden" name="hashKey" id="hashKey">
-</form>
 <form method="POST" action="" id="frm">
    <div>
       <!-- 본문부분 -->
@@ -128,7 +118,7 @@
             </div>
             <div class="searchbox">
                <input id="searchinput" class="searchinput" type="text"
-                  placeholder="search" name="searchinput"> <span
+                  placeholder="search" name="hashKey"> <span
                   id="searchclear">X</span>
             </div>
             <div class="iconsbox">

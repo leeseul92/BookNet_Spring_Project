@@ -20,29 +20,19 @@
 <script type="text/javascript" src="/cls/js/fixed.js"></script>
 <script type="text/javascript" src="/cls/js/search.js"></script>
 <script>
-	$(function(){
-		// 엔터검색
-		$('#searchinput').keyup(function(e) {
-			if (e.keyCode == 13) {
-				$('#frm').attr('action', '/cls/search/searchMember.cls');
-				$('#frm').submit();
-			}
-		})
-	// 검색된 아이디 클릭
-	$('#searchIdBtn').click(function(){
-	//	$(this).attr('href','/cls/search/searchMember.cls');
-		$('#membKey').val('${KEYWORD}');
-		$('#test').val('${KEYWORD}');
-		$('#frm2').attr('action','/cls/search/searchMember.cls');
-		$('#frm2').submit();
+$(function(){
+	// 엔터검색
+	$('#searchinput').keyup(function(e) {
+		if (e.keyCode == 13) {
+			$('#membKey').val('${KEYWORD}');
+			$('#frm').attr('action','/cls/search/searchMember.cls');
+			$('#frm').submit();
+		}
 	})
-	})
+})
 </script>
 </head>
 <body onload="printClock()" />
-<form method="GET" action="" id="frm2">
-	<input type="hidden" name="membKey" id="membKey">
-</form>
 <form method="POST" action="" id="frm">
    <div>
       <!-- 본문부분 -->
@@ -63,7 +53,7 @@
                <div style="width: 100%; height: 204px;">
                   <span
                      style="color: #666; font-size: 14px; float: left; padding-top: 40px; padding-bottom: 10px;"
-                     class="box"> <a href="/cls/search/searchMember.cls" id="searchIdBtn">검색된 아이디</a> </span>
+                     class="box">검색된 아이디</span>
                   <div class="width_scroll">
                         <div style="font-size: 14px;" class="boxwrap">
                      <c:forEach var="data" items="${LIST}">
@@ -101,7 +91,7 @@
             </div>
             <div class="searchbox">
                <input id="searchinput" class="searchinput" type="text"
-                  placeholder="search" name="searchinput"> <span
+                  placeholder="search" name="membKey"> <span
                   id="searchclear">X</span>
             </div>
             <div class="iconsbox">

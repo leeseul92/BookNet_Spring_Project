@@ -15,7 +15,7 @@ $(document).ready(function() {
 	// 엔터검색
 	$('#searchinput').keyup(function(e) {
 		if (e.keyCode == 13) {
-			$('#frm').attr('action', '/BookNet/search/searchAll.cls');
+			$('#frm').attr('action', '/cls/search/searchAll.cls');
 			$('#frm').submit();
 		}
 	})

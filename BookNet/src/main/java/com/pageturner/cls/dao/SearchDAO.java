@@ -26,5 +26,4 @@ public class SearchDAO {
 		return sqlSession.selectList("sSQL.searchAll", keyword);	
 	}
 	
-	
 }

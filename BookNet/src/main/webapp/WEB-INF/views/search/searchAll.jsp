@@ -31,7 +31,6 @@ $(document).ready(function() {
 	$('#searchIdBtn').click(function(){
 	//	$(this).attr('href','/cls/search/searchMember.cls');
 		$('#membKey').val('${KEYWORD}');
-		$('#test').val('${KEYWORD}');
 		$('#frm2').attr('action','/cls/search/searchMember.cls');
 		$('#frm2').submit();
 	})
@@ -39,7 +38,6 @@ $(document).ready(function() {
 	$('#searchBookBtn').click(function(){
 	//	$(this).attr('href','/cls/search/searchBook.cls');
 		$('#bookKey').val('${KEYWORD}');
-		$('#test').val('${KEYWORD}');
 		$('#frm2').attr('action','/cls/search/searchBook.cls');
 		$('#frm2').submit();
 	})
@@ -47,7 +45,6 @@ $(document).ready(function() {
 	$('#searchHashBtn').click(function(){
 	//	$(this).attr('href','/cls/search/searchHash.cls');
 		$('#hashKey').val('${KEYWORD}');
-		$('#test').val('${KEYWORD}');
 		$('#frm2').attr('action','/cls/search/searchHash.cls');
 		$('#frm2').submit();
 	})

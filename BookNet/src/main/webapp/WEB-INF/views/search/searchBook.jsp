@@ -24,25 +24,15 @@
 		// 엔터검색
 		$('#searchinput').keyup(function(e) {
 			if (e.keyCode == 13) {
-				$('#frm').attr('action', '/cls/search/searchBook.cls');
+				$('#bookKey').val('${KEYWORD}');
+				$('#frm').attr('action','/cls/search/searchBook.cls');
 				$('#frm').submit();
 			}
 		})
-	// 검색된 책이름 클릭
-	$('#searchBookBtn').click(function(){
-	//	$(this).attr('href','/cls/search/searchBook.cls');
-		$('#bookKey').val('${KEYWORD}');
-		$('#test').val('${KEYWORD}');
-		$('#frm2').attr('action','/cls/search/searchBook.cls');
-		$('#frm2').submit();
-	})
 	})
 </script>
 </head>
 <body onload="printClock()" />
-<form method="GET" action="" id="frm2">
-	<input type="hidden" name="bookKey"id="bookKey">
-</form>
 <form method="POST" action="" id="frm">
    <div>
       <!-- 본문부분 -->
@@ -114,7 +104,7 @@
             </div>
             <div class="searchbox">
                <input id="searchinput" class="searchinput" type="text"
-                  placeholder="search" name="searchinput"> <span
+                  placeholder="search" name="bookKey"> <span
                   id="searchclear">X</span>
             </div>
             <div class="iconsbox">

@@ -52,6 +52,7 @@ public class Search {
 		String view = "search/searchBook";
 			// 파라미터에서 검색값 가져오기
 			String keyword = req.getParameter("bookKey");
+			System.out.println("book.keyword:"+keyword);
 			String key = "%" + keyword + "%";
 			List<SearchVO> list = sSrvc.searchKey(key);
 			// 검색결과 콘솔
