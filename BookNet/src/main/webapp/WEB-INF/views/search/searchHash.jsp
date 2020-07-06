@@ -48,44 +48,58 @@
                         <div style="height: 100px; text-align: left;">${KEYWORD}</div>
                      </div>
                </div>
-                  <!-- 검색해시태그 -->
-                  <div style="width: 100%; height: 204px;">
+                <!-- 검색 해시태그 포함 게시물 -->
+                     <div style="width: 100%; height: 204px;">
                         <span
-                           style="color: #666; font-size: 14px; float: left; padding-top: 40px; padding-bottom: 10px;"
-                           class="box"> 검색된 해시태그이름 </span>
-                        <div style="font-size: 14px;" class="boxwrap">
-                     <c:forEach var="data" items="${LIST}" begin="0" end="4">
-                           <span style="border: solid 4px transparent;" class="box">
-                              <img src="${data.limg}"
+                           style="color: #666; font-size: 14px; float: left; padding-top: 40px; display: block; text-align: left; width: 100%; padding-bottom: 10px;"
+                           class="box"id="searchHashBtn">검색된 해시태그가 포함된 게시물 </span>
+                        <!-- 여기부터 게시글  -->
+                        <c:forEach var="post" items="${LIST}">
+                        <article class="eachPost"
+                           style="margin: 30px; display: inline-block;"
+                           id="이곳은게시물번호가들어갈자리">
+                           <!-- 작성자 정보 & 버튼 :: 아이디 불러와야함  -->
+                           <div class="wrtInfo">
+                                 <div class="wrtProf">
+                                    <img src="${post.profile }" />
+                                 </div>
+                                 <div class="wrter" id="">
+                                    <b>${post.id}</b>
+                                 </div>
+                              <div class="like-butt" id="" style="display: flex;">
+                                 <span style="font-size: 12px; line-height: 0px;"
+                                    class="like-img" id="likebtn"> </span>
+                              </div>
+                           </div>
+                           <!-- 게시글의 본문부분::도서사진,도서이름,본문 -->
+                           <div class="postCont"
+                              style="text-align: center; font-size: 16px;">
+                              <!-- 도서사진, 도서이름, 게시글본문 -->
+                              <div class="book-pic">
+                                 <!-- 도서 사진 들어갈 부분 -->
+                                 <img src="${post.limg}"
                               style="text-decoration: unset; color: #F7B3D2; width: 200px; height: 239px;">
-                           </span>
-                     </c:forEach>
-                        </div>
-                        <div style="font-size: 14px; margin-bottom: 10px;"
-                           class="boxwrap">
-                        <c:forEach var="data" items="${LIST}" begin="0" end="4">
-                           <span style="border: solid 4px transparent;" class="box">
-                              <a href="#" style="text-decoration: unset; color: #F7B3D2; width: 200px; height: 239px;">${data.bname}</a>
-                           </span>
+                              </div>
+                              <div class="book-name">
+                                 <!-- 도서명 들어갈 부분 -->
+                                 ${post.bname}
+                              </div>
+                              <div class="post-body">
+                                 <!-- 게시글 부분 -->
+                                 ${post.postcont}
+                              </div>
+                           </div>
+                           <div class="wrtInfo">
+                           		<div class="etcdiv" style="text-align: left; font-size: 13px;" id="">${post.hash}</div>
+                           		<span class="modifdiv modi_post"></span>
+                           </div>
+                        </article>
                         </c:forEach>
+                        <div style="display: inline-block; width:100%; height:200px; text-align:center; ">
+                           <b>-End-</b>
                         </div>
-                        <div style="font-size: 14px;" class="boxwrap">
-                     <c:forEach var="data" items="${LIST}" begin="5" end="9">
-                           <span style="border: solid 4px transparent;" class="box">
-                              <img src="${data.limg}"
-                              style="text-decoration: unset; color: #F7B3D2; width: 200px; height: 239px;">
-                           </span>
-                     </c:forEach>
-                        </div>
-                        <div style="font-size: 14px; margin-bottom: 10px;"
-                           class="boxwrap">
-                        <c:forEach var="data" items="${LIST}" begin="5" end="9">
-                           <span style="border: solid 4px transparent;" class="box">
-                              <a href="#" style="text-decoration: unset; color: #F7B3D2; width: 200px; height: 239px;">${data.bname}</a>
-                           </span>
-                        </c:forEach>
-                        </div>
-                  </div>
+                        <!-- /게시글  -->
+                     </div>
                </div>
                <!-- /모든 검색 결과 창 -->
             </div>
