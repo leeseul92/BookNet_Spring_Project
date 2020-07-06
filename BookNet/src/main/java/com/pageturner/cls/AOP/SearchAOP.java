@@ -27,7 +27,8 @@ public class SearchAOP {
 	MemberService membSrvc;
 	@Autowired
 	MemberDAO mDAO;
-
+	
+	// 로그인 세션 체크
 	@Before("execution(* com.pageturner.cls.controller.main.Main.showNonMain(..))")
 	public void loginCk(JoinPoint join) {
 		System.out.println("******   loginCk AOP **");
