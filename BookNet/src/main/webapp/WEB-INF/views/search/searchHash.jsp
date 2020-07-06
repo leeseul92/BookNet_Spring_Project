@@ -28,10 +28,21 @@
 				$('#frm').submit();
 			}
 		})
+	// 검색된 해시태그 클릭
+	$('#searchHashBtn').click(function(){
+	//	$(this).attr('href','/cls/search/searchHash.cls');
+		$('#hashKey').val('${KEYWORD}');
+		$('#test').val('${KEYWORD}');
+		$('#frm2').attr('action','/cls/search/searchHash.cls');
+		$('#frm2').submit();
+	})
 	})
 </script>
 </head>
 <body onload="printClock()" />
+<form method="GET" action="" id="frm2">
+	<input type="hidden" name="hashKey" id="hashKey">
+</form>
 <form method="POST" action="" id="frm">
    <div>
       <!-- 본문부분 -->

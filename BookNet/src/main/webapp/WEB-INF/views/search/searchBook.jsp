@@ -28,10 +28,21 @@
 				$('#frm').submit();
 			}
 		})
+	// 검색된 책이름 클릭
+	$('#searchBookBtn').click(function(){
+	//	$(this).attr('href','/cls/search/searchBook.cls');
+		$('#bookKey').val('${KEYWORD}');
+		$('#test').val('${KEYWORD}');
+		$('#frm2').attr('action','/cls/search/searchBook.cls');
+		$('#frm2').submit();
+	})
 	})
 </script>
 </head>
 <body onload="printClock()" />
+<form method="GET" action="" id="frm2">
+	<input type="hidden" name="bookKey"id="bookKey">
+</form>
 <form method="POST" action="" id="frm">
    <div>
       <!-- 본문부분 -->
