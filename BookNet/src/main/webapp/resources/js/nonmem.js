@@ -7,16 +7,16 @@
 $(function(){ 
 
    $('#lbtn').click(function(){
-      $(location).attr('href','/BookNet/member/login.cls');
+      $(location).attr('href','/cls/member/login.cls');
    })
    $('#lbtn2').click(function(){
-      $(location).attr('href','/BookNet/member/login.cls');
+      $(location).attr('href','/cls/member/login.cls');
    })
    $('#jbtn').click(function(){ 
-      $(location).attr('href','/BookNet/member/join.cls');
+      $(location).attr('href','/cls/member/join.cls');
    })
    $('#jbtn2').click(function(){
-      $(location).attr('href','/BookNet/member/join.cls');
+      $(location).attr('href','/cls/member/join.cls');
    })
    $('.dCJp8').click(function(){
       $('.closeing').remove();

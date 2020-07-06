@@ -31,6 +31,6 @@ $(function(){
 		})
 	})
 	$('#influencer').click(function(){
-		$('#influencer').attr('href','/BookNet/search/searchAll.cls');
+		$('#influencer').attr('href','/cls/search/searchAll.cls');
 	})
 })

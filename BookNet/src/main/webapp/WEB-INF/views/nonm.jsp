@@ -12,14 +12,14 @@
 <head>
 <meta charset="UTF-8">
 <title>비회원 메인페이지</title>
-<link rel="stylesheet" href="/cls/css/nonmem.css">
-<link rel="stylesheet" href="/cls/css/proj_fixed.css">
-<link rel="stylesheet" href="/cls/css/modal.css">
-<link rel="stylesheet" href="/cls/css/w3.css">
-<link rel="stylesheet" href="/cls/css/non_search.css">
+<link rel="stylesheet" href="/cls/css/nonmem.css?v=1"">
+<link rel="stylesheet" href="/cls/css/proj_fixed.css?v=1"">
+<link rel="stylesheet" href="/cls/css/modal.css?v=1"">
+<link rel="stylesheet" href="/cls/css/w3.css?v=1"">
+<link rel="stylesheet" href="/cls/css/non_search.css?v=1"">
 <script type="text/javascript" src="/cls/js/jquery-3.5.0.min.js"></script>
-<script type="text/javascript" src="/cls/js/nonmem.js"></script>
-<script src = "https://unpkg.com/sweetalert/dist/sweetalert.min.js" ></script>
+<script type="text/javascript" src="/cls/js/nonmem.js?v=1"></script>
+<script src = "https://unpkg.com/sweetalert/dist/sweetalert.min.js?v=1"" ></script>
 </head>
 <form method="POST" id="frm2">
 	<input type="hidden" id="pno" name="pno"> <!-- 게시글 삭제시 넘겨줄 게시글 번호 -->
@@ -31,7 +31,7 @@
 				<div class="logobox">
 					<div style="box-sizing: border-box; font-size: 30px; text-align: center;">
 						<!-- 로고 이미지 혹은 링크 들어갈 자리 class="div_logo" -->
-						<a href="/BookNet/main/non.cls" style="color: #120E0A;"><b>PageTurner</b></a>
+						<a href="/cls/main/non.cls" style="color: #120E0A;"><b>PageTurner</b></a>
 					</div>
 				</div>
 				<div class="searchbox">
