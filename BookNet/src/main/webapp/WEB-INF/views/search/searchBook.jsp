@@ -11,20 +11,20 @@
 <head>
 <meta charset="UTF-8">
 <title>책 검색 결과 페이지</title>
-<link rel="stylesheet" href="/BookNet/css/proj_fixed.css">
-<link rel="stylesheet" href="/BookNet/css/modal.css">
-<link rel="stylesheet" href="/BookNet/css/w3.css">
-<link rel="stylesheet" href="/BookNet/css/non_search.css">
+<link rel="stylesheet" href="/cls/css/proj_fixed.css">
+<link rel="stylesheet" href="/cls/css/modal.css">
+<link rel="stylesheet" href="/cls/css/w3.css">
+<link rel="stylesheet" href="/cls/css/non_search.css">
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> -->
-<script type="text/javascript" src="/BookNet/js/jquery-3.5.0.min.js"></script>
-<script type="text/javascript" src="/BookNet/js/fixed.js"></script>
-<script type="text/javascript" src="/BookNet/js/search.js"></script>
+<script type="text/javascript" src="/cls/js/jquery-3.5.0.min.js"></script>
+<script type="text/javascript" src="/cls/js/fixed.js"></script>
+<script type="text/javascript" src="/cls/js/search.js"></script>
 <script>
 	$(function(){
 		// 엔터검색
 		$('#searchinput').keyup(function(e) {
 			if (e.keyCode == 13) {
-				$('#frm').attr('action', '/BookNet/search/searchBook.cls');
+				$('#frm').attr('action', '/cls/search/searchBook.cls');
 				$('#frm').submit();
 			}
 		})
@@ -45,7 +45,7 @@
                   <!-- 검색어 -->
                      <div
                         style="height: 204px; float: right; width: 610px; position: relative; top: 30px;">
-                        <div style="height: 100px; text-align: left;">${searchinput.KEYWORD}</div>
+                        <div style="height: 100px; text-align: left;">${KEYWORD}</div>
                      </div>
                </div>
                   <!-- 검색책 -->
@@ -98,7 +98,7 @@
                <div
                   style="box-sizing: border-box; font-size: 30px; text-align: center;">
                   <!-- 로고 이미지 혹은 링크 들어갈 자리 class="div_logo" -->
-                  <a href="/BookNet/main/main.cls"><b>PageTurner</b></a>
+                  <a href="/cls/main/main.cls"><b>PageTurner</b></a>
                </div>
             </div>
             <div class="searchbox">
@@ -108,13 +108,13 @@
             </div>
             <div class="iconsbox">
             	<div style="float: left; width:80px;"> 
-						<a href="/BookNet/member/logoutProc.cls">로그아웃</a>
-						<!-- <img class="iconimg" id="" src="/BookNet/img/iconmonstr-compass-4-240.png"> -->
+						<a href="/cls/member/logoutProc.cls">로그아웃</a>
+						<!-- <img class="iconimg" id="" src="/cls/img/iconmonstr-compass-4-240.png"> -->
 				</div> 
                <!-- 알람표시아이콘 -->
                <div class="span_icons">
                   <button type="button" class="butt" id="aBtn">
-                     <img class="iconimg" id="" src="/BookNet/img/iconmonstr-bell-7-240.png">
+                     <img class="iconimg" id="" src="/cls/img/iconmonstr-bell-7-240.png">
                   </button>
                   <!-- The Modal -->
                   <div id="actModal" class="modal" role="none">
@@ -134,7 +134,7 @@
                </div>
                <div class="span_icons" id=""> 
                   <button type="button" class="butt" id="wBtn">
-                     <img class="iconimg" id="" src="/BookNet/img/iconmonstr-pen-15-240.png">
+                     <img class="iconimg" id="" src="/cls/img/iconmonstr-pen-15-240.png">
                   </button>
                   <!-- The Modal -->
                   <div id="writeModal" class="w3-modal">
@@ -186,7 +186,7 @@
                   </div>
                </div> 
                <div class="span_icons"> 
-                  <img class="iconimg" id="" src="/BookNet/img/iconmonstr-user-19-240.png">
+                  <img class="iconimg" id="" src="/cls/img/iconmonstr-user-19-240.png">
                </div>
             </div>
          </div>
