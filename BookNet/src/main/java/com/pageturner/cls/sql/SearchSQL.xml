@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+			PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 
+	검색 결과 나타낼 SQL 클래스
+	@author 서동혁
+	@since 2020-06-25
+ -->					
+<mapper namespace="sSQL">
+	<!-- 검색할 때 모든 검색결과를 호출 -->
+	<select id="searchAll" resultType="sVO"  parameterType="string">
+			SELECT 
+			     bname ,  MAX(hash) hash, writer , trans , gname , name , id , publish , postcont, prof.save_loc profile, largeimg limg 
+			FROM
+			    booktab b, genretab g 
+			    , membertab m, publishtab pub, poststab p,
+                (SELECT 
+			        h.pno pno,
+			        '#'||LISTAGG(hname, '#') WITHIN GROUP (ORDER BY hname DESC) hash 
+			    FROM
+			        poststab p,  hashtab h 
+			    WHERE 
+			       p.pno = h.pno 
+			    GROUP BY 
+			        h.pno)h,  profilepictab prof 
+			WHERE 
+			    b.genre = g.genre
+			    AND b.bno = p.bno
+			    AND pub.publish_no = b.publish_no
+			    AND m.mno = p.mno 
+			    AND p.pno = h.pno 
+			    AND prof.mno = m.mno 
+			    AND ( UPPER(bname) LIKE UPPER(#{keyword})
+			    OR UPPER(WRITER) LIKE UPPER(#{keyword})
+			    OR UPPER(TRANS) LIKE UPPER(#{keyword})
+			    OR UPPER(gname) LIKE UPPER(#{keyword})
+			    OR UPPER(hash) LIKE UPPER(#{keyword})
+			    OR UPPER(name) LIKE UPPER(#{keyword})
+			    OR UPPER(id) LIKE UPPER(#{keyword})
+			    OR UPPER(nickname) LIKE UPPER(#{keyword})
+			    OR UPPER(publish) LIKE UPPER(#{keyword}))
+			Group By bname , writer , trans , gname , name , id , nickname , publish , postcont, prof.save_loc, largeimg
+	</select>
+</mapper>
