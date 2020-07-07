@@ -111,3 +111,17 @@
 	처리함수	: Member.idCheck()
 	뷰		: 비동기통신
 --------------------------------------------------------------
+# 인플루언서 폼 보기 요청 --> 우현우 
+	요청내용	: /cls/member/influencer.cls
+	파라미터	: 무
+	컨트롤러	: com.pageturner.cls.controller.member.member
+	처리함수	: Member.influencer()
+	뷰		: /WEB-INF/views/member/influencer.jsp
+--------------------------------------------------------------
+# 인플루언서 처리 요청 --> 우현우 
+	요청내용	: /cls/member/influProc.cls
+	파라미터	: 무
+	컨트롤러	: com.pageturner.cls.controller.member.member
+	처리함수	: Member.influencer()
+	뷰		: /WEB-INF/views/member/influencer.jsp
+--------------------------------------------------------------

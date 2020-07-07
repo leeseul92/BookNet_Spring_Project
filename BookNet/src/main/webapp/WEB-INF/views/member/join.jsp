@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%-- <%@taglib prefix="c" uri="http://java.sun.com/jstl/core"%> --%>
 
 <!DOCTYPE html>
 <html>
@@ -53,8 +54,7 @@
 			<!-- 좌측상단 로고 -->
 			<div class="row sft-header-register d-flex">
 				<div class="col-3 pl-0">
-					<!--<a class="d-none d-lg-block" href="https://shiftee.io/ko"><img src="./img/logo-with-text-white.png" height="32"></a>-->
-					<h3 class="turnerlogo">PageTurner</h3>
+					<h3 class="turnerlogo"><a href="/cls/main/non.cls">PageTurner</a></h3>
 				</div>
 				<div class="col-9 pr-0">
 					<div class="pt-1 text-right">
@@ -172,7 +172,7 @@
 									<div class="controls" >
 
 										<label for="confirm-name">이름</label> <input
-											type="text" class="form-control" id="confirm-password" name="name"
+											type="text" class="form-control" id="name" name="name"
 											>
 										
 									</div>
@@ -202,18 +202,16 @@
 								<div class="controls">
 
 									<label for="email-address">이메일</label> <input type="email"
-										class="form-control" id="email-address" name="mail" value=""
+										class="form-control" id="email" name="mail" 
 										size="5">
 									<button class="btn btn-primary btn-block" id="mailck"
 										type="button">인증번호 발송</button>
 								</div>
 								<div class="controls" id="efrm">
 
-									<label for="email-ck">인증 번호</label> <input type="email"
-										class="form-control" id="email-ck" 
-										size="5">
-									<button type="button" class="btn btn-primary btn-block"
-										id="emailck">인증하기</button>
+									<label for="email-ck">인증 번호</label> 
+									<input type="text"class="form-control" id="email-ck" size="5">
+									<button type="button" class="btn btn-primary btn-block" id="emailck">인증하기</button>
 								</div>
 								<div class="controls">
 
@@ -234,98 +232,144 @@
 								
 
 
-								<div class="row sft-terms-and-privacy-agreement-container">
-									<label>관심 장르(국내도서)</label>
-								</div>
-								
-								<div class="row sft-terms-and-privacy-agreement-container">
-									<input type="checkbox" id="social" name="interest">
-									<p class="gangre">소설</p>
-									<input type="checkbox" id="Pessay" name="interest">
-									<p class="gangre">시/에세이</p>
-									<input type="checkbox" id="apculture" name="interest">
-									<p class="gangre">예술/대중문화</p>
-									<input type="checkbox" id="sscience" name="interest">
-									<p class="gangre">사회과학</p>
-									<input type="checkbox" id="hculture" name="interest">
-									<p class="gangre">역사와문화</p>
-									<input type="checkbox" id="magazine" name="interest">
-									<p class="gangre">잡지</p>
-									<input type="checkbox" id="comic" name="interest">
-									<p class="gangre">만화</p>
-									<input type="checkbox" id="inchild" name="interest">
-									<p class="gangre">유아</p>
-									<input type="checkbox" id="child" name="interest">
-									<p class="gangre">아동</p>
-									<input type="checkbox" id="famliylife" name="interest">
-									<p class="gangre">가정과생활</p>
-									<input type="checkbox" id="youth" name="interest">
-									<p class="gangre">청소년</p>
-									<input type="checkbox" id="elementary" name="interest">
-									<p class="gangre">초등학습서</p>
-									<input type="checkbox" id="High" name="interest">
-									<p class="gangre">고등학습서</p>
-									<input type="checkbox" id="nforgin" name="interest">
-									<p class="gangre">국/외국어/사전</p>
-									<input type="checkbox" id="nscience" name="interest">
-									<p class="gangre">자연과 과학</p>
-									<input type="checkbox" id="emanagement" name="interest">
-									<p class="gangre">경제경영</p>
-									<input type="checkbox" id="Sdevelopment" name="interest">
-									<p class="gangre">자기개발</p>
-									<input type="checkbox" id="humanities" name="interest">
-									<p class="gangre">인문</p>
-									<input type="checkbox" id="rmechanics" name="interest">
-									<p class="gangre">종교/역학</p>
-									<input type="checkbox" id="cinternet" name="interest">
-									<p class="gangre">컴퓨터/인터넷</p>
-									<input type="checkbox" id="licence" name="interest">
-									<p class="gangre">자격서/수험서</p>
-									<input type="checkbox" id="hobby" name="interest">
-									<p class="gangre">취미/레져</p>
-									<input type="checkbox" id="majar" name="interest">
-									<p class="gangre">전공/대학도서</p>
-									<input type="checkbox" id="haelth" name="interest">
-									<p class="gangre">건강/뷰티</p>
-									<input type="checkbox" id="trapic" name="interest">
-									<p class="gangre">여행</p>
-									<input type="checkbox" id="middle" name="interest">
-									<p class="gangre">중등학습서</p>
+															
+							<div class="controls">
+								<div class="controls">
 
+									<label for="firstG">관심장르</label> 
+										<select class="form-control" id="firstG" name="interest">
+										<option>선택하세요</option>
+										<option>소설</option>
+										<option>시/에세이</option>
+										<option>사회과학</option>
+										<option>역사와문화</option>
+										<option>잡지</option>
+										<option>만화</option>
+										<option>유아</option>
+										<option>아동</option>
+										<option>가정과생활</option>
+										<option>청소년</option>
+										<option>초등학습서</option>
+										<option>고등학습서</option>
+										<option>국어/외국어/사전</option>
+										<option>자연과 과학</option>
+										<option>경제경영</option>
+										<option>자기개발</option>
+										<option>인문</option>
+										<option>종교/역학</option>
+										<option>컴퓨터/인터넷</option>
+										<option>자격서/수험서</option>
+										<option>취미/레져</option>
+										<option>전공/대학도서</option>
+										<option>건강/뷰티</option>
+										<option>여행</option>
+										<option>중등학습서</option>
+										<option>어린이(해외)</option>
+										<option>ELT/사전(해외)</option>
+										<option>문학(해외)</option>
+										<option>경영/인문(해외)</option>
+										<option>예술/디자인(해외)</option>
+										<option>실용(해외)</option>
+										<option>해외잡지(해외)</option>
+										<option>대학/전문서적(해외)</option>
+										<option>컴퓨터(해외)</option>
+										<option>일본도서(해외)</option>
+										<option>프랑스도서(해외)</option>
+										<option>중국도서(해외)</option>
+										<option>해외주문원서()</option>
+									</select>
+									
 								</div>
-								<div class="row sft-terms-and-privacy-agreement-container">
-									<label>관심 장르(해외도서)</label>
+								<div class="controls">
+									<label></label>
+									<select class="form-control" id="secondG" name="interest">
+										<option>선택하세요</option>
+										<option>소설</option>
+										<option>시/에세이</option>
+										<option>사회과학</option>
+										<option>역사와문화</option>
+										<option>잡지</option>
+										<option>만화</option>
+										<option>유아</option>
+										<option>아동</option>
+										<option>가정과생활</option>
+										<option>청소년</option>
+										<option>초등학습서</option>
+										<option>고등학습서</option>
+										<option>국어/외국어/사전</option>
+										<option>자연과 과학</option>
+										<option>경제경영</option>
+										<option>자기개발</option>
+										<option>인문</option>
+										<option>종교/역학</option>
+										<option>컴퓨터/인터넷</option>
+										<option>자격서/수험서</option>
+										<option>취미/레져</option>
+										<option>전공/대학도서</option>
+										<option>건강/뷰티</option>
+										<option>여행</option>
+										<option>중등학습서</option>
+										<option>어린이(해외)</option>
+										<option>ELT/사전(해외)</option>
+										<option>문학(해외)</option>
+										<option>경영/인문(해외)</option>
+										<option>예술/디자인(해외)</option>
+										<option>실용(해외)</option>
+										<option>해외잡지(해외)</option>
+										<option>대학/전문서적(해외)</option>
+										<option>컴퓨터(해외)</option>
+										<option>일본도서(해외)</option>
+										<option>프랑스도서(해외)</option>
+										<option>중국도서(해외)</option>
+										<option>해외주문원서(해외)</option>
+									</select>
 								</div>
-								<div class="row sft-terms-and-privacy-agreement-container">
-									<input type="checkbox" id="ochild" name="interest">
-									<p class="gangre">어린이</p>
-									<input type="checkbox" id="ELT" name="ELT" name="interest">
-									<p class="gangre">ELT/사전</p>
-									<input type="checkbox" id="Literature" name="interest">
-									<p class="gangre">문학</p>
-									<input type="checkbox" id="mpersonnel" name="interest">
-									<p class="gangre">경영/인문</p>
-									<input type="checkbox" id="aDesign" name="interest">
-									<p class="gangre">예술/디자인</p>
-									<input type="checkbox" id="practicaluse" name="interest">
-									<p class="gangre">실용</p>
-									<input type="checkbox" id="omagazine" name="interest">
-									<p class="gangre">해외잡지</p>
-									<input type="checkbox" id="universitybooks"
-										name="interest">
-									<p class="gangre">대학/전문서적</p>
-									<input type="checkbox" id="computer" name="interest">
-									<p class="gangre">컴퓨터</p>
-									<input type="checkbox" id="jbooks" name="interest">
-									<p class="gangre">일본도서</p>
-									<input type="checkbox" id="fbooks" name="interest">
-									<p class="gangre">프랑스도서</p>
-									<input type="checkbox" id="cbooks" name="interest">
-									<p class="gangre">중국도서</p>
-									<input type="checkbox" id="ooapplication" name="interest">
-									<p class="gangre">해외주문원서</p>
+								<div class="controls">
+									<label></label>
+									<select class="form-control" id="thirdG" name="interest">
+										<option>선택하세요</option>
+										<option>소설</option>
+										<option>시/에세이</option>
+										<option>사회과학</option>
+										<option>역사와문화</option>
+										<option>잡지</option>
+										<option>만화</option>
+										<option>유아</option>
+										<option>아동</option>
+										<option>가정과생활</option>
+										<option>청소년</option>
+										<option>초등학습서</option>
+										<option>고등학습서</option>
+										<option>국어/외국어/사전</option>
+										<option>자연과 과학</option>
+										<option>경제경영</option>
+										<option>자기개발</option>
+										<option>인문</option>
+										<option>종교/역학</option>
+										<option>컴퓨터/인터넷</option>
+										<option>자격서/수험서</option>
+										<option>취미/레져</option>
+										<option>전공/대학도서</option>
+										<option>건강/뷰티</option>
+										<option>여행</option>
+										<option>중등학습서</option>
+										<option>어린이(해외)</option>
+										<option>ELT/사전(해외)</option>
+										<option>문학(해외)</option>
+										<option>경영/인문(해외)</option>
+										<option>예술/디자인(해외)</option>
+										<option>실용(해외)</option>
+										<option>해외잡지(해외)</option>
+										<option>대학/전문서적(해외)</option>
+										<option>컴퓨터(해외)</option>
+										<option>일본도서(해외)</option>
+										<option>프랑스도서(해외)</option>
+										<option>중국도서(해외)</option>
+										<option>해외주문원서(해외)</option>
+									</select>
 								</div>
 							</div>
+									
 								<div class="controls">
 
 									<label for="introduce">간단소개</label>
@@ -335,9 +379,6 @@
 
 								<div type="button" class="btn btn-primary btn-block" id="submit">
 									가입하기</div>
-
-
-
 							</form>
 						</div>
 					</div>
