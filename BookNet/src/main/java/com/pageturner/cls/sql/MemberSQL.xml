@@ -20,6 +20,26 @@
 			AND pw = #{pw}
 	</select>
 	
+	<!-- 회원정보 조회 -->
+	<select id="selUser" resultType="mVO" parameterType="String">
+		select
+			*
+		from
+			membertab
+		where
+			id = #{id}
+	</select>
+	
+	<!-- 장르 조회 -->
+	<select id="genre" resultType="pVO">
+		select
+			genre, substr(gname, 6) gname
+		from
+			genretab
+		where
+			substr(gname, 6) is not null
+	</select>
+	
 	<!-- 정보수정(pw) -->
 	<update id="editPW" parameterType="mVO">
 		update

@@ -1,4 +1,4 @@
-package com.pageturner.cls.service;
+package com.pageturner.cls.AOP;
 
 /**
  * 컨트롤러 실행 시 로그인 상태 체크해주는 AOP
@@ -18,7 +18,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 //@Component
 //@Aspect
-public class AOP {
+public class LoginAOP {
 	
 //	@Before("execution(* com.pageturner.cls.controller.mypage.MyPage(..))")
 	public void loginCK(JoinPoint join) {

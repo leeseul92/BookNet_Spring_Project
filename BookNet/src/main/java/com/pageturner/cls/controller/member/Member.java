@@ -95,7 +95,7 @@ public class Member {
 		try {
 			MimeMessage msg = mailSender.createMimeMessage();
 			MimeMessageHelper msgHelper = new MimeMessageHelper(msg, true, "UTF-8");
-			msgHelper.setFrom("myeongwhan@gmail.com");
+			msgHelper.setFrom("pageTurner");
 			msgHelper.setTo(req.getParameter("mail"));
 			msgHelper.setSubject("회원가입 인증메일 발송");
 			msgHelper.setText("인증번호는 " + cout + " 입니다");
@@ -112,9 +112,17 @@ public class Member {
 
 	// 이명환
 	// 정보수정 뷰
-	@RequestMapping("/edit.cls")
+	@RequestMapping("/editMemInfo.cls")
 	public ModelAndView edit(HttpServletRequest req, ModelAndView mv) {
 		mv.setViewName("mypage/editMemb");
+//		mv.setView(new RedirectView("mypage/editMemb"));
+		String sid = (String) req.getSession().getAttribute("SID");
+		System.out.println(sid);
+		List<MemberVO> list = mDAO.selUser(sid);
+		List<PostsVO> genre = mDAO.genre();
+		mv.addObject("LIST", list);
+		mv.addObject("GENRE", genre);
+		
 		return mv;
 	}
 
@@ -155,7 +163,7 @@ public class Member {
 		int cnt = mDAO.delUser(mVO);
 
 		if (cnt == 0) {
-			System.out.println("정보수정(유저)처리 에러");
+			System.out.println("정보수정(탈퇴)처리 에러");
 		}
 		req.getSession().removeAttribute("SID");
 		mv.setView(new RedirectView("비회원메인페이지"));

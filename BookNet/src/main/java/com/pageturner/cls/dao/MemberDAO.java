@@ -22,14 +22,29 @@ public class MemberDAO {
 		return sqlSession.selectOne("mSQL.Login", mVO);
 	}
 	
+	// 회원정보 조회
+	public List<MemberVO> selUser(String id) {
+		return sqlSession.selectList("mSQL.selUser", id);
+	}
+	
+	// 장르 조회
+	public List<PostsVO> genre() {
+		return sqlSession.selectList("mSQL.genre");
+	}
+	
 	// 정보수정(비번)
 	public int editPW(MemberVO mVO) {
 		return sqlSession.update("mSQL.editPW", mVO);
 	}
 	
-	// 정보수정
+	// 정보수정(회원정보)
 	public int editUser(MemberVO mVO) {
 		return sqlSession.update("mSQL.editUser", mVO);
+	}
+	
+	// 정보수정(프사)
+	public int editProfile(ProfileVO fVO) {
+		return sqlSession.insert("mSQL.insertProfile", fVO);
 	}
 	
 	// 회원탈퇴
