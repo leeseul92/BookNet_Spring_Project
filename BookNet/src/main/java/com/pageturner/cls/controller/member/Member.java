@@ -151,7 +151,7 @@ public class Member {
 		if (cnt == 0) {
 			System.out.println("정보수정(유저)처리 에러");
 		}
-		mv.setView(new RedirectView("마이페이지"));
+		mv.setView(new RedirectView("/cls/mypage/mypage.cls"));
 		return mv;
 	}
 

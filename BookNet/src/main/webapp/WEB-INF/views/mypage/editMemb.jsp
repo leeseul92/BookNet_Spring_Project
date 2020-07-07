@@ -120,7 +120,7 @@ function CountChecked(check) {
 		</form>
 			<div class="w3-col m12 w3-padding w3-card w3-center w3-blue w3-button" id="pbtn">비밀번호 변경</div>
 				<!-- 프로필사진 -->
-		<form class="w3-col" method="post" action="" name="frm" id="frm2" encType="multipart/form-data">
+		<form class="w3-col" method="post" action="/cls/member/editUser.cls" name="frm" id="frm2" encType="multipart/form-data">
 			<div class="w3-col w3-padding w3-border w3-card" style="margin-top: 10px;">
 				<div class="w3-row">
 					<label class="w3-col m3 w3-right-align w3-padding w3-border" for="file">프로필 사진</label>
