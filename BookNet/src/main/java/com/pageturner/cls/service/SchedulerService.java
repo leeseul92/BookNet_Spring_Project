@@ -20,8 +20,9 @@ import com.pageturner.cls.vo.*;
 
 @Service
 public class SchedulerService {
+	
 	@Autowired
-	BookDAO bDAO;
+	BookDAO bookDAO;
 	@Autowired
 	SelectAPI selApi;
 	@Autowired
@@ -30,8 +31,13 @@ public class SchedulerService {
 	InterParkService interparkSrvc;
 	
 	public void bestseller() {
-		RecommendVO rcmdVO = bSrvc.addPeriod();
-		List<Integer> gList = bDAO.getGenreList();
+//		BookDAO bookDAO = new BookDAO();
+//		SelectAPI selApi = new SelectAPI();
+//		BookService bSrvc = new BookService();
+//		InterParkService interparkSrvc = new InterParkService();
+		RecommendVO rcmdVO = new RecommendVO();
+		rcmdVO = bSrvc.addPeriod();
+		List<Integer> gList = bookDAO.getGenreList();
 		
 		for (int cat_id : gList) {
 			ArrayList<BookVO> bList = interparkSrvc.interparkAPI(selApi.BESTSELL,cat_id);

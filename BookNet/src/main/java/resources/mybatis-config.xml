@@ -12,6 +12,7 @@
 	
 	<typeAliases> 
 	<!-- vo클래스 별칭주기 -->
+		<typeAlias alias="scdVO" type="com.pageturner.cls.scd.ScdVO" />
 		<package name="com.pageturner.cls.vo" />
 		<!-- <typeAlias alias="mVO" type="com.pageturner.cls.vo.MemberVO"/>
 		<typeAlias alias="mainVO" type="com.pageturner.cls.vo.MainVO"/>
@@ -30,6 +31,7 @@
 		<mapper resource="com/pageturner/cls/sql/AlarmSQL.xml"/>
 		<mapper resource="com/pageturner/cls/sql/BookSQL.xml"/>
 		<mapper resource="com/pageturner/cls/sql/LikeSQL.xml"/>
+		<mapper resource="com/pageturner/cls/scd/ScdSQL.xml" />
 		<!-- <mapper resource="com/pageturner/cls/sql/*SQL.xml" /> --> 
 	</mappers>
 </configuration>		

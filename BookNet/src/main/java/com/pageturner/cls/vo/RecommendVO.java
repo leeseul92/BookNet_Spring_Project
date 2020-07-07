@@ -14,7 +14,7 @@ import org.apache.ibatis.type.*;
 public class RecommendVO {
 	private int recomdate_no, recom_no, bno, cat_id;
 	private String classify, recomdate_start, recomdate_end;
-	private HashMap map;
+	private HashMap map = new HashMap();
 	public HashMap getMap() {
 		return map;
 	}

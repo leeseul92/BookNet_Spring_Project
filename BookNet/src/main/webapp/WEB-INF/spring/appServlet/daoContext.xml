@@ -38,4 +38,7 @@
 	<!-- 검색 관련 데이터베이스 처리 dao bean 처리 -->
 	<bean id="sDAO" class="com.pageturner.cls.dao.SearchDAO" />
 	
+	<!-- 스케줄 관련 데이터베이스 처리 dao bean 처리 -->
+	<bean id="scdDAO" class="com.pageturner.cls.scd.ScdDAO" />
+	
 </beans>

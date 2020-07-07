@@ -38,19 +38,18 @@ public class BookService {
 	
 	public RecommendVO addPeriod() {
 		RecommendVO rcmdVO = new RecommendVO();
-		System.out.println("!" + rcmdVO.getRecomdate_no());
-		bookDAO.addPeriod(rcmdVO);
-		System.out.println("@" + rcmdVO.getRecomdate_no());
+		BookDAO bDAO = new BookDAO();
+		bDAO.addPeriod(rcmdVO);
 		return rcmdVO;
 	}
 	
 	public void addRcmd_AND_Bestsell(ArrayList<BookVO> list, RecommendVO rcmdVO) {
 		for (int i = 0; i < list.size(); i++) {
+			BookDAO bDAO = new BookDAO();
 			rcmdVO.setBno(list.get(i).getBno());
 			rcmdVO.setCat_id(list.get(i).getCat_id());
 			rcmdVO.setClassify(list.get(i).getClassify());
-			bookDAO.addRcmdBook(rcmdVO);
-			System.out.println(rcmdVO.toString());
+			bDAO.addRcmdBook(rcmdVO);
 		}
 	}
 }

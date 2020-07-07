@@ -76,7 +76,7 @@
 		INSERT INTO
 			recomdatetab(recomdate_no, recomdate_start, recomdate_end)
 		VALUES(
-			#{map.RECOMDATE_NO}, #{map.RECOMDATE_START}, #{map.RECOMDATE_END}
+			#{map.RECOMDATE_NO,jdbcType=INTEGER}, #{map.RECOMDATE_START,jdbcType=DATE}, #{map.RECOMDATE_END,jdbcType=DATE}
 		)
 	</insert>
 	

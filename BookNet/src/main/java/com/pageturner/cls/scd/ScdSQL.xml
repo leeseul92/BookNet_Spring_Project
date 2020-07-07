@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="scdSQL">
+	<insert id="addPeriod" parameterType="scdVO">
+		<selectKey keyProperty="recomdate_no" resultType="int" order="BEFORE">
+			SELECT
+				NVL(MAX(recomdate_no) + 1, 1)
+			FROM
+				recomdatetab
+		</selectKey>
+		INSERT INTO
+			recomdatetab(recomdate_no, recomdate_start, recomdate_end)
+		VALUES(
+			#{recomdate_no},
+			(SELECT NVL(MAX(recomdate_start) + 7, '2020-06-30') FROM recomdatetab),
+			(SELECT NVL(MAX(recomdate_end) + 7, '2020-07-06') FROM recomdatetab)
+		)
+	</insert>
+	
+	<insert id="addRcmdBook" parameterType="scdVO">
+		<selectKey keyProperty="recom_no" resultType="int" order="BEFORE">
+			SELECT
+				NVL(MAX(recom_no) + 1, 1)
+			FROM
+				recomtab
+		</selectKey>
+		INSERT INTO
+			recomtab(recom_no, bno, recomdate_no, classify, cat_id)
+		VALUES(
+			#{recom_no}, #{bno}, #{recomdate_no}, #{classify}, #{cat_id}
+		)
+	</insert>
+	
+	<select id="getBno" parameterType="bVO" resultType="int">
+		SELECT
+			bno
+		FROM
+			booktab
+		WHERE
+			isbn = #{isbn}
+	</select>
+</mapper>
