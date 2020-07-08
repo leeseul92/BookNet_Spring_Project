@@ -57,4 +57,9 @@ public class PostsDAO {
 	public int delPost(int pno) {
 		return sqlSession.update("pSQL.delPost", pno);
 	}
+	
+	//해당게시글 해시태그 불러오기 
+	public List<PostsVO> selHash(int pno) {
+		return sqlSession.selectList("pSQL.selHashes", pno);
+	}
 }

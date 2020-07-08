@@ -120,4 +120,11 @@ public class Posts {
 		String ischeck = postsSrvc.likeProc(pVO);
 		return ischeck;
 	}
+	
+	//게시글 수정처리
+	@RequestMapping("/editPost.cls")
+	@ResponseBody
+	public void editPost(PostsVO pVO) {
+		
+	}
 }

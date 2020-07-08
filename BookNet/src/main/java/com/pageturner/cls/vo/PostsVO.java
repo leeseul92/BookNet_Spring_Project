@@ -15,7 +15,7 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("pVO")
 public class PostsVO {
-	private int pno, linkno, mno, eno, bno, cno, genre, hno, cnt;
+	private int pno, linkno, mno, eno, bno, cno, genre, hno, cnt, orino;
 	private String id, profile, postcont, pdate, largeimg, smallimg, bname, writer, trans, domain,
 	 				hash, publish, emotion, cbody, comnt, cdate, gname, mention, sid, ischeck, likepost, keyword;
 //	private Date postdate;

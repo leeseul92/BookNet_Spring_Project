@@ -149,4 +149,19 @@ public class PostsService {
  		
  		return ischeck;
  	}
+ 	
+ 	//게시글 수정처리
+ 	public void editPostProc(PostsVO pVO) {
+ 		//게시글 수정시킬 db 작업
+ 		
+ 		//수정된 게시글에 작성된 해시태그 추출할 함수 호출
+ 		ArrayList<String> hash = splitHash(pVO.getHash());
+ 		//원본 게시글에 작성된 해시태그 불러오기 
+ 		ArrayList<PostsVO> oriHash = (ArrayList<PostsVO>)pDAO.selHash(pVO.getPno());
+ 		
+ 		if(hash.size() == oriHash.size()) {
+ 			
+ 		}
+ 	}
+ 	
 }

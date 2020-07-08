@@ -24,9 +24,9 @@
 	<!-- 로그인한 회원에게 보여주는 메인 게시글 질의명령 -->
 	<select id="MemMain" resultType="pVO" parameterType="string">
 		SELECT
-		    pt.pno, mt.id, lt.ischeck, bname, gname, postcont, largeimg, postdate pdate, postdate ptime
+		    pt.pno, et.eno, mt.id, lt.ischeck, bname, gname, postcont, largeimg, postdate pdate, postdate ptime
 		FROM
-		    poststab pt, booktab bt, genretab gt,
+		    poststab pt, booktab bt, genretab gt, emotiontab et,
 		    (SELECT
 		        DISTINCT mno, id
 		    FROM
@@ -49,6 +49,7 @@
 		    AND pt.bno = bt.bno
 		    AND bt.genre = gt.genre
 		    AND pt.pno = lt.pno(+)
+		    AND pt.eno = et.eno(+)
 		ORDER BY
 		    postdate DESC
 	</select>

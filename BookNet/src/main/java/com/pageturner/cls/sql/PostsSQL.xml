@@ -130,4 +130,27 @@
 		WHERE
 			pno = #{pno}
 	</update>
+	
+	<!-- 해당 게시글의 해시태그 조회 -->
+	<select id="selHashes" resultType="pVO" parameterType="int">
+		SELECT
+		    hno, hname hash
+		FROM    
+		    hashtab
+		WHERE
+		    pno = #{pno}
+	</select>
+	
+	<!-- 게시글 수정 질의명령 -->
+	<!-- 
+	 <update id="editPost" parameterType="pVO">
+		update
+		    poststab
+		set
+		    postcont = 
+		    
+		where
+		    pno = #{pno}
+	</update>
+	 -->
 </mapper>					

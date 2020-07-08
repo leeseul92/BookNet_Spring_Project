@@ -215,39 +215,44 @@ $(document).ready(function(){
 		}
 	});
 	
+	//베스트셀러 모달 닫기 
 	$('#r-close_butt').click(function(){
 		$('.slideRank').css('display', 'none');
 	});
 	
-	$('#more_butt').click(function() { //modal에서 알림페이지로 이동 
+	//알림페이지로 이동 
+	$('#more_butt').click(function() {  
 		$(location).attr('href', '/cls/alarm/alarmPage.cls');
 	});
 
-	$('#aBtn').click(function() { //modal 열기
+	//알림 모달 열기 
+	$('#aBtn').click(function() { 
 		$('#actModal').css('display', 'block');
 	});
 
-	$('#a-close_butt').click(function() { //modal 닫기버튼 
+	//알림 모달 닫기 
+	$('#a-close_butt').click(function() {  
 		$('#actModal').css('display', 'none');
 	});
 
-	$('#s-close_butt').click(function() { //modal 닫기버튼 
+	//게시글작성시 도서검색결과 모달 닫기 
+	$('#s-close_butt').click(function() { 
 		$('#-s-b-modal').css('display', 'none');
 		$('.rstPage').html('');
 		$('#findBook').val('');
 	});
 	
+	//마이페이지로 이동 
 	$('#myBtn').click(function(){
 		$(location).attr('href', '/cls/mypage/mypage.cls');
 	});
 	
-	
-	$('.likebtn, .dLikebtn').click(function(){ //like 버튼 클릭시 하트 변경되어야함.
+	//좋아요처리 
+	$('.likebtn, .dLikebtn').click(function(){ 
 		var pno = $(this).parents().attr('id');
 		var sid = $('#sid').val();
 		var likeStatus = $(this).attr('id');
 		alert(likeStatus);
-//		alert($('#dLikebtn').attr('id'));
 		
 		//뷰인지 모달인지 체크해줄 함수 선언 
 		var str = checkModal();
@@ -288,18 +293,51 @@ $(document).ready(function(){
 		});
 	});
 	
-	$('.edbtn').click(function(){ //수정삭제를 보여주는 아이콘클릭시 수정과 삭제를 선택하게 하는 모달 
+	//게시글 수정 삭제 선택하게 하는 모달 
+	$('.edbtn').click(function(){  
 		$('.edit-del-modal').css('display', 'block');
 		//frm2에 값을 전달해주어야함. 
 		var pno = $(this).parents().attr('id');
 		$('#pno').val(pno); 
 	});
 	
-	$('#e-btn').click(function(){ //수정 버튼을 눌렀을 때 처리이벤트 
+	//게시글 수정처리 
+	$('#e-btn').click(function(){  
+		var pno = $('#pno').val();
+		$('.edit-del-modal').css('display', 'none');
+		$('#pbody'+pno).css('display', 'none');
+		$('#ebody'+pno).css('display', 'block');
+		$('.editButton').css('display', 'inherit');
+		$('.emotiondiv').css('display', 'block');
 		
+		var editbody = $('#ebody'+pno).text();
+		var editemotion = $('#editemo'+pno).val();
+		
+		//수정된 게시글 해시태그 분리하기
+		var hash = splitedHash(editbody);
+		
+		//수정처리 비동기처리
+		$.ajax({
+			url: '/cls/posts/editPost.cls',
+			type: 'POST',
+			dataType: 'json',
+			data: {
+				'pno': pno,
+				'postcont': editbody,
+				'eno': editemotion,
+				'hash': hash
+			},
+			success: function(){
+				
+			},
+			error: function(){
+				alert('##통신에러##');
+			}
+		});
 	});
 	
-	$('#d-btn').click(function(){ //삭제 버튼을 눌렀을 때 처리이벤트
+	//게시글 삭제처리 
+	$('#d-btn').click(function(){ 
 		var pno = $('#pno').val();
 		$('#frm2').submit();
 		
@@ -323,17 +361,20 @@ $(document).ready(function(){
 		});
 	});
 	
-	$('#c-btn').click(function(){ //취소 버튼을 눌렀을 때 처리이벤트 
+	//게시글 수정삭제 모달 닫기 
+	$('#c-btn').click(function(){  
 		//수정삭제 모달 닫아주어야한다.
 		$('.edit-del-modal').css('display', 'none');
 	});
 	
-	$('.dComtbtn').click(function(){ //댓글버튼 클릭시 댓글 달 수 있는 창 보여주기 
+	//댓글버튼 클릭시 댓글 달 수 있는 div 보여주기 
+	$('.dComtbtn').click(function(){  
 		$('.wrtcomt').css('display', '');
 		$('.wrt-hid').css('height','460px');
 	});
 	
-	$('.modi_post').click(function(){ //게시물 상세보기 모달
+	//게시글 상세보기 모달 
+	$('.modi_post').click(function(){ 
 		var pno = $(this).attr('id'); //게시글번호
 		var id = $('#id'+pno).text(); //작성자 아이디
 		var stime = $('#time'+pno).html(); //작성시간 
@@ -361,7 +402,8 @@ $(document).ready(function(){
 		var tid = 'cmt' + pno;
 		$('.post-comment').attr('id', tid);
 
-		$('#d-close_butt'+pno).click(function(){ //게시물 상세보기 닫기 
+		//게시물 상세보기 닫기 
+		$('#d-close_butt'+pno).click(function(){ 
 			checkIf('dLike'+pno, 'like'+pno);
 			$('.detailPost').css('display', 'none');
 			$('#'+tid).html('');
@@ -377,7 +419,8 @@ $(document).ready(function(){
 		
 	});
 	
-	$('.comsubbtn').click(function(){ //댓글 등록하기 
+	//댓글 등록처리 
+	$('.comsubbtn').click(function(){ 
 		var pno = $('.realLkBtn').attr('id');
 		alert(pno);
 		var cbody = $('.combody').val();
@@ -397,7 +440,6 @@ $(document).ready(function(){
 				}
 				if(data.cnt == 1){
 					$('.combody').val('');
-//					showCmtList(pno, tid); 댓글등록에 성공하면 다시 댓글리스트 비동기통신 함수호출 
 					$('.post-comment').prepend('<div style="width: 100%; height: 30px;" id="' + tid + '">' +
 							'<div style="float: left; width: 30px; height: 30px; margin-left: 10px; border: 1px dashed black;">' +
 							'<img src="" style="box-sizing: border-box;"/>' +
@@ -416,12 +458,13 @@ $(document).ready(function(){
 		});
 	});
 	
-	
-	$('#wBtn').click(function(){ //글쓰기 modal 열기 
+	//게시글작성 모달 열기 
+	$('#wBtn').click(function(){ 
 		$('#writeModal').css('display', 'block');
 	});
 	
-	$('#w-close_butt, #c-submit').click(function(){ //글쓰기 모달 닫기 
+	//게시글작성 모달 닫기 
+	$('#w-close_butt, #c-submit').click(function(){  
 		$('#writeModal').css('display', 'none');
 		$('.rstPage').html('');
 		$('#findBook').val('');
@@ -430,7 +473,8 @@ $(document).ready(function(){
 		$('#rst-book-bname').val('');
 	});
 	
-	$('#changeInfo').click(function(){ //정보수정페이지로 이동 
+	//회원 정보수정하기 페이지 이
+	$('#changeInfo').click(function(){ 
 		$(location).attr('href', '/cls/member/editMemInfo.cls');
 	});
 	
@@ -440,7 +484,6 @@ $(document).ready(function(){
 		var book = $('#findBook').val();
 		//선택된 도서장르 번호를 변수에 저장
 		var genre = $('#setGenre').val();
-//		alert(book+genre);
 		//검색어 유효성 검사
 		if(!book){
 			$('#findBook').focus();
@@ -499,9 +542,9 @@ $(document).ready(function(){
 			}
 		});
 	});
-	
-	$(document).on('click', '#p-submit', function(){
-//		alert($('#sid').val());
+
+	//게시글 등록 처리
+	$(document).on('click', '#p-submit', function(){ 
 		var dom = document.location.href.split('/');
 		var domain = "";
 		for(var i = 3; i < dom.length; i++){
@@ -521,18 +564,18 @@ $(document).ready(function(){
 		$('#postcont').val(body);
 		$('#hash').val(htag);
 		$('#domain').val(domain);
-//		alert(len);
 		
-		if(!bno){		//도서선택 여부 확인
+		//데이터 유효성 검사 
+		if(!bno){		
 			alert('작성할 책을 검색해주세요!');
 			$('#findBook').focus();
 			return;
 		}
-		if(!emo){
-			alert('당시의 감정을 선택해주세요!');
-			$('#selEmo').focus();
-			return
-		}
+//		if(!emo){
+//			alert('당시의 감정을 선택해주세요!');
+//			$('#selEmo').focus();
+//			return
+//		}
 		if(!body){
 			alert('게시글 본문을 입력해주세요!');
 			$('#postBody').focus();

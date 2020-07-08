@@ -28,17 +28,17 @@
 			</div>
 			<div style="width: 100%; height: 10px; margin: 5px auto;">
 				<div class="w3-col"><a class="w3-third w3-card w3-bar-item" style="color: white; font-size: 18px; text-align: center;" href="">금주의 베스트셀러</a></div>
-				<!-- <div><a class="w3-third w3-border" style="color: white; text-align: center;" href="">베스트셀러</a></div>
-				<div><a class="w3-third w3-border" style="color: white; text-align: center;" href="">추천도서</a></div> -->
+				<div><a class="w3-third w3-border" style="color: white; text-align: center;" href="">베스트셀러</a></div>
+				<div><a class="w3-third w3-border" style="color: white; text-align: center;" href="">추천도서</a></div>
 			</div>
-			<!-- 베스트셀러 정보를 담을 div -->
+			베스트셀러 정보를 담을 div
 			<div class="w100-h390 mgt15" id=""> 
-				
+				<%@include file="./bestseller_slideshow.jsp" %>
 			</div>
 			<input type="checkbox" name="closeForDay" value="OK" id="closeForDay" /> 하루동안 창을 열지 않음
 		</div>
 	</div>
-	<div>
+	<div> 
 		<!-- 본문부분 -->
 		<div id="contents-wrap">
 			<div class="contents">
@@ -92,10 +92,26 @@
 								<div class="post-body">
 									<!-- 게시글 부분 -->
 									<a style="box-sizing: border-box; font-size: 13px;" id="pbody${data.pno}">${data.postcont}</a>
+									<!-- 게시글 수정시 보여줄 textarea -->
+									<textarea class="editPosts" id="ebody${data.pno}">${data.postcont}</textarea>
+								</div>
+								<div style="width: 175px; float: left; height: 40px;">
+									<input type="button" class="editButton" id="eSubmit${data.pno}" value="edit"/>
 								</div>
 							</div>
 							<div class="wrtInfo">
-								<div class="etcdiv" style="text-align: left; font-size: 13px;" id="hash${data.pno}">${data.hash}</div>
+								<input type="hidden" id="emo${data.pno}" name="emo${data.pno}" value="${data.eno}"/>
+								 <!--  감정 셀렉트 -->
+								<div class="emotiondiv">
+									<select name="emotion" id="editemo${data.pno}" style="float: left; width: 100%; height: 100%; margin: 5px; font-size: 13px;">
+										<option value="">감정을 선택해주세요X)</option>
+										<option value="2">덜덜;무서워욧!</option>
+										<option value="3">ㅠ_ㅠ불안해요..</option>
+										<option value="4">very exciting!</option>
+										<option value="1">행복해요X)</option>
+										<option value="5">그리워요;ㅁ;</option>
+									</select>
+								</div>
 								<span class="modifdiv modi_post" id="${data.pno}"></span>
 							</div>
 						</article>

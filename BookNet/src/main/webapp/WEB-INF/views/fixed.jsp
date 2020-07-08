@@ -81,7 +81,7 @@
 								<!-- 도서검색 -->
 								<div class="w-b-input">
 									<!-- 도서장르 선택 -->
-									<div style="float: left; wdith: 100px; height: 40px; line-height: 40px; margin-right: 10px;">
+									<div style="float: left; width: 100px; height: 40px; line-height: 40px; margin-right: 10px;">
 										<select name="selGenre" id="setGenre">
 											<option value="">도서장르</option>
 											<c:forEach var="genre" items="${GENRE}" varStatus="status">

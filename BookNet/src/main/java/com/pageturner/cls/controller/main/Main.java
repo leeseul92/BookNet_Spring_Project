@@ -6,7 +6,7 @@ package com.pageturner.cls.controller.main;
  *
  */
 
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
-import com.pageturner.cls.service.MainService;
-import com.pageturner.cls.service.PostsService;
-import com.pageturner.cls.vo.PostsVO;
+import com.pageturner.cls.service.*;
+import com.pageturner.cls.vo.*;
+import com.pageturner.cls.scd.*;
 
 @Controller
 @RequestMapping("/main")
@@ -29,6 +29,10 @@ public class Main {
 	
 	@Autowired
 	PostsService postsSrvc;
+	
+	// DI
+	@Autowired
+	ScdService scdSrvc;
 	
 	//비로그인 회원 메인화면
 	@RequestMapping("/non.cls")
@@ -75,7 +79,16 @@ public class Main {
 			mv.setViewName(view);
 		}
 		
+		//showMain
+		ScdVO scdVO = new ScdVO();
+		scdVO.setClassify('B');
+		scdVO.setCat_id(100);
+		ArrayList<BookVO> bList = scdSrvc.bestOrRcmd(scdVO);
+
+		mv.addObject("BLIST", bList);
+		
 		return mv;
 	}
+	
 	
 }

@@ -303,10 +303,8 @@
 }
 
 .modifdiv {
-	float: left;
-	margin: auto auto;
-	margin-top: 7px;
-	margin-left: 40px;
+	float: right;
+	margin: 7px;
 	height: 25px;
 	width: 25px;
 	background-position: -50px -394px;
@@ -594,12 +592,12 @@ a:visited {
 
 .combody {
 	float: left;
-    width: 270px;
-    height: 50px;
-    font-size: 13px;
-    /* resize: none; */
-    margin-left: 20px;
-    border: 1px solid black;
+	width: 270px;
+	height: 50px;
+	font-size: 13px;
+	/* resize: none; */
+	margin-left: 20px;
+	border: 1px solid black;
 }
 
 .listcomt {
@@ -610,11 +608,11 @@ a:visited {
 }
 
 .comsubbtn {
-    width: 50px;
-    height: 30px;
-    margin-top: 8px;
-    float: left;
-    margin-left: 10px;
+	width: 50px;
+	height: 30px;
+	margin-top: 8px;
+	float: left;
+	margin-left: 10px;
 }
 
 .h30-m10 {
@@ -679,4 +677,30 @@ a:visited {
 	height: 5px;
 	line-height: 5px;
 	font-size: 13px;
+}
+
+.editPosts {
+	display: none;
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
+	resize: none;
+	font-size: 13px;
+}
+
+.editButton {
+	display: none;
+	float: right;
+	height: 30px;
+	line-height: 30px;
+	font-size: 13px;
+}
+
+.emotiondiv {
+	float: left;
+	width: 200px;
+	height: 30px;
+	line-height: 30px;
+	margin-right: 10px;
+	display: none;
 }
