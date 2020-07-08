@@ -71,5 +71,9 @@ public class MemberDAO {
    public int join(MemberVO mVO) {
       return sqlSession.insert("mSQL.join",mVO);
    } 
+   
+   public String mailck(MemberVO mVO) {
+	   return sqlSession.selectOne("mSQL.mailck", mVO);
+   }
 
 }

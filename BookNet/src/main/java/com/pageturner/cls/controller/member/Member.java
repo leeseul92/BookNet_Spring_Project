@@ -228,7 +228,17 @@ public class Member {
 		map.put("cnt", mDAO.idcheck(id));
 		return map;
 	}
-
+	
+	//우현우
+	// 이메일 중복 여부 확인 요청
+	@RequestMapping("/mailck.cls")
+	@ResponseBody
+	public Map mailck(MemberVO mVO) {
+		mVO = new MemberVO();
+		HashMap map = new HashMap();
+		map.put("cnt", mDAO.mailck(mVO));
+		return map;
+	}
 	// 우현우
 	// 회원가입 처리
 	@RequestMapping("/joinProc.cls")
@@ -239,6 +249,7 @@ public class Member {
 		rv = null;
 		if (cnt == 1) {
 			session.setAttribute("SID", mVO.getId());
+			
 			rv = new RedirectView("/cls/main/main.cls");
 		} else {
 			rv = new RedirectView("/cls/main/non.cls");
@@ -246,5 +257,6 @@ public class Member {
 		mv.setView(rv);
 		return mv;
 	}
-
+	
+	
 }

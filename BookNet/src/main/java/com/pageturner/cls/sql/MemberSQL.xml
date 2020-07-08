@@ -119,4 +119,14 @@
 				MEMBERTAB),#{id}, #{pw}, #{name}, #{mail}, #{gen}, #{birthdate}, SYSDATE, #{interest} ,#{describe}
 		)	
 	</insert>
+	
+	<!-- 이메일 중복 가입 방지 처리(우현우) -->
+	<select id="mailck" parameterType="mVO">
+		SELECT 
+			count(mail) cnt
+		FROM
+			MEMBERTAB
+		WHERE
+			mail = #{mail}
+	</select>
 </mapper>					

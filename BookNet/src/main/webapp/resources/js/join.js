@@ -1,5 +1,6 @@
 $(function(){
 		var count = '';
+		//아이디 중복 여부
 	$('#idck').click(function(){
 		var sid = $('#id').val();
 		if(sid){
@@ -37,56 +38,7 @@ $(function(){
 		}
 	});
 	
-	//데이터 입력 여부 확인 후 데이터 넘기기
-	$('#submit').click(function(){
-		var id = $('#id').val();
-		var pw = $('#password').val();
-		var repw = $('#confirm-password').val();
-		var name = $('#name').val();
-		var mail = $('#email').val();
-		var mailck = /^[A-Za-z0-9]+@[A-Za-z]+\.[A-Za-z]+/;
-		var gen = $('#gen').val();
-		var birth = $('#birthday').val();
-		var gangre1 = $('#firstG').val();
-		var gangre2 = $('#secondG').val();
-		var gangre3 = $('#thirdG').val();
-		var check = $('#emailck').click();
-		
-		
-		var noid = $('#idmsg').text('### 사용할 수 없는 아이디 입니다. ###');
-		
-		if(id == ''){
-			alert('아이디를 입력해주세요');
-			if(noid == id){
-				alert('이미 가입되어 있는 아이디입니다.');
-			}
-		}else if( pw == ''){
-			alert('비밀번호를 입력하세요');
-		}else if(repw != pw){
-			alert('입력한 비밀번호가 다릅니다');
-		}else if(name == ''){
-			alert('이름을 입력하세요');
-		}else if(mail == ''){
-			alert('이메일을 입력해주세요');
-		}else if(!mailck.test(mail)){
-			alert('올바른 형태의 이메일이 아닙니다');
-		}else if(!check){
-			alert('이메일 인증을 진행해 주세요');
-		}else if(gen == '선택하세요'){
-			alert('성별을 선택하세요');
-		}else if(birth == ''){
-			alert('생일을 입력해 주세요');
-		}else if(gangre1 == '선택하세요'){
-			alert('3개의 장르를 선택해 주세요');
-		}else if(gangre2 == '선택하세요'){
-			alert('3개의 장르를 선택해 주세요');
-		}else if(gangre3 == '선택하세요'){
-			alert('3개의 장르를 선택해 주세요');	
-		}else{
-			$('#frm').submit();			
-		}
-	});
-
+	
 	
 	//비밀번호 확인
 	$('#confirm-password').keyup(function(){
@@ -110,6 +62,52 @@ $(function(){
 		
 	});
 	
+	//이름 10자까지 제한
+	$('#name').keyup(function(){
+		var name = $(this).val();
+		if(name.length > 11){
+			alert('최대 10자까지 입력 가능합니다.')
+			$(this).val(name.substring(0,10));
+		}
+	});
+	//이메일 중복 여부 
+	$('#mcheck').click(function(){
+		var mail = $('#email').val();
+		if(mail){
+			$.ajax({
+				url: '/cls/member/mailck.cls',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					'mail': mail
+				},
+				success: function(data){
+					var result = data["cnt"];
+					if(result == 0){
+						// 이메일 사용가능한 경우
+						$('#mailmsg').text('*** 사용 가능한 이메일 입니다. ***');
+						$('#mailmsg').css('color', 'blue');
+						$('#mailmsg').css('display', '');
+						
+					} else {
+						// 이메일 사용불가능한 경우
+						$('#mailmsg').text('### 이미 존재하는 이메일 입니다. ###');
+						$('#mailmsg').css('color', 'red');
+						$('#mailmsg').css('display', '');
+						$('#email').val('');
+						$('#email').focus();
+					}
+				},
+				error: function(){
+					alert('### 통신 실패 ###');
+				}
+			});
+		} else {
+			$('#email').focus();
+			return;
+		}
+	});
+	})
 	//이메일 인증 처리
 	$('#mailck').click(function(){
 		$('#efrm').attr('action','/cls/member/mail.cls');
@@ -165,15 +163,59 @@ $(function(){
 			$(this).val(text.substring(0,100));
 		}
 	});
-	//이름 10자까지 제한
-	$('#name').keyup(function(){
-		var name = $(this).val();
-		if(name.length > 11){
-			alert('최대 10자까지 입력 가능합니다.')
-			$(this).val(name.substring(0,10));
+	
+	
+	//데이터 입력 여부 확인 후 데이터 넘기기
+	$('#submit').click(function(){
+		var id = $('#id').val();
+		var pw = $('#password').val();
+		var repw = $('#confirm-password').val();
+		var name = $('#name').val();
+		var mail = $('#email').val();
+		var mailck = /^[A-Za-z0-9]+@[A-Za-z]+\.[A-Za-z]+/;
+		var gen = $('#gen').val();
+		var birth = $('#birthday').val();
+		var gangre1 = $('#firstG').val();
+		var gangre2 = $('#secondG').val();
+		var gangre3 = $('#thirdG').val();
+		var check = $('#emailck').click();
+		var mck = $('#mcheck').click();
+		
+		var noid = $('#idmsg').text('### 사용할 수 없는 아이디 입니다. ###');
+		
+		if(id == ''){
+			alert('아이디를 입력해주세요');
+			if(noid == id){
+				alert('이미 가입되어 있는 아이디입니다.');
+			}
+		}else if( pw == ''){
+			alert('비밀번호를 입력하세요');
+		}else if(repw != pw){
+			alert('입력한 비밀번호가 다릅니다');
+		}else if(name == ''){
+			alert('이름을 입력하세요');
+		}else if(mail == ''){
+			alert('이메일을 입력해주세요');
+		}else if(!mck){
+			alert('이메일 중복 버튼을 클릭해 중복여부를 확인해 주세요');		
+		}else if(!mailck.test(mail)){
+			alert('올바른 형태의 이메일이 아닙니다');
+		}else if(!check){
+			alert('이메일 인증을 진행해 주세요');
+		}else if(gen == '선택하세요'){
+			alert('성별을 선택하세요');
+		}else if(birth == ''){
+			alert('생일을 입력해 주세요');
+		}else if(gangre1 == '선택하세요'){
+			alert('3개의 장르를 선택해 주세요');
+		}else if(gangre2 == '선택하세요'){
+			alert('3개의 장르를 선택해 주세요');
+		}else if(gangre3 == '선택하세요'){
+			alert('3개의 장르를 선택해 주세요');	
+		}else{
+			$('#frm').submit();			
 		}
 	});
-	
-	
-});
+
+
 
