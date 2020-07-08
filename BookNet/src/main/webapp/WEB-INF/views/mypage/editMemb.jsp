@@ -23,6 +23,21 @@
     .gangre {
 	margin-right: 10px;
 	}
+	.form-control {
+	display: block;
+	width: 100%;
+	height: calc(1.5em + .75rem + 2px);
+	padding: .375rem .75rem;
+	font-size: 1rem;
+	font-weight: 400;
+	line-height: 1.5;
+	color: #495057;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ced4da;
+	border-radius: .25rem;
+	transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out
+	}
 </style>
 <script type="text/javascript">
 var maxChecked = 3;   // 체크 최대 개수
@@ -71,6 +86,13 @@ function CountChecked(check) {
 		
 		// 정보 수정
 		$('#ebtn').click(function(){
+			var gen1 = $('#firstG').val();
+			var gen2 = $('#secondG').val();
+			var gen3 = $('#thirdG').val();
+			
+			var inter = gen1 + ',' + gen2 + ',' + gen3;
+			$('#interest').val(inter);
+			
 			$('#frm2').submit();
 		});
 		
@@ -132,9 +154,29 @@ function CountChecked(check) {
 					</div>
 				</div>
 				<!-- 관심분야 -->
+				<input type="hidden" id="interest" name="interest" value="">
 				<div class="w3-row">
-					<label class="w3-col m3 w3-right-align w3-padding w3-border" for="interest">관심분야(국내도서)</label>
+					<label class="w3-col m3 w3-right-align w3-padding w3-border" for="interest">관심분야</label>
 					<div class="w3-col m9 w3-padding w3-border">
+						<select class="form-control" id="firstG">
+							<option>선택하세요</option>
+							<c:forEach var="data" items="${GENRE }" varStatus="st">
+							<option>${data.gname }</option>
+							</c:forEach>
+						</select>
+						<select class="form-control" id="secondG">
+							<option>선택하세요</option>
+							<c:forEach var="data" items="${GENRE }" varStatus="st">
+							<option>${data.gname }</option>
+							</c:forEach>
+						</select>
+						<select class="form-control" id="thirdG">
+							<option>선택하세요</option>
+							<c:forEach var="data" items="${GENRE }" varStatus="st">
+							<option>${data.gname }</option>
+							</c:forEach>
+						</select>
+						<!-- 
 						<c:forEach var="data" items="${GENRE }" varStatus="st">
 						<c:if test="${data.genre < 200 }">
 							<span>
@@ -143,17 +185,7 @@ function CountChecked(check) {
 							</span>
 						</c:if>
 						</c:forEach>
-					</div>
-				</div>
-				<div class="w3-row">
-					<label class="w3-col m3 w3-right-align w3-padding w3-border" for="interest">관심분야(해외도서)</label>
-					<div class="w3-col m9 w3-padding w3-border">
-						<c:forEach var="data" items="${GENRE }" varStatus="st">
-						<c:if test="${data.genre > 200 }">
-							<input onclick="CountChecked(this)" type="checkbox" id="${data.genre }" name="interest" value="${data.gname }" faking-checkbox>
-							<label class="gangre" for="${data.genre }">${data.gname }</label>
-						</c:if>
-						</c:forEach>
+						 -->
 					</div>
 				</div>
 				<!-- 간단소개 -->
