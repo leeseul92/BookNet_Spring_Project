@@ -34,32 +34,33 @@ public class libXmlAPI {
 		// 아이디 가져오기
 		String sid = (String) session.getAttribute("SID");
 		// 아아디세션 만료되었는지 확인하기
+		//파싱할 url 지정(api 키 포함)
+		api = "http://openapi.seoul.go.kr:8088/";
+		query = "/xml/SeoulPublicLibraryInfo/";
 			try {
 				while(true) {
-					//파싱할 url 지정(api 키 포함)
-					api = "http://openapi.seoul.go.kr:8088/";
-					query = "/xml/SeoulPublicLibraryInfo/";
 					
 					base = api + KEY + query +startPage+"/"+endPage+"/";
 					
 					DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 					DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 					Document doc = (Document)dBuilder.parse(base);
-					System.out.println(base);
+//					System.out.println(base);
 					// xml의 최상위 값을 꺼내온다
 					doc.getDocumentElement().normalize();
 					// 첫번째 tag값을 가져온다
-					System.out.println("Doc element: " + doc.getDocumentElement().getNodeName());
+//					System.out.println("Doc element: " + doc.getDocumentElement().getNodeName());
 					
 					// 파싱할 정보가 있는 tag에 접근
 					// 파싱할 tag
 					NodeList nList = doc.getElementsByTagName("row");
 					//파싱할 리스트 수
-					System.out.println("파싱할 리스트의 수 : " + nList.getLength());
+//					System.out.println("파싱할 리스트의 수 : " + nList.getLength());
 					
 					//리스트에 담긴 데이터 출력하기
+					int temp=0;
 					//반복문 사용
-					for (int temp = 0; temp < nList.getLength(); temp++) {
+					for (temp = 0; temp < nList.getLength(); temp++) {
 						
 						Node nNode = nList.item(temp);
 						
@@ -67,25 +68,32 @@ public class libXmlAPI {
 							
 							Element eElement = (Element) nNode;
 							
-							System.out.println("#################");
-							System.out.println("도서관 명 : " + getTagValue("LBRRY_NAME",eElement));
-							System.out.println("전화번 호 : " + getTagValue("TEL_NO",eElement));
-							System.out.println("휴     일 : " + getTagValue("FDRM_CLOSE_DATE",eElement));
-							System.out.println("경     도 : " + getTagValue("XCNTS",eElement));
-							System.out.println("위     도 : " + getTagValue("YDNTS",eElement));
+//							System.out.println("#################");
+//							System.out.println("도서관 명 : " + getTagValue("LBRRY_NAME",eElement));
+							String lname = getTagValue("LBRRY_NAME",eElement);
+//							System.out.println("전화번 호 : " + getTagValue("TEL_NO",eElement));
+//							System.out.println("휴     일 : " + getTagValue("FDRM_CLOSE_DATE",eElement));
+//							System.out.println("경     도 : " + getTagValue("XCNTS",eElement));
+//							System.out.println("위     도 : " + getTagValue("YDNTS",eElement));
+							if(lname.equals("강남구립못골도서관")) {
+								System.out.println(" 등장!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+								break;
+							}
 						} //if
 					} //for
 					startPage += 1;
 					endPage += 1;
-					System.out.println("Page number : " + startPage+"~"+endPage);
+//					System.out.println("Page number : " + startPage+"~"+endPage);
 					
 					// 뽑아올 마지막 페이지
 					if(nList.getLength() == 0) {
+						System.out.println("없댜");
+						startPage = 1;
+						endPage = 1;
 						break;
 						// 추가로 실행하면 계속해서 0을 찾음. - 서버가 새로고침 되기 전까지.
 					}
 				}//while
-				
 			}catch(Exception e) {
 				e.printStackTrace();
 			}
