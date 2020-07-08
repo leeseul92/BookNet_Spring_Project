@@ -1,9 +1,18 @@
 package com.pageturner.cls.scd;
 
+/**
+ * 	이 클래스는 추천도서 및 베스트셀러와 관련된 서비스 클래스이다.
+ * @author	박기윤
+ * @since	2020.07.07
+ * @version	v.1.0
+ * 
+ */
+
 import java.util.*;
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.*;
 import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
 import com.pageturner.cls.dao.*;
 import com.pageturner.cls.service.*;
 import com.pageturner.cls.util.*;
@@ -22,8 +31,9 @@ public class ScdService {
 	@Autowired
 	InterParkService interparkSrvc;
 	
+	@Transactional
 	@DependsOn
-	public void test_bestseller() {
+	public void scd_best_AND_rcmd() {
 		ScdVO scdVO = new ScdVO();
 		List<Integer> gList = bookDAO.getGenreList();
 		
@@ -31,6 +41,8 @@ public class ScdService {
 		
 		for (int cat_id : gList) {
 			ArrayList<BookVO> bList = interparkSrvc.interparkAPI(selApi.BESTSELL, cat_id);
+			scdVO.setClassify('B');
+			scdVO.setCat_id(cat_id);
 			
 			for (int i = 0; i < bList.size(); i++) {
 				BookVO bVO = new BookVO();
@@ -38,8 +50,18 @@ public class ScdService {
 				bSrvc.addBookData(bVO);
 				
 				scdVO.setBno(scdDAO.getBno(bVO));
-				scdVO.setCat_id(cat_id);
-				scdVO.setClassify('B');
+				scdDAO.addRcmdBook(scdVO);
+			}
+
+			ArrayList<BookVO> rList = interparkSrvc.interparkAPI(selApi.RECOMM, cat_id);
+			scdVO.setClassify('R');
+			
+			for (int i = 0; i < rList.size(); i++) {
+				BookVO bVO = new BookVO();
+				bVO = rList.get(i);
+				bSrvc.addBookData(bVO);
+				
+				scdVO.setBno(scdDAO.getBno(bVO));
 				scdDAO.addRcmdBook(scdVO);
 			}
 		}

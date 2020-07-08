@@ -36,19 +36,25 @@ public class ParsingBookInfo {
 //			PostsVO pVO = new PostsVO();
 			JsonObject obj = (JsonObject) jArr.get(i);
 			
-			bVO.setTitle(obj.get("title").getAsString());
+			bVO.setBname(obj.get("title").getAsString());
 			bVO.setSmallimg(obj.get("coverSmallUrl").getAsString());
 			bVO.setLargeimg(obj.get("coverLargeUrl").getAsString());
 			bVO.setGname(obj.get("categoryName").getAsString());
-			bVO.setPublisher(obj.get("publisher").getAsString());
-			bVO.setAuthor(obj.get("author").getAsString());
-			bVO.setTranslator(obj.get("translator").getAsString());
+			bVO.setPublish(obj.get("publisher").getAsString());
+			bVO.setWriter(obj.get("author").getAsString());
+			bVO.setTrans(obj.get("translator").getAsString());
 			bVO.setClassify(obj.get("link").getAsString());
-			bVO.setIsbn(obj.get("isbn").getAsString());
-			bVO.setCategoryId(obj.get("categoryId").getAsInt());
+			bVO.setGenre(obj.get("categoryId").getAsInt());
 			bVO.setCat_id(jObj.get("searchCategoryId").getAsInt());
 			
-			list.add(bVO);
+			try {
+				bVO.setIsbn(obj.get("isbn").getAsString());
+				list.add(bVO);
+			} catch (NullPointerException e) {
+				continue;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 //			System.out.println(bVO.toString());
 		}
 		

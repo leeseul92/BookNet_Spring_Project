@@ -14,7 +14,7 @@
 		FROM
 		    publishtab
 		WHERE
-		    publish = #{publisher}
+		    publish = #{publish}
 	</select>
 	
 	<select id="bookCk" parameterType="bVO" resultType="int">
@@ -36,7 +36,7 @@
 		INSERT INTO
 			publishtab(publish_no, publish)
 		VALUES(
-			${publish_no}, #{publisher}
+			${publish_no}, #{publish}
 		)
 	</insert>
 	
@@ -49,7 +49,7 @@
 			FROM
 				booktab, publishtab
 			WHERE
-				publishtab.publish = #{publisher}
+				publishtab.publish = #{publish}
 			GROUP BY
 				publishtab.publish_no
 		</selectKey>
@@ -57,58 +57,11 @@
 			booktab(bno, bname, genre, smallimg, largeimg,
 					writer, trans, isbn, publish_no)
 		VALUES(
-			${bno}, #{title}, ${categoryId}, #{smallimg},
-			#{largeimg}, #{author}, #{translator},
+			${bno}, #{bname}, ${genre}, #{smallimg},
+			#{largeimg}, #{writer}, #{trans},
 			#{isbn}, ${publish_no}
 		)
 	</insert>
-	
-	<insert id="addPeriod" parameterType="rcmdVO">
-		<selectKey keyProperty="map"
-					resultType="map" order="BEFORE">
-			SELECT
-				TO_CHAR(NVL(MAX(recomdate_no) + 1, 1)) recomdate_no,
-				TO_CHAR(NVL(MAX(recomdate_start) + 7, '2020-06-30'), 'yyyy-MM-dd') recomdate_start,
-				TO_CHAR(NVL(MAX(recomdate_end) + 7, '2020-07-06'), 'yyyy-MM-dd') recomdate_end
-			FROM
-				recomdatetab
-		</selectKey>
-		INSERT INTO
-			recomdatetab(recomdate_no, recomdate_start, recomdate_end)
-		VALUES(
-			#{map.RECOMDATE_NO,jdbcType=INTEGER}, #{map.RECOMDATE_START,jdbcType=DATE}, #{map.RECOMDATE_END,jdbcType=DATE}
-		)
-	</insert>
-	
-	<insert id="addRcmdBook" parameterType="rcmdVO">
-		<selectKey keyProperty="recom_no"
-					resultType="rcmdVO" order="BEFORE">
-			SELECT
-				NVL(MAX(recom_no) + 1, 1) recom_no
-			FROM
-				recomtab
-		</selectKey>
-		INSERT INTO
-			recomtab(recom_no, bno, recomdate_no, classify, cat_id)
-		VALUES(
-			${recom_no}, ${bno}, ${recomdate_no}, #{classify}, ${cat_id}
-		)
-	</insert>
-	
-	<select id="seldRcmdList" resultType="bVO">
-		SELECT
-			bname title, largeimg, gname, writer author,
-			publish publisher, cat_id, classify
-		FROM
-			booktab bt, genretab gt, publishtab pt,
-			recomdatetab rdt, recomtab rt
-		WHERE
-			sysdate BETWEEN recomdate_start AND recomdate_end
-			AND rt.recomdate_no = rdt.recomdate_no
-			AND bt.bno = rt.bno
-			AND gt.genre = bt.genre
-			AND pt.publish_no = bt.publish_no
-	</select>
 	
 	<select id="selGenreList" resultType="int">
 		SELECT

@@ -2,16 +2,13 @@ package com.pageturner.cls.scd;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/test")
-public class ScdCon {
+public class ScdController {
 	@Autowired
 	ScdService scdSrvc;
 
-	@RequestMapping("/scd.cls")
-	public void scdTest() {
-		scdSrvc.test_bestseller();
+	public void bestSeller() {
+		scdSrvc.scd_best_AND_rcmd();
 	}
 }

@@ -35,21 +35,4 @@ public class BookService {
 			bookDAO.addBook(bVO);
 		}
 	}
-	
-	public RecommendVO addPeriod() {
-		RecommendVO rcmdVO = new RecommendVO();
-		BookDAO bDAO = new BookDAO();
-		bDAO.addPeriod(rcmdVO);
-		return rcmdVO;
-	}
-	
-	public void addRcmd_AND_Bestsell(ArrayList<BookVO> list, RecommendVO rcmdVO) {
-		for (int i = 0; i < list.size(); i++) {
-			BookDAO bDAO = new BookDAO();
-			rcmdVO.setBno(list.get(i).getBno());
-			rcmdVO.setCat_id(list.get(i).getCat_id());
-			rcmdVO.setClassify(list.get(i).getClassify());
-			bDAO.addRcmdBook(rcmdVO);
-		}
-	}
 }

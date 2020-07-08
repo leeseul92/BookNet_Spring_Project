@@ -36,18 +36,6 @@ public class BookDAO {
 		sqlSession.insert("bookSQL.addBook", bVO);
 	}
 	
-	public void addPeriod(RecommendVO rcmdVO) {
-		sqlSession.insert("bookSQL.addPeriod", rcmdVO);
-	}
-	
-	public void addRcmdBook(RecommendVO rcmdVO) {
-		sqlSession.insert("bookSQL.addRcmdBook", rcmdVO);
-	}
-	
-	public List getRcmdList() {
-		return sqlSession.selectList("bookSQL.selRcmdList");
-	}
-	
 	public List<Integer> getGenreList() {
 		return sqlSession.selectList("bookSQL.selGenreList");
 	}

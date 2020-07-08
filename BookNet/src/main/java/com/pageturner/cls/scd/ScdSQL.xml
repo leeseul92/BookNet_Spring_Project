@@ -2,7 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!--
+	이 파일은 추천도서 및 베스트셀러와 관련된 데이터베이스 작업을
+	수행할 질의명령이 담긴 파일이다.
+	@작성자 :	박기윤
+	@작성일 :	2020.07.07
+	@버전   :	v.1.0
+-->
+
 <mapper namespace="scdSQL">
+
+	<sql id="bname">
+		CASE
+			WHEN LENGTH(bname) <![CDATA[<]]>= 10 THEN bname
+			ELSE SUBSTR(bname, 1, 10) || '...'
+		END AS bname
+	</sql>
+	
 	<insert id="addPeriod" parameterType="scdVO">
 		<selectKey keyProperty="recomdate_no" resultType="int" order="BEFORE">
 			SELECT
@@ -40,5 +56,21 @@
 			booktab
 		WHERE
 			isbn = #{isbn}
+	</select>
+	
+	<select id="getBestOrRcmdList" resultType="bVO" parameterType="scdVO">
+		SELECT
+		    bt.bno, largeimg, gname, writer, publish,
+		    <include refid="bname" />
+		FROM
+		    booktab bt, recomtab rt, recomdatetab rdt, genretab gt, publishtab pt
+		WHERE
+		    sysdate BETWEEN recomdate_start AND recomdate_end
+		    AND rt.recomdate_no = rdt.recomdate_no
+		    AND bt.bno = rt.bno
+		    AND gt.genre = bt.genre
+		    AND pt.publish_no = bt.publish_no
+		    AND cat_id = ${cat_id}
+		    AND classify = #{classify}
 	</select>
 </mapper>

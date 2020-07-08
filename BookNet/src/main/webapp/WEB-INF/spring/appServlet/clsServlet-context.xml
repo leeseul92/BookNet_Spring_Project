@@ -54,12 +54,12 @@
 	<beans:import resource="./serviceContext.xml"/>
 	<!-- 스케줄러 bean 처리 -->
 <!-- 	<beans:import resource="./context-quartz.xml"/> -->
-	<beans:bean id="scdCon" class="com.pageturner.cls.scd.ScdCon" />
+	<beans:bean id="scdCon" class="com.pageturner.cls.scd.ScdController" />
 	<task:annotation-driven scheduler="scheduler"/>
 	<task:scheduler id="scheduler" pool-size="10"/>
 	
 	<task:scheduled-tasks scheduler="scheduler">
-		<task:scheduled ref="scdCon" method="scdTest" cron="0 30 15 ? * TUE"/>
+		<task:scheduled ref="scdCon" method="bestSeller" cron="0 30 15 ? * TUE"/>
 	</task:scheduled-tasks>
 	 	
 	<context:component-scan base-package="com.pageturner.cls" />
