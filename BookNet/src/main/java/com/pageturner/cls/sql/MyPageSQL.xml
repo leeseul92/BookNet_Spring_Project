@@ -27,7 +27,7 @@
 		FROM
 		    membertab mt, profilepictab pt
 		WHERE
-		    mt.mno = pt.mno
+		    mt.mno = pt.mno(+)
 		    AND mt.mno = ${mno}
 	</select>
 	
