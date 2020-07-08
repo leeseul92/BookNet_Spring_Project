@@ -32,15 +32,20 @@ public class Main {
 	
 	//비로그인 회원 메인화면
 	@RequestMapping("/non.cls")
-	public ModelAndView showMainNon(HttpServletRequest req, ModelAndView mv) {
-		String view = "/main/non_main";
+	public ModelAndView showMainNon(HttpServletRequest req, ModelAndView mv, HttpSession session) {
+		String view = "main/non_main";
 		
 		List<PostsVO> list = mainSrvc.nonMain();
-		
+		String sid = (String) session.getAttribute("SID");
 		mv.addObject("LIST", list);
 		
-		mv.setViewName(view);
-		
+		if(sid == null) { //재로그인 시키기 
+			System.out.println("*****비 회원용 메인게시글 불러오기 완료*****");
+			mv.setViewName(view);
+		} else {
+			RedirectView rv = new RedirectView("/cls/main/main.cls");
+			mv.setView(rv);
+		}
 		return mv;
 	}
 	

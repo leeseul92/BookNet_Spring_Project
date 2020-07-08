@@ -32,6 +32,7 @@
 		<mapper resource="com/pageturner/cls/sql/BookSQL.xml"/>
 		<mapper resource="com/pageturner/cls/sql/LikeSQL.xml"/>
 		<mapper resource="com/pageturner/cls/scd/ScdSQL.xml" />
+		<mapper resource="com/pageturner/cls/sql/SearchSQL.xml" />
 		<!-- <mapper resource="com/pageturner/cls/sql/*SQL.xml" /> --> 
 	</mappers>
 </configuration>		
