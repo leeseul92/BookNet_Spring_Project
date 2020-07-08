@@ -1,6 +1,14 @@
 package com.pageturner.cls.scd;
 
-import org.apache.ibatis.type.Alias;
+/**
+ * 이 클래스는 추천도서 및 베스트셀러로 저장될 도서의 정보와 기간을
+ * 저장하는 VO 클래스이다.
+ * @author	박기윤
+ * @since	2020.07.07
+ * @version	v.1.0
+ */
+
+import org.apache.ibatis.type.*;
 
 @Alias("scdVO")
 public class ScdVO {

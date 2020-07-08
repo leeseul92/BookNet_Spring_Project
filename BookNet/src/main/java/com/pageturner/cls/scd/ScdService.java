@@ -66,4 +66,9 @@ public class ScdService {
 			}
 		}
 	}
+	
+	public ArrayList<BookVO> bestOrRcmd(ScdVO scdVO){
+		ArrayList<BookVO> list = (ArrayList<BookVO>)scdDAO.bestOrRcmdList(scdVO);
+		return list;
+	}
 }
