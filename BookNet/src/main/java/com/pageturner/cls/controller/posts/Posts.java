@@ -124,7 +124,8 @@ public class Posts {
 	//게시글 수정처리
 	@RequestMapping("/editPost.cls")
 	@ResponseBody
-	public void editPost(PostsVO pVO) {
-		
+	public int editPost(PostsVO pVO) {
+		System.out.println(pVO.getEno());
+		return postsSrvc.editPostProc(pVO);
 	}
 }

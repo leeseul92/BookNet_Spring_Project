@@ -63,8 +63,18 @@ public class PostsDAO {
 		return sqlSession.selectList("pSQL.selHashes", pno);
 	}
 	
+	//해당게시글 해시태그 내용 수정 전담함수
+	public void editHash(PostsVO pVO) {
+		sqlSession.update("pSQL.editHash", pVO);
+	}
+
+	//해당게시글 해시태그 isshow 수정 전담함수
+	public void isshowHash(PostsVO pVO) {
+		sqlSession.update("pSQL.isshowHash", pVO);
+	}
+	
 	//게시글 수정처리 전담함수
-	public void editPost(PostsVO pVO) {
-		sqlSession.update("pSQL.editPost", pVO);
+	public int editPost(PostsVO pVO) {
+		return sqlSession.update("pSQL.editPost", pVO);
 	}
 }

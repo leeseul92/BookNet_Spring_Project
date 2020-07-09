@@ -141,6 +141,28 @@
 		    pno = #{pno}
 	</select>
 	
+	<!-- 해당 게시글 해시태그 수정 -->
+	<update id="editHash" parameterType="pVO">
+		UPDATE
+		    hashtab
+		SET
+		    hname = #{hash}
+		WHERE
+		    pno = #{pno}
+		    AND hno = #{hno}
+	</update>
+
+	<!-- 해당 게시글 해시태그 isshow 수정 -->
+	<update id="isshowHash" parameterType="pVO">
+		UPDATE
+		    hashtab
+		SET
+		    isshow = 'N'
+		WHERE
+		    pno = #{pno}
+		    AND hno = #{hno}
+	</update>
+	
 	<!-- 게시글 수정 질의명령 -->
 	<update id="editPost" parameterType="pVO">
 		update

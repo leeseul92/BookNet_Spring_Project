@@ -307,33 +307,42 @@ $(document).ready(function(){
 		$('.edit-del-modal').css('display', 'none');
 		$('#pbody'+pno).css('display', 'none');
 		$('#ebody'+pno).css('display', 'block');
+		var body = $('#pbody'+pno).text();
+		$('#ebody'+pno).text(body);
 		$('.editButton').css('display', 'inherit');
 		$('.emotiondiv').css('display', 'block');
 		
-		var editbody = $('#ebody'+pno).text();
-		var editemotion = $('#editemo'+pno).val();
-		
-		//수정된 게시글 해시태그 분리하기
-		var hash = splitedHash(editbody);
-		
-		//수정처리 비동기처리
-		$.ajax({
-			url: '/cls/posts/editPost.cls',
-			type: 'POST',
-			dataType: 'json',
-			data: {
-				'pno': pno,
-				'postcont': editbody,
-				'eno': editemotion,
-				'hash': hash
-			},
-			success: function(){
-				
-			},
-			error: function(){
-				alert('##통신에러##');
-			}
-		});
+		$('#eSubmit'+pno).click(function(){
+			var editbody = $('#ebody'+pno).text();
+			var editemotion = $('#editemo'+pno).val();
+			
+			alert(editbody);
+			//수정된 게시글 해시태그 분리하기
+			var hash = splitedHash(editbody);
+			
+			//수정처리 비동기처리
+			$.ajax({
+				url: '/cls/posts/editPost.cls',
+				type: 'POST',
+				dataType: 'json',
+				data: {
+					'pno': pno,
+					'postcont': editbody,
+					'eno': editemotion,
+					'hash': hash
+				},
+				success: function(rst){
+					if(rst == 1){
+						alert('게시글이 수정되었습니다.');
+					} else {
+						alert('게시글이 수정에 실패하였습니다.');
+					}
+				},
+				error: function(){
+					alert('##통신에러##');
+				}
+			});
+		})
 	});
 	
 	//게시글 삭제처리 

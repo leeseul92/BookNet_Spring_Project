@@ -151,17 +151,59 @@ public class PostsService {
  	}
  	
  	//게시글 수정처리
- 	public void editPostProc(PostsVO pVO) {
- 		//게시글 수정시킬 db 작업
- 		pDAO.editPost(pVO);
+ 	public int editPostProc(PostsVO pVO) {
  		//수정된 게시글에 작성된 해시태그 추출할 함수 호출
  		ArrayList<String> hash = splitHash(pVO.getHash());
+ 		System.out.println(hash.toString());
  		//원본 게시글에 작성된 해시태그 불러오기 
  		ArrayList<PostsVO> oriHash = (ArrayList<PostsVO>)pDAO.selHash(pVO.getPno());
- 		
+ 		System.out.println(oriHash.toString());
+
+ 		//원본 해시태그와 수정된 해시태그 구분하여 DB처리해주는 부분  
  		if(hash.size() == oriHash.size()) {
- 			
+ 			for(int i = 0; i < hash.size(); i++) {
+ 				if(!hash.get(i).equals(oriHash.get(i).getHash())) {
+ 					//해시태그가 동일하지 않으면 hname 변경시켜주기 
+ 					pVO.setHash(hash.get(i));
+ 					pVO.setHno(oriHash.get(i).getHno());
+ 					pDAO.editHash(pVO);
+ 				}
+ 			}
+ 		} else if(hash.size() > oriHash.size()) {
+ 			for(int i = 0; i < hash.size(); i++) {
+ 				if(i < oriHash.size()) {
+ 					if(!hash.get(i).equals(oriHash.get(i).getHash())) {
+ 						//해시태그가 동일하지 않으면 hname 변경시켜주기 
+ 						pVO.setHash(hash.get(i));
+ 						pVO.setHno(oriHash.get(i).getHno());
+ 						pDAO.editHash(pVO);
+ 					}
+ 				} else {
+ 					//수정된 나머지 태그는 추가해줘야함.
+ 					pVO.setHash(hash.get(i));
+ 					pDAO.addHash(pVO);
+ 				}
+ 			}
+ 		} else if(hash.size() < oriHash.size()) {
+ 			for(int i = 0; i < oriHash.size(); i++) {
+ 				if(i < hash.size()) {
+ 					if(!hash.get(i).equals(oriHash.get(i).getHash())) {
+ 						//해시태그가 동일하지 않으면 hname 변경시켜주기 
+ 						pVO.setHash(hash.get(i));
+ 						pVO.setHno(oriHash.get(i).getHno());
+ 						pDAO.editHash(pVO);
+ 					}
+ 				} else {
+ 					//삭제된 원본 태그는 수정되어야함.
+ 					pVO.setHno(oriHash.get(i).getHno());
+ 					pDAO.isshowHash(pVO);
+ 				}
+ 			}
  		}
+
+ 		//게시글 수정시킬 db 작업
+ 		int rst = pDAO.editPost(pVO);
+ 		return rst;
  	}
  	
 }
