@@ -115,9 +115,7 @@ public class Member {
 	@RequestMapping("/editMemInfo.cls")
 	public ModelAndView edit(HttpServletRequest req, ModelAndView mv) {
 		mv.setViewName("mypage/editMemb");
-//		mv.setView(new RedirectView("mypage/editMemb"));
 		String sid = (String) req.getSession().getAttribute("SID");
-		System.out.println(sid);
 		List<MemberVO> list = mDAO.selUser(sid);
 		List<PostsVO> genre = mDAO.genre();
 		mv.addObject("LIST", list);

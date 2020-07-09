@@ -68,22 +68,22 @@ public class libXmlAPI {
 							
 							Element eElement = (Element) nNode;
 							
-//							System.out.println("#################");
-//							System.out.println("도서관 명 : " + getTagValue("LBRRY_NAME",eElement));
+							System.out.println("#################");
+							System.out.println("도서관 명 : " + getTagValue("LBRRY_NAME",eElement));
 							String lname = getTagValue("LBRRY_NAME",eElement);
-//							System.out.println("전화번 호 : " + getTagValue("TEL_NO",eElement));
-//							System.out.println("휴     일 : " + getTagValue("FDRM_CLOSE_DATE",eElement));
-//							System.out.println("경     도 : " + getTagValue("XCNTS",eElement));
-//							System.out.println("위     도 : " + getTagValue("YDNTS",eElement));
-							if(lname.equals("강남구립못골도서관")) {
-								System.out.println(" 등장!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
-								break;
-							}
+							System.out.println("전화번 호 : " + getTagValue("TEL_NO",eElement));
+							System.out.println("휴     일 : " + getTagValue("FDRM_CLOSE_DATE",eElement));
+							System.out.println("경     도 : " + getTagValue("XCNTS",eElement));
+							System.out.println("위     도 : " + getTagValue("YDNTS",eElement));
+//							if(lname.equals("강남구립못골도서관")) {
+//								System.out.println(" 등장!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+//								break;
+//							}
 						} //if
 					} //for
 					startPage += 1;
 					endPage += 1;
-//					System.out.println("Page number : " + startPage+"~"+endPage);
+					System.out.println("Page number : " + startPage+"~"+endPage);
 					
 					// 뽑아올 마지막 페이지
 					if(nList.getLength() == 0) {
