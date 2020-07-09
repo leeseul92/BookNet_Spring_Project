@@ -42,6 +42,7 @@
 				</div>
 				<div class="searchbox">
 					<input class="searchinput" type="text" placeholder="search">
+					<span id="searchclear">X</span>
 				</div>
 				<div class="iconsbox">
 					<div style="float: left; width:80px;"> 
