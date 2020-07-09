@@ -28,6 +28,13 @@
 		<beans:property name="order" value="1" />
 	</beans:bean>
 	
+	<!-- 파일 업로드를 위한 환경설정 처리 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="1000000000" />
+		<beans:property name="maxInMemorySize" value="1000000000" />	<!-- 1GB -->
+		<beans:property name="defaultEncoding" value="UTF-8" />
+	</beans:bean>
+	
 	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
 	<!-- 
 			뷰의 실행 우선 순위를 지정하는 부분이다.

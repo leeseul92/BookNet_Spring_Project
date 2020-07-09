@@ -40,6 +40,9 @@
 	}
 </style>
 <script type="text/javascript">
+/*
+// 체크박스 3개 넘게 체크하면 막는 이벤트함수
+
 var maxChecked = 3;   // 체크 최대 개수
 var totalChecked = 0; // 총 체크 수
 
@@ -56,6 +59,7 @@ function CountChecked(check) {
     }
     
 }
+*/
 	$(function(){
 		// 비번일치
 		$('#pwck').keyup(function(){
@@ -92,6 +96,7 @@ function CountChecked(check) {
 			
 			var inter = gen1 + ',' + gen2 + ',' + gen3;
 			$('#interest').val(inter);
+			alert($('#interest').val());
 			
 			$('#frm2').submit();
 		});
@@ -113,22 +118,22 @@ function CountChecked(check) {
 <body>
 	<div class="w3-col l3 m3"><p></p></div>
 	<div class="w3-col l6 m6 s12">
-		<form class="w3-col" method="post" action="/cls/member/editPW.cls" name="frm" id="frm1" encType="multipart/form-data">
+		<form class="w3-col" method="post" action="/cls/member/editPW.cls" name="frm1" id="frm1">
 			<div class="w3-col w3-padding w3-black w3-card">
 				<h3 class="w3-center">정보수정</h3>
 			</div>
 				<!-- 비번수정 -->
 			<div class="w3-col w3-padding w3-border w3-card" style="margin-top: 10px;">
 				<div class="w3-row">
-					<label class="w3-col m3 w3-right-align w3-padding w3-border" for="pw">현재 비밀번호</label>
+					<label class="w3-col m3 w3-right-align w3-padding w3-border" for="oldpw">현재 비밀번호</label>
 					<div class="w3-col m9 w3-padding w3-border">
-						<input  class="w3-col m12 " type="text" id="pw" name="pw" >
+						<input  class="w3-col m12 " type="password" id="oldpw" name="oldpw" >
 					</div>
 				</div>
 				<div class="w3-row">
 					<label class="w3-col m3 w3-right-align w3-padding w3-border" for="newpw">새 비밀번호</label>
 					<div class="w3-col m9 w3-padding w3-border">
-						<input class="w3-col m12 " type="password" id="newpw" name="newpw">
+						<input class="w3-col m12 " type="password" id="newpw" name="pw">
 					</div>
 				</div>
 				<div class="w3-row">
@@ -142,7 +147,7 @@ function CountChecked(check) {
 		</form>
 			<div class="w3-col m12 w3-padding w3-card w3-center w3-blue w3-button" id="pbtn">비밀번호 변경</div>
 				<!-- 프로필사진 -->
-		<form class="w3-col" method="post" action="/cls/member/editUser.cls" name="frm" id="frm2" encType="multipart/form-data">
+		<form class="w3-col" method="post" action="/cls/member/editUser.cls" name="frm2" id="frm2" encType="multipart/form-data">
 			<div class="w3-col w3-padding w3-border w3-card" style="margin-top: 10px;">
 				<div class="w3-row">
 					<label class="w3-col m3 w3-right-align w3-padding w3-border" for="file">프로필 사진</label>
@@ -154,7 +159,7 @@ function CountChecked(check) {
 					</div>
 				</div>
 				<!-- 관심분야 -->
-				<input type="hidden" id="interest" name="interest" value="">
+				<input type="hidden" id="interest" name="interest">
 				<div class="w3-row">
 					<label class="w3-col m3 w3-right-align w3-padding w3-border" for="interest">관심분야</label>
 					<div class="w3-col m9 w3-padding w3-border">

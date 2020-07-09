@@ -30,7 +30,7 @@
 	<bean id="bookDAO" class="com.pageturner.cls.dao.BookDAO" />
 	
 	<!-- 프로필 사진 업로드 관련 데이터베이스 처리 dao bean 처리 -->
-	<!-- <bean id="fDAO" class="com.pageturner.cls.dao.ProfileDAO" /> -->
+	<bean id="fDAO" class="com.pageturner.cls.dao.ProfileDAO" />
 	
 	<!-- 좋아요 처리 관련 데이터베이스 처리 dao bean 처리 -->
 	<bean id="lDAO" class="com.pageturner.cls.dao.LikeDAO" />
