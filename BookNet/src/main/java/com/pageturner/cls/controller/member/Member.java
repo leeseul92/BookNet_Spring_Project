@@ -204,19 +204,21 @@ public class Member {
 	}
 
 	// 우현우
-	// 회원가입 폼 요청
-	@RequestMapping("/join.cls")
-	public ModelAndView joinForm(ModelAndView mv, HttpSession session) {
-		String sid = (String) session.getAttribute("SID");
-		String view = "member/join";
-		if (sid != null) {
-			RedirectView rv = new RedirectView("main");
-			mv.setView(rv);
-		} else {
-			mv.setViewName(view);
+		// 회원가입 폼 요청
+		@RequestMapping("/join.cls")
+		public ModelAndView joinForm(ModelAndView mv, HttpSession session) {
+			String sid = (String) session.getAttribute("SID");
+			String view = "member/join";
+			if (sid != null) {
+				RedirectView rv = new RedirectView("main");
+				mv.setView(rv);
+			} else {
+				mv.setViewName(view);
+			}
+			List<PostsVO> genre = mDAO.genre();
+			mv.addObject("GENRE", genre);
+			return mv;
 		}
-		return mv;
-	}
 
 	// 우현우
 	// 아이디 중복여부 확인 요청
@@ -239,26 +241,25 @@ public class Member {
 		return map;
 	}
 	// 우현우
-	// 회원가입 처리
-	@RequestMapping("/joinProc.cls")
-	public ModelAndView joinProc(HttpSession session, ModelAndView mv, MemberVO mVO, RedirectView rv) {		
-		try {
-		System.out.println(mVO);
-		int cnt = mDAO.join(mVO);
-		rv = null;
-		if (cnt == 1) {
-			session.setAttribute("SID", mVO.getId());
-				
-			rv = new RedirectView("/cls/main/main.cls");
-		} else {
-				rv = new RedirectView("/cls/main/non.cls");
-		}
-		mv.setView(rv);
-				
-		} catch (Exception e) {
-			String view = "error/error";
-			mv.setViewName(view);
-		}
-			return mv;
-	}	
+		// 회원가입 처리
+		@RequestMapping("/joinProc.cls")
+		public ModelAndView joinProc(HttpSession session, ModelAndView mv, MemberVO mVO, RedirectView rv) {		
+			try {
+			System.out.println(mVO);
+			int cnt = mDAO.join(mVO);
+			rv = null;
+			if (cnt == 1) {
+				session.setAttribute("SID", mVO.getId());
+					
+				rv = new RedirectView("/cls/main/main.cls");
+			} else {
+					rv = new RedirectView("/cls/main/non.cls");
+			}
+			mv.setView(rv);
+			} catch (Exception e) {
+				String view = "error/error";
+				mv.setViewName(view);
+			}
+				return mv;
+		}	
 }

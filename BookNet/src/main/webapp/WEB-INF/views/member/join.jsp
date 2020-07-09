@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%-- <%@taglib prefix="c" uri="http://java.sun.com/jstl/core"%> --%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 
 <!DOCTYPE html>
 <html>
@@ -228,13 +228,21 @@
 									<label for="birthday">생년월일</label> <input type="date"
 										class="form-control" id="birthday" name="birthdate" value="">
 								</div>
-
-								
+					
 
 
 															
+							<label for="firstG">관심장르</label>
 							<div class="controls">
-								<div class="controls">
+							<c:forEach var="data" items="${GENRE }" varStatus="st">
+						<c:if test="${data.genre < 200 }">
+							<div style="display: inline-block;">
+							<input type="checkbox" onclick="CountChecked(this)" id="${data.genre }" name="interest" value="${data.gname}" faking-checkbox>
+							<label class="gangre" for="${data.genre }">${data.gname }</label>
+							</div>
+						</c:if>
+						</c:forEach>
+								<!-- <div class="controls">
 
 									<label for="firstG">관심장르</label> 
 										<select class="form-control" id="firstG" name="interest">
@@ -367,7 +375,7 @@
 										<option>중국도서(해외)</option>
 										<option>해외주문원서(해외)</option>
 									</select>
-								</div>
+								</div> -->
 							</div>
 									
 								<div class="controls">

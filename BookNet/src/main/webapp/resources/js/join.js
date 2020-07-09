@@ -1,6 +1,24 @@
+// 체크박스 3개 넘게 체크하면 막는 이벤트함수
+
+var maxChecked = 3;   // 체크 최대 개수
+var totalChecked = 0; // 총 체크 수
+
+function CountChecked(check) {
+    if (check.checked)
+        totalChecked += 1; // totalChecked 증가
+    else
+        totalChecked -= 1; // totalChecked 감소
+
+    if (totalChecked > maxChecked) {
+        alert ("관심분야 지정은 통합 최대 3개 까지만 가능합니다.");
+    check.checked = false;
+    totalChecked -= 1;
+    }
+    
+}
+
 $(function(){
 		var count = '';
-		
 		//데이터 입력 여부 확인 후 데이터 넘기기
 	$('#submit').click(function(){
 		var id = $('#id').val();
@@ -11,9 +29,6 @@ $(function(){
 		var mailck = /^[A-Za-z0-9]+@[A-Za-z]+\.[A-Za-z]+/;
 		var gen = $('#gen').val();
 		var birth = $('#birthday').val();
-		var gangre1 = $('#firstG').val();
-		var gangre2 = $('#secondG').val();
-		var gangre3 = $('#thirdG').val();
 		var check = $('#emailck').click();
 		var mck = $('#mcheck').click();
 		
@@ -41,13 +56,7 @@ $(function(){
 		}else if(gen == '선택하세요'){
 			alert('성별을 선택하세요');
 		}else if(birth == ''){
-			alert('생일을 입력해 주세요');
-		}else if(gangre1 == '선택하세요'){
-			alert('3개의 장르를 선택해 주세요');
-		}else if(gangre2 == '선택하세요'){
-			alert('3개의 장르를 선택해 주세요');
-		}else if(gangre3 == '선택하세요'){
-			alert('3개의 장르를 선택해 주세요');	
+			alert('생일을 입력해 주세요');	
 		}else{
 			$('#frm').submit();			
 		}
@@ -168,6 +177,22 @@ $(function(){
 			$('#email-ck').val('');
 		}
 	});
+
+	/*// 체크박스 3개 넘게 체크하면 막는 이벤트함수	
+	document.getElementsByName("interest").onclick = function(check){
+		if(check.checked){
+			totalChecked += 1;
+		}else{
+			totalChecked -= 1;
+		}
+		
+		if(totalChecked > maxChecked){
+			alert('관심분야는 3개까지 지정 가능합니다.');
+			check.checked = false;
+			totalChecked  -= 1;
+		}
+	}
+	*/
 	
 	//자기소개 100자 제한 
 	$('#introduce').keyup(function(){
@@ -178,6 +203,6 @@ $(function(){
 			$(this).val(text.substring(0,100));
 		}
 	});
-
+	
 
 });
