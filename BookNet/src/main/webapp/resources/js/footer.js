@@ -30,7 +30,7 @@ $(function(){
 	 		}
 		})
 	})
-	$('#influencer').click(function(){
-		$('#influencer').attr('href','/cls/search/searchAll.cls');
-	})
+//	$('#influencer').click(function(){
+//		$('#influencer').attr('href','');
+//	})
 })
