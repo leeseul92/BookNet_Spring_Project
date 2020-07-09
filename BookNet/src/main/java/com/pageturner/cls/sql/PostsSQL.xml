@@ -142,15 +142,14 @@
 	</select>
 	
 	<!-- 게시글 수정 질의명령 -->
-	<!-- 
-	 <update id="editPost" parameterType="pVO">
+	<update id="editPost" parameterType="pVO">
 		update
 		    poststab
 		set
-		    postcont = 
-		    
+		    postcont = #{postcont},
+		    eno = #{eno}
 		where
 		    pno = #{pno}
 	</update>
-	 -->
+	 
 </mapper>					

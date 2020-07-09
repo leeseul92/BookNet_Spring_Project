@@ -62,4 +62,9 @@ public class PostsDAO {
 	public List<PostsVO> selHash(int pno) {
 		return sqlSession.selectList("pSQL.selHashes", pno);
 	}
+	
+	//게시글 수정처리 전담함수
+	public void editPost(PostsVO pVO) {
+		sqlSession.update("pSQL.editPost", pVO);
+	}
 }

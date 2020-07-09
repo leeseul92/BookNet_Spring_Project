@@ -31,7 +31,6 @@ public class ScdService {
 	@Autowired
 	InterParkService interparkSrvc;
 	
-	@Transactional
 	@DependsOn
 	public void scd_best_AND_rcmd() {
 		ScdVO scdVO = new ScdVO();
