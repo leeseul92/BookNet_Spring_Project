@@ -12,14 +12,16 @@
 <head>
 <meta charset="UTF-8">
 <title>비회원 메인페이지</title>
-<link rel="stylesheet" href="/cls/css/nonmem.css?v=1"">
-<link rel="stylesheet" href="/cls/css/proj_fixed.css?v=1"">
-<link rel="stylesheet" href="/cls/css/modal.css?v=1"">
-<link rel="stylesheet" href="/cls/css/w3.css?v=1"">
-<link rel="stylesheet" href="/cls/css/non_search.css?v=1"">
+<link rel="stylesheet" href="/cls/css/nonmem.css?v=1 ">
+<link rel="stylesheet" href="/cls/css/non_search.css?v=1">
+<link rel="stylesheet" href="/cls/css/proj_fixed.css?v=<%=System.currentTimeMillis() %>">
+<link rel="stylesheet" href="/cls/css/modal.css?v=<%=System.currentTimeMillis() %>">
+<link rel="stylesheet" href="/cls/css/w3.css?v=<%=System.currentTimeMillis() %>">
 <script type="text/javascript" src="/cls/js/jquery-3.5.0.min.js"></script>
-<script type="text/javascript" src="/cls/js/nonmem.js?v=1"></script>
-<script src = "https://unpkg.com/sweetalert/dist/sweetalert.min.js?v=1"" ></script>
+<script type="text/javascript" src="/cls/js/fixed.js?v=<%=System.currentTimeMillis() %>"></script>
+<script type="text/javascript" src="/cls/js/clock.js?v=<%=System.currentTimeMillis() %>"></script>
+<script type="text/javascript" src="/cls/js/nonmem.js?v=<%=System.currentTimeMillis() %>"></script>
+<script src = "https://unpkg.com/sweetalert/dist/sweetalert.min.js?v=1" ></script>
 </head>
 <form method="POST" id="frm2">
 	<input type="hidden" id="pno" name="pno"> <!-- 게시글 삭제시 넘겨줄 게시글 번호 -->

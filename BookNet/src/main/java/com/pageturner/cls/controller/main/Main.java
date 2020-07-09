@@ -40,8 +40,12 @@ public class Main {
 		String view = "main/non_main";
 		
 		List<PostsVO> list = mainSrvc.nonMain();
+		List<PostsVO> mList = mainSrvc.mostRefRank();
+		List<PostsVO> genre = postsSrvc.genresList();
 		String sid = (String) session.getAttribute("SID");
 		mv.addObject("LIST", list);
+		mv.addObject("LIST", list); 
+		mv.addObject("OLIST", mList); 
 		
 		if(sid == null) { //재로그인 시키기 
 			System.out.println("*****비 회원용 메인게시글 불러오기 완료*****");

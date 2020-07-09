@@ -41,7 +41,7 @@
             style="font-size: 18.72px; position: absolute; top: 40px; left: 735px; display: flex; font-family: Verdana, sans-serif;">Project_Team</h3>
          <br>
          <h4
-            style="position: absolute; top: 35px; left: 910px; display: flex; font-size: 10pt; font-family: Verdana, sans-serif;">`
+            style="position: absolute; top: 35px; left: 910px; display: flex; font-size: 10pt; font-family: Verdana, sans-serif;">BookNet
             KOR</h4>
          <br>
          <h4
