@@ -41,10 +41,8 @@ public class Main {
 		
 		List<PostsVO> list = mainSrvc.nonMain();
 		List<PostsVO> mList = mainSrvc.mostRefRank();
-		List<PostsVO> genre = postsSrvc.genresList();
 		String sid = (String) session.getAttribute("SID");
 		mv.addObject("LIST", list);
-		mv.addObject("LIST", list); 
 		mv.addObject("OLIST", mList); 
 		
 		if(sid == null) { //재로그인 시키기 

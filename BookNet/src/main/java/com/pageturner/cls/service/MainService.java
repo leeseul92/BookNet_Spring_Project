@@ -25,7 +25,8 @@ public class MainService {
 	
 	//비로그인 회원용 메인게시글화면
 	public List<PostsVO> nonMain(){
-		return mainDAO.showNonMain();
+		List<PostsVO> list = mainDAO.showNonMain();
+		return list;
 	}
 	
 	//로그인한 회원용 메인게시글화면  

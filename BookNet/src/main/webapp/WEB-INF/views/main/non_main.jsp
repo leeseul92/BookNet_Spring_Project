@@ -11,6 +11,13 @@
 <html style="background-color: #F3F0F7">
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript">
+	$(function(){
+		$('.likebtn').click(function(){
+			$(location).attr('#');
+s		})
+	})
+</script>
 <title>비회원 메인페이지</title>
 </head>
 <body onload="printClock()"/>
@@ -24,6 +31,7 @@
 				<!-- 좌측 게시글 부분 -->
 				<div class="posts_area">
 					<c:forEach var="data" items="${LIST}">
+					<form method="POST" id="toDetailFrm" >
 						<article class="eachPost"><!-- id="${data.pno}" -->
 							<!-- 작성자 정보 & 버튼 :: 아이디 불러와야함  -->
 							<div class="wrtInfo">
@@ -32,13 +40,11 @@
 								</div>
 								<div class="wrter" id="id${data.pno}"><a href=""><b id="">${data.id}</b></a></div>
 								<div class="time" id="time${data.pno}">${data.pdate}</div>
-								<c:if test="${SID eq data.id}">
-									<div class="like-butt" id="${data.pno}" style="display: flex;'">
-										<span style="font-size: 12px; line-height: 0px;" class="e-d-img edbtn" id=""></span>
-									</div>
-								</c:if>
-								<div class="like-butt" id="${data.pno}" style="display: flex;'">
-									<span style="font-size: 12px; line-height: 0px;" class="like-img likebtn" id="like${data.pno}"></span>
+								<div class="like-butt" id="">
+									<span style="font-size: 12px; line-height: 0px;" class="comt-img"></span>
+								</div>
+								<div class="like-butt" id="" style="display: flex;'">
+									<span style="font-size: 12px; line-height: 0px;" class="like-img" id=""></span>
 								</div>
 							</div>
 							<!-- 게시글의 본문부분::도서사진,도서이름,본문 -->
@@ -58,14 +64,31 @@
 								</div>
 								<div class="post-body">
 									<!-- 게시글 부분 -->
-									<a style="box-sizing: border-box; font-size: 18px;" id="pbody${data.pno}">${data.postcont}</a>
+									<a style="box-sizing: border-box; font-size: 13px;" id="pbody${data.pno}">${data.postcont}</a>
+									<!-- 게시글 수정시 보여줄 textarea -->
+									<textarea class="editPosts" id="ebody${data.pno}">${data.postcont}</textarea>
+								</div>
+								<div style="width: 175px; float: left; height: 40px;">
+									<input type="button" class="editButton" id="eSubmit${data.pno}" value="edit"/>
 								</div>
 							</div>
 							<div class="wrtInfo">
-								<div class="etcdiv" style="text-align: left; font-size: 13px;" id="hash${data.pno}">${data.hash}</div>
+								<input type="hidden" id="emo${data.pno}" name="emo${data.pno}" value="${data.eno}"/>
+								 <!--  감정 셀렉트 -->
+								<div class="emotiondiv">
+									<select name="emotion" id="editemo${data.pno}" style="float: left; width: 100%; height: 100%; margin: 5px; font-size: 13px;">
+										<option value="">감정을 선택해주세요X)</option>
+										<option value="2">덜덜;무서워욧!</option>
+										<option value="3">ㅠ_ㅠ불안해요..</option>
+										<option value="4">very exciting!</option>
+										<option value="1">행복해요X)</option>
+										<option value="5">그리워요;ㅁ;</option>
+									</select>
+								</div>
 								<span class="modifdiv modi_post" id="${data.pno}"></span>
 							</div>
 						</article>
+					</form>	
 					</c:forEach>
 					<!-- 게시물 수정 삭제 선택 띄워주는 모달 -->
 					<div class="modal edit-del-modal" role="none">
@@ -81,53 +104,8 @@
 							</div>
 						</div>
 					</div>
-					<!-- 게시물 상세보는 모달 -->
-					<div class="modal detailPost" role="none">
-						<div class="p-modal-content" id="" style="height: 540px;">
-							<span class="close w-x-btn" id="d-close_butt">x</span>
-							<div class="w100-pt10">
-								<div class="wrtProf" style="width: 45px; height: 45px;">
-									<img src="">
-								</div>
-								<div class="wrter" style="line-height: 40px;" id="">
-									<a href="" style="font-size: 18px;"><b class="wrter"></b></a>
-								</div>
-								<div class="time" style="line-height: 40px;" id="time"></div>
-								<div class="like-butt" id="">
-									<span style="font-size: 12px; line-height: 0px;" class="comt-img comtbtn"></span>
-								</div>
-								<div class="like-butt" id="" style="display: flex;'">
-									<span style="font-size: 12px; line-height: 0px;" class="like-img likebtn" id=""></span>
-								</div>
-								<div class="w100-h290">
-									<div class="book-pic">
-										<!-- 도서 사진 들어갈 부분 -->
-										<img id="bimg" src="" style="float: left; box-sizing: border-box;" />
-									</div>
-									<div class="genre-pad" id="genre-pad"></div>
-									<div class="genre-pad" style="font-size: 25px; line-height: 25px;"><b id="genre-name"><b></b></b></div>
-									<div class="detail-body">
-										<!-- 게시글 부분 -->
-										<a style="box-sizing: border-box; font-size: 15px;" id="p-body"></a>
-									</div>
-								</div>
-								<div class="w100-h35">
-									<div style="margin-left: 20px; text-align: left; font-size: 12px;" id="gethash"></div>
-								</div>
-								<div class="w100-h95" id="">
-									<!-- 댓글 리스트 뽑아오기 -->
-								</div>
-								<div class="wrtcomt hidcommt" style="display: none;" id="">
-									<div class="comwrter">
-										<input type="hidden">
-										<a>${SID}</a>
-									</div>
-									<input type="text" class="combody" placeholder="댓글을 입력하세요." />
-									<input type="button" class="comsubbtn" value="등록" id=""/>
-								</div>
-							</div>
-						</div>
-					</div>
+					<!-- 게시물 상세보는 모달 include -->
+					<jsp:include page="/WEB-INF/views/postsDetail.jsp" />
 				</div>
 				<!-- 우측 정보 부분 : 고정페이지로 들어갈 것-->
 				<div class="info_area">

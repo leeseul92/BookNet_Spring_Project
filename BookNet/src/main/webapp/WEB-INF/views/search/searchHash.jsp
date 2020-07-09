@@ -95,9 +95,6 @@
                            </div>
                         </article>
                         </c:forEach>
-                        <div style="display: inline-block; width:100%; height:200px; text-align:center; ">
-                           <b>-End-</b>
-                        </div>
                         <!-- /게시글  -->
                      </div>
                </div>
