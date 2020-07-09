@@ -23,6 +23,16 @@
 		</trim>
 	</select>
 	
+	<select id="ckFal" parameterType="falVO" resultType="string">
+		SELECT
+			ischeck
+		FROM
+			fallowtab
+		WHERE
+			fallow_no = ${fallow_no}
+			AND fallower_no = ${fallower_no}
+	</select>
+	
 	<select id="falList" parameterType="falVO" resultType="falVO">
 		SELECT
 			fallow_no, fallower_no, id, save_name sname, save_loc sloc, ischeck
@@ -46,42 +56,20 @@
 	</select>
 	
 	<insert id="newFal" parameterType="falVO">
-		<selectKey keyProperty="fal_no" resultType="int" order="BEFORE">
-			SELECT
-				NVL(MAX(fal_no) + 1, 1)
-			FROM
-				fallowtab
-		</selectKey>
-		INSERT
-			fallowtab(fal_no, fallow_no, fallower_no)
+		INSERT INTO
+			fallowtab(fallow_no, fallower_no)
 		VALUES(
-			${fal_no}, ${fallow_no}, ${fallower_no}
+			#{fallow_no}, #{fallower_no}
 		)
 	</insert>
-	
-	<select id="ckFal" parameterType="falVO" resultType="string">
-		SELECT
-			ischeck
-		FROM
-			liketab
-		WHERE
-			fallow_no = ${fallow_no}
-			AND fallower_no = ${fallower_no}
-	</select>
 	
 	<update id="falStateChange" parameterType="falVO">
 		UPDATE
 			fallowtab
-		SET
-			<choose>
-				<when test="ischeck == 'Y'">
-					ischeck = 'N'
-				</when>
-				<otherwise>
-					ischeck = 'Y',
-					fal_time = sysdate
-				</otherwise>
-			</choose>
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="true">ischeck = #{ischeck},</if>
+			<if test="revck eq 'YES'">fal_time = sysdate,</if>
+		</trim>
 		WHERE
 			fallow_no = ${fallow_no}
 			AND fallower_no = ${fallower_no}

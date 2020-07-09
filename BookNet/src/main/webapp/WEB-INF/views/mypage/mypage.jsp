@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <script type="text/javascript" src="/cls/js/jquery-3.5.0.min.js"></script>
+<script type="text/javascript" src="/cls/js/mypage.js"></script>
 <script type="text/javascript">
 </script>
 <title>마이페이지</title>
@@ -42,10 +43,25 @@
                 			<a id="cntfallower" href="/cls/mypage/fallower.cls?id=${INFO.id}">${CNTFALLOWER}</a>
              			</h3>
               			<!-- 팔로우 여부 -->
-              			<div class="w3-col w3-center">
-							  <c:if test="${SID ne INFO.id}">
-							  </c:if>
-             			</div>
+						  <c:if test="${SID ne INFO.id}">
+	              			<div class="w3-col w3-center">
+								<input name="pid" id="pid" type="hidden" value="${INFO.id}" />
+							  	<c:choose>
+							  		<c:when test="${CKFAL == 'Y'}">
+							  			<h5 class="w3-button"  id="fal">
+											팔로우중
+										</h5>
+										<input name="ckfal" id="ckfal" type="hidden" value="Y" />
+									</c:when>
+									<c:otherwise>
+										<h5 class="w3-button" id="fal">
+											팔로우하기
+										</h5>
+										<input name="ckfal" id="ckfal" type="hidden" value="N" />
+							  		</c:otherwise>
+							  	</c:choose>
+	             			</div>
+						  </c:if>
             		</div>
           		</div>
           		<div class="w3-col m1"><p></p></div>

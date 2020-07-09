@@ -9,7 +9,6 @@ package com.pageturner.cls.service;
  */
 
 import java.util.*;
-import javax.servlet.http.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import com.pageturner.cls.dao.*;
@@ -20,7 +19,7 @@ public class FallowService {
 	@Autowired
 	FallowDAO falDAO;
 	@Autowired
-	MyPageDAO mpDAO;
+	MyPageService mpSrvc;
 	
 	public int cntFallow(MemberVO mVO) {
 		int cnt = 0;
@@ -42,16 +41,19 @@ public class FallowService {
 		return cnt;
 	}
 	
-	public int checkFal(MemberVO mVO, HttpSession session) {
+	public String checkFal(MemberVO mVO, String sid) {
 		int cnt = 0;
+		String ckfal = null;
 		FallowVO falVO = new FallowVO();
 		
 		falVO.setFallow_no(mVO.getMno());
-		mVO.setId((String)session.getAttribute("SID"));
-		falVO.setFallower_no(mpDAO.getMno(mVO));
+		mVO.setId(sid);
+		mVO = mpSrvc.getInfo(mVO);
+		falVO.setFallower_no(mVO.getMno());
 		cnt = falDAO.cntFal(falVO);
+		ckfal = falDAO.ckFal(falVO);
 		
-		return cnt;
+		return ckfal;
 	}
 	
 	public ArrayList<FallowVO> fallowList(MemberVO mVO){
@@ -74,18 +76,24 @@ public class FallowService {
 		return list;
 	}
 	
-	public void fallowingState(MemberVO mVO, HttpSession session) {
-		int cnt = checkFal(mVO, session);
+	public void fallowingState(MemberVO mVO, String sid, String ckfal) {
 		FallowVO falVO = new FallowVO();
 		
 		falVO.setFallow_no(mVO.getMno());
-		mVO.setId((String)session.getAttribute("SID"));
-		falVO.setFallower_no(mpDAO.getMno(mVO));
-		
+		mVO.setId(sid);
+		mVO = mpSrvc.getInfo(mVO);
+		falVO.setFallower_no(mVO.getMno());
+		int cnt = falDAO.cntFal(falVO);
 		if(cnt == 0) {
 			falDAO.newFal(falVO);
 		} else {
-			falVO.setIscheck(falDAO.checkFal(falVO));
+			if(ckfal.equals("N")) {
+				falVO.setRevck("YES");
+				falVO.setIscheck("Y");
+			} else {
+				falVO.setRevck("NO");
+				falVO.setIscheck("N");
+			}
 			falDAO.falStateChange(falVO);
 		}
 	}

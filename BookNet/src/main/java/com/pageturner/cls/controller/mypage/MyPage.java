@@ -29,12 +29,13 @@ public class MyPage {
 
 	// 마이페이지 화면 요청
 	@RequestMapping("/mypage.cls")
-	public ModelAndView showMyPage(ModelAndView mv, HttpSession session, MemberVO mVO) {
+	public ModelAndView showMyPage(HttpServletRequest req, ModelAndView mv, MemberVO mVO) {
 		// AOP를 통해 로그인되어있는지 확인
 		String view = "mypage/mypage";
+		HttpSession session = req.getSession();
 		String sid = (String)session.getAttribute("SID");
 		String id = mVO.getId();
-		int ckFal = 0;
+		String ckFal = null;
 		ArrayList<AlarmVO> alarmList = new ArrayList<AlarmVO>();
 		
 		if(id == null || id.equals(sid)) {
@@ -54,7 +55,7 @@ public class MyPage {
 		}
 
 		if(!sid.equals(id)) {
-			ckFal = falSrvc.checkFal(mVO, session);
+			ckFal = falSrvc.checkFal(mVO, sid);
 			mv.addObject("CKFAL", ckFal);
 		}
 		
@@ -72,5 +73,22 @@ public class MyPage {
 		mv.addObject("ALARM", alarmList);
 		mv.setViewName(view);
 		return mv;
+	}
+	
+	@RequestMapping("/fal.cls")
+	@ResponseBody
+	public String chageFalState(HttpServletRequest req, String pid, String ckfal) {
+		HttpSession session = req.getSession();
+		String sid = (String)session.getAttribute("SID");
+		MemberVO mVO = new MemberVO();
+		
+		mVO.setId(pid);
+		mVO = mpSrvc.getInfo(mVO);
+		
+		falSrvc.fallowingState(mVO, sid, ckfal);
+		mVO.setId(pid);
+		mVO = mpSrvc.getInfo(mVO);
+		ckfal = falSrvc.checkFal(mVO, sid);
+		return ckfal;
 	}
 }

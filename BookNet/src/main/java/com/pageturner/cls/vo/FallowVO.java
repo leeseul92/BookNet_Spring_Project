@@ -10,7 +10,7 @@ import org.apache.ibatis.type.*;
 @Alias("falVO")
 public class FallowVO {
 	private int fallow_no, fallower_no;
-	private String id, sname, sloc, faldate, ischeck;
+	private String id, sname, sloc, faldate, revck, ischeck;
 
 	public int getFallow_no() {
 		return fallow_no;
@@ -36,6 +36,12 @@ public class FallowVO {
 	public void setIscheck(String ischeck) {
 		this.ischeck = ischeck;
 	}
+	public String getRevck() {
+		return revck;
+	}
+	public void setRevck(String revck) {
+		this.revck = revck;
+	}
 	public String getId() {
 		return id;
 	}
@@ -53,5 +59,10 @@ public class FallowVO {
 	}
 	public void setSloc(String sloc) {
 		this.sloc = sloc;
+	}
+	@Override
+	public String toString() {
+		return "FallowVO [fallow_no=" + fallow_no + ", fallower_no=" + fallower_no + ", id=" + id + ", sname=" + sname
+				+ ", sloc=" + sloc + ", faldate=" + faldate + ", revck=" + revck + ", ischeck=" + ischeck + "]";
 	}
 }

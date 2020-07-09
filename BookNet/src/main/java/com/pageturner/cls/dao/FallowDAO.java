@@ -20,16 +20,16 @@ public class FallowDAO {
 		return sqlSession.selectOne("falSQL.cntFal", falVO);
 	}
 	
+	public String ckFal(FallowVO falVO) {
+		return sqlSession.selectOne("falSQL.ckFal", falVO);
+	}
+	
 	public List falList(FallowVO falVO) {
 		return sqlSession.selectList("falSQL.falList", falVO);
 	}
 	
 	public void newFal(FallowVO falVO) {
 		sqlSession.insert("falSQL.newFal", falVO);
-	}
-	
-	public String checkFal(FallowVO falVO) {
-		return sqlSession.selectOne("falSQL.ckFal", falVO);
 	}
 	
 	public void falStateChange(FallowVO falVO) {
