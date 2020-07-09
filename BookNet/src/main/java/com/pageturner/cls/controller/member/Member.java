@@ -243,21 +243,24 @@ public class Member {
 	// 우현우
 	// 회원가입 처리
 	@RequestMapping("/joinProc.cls")
-
-	public ModelAndView joinProc(HttpSession session, ModelAndView mv, MemberVO mVO, RedirectView rv) {
+	public ModelAndView joinProc(HttpSession session, ModelAndView mv, MemberVO mVO, RedirectView rv) {		
+		try {
 		System.out.println(mVO);
 		int cnt = mDAO.join(mVO);
 		rv = null;
 		if (cnt == 1) {
 			session.setAttribute("SID", mVO.getId());
-			
+				
 			rv = new RedirectView("/cls/main/main.cls");
 		} else {
-			rv = new RedirectView("/cls/main/non.cls");
+				rv = new RedirectView("/cls/main/non.cls");
 		}
 		mv.setView(rv);
-		return mv;
-	}
-	
-	
+				
+		} catch (Exception e) {
+			String view = "error/error";
+			mv.setViewName(view);
+		}
+			return mv;
+		}	
 }

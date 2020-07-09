@@ -38,7 +38,7 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="/cls/js/join.js?=1"></script>
+<script type="text/javascript" src="/cls/js/join.js"></script>
 
 
 
@@ -204,8 +204,6 @@
 									<label for="email-address">이메일</label> <input type="email"
 										class="form-control" id="email" name="mail" 
 										size="5">
-									<button class="btn btn-primary btn-block" id="mcheck" type="button" >이메일 중복 확인</button>
-									<p class="w3-col w3-center" id="mailmsg" style="display: none;"></p>
 									<button class="btn btn-primary btn-block" id="mailck" type="button">인증번호 발송</button>
 									<p class="w3-col w3-center" id="mckmsg" style="display: none;"></p>
 								</div>
