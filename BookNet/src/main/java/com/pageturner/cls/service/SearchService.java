@@ -21,11 +21,32 @@ public class SearchService {
 	
 	@Autowired
 	SearchDAO sDAO;
-	// DAO 받아오기
-	public List<SearchVO> searchKey(String keyword){
-		System.out.println("###  SearchService : DAO");
-			List<SearchVO> key = sDAO.searchAll(keyword);
-			System.out.println("##### Service key.size : " + key.size());
+	// SearchAll
+//	public List<SearchVO> searchAll(String keyword){
+//		System.out.println("###  SearchService : All");
+//			List<SearchVO> key = sDAO.searchAll(keyword);
+//			System.out.println("##### Service key.size : " + key.size());
+//		return key;
+//	}
+	// SearchBook
+	public List<SearchVO> searchBook(String keyword){
+		System.out.println("###  SearchService : Book");
+		List<SearchVO> key = sDAO.searchBook(keyword);
+		System.out.println("##### Service key.size : " + key.size());
+		return key;
+	}
+	// SearchMemb
+	public List<SearchVO> searchMemb(String keyword){
+		System.out.println("###  SearchService : Memb");
+		List<SearchVO> key = sDAO.searchMemb(keyword);
+		System.out.println("##### Service key.size : " + key.size());
+		return key;
+	}
+	// SearchHash
+	public List<SearchVO> searchHash(String keyword){
+		System.out.println("###  SearchService : Hash");
+		List<SearchVO> key = sDAO.searchHash(keyword);
+		System.out.println("##### Service key.size : " + key.size());
 		return key;
 	}
 	

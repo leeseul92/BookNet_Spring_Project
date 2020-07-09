@@ -9,10 +9,10 @@
 	@since 2020-06-25
  -->					
 <mapper namespace="sSQL">
-	<!-- 검색할 때 모든 검색결과를 호출 -->
-	<select id="searchAll" resultType="sVO"  parameterType="string">
+	 <!-- 검색할 때 모든 검색결과를 호출 -->
+	<!--<select id="searchAll" resultType="sVO"  parameterType="string">
 			SELECT 
-			     bname ,  MAX(hash) hash, writer , trans , gname , name , id , publish , postcont, prof.save_loc profile, largeimg limg 
+			     bname ,  MAX(hash) hash, writer , trans , gname , id , publish , postcont, prof.save_loc profile, largeimg limg 
 			FROM
 			    booktab b, genretab g 
 			    , membertab m, publishtab pub, poststab p,
@@ -37,10 +37,60 @@
 			    OR UPPER(TRANS) LIKE UPPER(#{keyword})
 			    OR UPPER(gname) LIKE UPPER(#{keyword})
 			    OR UPPER(hash) LIKE UPPER(#{keyword})
-			    OR UPPER(name) LIKE UPPER(#{keyword})
 			    OR UPPER(id) LIKE UPPER(#{keyword})
 			    OR UPPER(nickname) LIKE UPPER(#{keyword})
 			    OR UPPER(publish) LIKE UPPER(#{keyword}))
-			Group By bname , writer , trans , gname , name , id , nickname , publish , postcont, prof.save_loc, largeimg
+			Group By bname , writer , trans , gname , id , nickname , publish , postcont, prof.save_loc, largeimg
+	</select> -->
+	
+	<!-- 검색할 때 책 검색결과를 호출 -->
+	<select id="searchBook" resultType="sVO"  parameterType="string">
+			SELECT 
+			     bname ,  largeimg limg , writer
+			FROM
+			    booktab
+			WHERE 
+			    UPPER(bname) LIKE UPPER(#{keyword})
+			    OR UPPER(WRITER) LIKE UPPER(#{keyword})
+			Group By bname , largeimg, writer 
+	</select>
+	
+	<!-- 검색할 때 아이디 검색결과를 호출 -->
+	<select id="searchMemb" resultType="sVO"  parameterType="string">
+			SELECT 
+			    id, save_loc
+			FROM
+			    membertab m, profilepictab p
+			WHERE
+			    m.mno = p.mno
+			    AND UPPER(id) Like UPPER(#{keyword})
+			Group By
+ 			   id, save_loc
+	</select>
+	<!-- 검색할 때 해쉬태그 검색결과를 호출 -->
+	<select id="searchHash" resultType="sVO"  parameterType="string">
+			SELECT 
+			      bname ,  MAX(hash) hash, writer , trans , gname , id , publish , postcont, prof.save_loc profile, largeimg limg 
+			FROM
+			    booktab b, genretab g 
+			    , membertab m, publishtab pub, poststab p,
+                (SELECT 
+			        h.pno pno,
+			        '#'||LISTAGG(hname, '#') WITHIN GROUP (ORDER BY hname DESC) hash 
+			    FROM
+			        poststab p,  hashtab h 
+			    WHERE 
+			       p.pno = h.pno
+                   AND UPPER(hname) like UPPER(#{keyword})
+			    GROUP BY 
+			        h.pno)h,  profilepictab prof 
+			WHERE 
+			    b.genre = g.genre
+			    AND b.bno = p.bno
+			    AND pub.publish_no = b.publish_no
+			    AND m.mno = p.mno 
+			    AND p.pno = h.pno 
+			    AND prof.mno = m.mno
+			Group By bname , writer , trans , gname , id , nickname , publish , postcont, prof.save_loc, largeimg
 	</select>
 </mapper>

@@ -35,7 +35,10 @@ public class Search {
 			String keyword = req.getParameter("searchinput");
 			// DB에서 가져올 때 사용할 searchinput 변수
 			String key = "%" + keyword + "%";
-			List<SearchVO> list = sSrvc.searchKey(key);
+//			List<SearchVO> list = sSrvc.searchAll(key);
+			List<SearchVO> book = sSrvc.searchBook(key);
+			List<SearchVO> memb = sSrvc.searchMemb(key);
+			List<SearchVO> hash = sSrvc.searchHash(key);
 			String sid = (String) session.getAttribute("SID");
 			if(sid != null) {
 			// 검색결과 콘솔
@@ -44,7 +47,10 @@ public class Search {
 			// 검색된 값 세션에 담기
 			mv.addObject("KEYWORD", keyword);
 			// 화면에 보여줄 오브젝트
-			mv.addObject("LIST", list);
+//			mv.addObject("LIST", list);
+			mv.addObject("BOOK", book);
+			mv.addObject("MEMB", memb);
+			mv.addObject("HASH", hash);
 			mv.setViewName(view);
 			} else {
 				RedirectView rv = new RedirectView("/cls/main/main.cls");
@@ -61,7 +67,7 @@ public class Search {
 			String keyword = req.getParameter("bookKey");
 			System.out.println("book.keyword:"+keyword);
 			String key = "%" + keyword + "%";
-			List<SearchVO> list = sSrvc.searchKey(key);
+			List<SearchVO> list = sSrvc.searchBook(key);
 			String sid = (String) session.getAttribute("SID");
 			if(sid != null) {
 			// 검색결과 콘솔
@@ -85,7 +91,7 @@ public class Search {
 			// 파라미터에서 검색값 가져오기
 			String keyword = req.getParameter("hashKey");
 			String key = "%" + keyword + "%";
-			List<SearchVO> list = sSrvc.searchKey(key);
+			List<SearchVO> list = sSrvc.searchHash(key);
 			String sid = (String)session.getAttribute("SID");
 			if(sid != null) {
 			// 검색결과 콘솔
@@ -109,7 +115,7 @@ public class Search {
 			// 파라미터에서 검색값 가져오기
 			String keyword = req.getParameter("membKey");
 			String key = "%" + keyword + "%";
-			List<SearchVO> list = sSrvc.searchKey(key);
+			List<SearchVO> list = sSrvc.searchMemb(key);
 			String sid = (String)session.getAttribute("SID");
 			if(sid != null) {
 			//검색결과 콘솔

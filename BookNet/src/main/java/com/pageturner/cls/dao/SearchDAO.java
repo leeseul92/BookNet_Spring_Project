@@ -20,10 +20,25 @@ public class SearchDAO {
 	@Autowired
 	SqlSessionTemplate sqlSession;
 	
-	//검색한 결과를 회원에게 보여질 게시글
+	// 검색한 결과 모든 게시글
 	public List<SearchVO> searchAll(String keyword) {
 		System.out.println("####  DAO keyword : " + keyword);
 		return sqlSession.selectList("sSQL.searchAll", keyword);	
+	}
+	// 검색한 결과 책 게시글
+	public List<SearchVO> searchBook(String keyword) {
+		System.out.println("####  DAO keyword : " + keyword);
+		return sqlSession.selectList("sSQL.searchBook", keyword);	
+	}
+	// 검색한 결과 해쉬태그 게시글
+	public List<SearchVO> searchHash(String keyword) {
+		System.out.println("####  DAO keyword : " + keyword);
+		return sqlSession.selectList("sSQL.searchHash", keyword);	
+	}
+	// 검색한 결과 멤버 게시글
+	public List<SearchVO> searchMemb(String keyword) {
+		System.out.println("####  DAO keyword : " + keyword);
+		return sqlSession.selectList("sSQL.searchMemb", keyword);	
 	}
 	
 }

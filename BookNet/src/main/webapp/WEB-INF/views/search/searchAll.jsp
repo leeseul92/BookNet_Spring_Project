@@ -15,7 +15,6 @@
 <link rel="stylesheet" href="/cls/css/modal.css">
 <link rel="stylesheet" href="/cls/css/w3.css">
 <link rel="stylesheet" href="/cls/css/non_search.css">
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> -->
 <script type="text/javascript" src="/cls/js/jquery-3.5.0.min.js"></script>
 <script type="text/javascript" src="/cls/js/fixed.js"></script>
 <script type="text/javascript" src="/cls/js/search.js"></script>
@@ -31,6 +30,7 @@ $(document).ready(function() {
 	$('#searchIdBtn').click(function(){
 	//	$(this).attr('href','/cls/search/searchMember.cls');
 		$('#membKey').val('${KEYWORD}');
+		$('#test').val('${KEYWORD}');
 		$('#frm2').attr('action','/cls/search/searchMember.cls');
 		$('#frm2').submit();
 	})
@@ -38,6 +38,7 @@ $(document).ready(function() {
 	$('#searchBookBtn').click(function(){
 	//	$(this).attr('href','/cls/search/searchBook.cls');
 		$('#bookKey').val('${KEYWORD}');
+		$('#test').val('${KEYWORD}');
 		$('#frm2').attr('action','/cls/search/searchBook.cls');
 		$('#frm2').submit();
 	})
@@ -45,6 +46,7 @@ $(document).ready(function() {
 	$('#searchHashBtn').click(function(){
 	//	$(this).attr('href','/cls/search/searchHash.cls');
 		$('#hashKey').val('${KEYWORD}');
+		$('#test').val('${KEYWORD}');
 		$('#frm2').attr('action','/cls/search/searchHash.cls');
 		$('#frm2').submit();
 	})
@@ -79,7 +81,7 @@ $(document).ready(function() {
                         <table style="font-size: 14px; height: 50px; display: flex;"
                            class="boxwrap">
                            <tr>
-                           <c:forEach var="data" items="${LIST}" begin="0" end="5">
+                           <c:forEach var="data" items="${HASH}" begin="0" end="5">
                               <td style="" class="box"><a href="#" style="text-decoration: unset; color: #F7B3D2;">${data.hash}</a>
                               </td>
                            </c:forEach>
@@ -94,7 +96,7 @@ $(document).ready(function() {
                      class="box" id="searchIdBtn">검색된 아이디</span>
                   <div class="width_scroll">
                         <div style="font-size: 14px;" class="boxwrap">
-                     <c:forEach var="data" items="${LIST}">
+                     <c:forEach var="data" items="${MEMB}">
                            <span style="border: solid 4px transparent;" class="box">
                               <!-- ${data.profile} --><img src="https://img.icons8.com/dusk/64/000000/no-camera.png" 
                               style="text-decoration: unset; color: #F7B3D2; width: 70px; height: 70px;">
@@ -103,7 +105,7 @@ $(document).ready(function() {
                         </div>
                         <div style="font-size: 14px; margin-bottom: 10px;"
                            class="boxwrap">
-                     <c:forEach var="data" items="${LIST}">
+                     <c:forEach var="data" items="${MEMB}">
                            <span style="border: solid 4px transparent;" class="box">
                               <a href="${data.profile}"
                               style="text-decoration: unset; color: #F7B3D2; width: 70px; height: 70px;">${data.id}</a>
@@ -117,7 +119,7 @@ $(document).ready(function() {
                            style="color: #666; font-size: 14px; float: left; padding-top: 40px; padding-bottom: 10px;"
                            class="box"id="searchBookBtn"> 검색된 책이름</span>
                         <div style="font-size: 14px;" class="boxwrap">
-                     <c:forEach var="data" items="${LIST}" begin="0" end="4">
+                     <c:forEach var="data" items="${BOOK}" begin="0" end="4">
                            <span style="border: solid 4px transparent;" class="box">
                               <img src="${data.limg}"
                               style="text-decoration: unset; color: #F7B3D2; width: 200px; height: 239px;">
@@ -126,14 +128,14 @@ $(document).ready(function() {
                         </div>
                         <div style="font-size: 14px; margin-bottom: 10px;"
                            class="boxwrap">
-                        <c:forEach var="data" items="${LIST}" begin="0" end="4">
+                        <c:forEach var="data" items="${BOOK}" begin="0" end="4">
                            <span style="border: solid 4px transparent;" class="box">
                               <a href="#" style="text-decoration: unset; color: #F7B3D2; width: 200px; height: 239px;">${data.bname}</a>
                            </span>
                         </c:forEach>
                         </div>
                         <div style="font-size: 14px;" class="boxwrap">
-                     <c:forEach var="data" items="${LIST}" begin="5" end="9">
+                     <c:forEach var="data" items="${BOOK}" begin="5" end="9">
                            <span style="border: solid 4px transparent;" class="box">
                               <img src="${data.limg}"
                               style="text-decoration: unset; color: #F7B3D2; width: 200px; height: 239px;">
@@ -142,7 +144,7 @@ $(document).ready(function() {
                         </div>
                         <div style="font-size: 14px; margin-bottom: 10px;"
                            class="boxwrap">
-                        <c:forEach var="data" items="${LIST}" begin="5" end="9">
+                        <c:forEach var="data" items="${BOOK}" begin="5" end="9">
                            <span style="border: solid 4px transparent;" class="box">
                               <a href="#" style="text-decoration: unset; color: #F7B3D2; width: 200px; height: 239px;">${data.bname}</a>
                            </span>
@@ -154,7 +156,7 @@ $(document).ready(function() {
                            style="color: #666; font-size: 14px; float: left; padding-top: 40px; display: block; text-align: left; width: 100%; padding-bottom: 10px;"
                            class="box"id="searchHashBtn">검색된 해시태그가 포함된 게시물 </span>
                         <!-- 여기부터 게시글  -->
-                        <c:forEach var="post" items="${LIST}">
+                        <c:forEach var="post" items="${HASH}">
                         <article class="eachPost"
                            style="margin: 30px; display: inline-block;"
                            id="이곳은게시물번호가들어갈자리">

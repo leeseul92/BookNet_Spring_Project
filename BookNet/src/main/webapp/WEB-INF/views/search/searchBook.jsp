@@ -15,7 +15,6 @@
 <link rel="stylesheet" href="/cls/css/modal.css">
 <link rel="stylesheet" href="/cls/css/w3.css">
 <link rel="stylesheet" href="/cls/css/non_search.css">
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> -->
 <script type="text/javascript" src="/cls/js/jquery-3.5.0.min.js"></script>
 <script type="text/javascript" src="/cls/js/fixed.js"></script>
 <script type="text/javascript" src="/cls/js/search.js"></script>
