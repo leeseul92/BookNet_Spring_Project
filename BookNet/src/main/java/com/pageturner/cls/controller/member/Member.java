@@ -136,7 +136,7 @@ public class Member {
 		if (cnt == 0) {
 			System.out.println("정보수정(비번)처리 에러");
 		}
-		mv.setView(new RedirectView("마이페이지"));
+		mv.setView(new RedirectView("/cls/mypage/mypage.cls"));
 
 		return mv;
 	}
@@ -146,6 +146,7 @@ public class Member {
 	@RequestMapping("/editUser.cls")
 	public ModelAndView editUser(HttpServletRequest req, ModelAndView mv, MemberVO mVO) {
 		mVO.setId((String) req.getSession().getAttribute("SID"));
+		System.out.println(mVO.toString());
 		int cnt = mDAO.editUser(mVO);
 
 		if (cnt == 0) {

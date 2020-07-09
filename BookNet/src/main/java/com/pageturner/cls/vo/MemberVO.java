@@ -12,10 +12,6 @@ import java.text.SimpleDateFormat;
 
 import org.apache.ibatis.type.Alias;
 
-/**
- * @author class02
- *
- */
 @Alias("mVO")
 public class MemberVO {
 	private int mno;

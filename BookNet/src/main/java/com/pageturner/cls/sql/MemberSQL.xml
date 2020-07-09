@@ -55,10 +55,10 @@
 		update
 			membertab
 		set
-			interest = #{interest}
-			describe = #{describe}
-			intershow = #{intershow}
-			birthshow = #{birthshow}
+			interest = #{interest},
+			describe = #{describe},
+			intershow = #{intershow},
+			birthshow = #{birthshow},
 			genshow = #{genshow}
 		where
 			id = #{id}
