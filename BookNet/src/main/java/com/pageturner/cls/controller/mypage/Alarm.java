@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.*;
+import org.springframework.web.servlet.view.RedirectView;
+
 import com.pageturner.cls.service.*;
 import com.pageturner.cls.vo.*;
 
@@ -26,21 +28,27 @@ public class Alarm {
 	
 	@RequestMapping("/alarm/alarmPage.cls")
 	public ModelAndView showAlarmList(HttpServletRequest req, ModelAndView mv) {
-		String view = "mypage/alarmPage";
-		String sid = (String)req.getSession().getAttribute("SID");
-		MemberVO mVO = new MemberVO();
-		ArrayList<AlarmVO> list = new ArrayList<AlarmVO>();
-		
-		mVO.setId(sid);
-		mVO = mpSrvc.getInfo(mVO);
-		try {
-			list = alSrvc.getAlarmList(mVO);
-		} catch (Exception e) {
-			e.printStackTrace();
+		// AOP를 통해 로그인되어있는지 확인
+		if((boolean)mv.getModel().get("isLogin")) {
+			String view = "mypage/alarmPage";
+			String sid = (String)req.getSession().getAttribute("SID");
+			MemberVO mVO = new MemberVO();
+			ArrayList<AlarmVO> list = new ArrayList<AlarmVO>();
+			
+			mVO.setId(sid);
+			mVO = mpSrvc.getInfo(mVO);
+			try {
+				list = alSrvc.getAlarmList(mVO);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			mv.addObject("LIST", list);
+			mv.setViewName(view);
+			return mv;
+		} else {
+			mv.setView(new RedirectView("/member/login.cls"));
+			return mv;
 		}
-		
-		mv.addObject("LIST", list);
-		mv.setViewName(view);
-		return mv;
 	}
 }
