@@ -93,7 +93,7 @@
 									<!-- 게시글 부분 -->
 									<div style="box-sizing: border-box; font-size: 13px;" id="pbody${data.pno}">${data.postcont}</div>
 									<!-- 게시글 수정시 보여줄 textarea -->
-									<textarea class="editPosts" id="ebody${data.pno}"></textarea>
+									<textarea class="editPosts" id="ebody${data.pno}">${data.postcont}</textarea>
 								</div>
 								<div style="width: 175px; float: left; height: 40px;">
 									<input type="button" class="editButton" id="eSubmit${data.pno}" value="edit"/>

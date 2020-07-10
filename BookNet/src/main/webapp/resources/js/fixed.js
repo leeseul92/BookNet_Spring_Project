@@ -307,13 +307,11 @@ $(document).ready(function(){
 		$('.edit-del-modal').css('display', 'none');
 		$('#pbody'+pno).css('display', 'none');
 		$('#ebody'+pno).css('display', 'block');
-		var body = $('#pbody'+pno).text();
-		$('#ebody'+pno).text(body);
 		$('.editButton').css('display', 'inherit');
 		$('.emotiondiv').css('display', 'block');
 		
 		$('#eSubmit'+pno).click(function(){
-			var editbody = $('#ebody'+pno).text();
+			var editbody = $('#ebody'+pno).val();
 			var editemotion = $('#editemo'+pno).val();
 			
 			alert(editbody);
