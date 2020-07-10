@@ -54,7 +54,7 @@
 			<!-- 좌측상단 로고 -->
 			<div class="row sft-header-register d-flex">
 				<div class="col-3 pl-0">
-					<h3 class="turnerlogo"><a href="/cls/main/non.cls">PageTurner</a></h3>
+					<h3 class="turnerlogo"><a href="/cls/main/non.cls" style="font-size: 40px; color: white;  font-weight: bold; background-color: rgba( 0, 0, 0, 0.5 );">PageTurner</a></h3>
 				</div>
 				<div class="col-9 pr-0">
 					<div class="pt-1 text-right">
@@ -74,10 +74,10 @@
 
 		<div class="container-fluid">
 			<div class="row overflow-hidden">
-				<div class="d-none d-lg-block text-center sft-enterprise-cta">
-					<div class="sft-enterprise-cta-pattern" aria-hidden="true"></div>
-					<div class="sft-text">
-						<h4 class="mb-3">책과 함께하는 소통의 공간 PageTurner</h4>
+				<div class="d-none d-lg-block text-center sft-enterprise-cta" >
+					<div class="sft-enterprise-cta-pattern" aria-hidden="true" style="background-image: url('/cls/img/join.jpg')"></div>
+					<div class="sft-text" style="background-color: rgba( 0, 0, 0, 0.5 );">
+						<h4 class="mb-3" style="color: white;  font-weight: bold;">책과 함께하는 소통의 공간 PageTurner</h4>
 					</div>
 					<div class="sft-enterprise-cta-customers">
 						<div class="form-row sft-align-center">

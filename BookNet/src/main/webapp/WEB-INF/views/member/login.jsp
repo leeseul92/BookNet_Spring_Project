@@ -34,7 +34,7 @@
 	});
 </script>
 <body style="height: 100%; background-position: inherit; background-image: url('/cls/img/login_image.jpeg')">
-	<div class="totaldiv" style="margin-top: 100px;">
+	<div class="totaldiv" style="margin-top: 100px;" >
 
 		<!-- header -->
 		<div id="header">

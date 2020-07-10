@@ -245,7 +245,6 @@ public class Member {
 		@RequestMapping("/joinProc.cls")
 		public ModelAndView joinProc(HttpSession session, ModelAndView mv, MemberVO mVO, RedirectView rv) {		
 			try {
-			System.out.println(mVO);
 			int cnt = mDAO.join(mVO);
 			rv = null;
 			if (cnt == 1) {

@@ -18,6 +18,7 @@
 	<select id="Login" resultType="int" parameterType="mVO">
 		<include refid="selIdCNT" /> #{id}
 			AND pw = #{pw}
+			AND ISSHOW = 'Y'
 	</select>
 	
 	<!-- 회원정보 조회 -->
