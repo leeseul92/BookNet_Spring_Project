@@ -10,7 +10,7 @@ public class ProfileDAO {
 	SqlSessionTemplate sqlSession;
 	
 	public int insertProfile(ProfileVO fVO) {
-		return sqlSession.insert("mSQL.insertProfile", fVO);
+		return sqlSession.insert("fSQL.insertProfile", fVO);
 	}
 
 }

@@ -12,12 +12,13 @@ import java.io.*;
 import javax.servlet.http.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.pageturner.cls.vo.*;
 import com.pageturner.cls.dao.*;
 import com.pageturner.cls.util.*;
-
+@Service
 public class ProfileService {
 	//필요한 클래스 자동주입받기 
 	@Autowired

@@ -76,11 +76,11 @@
 	<!-- 정보수정(프사추가) -->
 	<insert id="insertProfile" parameterType="fVO">
 		insert into
-			profilepictab(pf_pt_no, mno, ori_name, save_name, save_loc)
+			profilepictab(pf_pt_no, mno, ori_name, save_name)
 		values(
 			(select nvl(max(pf_pt_no)+1, 1000) from profilepictab),
 			(select mno from membertab where id = #{id}),
-			#{ori_name}, #{save_name}, #{save_loc}
+			#{ori_name}, #{save_name}
 		)
 	</insert>
 	

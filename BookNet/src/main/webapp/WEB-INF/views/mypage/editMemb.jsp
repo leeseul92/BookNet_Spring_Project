@@ -93,15 +93,15 @@ function CountChecked(check) {
 		let i = 0;
 		do{
 			i += 1;
-			alert(tmp);
+// 			alert(tmp);
 			if(tmp.indexOf(',') == -1){
 				$('input[value=\"' + tmp + '\"]').attr('checked', 'checked');
 			}
 			var inter1 = tmp.substr(0, tmp.indexOf(','));
-			alert('inter1 = '+inter1);
+// 			alert('inter1 = '+inter1);
 			$('input[value=\"' + inter1 + '\"]').attr('checked', 'checked');
 			tmp = tmp.substr(inter1.length + 1);
-			alert('자른tmp = '+tmp);
+// 			alert('자른tmp = '+tmp);
 		} while (i<=comma);
 		
 		// 비번일치

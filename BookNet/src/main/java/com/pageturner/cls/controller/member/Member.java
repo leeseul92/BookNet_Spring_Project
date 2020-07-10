@@ -18,6 +18,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.*;
 
@@ -33,6 +34,10 @@ public class Member {
 	MemberService membSrvc;
 	@Autowired
 	MemberDAO mDAO;
+	@Autowired
+	ProfileDAO fDAO;
+	@Autowired
+	ProfileService pSrvc;
 	@Inject
 	JavaMailSender mailSender;
 
@@ -142,14 +147,28 @@ public class Member {
 	// 이명환
 	// 정보수정(유저) 처리
 	@RequestMapping("/editUser.cls")
-	public ModelAndView editUser(HttpServletRequest req, ModelAndView mv, MemberVO mVO) {
+	public ModelAndView editUser(HttpServletRequest req, ModelAndView mv, MemberVO mVO, ProfileVO fVO) {
 		mVO.setId((String) req.getSession().getAttribute("SID"));
-		System.out.println(mVO.toString());
+//		System.out.println(mVO.toString());
 		int cnt = mDAO.editUser(mVO);
 
-		if (cnt == 0) {
+		if (cnt == 1) {
+//			System.out.println("파일업로드들어옴");
+//			System.out.println(fVO.toString());
+			fVO.setId(mVO.getId());
+			String savename = pSrvc.uploadProc(req.getSession(), fVO.getFile());
+			fVO.setOri_name(fVO.getFile().getOriginalFilename());
+			fVO.setSave_name(savename);
+//			String path = req.getSession().getServletContext().getRealPath("resources");
+//			path = path + "/profile";
+			mVO.setSave_name(savename);
+//			System.out.println("fVO 세팅 끝");
+//			System.out.println(fVO.toString());
+			int ck = mDAO.editProfile(fVO);
+		} else {
 			System.out.println("정보수정(유저)처리 에러");
 		}
+		
 		mv.setView(new RedirectView("/cls/mypage/mypage.cls"));
 		return mv;
 	}

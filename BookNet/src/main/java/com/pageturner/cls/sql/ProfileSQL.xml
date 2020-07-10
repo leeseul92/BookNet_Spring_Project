@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+			PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+					"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+					
+<mapper namespace="fSQL">
+	
+	<!-- 정보수정(프사추가) -->
+	<insert id="insertProfile" parameterType="fVO">
+		insert into
+			profilepictab(pf_pt_no, mno, ori_name, save_name, save_loc)
+		values(
+			(select nvl(max(pf_pt_no)+1, 1000) from profilepictab),
+			(select mno from membertab where id = #{id}),
+			#{ori_name}, #{save_name}, #{save_loc}
+		)
+	</insert>
+	
+</mapper>					
