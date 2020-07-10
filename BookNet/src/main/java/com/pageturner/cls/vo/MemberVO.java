@@ -15,7 +15,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("mVO")
 public class MemberVO {
 	private int mno;
-	private String id, pw, name, birthdate, gen, mail, interest, 
+	private String id, pw, name, birthdate, gen, mail, interest,
 					describe, isshow, sdate, intershow, birthshow, genshow, isinflu,
 					ori_name, save_name, save_loc;
 	

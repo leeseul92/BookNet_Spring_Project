@@ -64,7 +64,7 @@ function CountChecked(check) {
 		var interS = '${LIST.get(0).intershow}';
 		var birthS = '${LIST.get(0).birthshow}';
 		var genS = '${LIST.get(0).genshow}';
-		alert(interS + birthS + genS);
+// 		alert(interS + birthS + genS);
 		
 		if(interS == 'Y') {
 			$('#intershowY').attr('checked', 'checked');
@@ -82,14 +82,27 @@ function CountChecked(check) {
 			$('#genshowN').attr('checked', 'checked');
 		}
 		
-		var inter1 = '${LIST.get(0).interest}';
-		alert(inter1);
-		alert(inter1.match(/,/gi).length);
-		var inter2 = inter1.substr(1, 3);
-		alert(inter2);
-		for(var i=1; i=inter1.match(/,/gi).length; i++){
-			
-		}
+		// 관심분야 상태 반영
+		var inter = '${LIST.get(0).interest}';
+		var comma = 0;
+		if(inter.indexOf(',') != -1){
+			comma = inter.match(/,/gi).length;
+		};
+		
+		var tmp = inter;
+		let i = 0;
+		do{
+			i += 1;
+			alert(tmp);
+			if(tmp.indexOf(',') == -1){
+				$('input[value=\"' + tmp + '\"]').attr('checked', 'checked');
+			}
+			var inter1 = tmp.substr(0, tmp.indexOf(','));
+			alert('inter1 = '+inter1);
+			$('input[value=\"' + inter1 + '\"]').attr('checked', 'checked');
+			tmp = tmp.substr(inter1.length + 1);
+			alert('자른tmp = '+tmp);
+		} while (i<=comma);
 		
 		// 비번일치
 		$('#pwck').keyup(function(){
@@ -123,8 +136,9 @@ function CountChecked(check) {
 			$('#frm2').submit();
 		});
 		
+		// 마이페이지로
 		$('#hbtn').click(function(){
-			$(location).attr('href', '/cls/main.cls');
+			$(location).attr('href', '/cls/mypage/mypage.cls');
 		});
 		
 		// 회원탈퇴
@@ -184,7 +198,6 @@ function CountChecked(check) {
 				</div>
 				<!-- //프사 수정 -->
 				<!-- 관심분야 -->
-				<input type="hidden" id="interest" name="interest">
 				<div class="w3-row">
 					<label class="w3-col m3 w3-right-align w3-padding w3-border" for="interest">관심분야(국내)</label>
 					<div class="w3-col m9 w3-padding w3-border">
@@ -274,7 +287,7 @@ function CountChecked(check) {
 				</div>
 			</div>
 		<!-- 홈버튼 -->
-		<div class="w3-col m12 w3-padding w3-card w3-center w3-red w3-button" id="hbtn">홈으로</div>
+		<div class="w3-col m12 w3-padding w3-card w3-center w3-red w3-button" id="hbtn">마이페이지로</div>
 	</div>
 </body>
 </html>
