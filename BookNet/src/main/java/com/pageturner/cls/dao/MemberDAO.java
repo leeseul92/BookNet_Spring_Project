@@ -47,6 +47,11 @@ public class MemberDAO {
 		return sqlSession.insert("mSQL.insertProfile", fVO);
 	}
 	
+	// 정보수정(프사)
+	public int updateProfile(ProfileVO fVO) {
+		return sqlSession.insert("mSQL.updateProfile", fVO);
+	}
+	
 	// 회원탈퇴
 	public int delUser(MemberVO mVO) {
 		return sqlSession.update("mSQL.delUser", mVO);

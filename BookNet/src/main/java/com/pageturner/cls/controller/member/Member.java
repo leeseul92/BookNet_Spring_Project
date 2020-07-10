@@ -61,7 +61,7 @@ public class Member {
 
 	// 이명환
 	// 아디비번찾기 뷰
-	@RequestMapping("/findUser.cls")
+	@RequestMapping("/findID.cls")
 	public ModelAndView findUser(ModelAndView mv) {
 		String view = "member/findUser";
 		mv.setViewName(view);
@@ -156,6 +156,7 @@ public class Member {
 //			System.out.println("파일업로드들어옴");
 //			System.out.println(fVO.toString());
 			fVO.setId(mVO.getId());
+			mDAO.updateProfile(fVO);
 			String savename = pSrvc.uploadProc(req.getSession(), fVO.getFile());
 			fVO.setOri_name(fVO.getFile().getOriginalFilename());
 			fVO.setSave_name(savename);
@@ -165,6 +166,9 @@ public class Member {
 //			System.out.println("fVO 세팅 끝");
 //			System.out.println(fVO.toString());
 			int ck = mDAO.editProfile(fVO);
+			if(ck != 1) {
+				System.out.println("정보수정(프사업로드) 에러");
+			}
 		} else {
 			System.out.println("정보수정(유저)처리 에러");
 		}

@@ -84,6 +84,16 @@
 		)
 	</insert>
 	
+	<!-- 프사추가전에 이전 프사들 isshow N 만들기 -->
+	<update id="updateProfile" parameterType="fVO">
+		update
+			profilepictab
+		set
+			isshow = 'N'
+		where
+			mno = (select mno from membertab where id = #{id})
+	</update>
+	
 	<!-- 회원탈퇴 -->
 	<update id="delUser" parameterType="mVO">
 		update
