@@ -55,12 +55,20 @@
 	<update id="editUser" parameterType="mVO">
 		update
 			membertab
-		set
+		<trim prefix="SET">
+			<if test="interest neq null">
 			interest = #{interest},
+			</if>
+			<if test="interest eq null">
+			interest = null,
+			</if>
+			<if test="true">
 			describe = #{describe},
 			intershow = #{intershow},
 			birthshow = #{birthshow},
 			genshow = #{genshow}
+			</if>
+		</trim>
 		where
 			id = #{id}
 	</update>
@@ -81,7 +89,7 @@
 		update
 			membertab
 		set
-			isshow = N
+			isshow = 'N'
 		where
 			id = #{id}
 	</update>
