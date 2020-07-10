@@ -10,7 +10,7 @@
 <mapper namespace="almSQL">
 	<sql id="cont">
 		SELECT
-			extime, id, save_loc
+			extime, id, save_name
 	</sql>
 	
 	<sql id="bname">
@@ -24,7 +24,7 @@
 		<include refid="cont" />
 		FROM
 			(SELECT
-				id, fal_time extime, save_loc
+				id, fal_time extime, save_name
 			FROM
 				fallowtab ft, membertab mt, profilepictab ppt
 			WHERE
@@ -41,7 +41,7 @@
 		<include refid="cont" />, bname, pno
 		FROM
 			(SELECT
-				pt.pno, id, lk_time extime, save_loc,
+				pt.pno, id, lk_time extime, save_name,
 			    <include refid="bname" />
 			FROM
 				poststab pt, booktab bt, liketab lt,
@@ -64,7 +64,7 @@
 		<include refid="cont" />, bname, pno
 		FROM
 			(SELECT
-				pt.pno, id, cdate extime, save_loc,
+				pt.pno, id, cdate extime, save_name,
 			    <include refid="bname" />
 			FROM
 				poststab pt, booktab bt, commenttab ct,

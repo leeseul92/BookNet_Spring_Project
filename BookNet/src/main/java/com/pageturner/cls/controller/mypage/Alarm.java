@@ -25,9 +25,9 @@ public class Alarm {
 	AlarmService alSrvc;
 	
 	@RequestMapping("/alarm/alarmPage.cls")
-	public ModelAndView showAlarmList(ModelAndView mv, HttpSession session) {
+	public ModelAndView showAlarmList(HttpServletRequest req, ModelAndView mv) {
 		String view = "mypage/alarmPage";
-		String sid = (String)session.getAttribute("SID");
+		String sid = (String)req.getSession().getAttribute("SID");
 		MemberVO mVO = new MemberVO();
 		ArrayList<AlarmVO> list = new ArrayList<AlarmVO>();
 		

@@ -23,12 +23,13 @@
 	<select id="getMembInfo" parameterType="mVO" resultType="mVO">
 		SELECT
 		    id, DECODE(gen, 'M', '남성', 'F', '여성') gen, birthdate, interest,
-		    describe, intershow, birthshow, genshow, isinflu, save_loc, mt.mno
+		    describe, intershow, birthshow, genshow, isinflu, save_loc, mt.mno, save_name
 		FROM
 		    membertab mt, profilepictab pt
 		WHERE
 		    mt.mno = pt.mno(+)
 		    AND mt.mno = ${mno}
+		    AND pt.isshow = 'Y'
 	</select>
 	
 	<!-- 작성한 게시글 갯수 조회하는 질의명령 -->

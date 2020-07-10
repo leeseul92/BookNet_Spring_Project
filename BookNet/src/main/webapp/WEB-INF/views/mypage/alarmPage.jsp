@@ -25,7 +25,7 @@ uri="http://java.sun.com/jsp/jstl/core"%>
           <c:forEach var="alarm" items="${LIST}">
             <div class="div_activity new-act">
               <div class="prof_div">
-                <img src="${alarm.save_loc}" />
+                <img src="/cls/img/${alarm.save_name}" style="width: 100%; height: 100%; margin-top: -26px;" />
               </div>
               <div class="div_act">
                 <!-- 나에게 새로운 알람을 준 회원의 아이디 + 알람의 내용 -->

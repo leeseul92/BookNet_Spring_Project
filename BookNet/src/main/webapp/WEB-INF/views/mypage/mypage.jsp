@@ -18,14 +18,14 @@
 </c:if>
 <div>
 	<div id="contents-wrap">
-<!-- 페이지 가로 길이 지정 -->
+		<!-- 페이지 가로 길이 지정 -->
     	<div style="width: 900px; margin: 0 auto;">
       		<div class="w3-col w3-margin-top" style="height: 720px;">
         		<div class="w3-col w3-margin-top">
           		<!-- 좌측 : 회원 프로필 사진 및 게시글과 팔로우, 팔로워 수, 팔로우하기(언팔로우하기) -->
           		<div class="w3-col m3">
             	<!-- 회원 프로필 사진 -->
-            		<img class="w3-col" style="height: 298px;" src="${INFO.save_loc}" />
+            		<img class="w3-col" style="height: 298px;" src="/cls/img/${INFO.save_name}" />
             		<div class="w3-col">
               			<!-- 게시글 수 -->
               			<h3 class="w3-col w3-center">
