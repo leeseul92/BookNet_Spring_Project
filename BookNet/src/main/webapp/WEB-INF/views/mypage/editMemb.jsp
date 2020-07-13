@@ -220,7 +220,7 @@ function CountChecked(check) {
 							<!-- 프사 수정 -->
 							<div class="w3-row w3-border-top">
 								<label class="w3-col m3 w3-right-align w3-padding" for="file">프로필 사진</label>
-								<div class="w3-col m9 w3-padding ">
+								<div class="w3-col m9 w3-padding w3-border-left">
 									<input class="w3-col m12" type="file" id="file" name="file"/>
 								</div>
 								<div class="w3-row w3-center " >
@@ -279,7 +279,7 @@ function CountChecked(check) {
 							<!-- 간단소개 -->
 							<div class="w3-row w3-border-top">
 								<label class="w3-col m3 w3-right-align w3-padding" for="describe">간단소개</label>
-								<div class="w3-col m9 w3-padding ">
+								<div class="w3-col m9 w3-padding w3-border-left">
 									<input class="w3-col m12" type="text" id="describe" name="describe" value="${LIST.get(0).describe }">
 								</div>
 							</div>
@@ -287,7 +287,7 @@ function CountChecked(check) {
 							<!-- 정보공개설정 -->
 							<div class="w3-row w3-border-top">
 								<label class="w3-col m3 w3-right-align w3-padding" for="gen">정보공개설정</label>
-								<div class="w3-col m9 w3-padding ">
+								<div class="w3-col m9 w3-padding w3-border-left">
 									<span class="w3-col m10">관심분야
 										<input type="radio" id="intershowY" name="intershow" value="Y"><label for="intershowY">공개</label>
 										<input type="radio" id="intershowN" name="intershow" value="N"><label for="intershowN">비공개</label>
@@ -313,8 +313,8 @@ function CountChecked(check) {
 							<!-- 회원탈퇴 -->
 						<div class="w3-col w3-padding  w3-card" style="margin-top: 10px;">
 							<div class="w3-row">
-								<label class="w3-col m3 w3-right-align w3-padding" for="name">회원탈퇴</label>
-								<div class="w3-col m9 w3-padding ">
+								<label class="w3-col m3 w3-right-align w3-padding w3-border-right w3-border-top w3-border-bottom" style="height: 44px;" for="name">회원탈퇴</label>
+								<div class="w3-col m9 w3-padding w3-border-top w3-border-bottom">
 									<button style="display: inline-block; border: 2px solid gray;" id="delete">회원탈퇴하시겠습니까?</button>
 								</div>
 							</div>
