@@ -43,7 +43,17 @@
 
 // 체크박스 3개 넘게 체크하면 막는 이벤트함수
 var maxChecked = 3;   // 체크 최대 개수
+var interstr = '${LIST.get(0).interest}';
 var totalChecked = 0; // 총 체크 수
+if(interstr == ''){
+	totalChecked = 0;
+} else if(interstr.match(/,/gi) == null) {
+	totalChecked = 1;
+} else if(interstr.match(/,/gi).length == 1) {
+	totalChecked = 2;
+} else if(interstr.match(/,/gi).length == 2) {
+	totalChecked = 3;
+}
 
 function CountChecked(check) {
     if (check.checked)
@@ -127,8 +137,27 @@ function CountChecked(check) {
 		// 비번 변경
 		$('#pbtn').click(function(){
 			// 데이터 무결성 검사해야됨
-			
-			$('#frm1').submit();
+			var oldpw = $('#oldpw').val();
+			var newpw = $('#newpw').val();
+			var pwck = $('#pwck').val();
+			if(!oldpw){
+				alert('현재 비밀번호를 입력해주세요');
+				$('#oldpw').focus();
+				return;
+			}
+			if(!newpw){
+				alert('새 비밀번호를 입력해주세요');
+				$('#newpw').focus();
+				return;
+			}
+			if(!pwck){
+				alert('비밀번호 확인이 필요합니다');
+				$('#pwck').focus();
+				return;
+			}
+			if(oldpw && newpw && pwck){
+				$('#frm1').submit();
+			}
 		});
 		
 		// 정보 수정
@@ -161,22 +190,22 @@ function CountChecked(check) {
 						<div class="w3-col w3-padding w3-black w3-card">
 							<h3 class="w3-center">정보수정</h3>
 						</div>
-						<div class="w3-col w3-padding w3-border w3-card" style="margin-top: 10px;">
-							<div class="w3-row">
-								<label class="w3-col m3 w3-right-align w3-padding w3-border" for="oldpw">현재 비밀번호</label>
-								<div class="w3-col m9 w3-padding w3-border">
+						<div class="w3-col w3-padding w3-card" style="margin-top: 10px;">
+							<div class="w3-row w3-border-top">
+								<label class="w3-col m3 w3-right-align w3-padding" for="oldpw">현재 비밀번호</label>
+								<div class="w3-col m9 w3-padding w3-border-left">
 									<input  class="w3-col m12 " type="password" id="oldpw" name="oldpw" >
 								</div>
 							</div>
-							<div class="w3-row">
-								<label class="w3-col m3 w3-right-align w3-padding w3-border" for="newpw">새 비밀번호</label>
-								<div class="w3-col m9 w3-padding w3-border">
-									<input class="w3-col m12 " type="password" id="newpw" name="pw">
+							<div class="w3-row w3-border-top">
+								<label class="w3-col m3 w3-right-align w3-padding" for="newpw">새 비밀번호</label>
+								<div class="w3-col m9 w3-padding w3-border-left">
+									<input class="w3-col m12" type="password" id="newpw" name="pw">
 								</div>
 							</div>
-							<div class="w3-row">
-								<label class="w3-col m3 w3-right-align w3-padding w3-border" for="pwck">비밀번호 확인</label>
-								<div class="w3-col m9 w3-padding w3-border">
+							<div class="w3-row w3-border-top w3-border-bottom">
+								<label class="w3-col m3 w3-right-align w3-padding" for="pwck">비밀번호 확인</label>
+								<div class="w3-col m9 w3-padding w3-border-left">
 									<input class="w3-col m12" type="password" id="pwck" name="pwck">
 									<div class="w3-col m12" id="pwckshow"></div>
 								</div>
@@ -187,76 +216,78 @@ function CountChecked(check) {
 						<div class="w3-col m12 w3-padding w3-card w3-center w3-blue w3-button" id="pbtn">비밀번호 변경</div>
 					<!-- 정보수정 -->
 					<form class="w3-col" method="post" action="/cls/member/editUser.cls" name="frm2" id="frm2" encType="multipart/form-data">
-						<div class="w3-col w3-padding w3-border w3-card" style="margin-top: 10px;">
+						<div class="w3-col w3-padding  w3-card" style="margin-top: 10px;">
 							<!-- 프사 수정 -->
-							<div class="w3-row">
-								<label class="w3-col m3 w3-right-align w3-padding w3-border" for="file">프로필 사진</label>
-								<div class="w3-col m9 w3-padding w3-border">
+							<div class="w3-row w3-border-top">
+								<label class="w3-col m3 w3-right-align w3-padding" for="file">프로필 사진</label>
+								<div class="w3-col m9 w3-padding ">
 									<input class="w3-col m12" type="file" id="file" name="file"/>
 								</div>
-								<div class="w3-row w3-center w3-border" >
+								<div class="w3-row w3-center " >
 									<img id="img" style="width: 100px; height: auto;" src="" />
 								</div>
 							</div>
 							<!-- //프사 수정 -->
 							<!-- 관심분야 -->
-							<div class="w3-row">
-								<label class="w3-col m3 w3-right-align w3-padding w3-border" for="interest">관심분야(국내)</label>
-								<div class="w3-col m9 w3-padding w3-border">
-									<!-- 
-									<select class="form-control" id="firstG">
-										<option>선택하세요</option>
+								<div class="w3-row w3-border-top">
+									<label class="w3-col m3 w3-right-align w3-padding" for="interest">관심분야(국내)</label>
+									<div class="w3-col m9 w3-padding w3-border-left">
+										<!-- 
+										<select class="form-control" id="firstG">
+											<option>선택하세요</option>
+											<c:forEach var="data" items="${GENRE }" varStatus="st">
+											<option>${data.gname }</option>
+											</c:forEach>
+										</select>
+										<select class="form-control" id="secondG">
+											<option>선택하세요</option>
+											<c:forEach var="data" items="${GENRE }" varStatus="st">
+											<option>${data.gname }</option>
+											</c:forEach>
+										</select>
+										<select class="form-control" id="thirdG">
+											<option>선택하세요</option>
+											<c:forEach var="data" items="${GENRE }" varStatus="st">
+											<option>${data.gname }</option>
+											</c:forEach>
+										</select>
+										 -->
 										<c:forEach var="data" items="${GENRE }" varStatus="st">
-										<option>${data.gname }</option>
+										<c:if test="${data.genre < 200 }">
+											<div style="display: inline-block;">
+											<input onclick="CountChecked(this)" type="checkbox" id="${data.genre }" name="interest" value="${data.gname }" faking-checkbox>
+											<label class="gangre" for="${data.genre }">${data.gname }</label>
+											</div>
+										</c:if>
 										</c:forEach>
-									</select>
-									<select class="form-control" id="secondG">
-										<option>선택하세요</option>
-										<c:forEach var="data" items="${GENRE }" varStatus="st">
-										<option>${data.gname }</option>
-										</c:forEach>
-									</select>
-									<select class="form-control" id="thirdG">
-										<option>선택하세요</option>
-										<c:forEach var="data" items="${GENRE }" varStatus="st">
-										<option>${data.gname }</option>
-										</c:forEach>
-									</select>
-									 -->
-									<c:forEach var="data" items="${GENRE }" varStatus="st">
-									<c:if test="${data.genre < 200 }">
-										<div style="display: inline-block;">
-										<input onclick="CountChecked(this)" type="checkbox" id="${data.genre }" name="interest" value="${data.gname }" faking-checkbox>
-										<label class="gangre" for="${data.genre }">${data.gname }</label>
-										</div>
-									</c:if>
-									</c:forEach>
+									</div>
 								</div>
-								<label class="w3-col m3 w3-right-align w3-padding w3-border" for="interest">관심분야(해외)</label>
-								<div class="w3-col m9 w3-padding w3-border">
-									<c:forEach var="data" items="${GENRE }" varStatus="st">
-									<c:if test="${data.genre > 200 }">
-										<div style="display: inline-block;">
-										<input onclick="CountChecked(this)" type="checkbox" id="${data.genre }" name="interest" value="${data.gname }" faking-checkbox>
-										<label class="gangre" for="${data.genre }">${data.gname }</label>
-										</div>
-									</c:if>
-									</c:forEach>
+								<div class="w3-row w3-border-top">
+									<label class="w3-col m3 w3-right-align w3-padding" for="interest">관심분야(해외)</label>
+									<div class="w3-col m9 w3-padding w3-border-left">
+										<c:forEach var="data" items="${GENRE }" varStatus="st">
+										<c:if test="${data.genre > 200 }">
+											<div style="display: inline-block;">
+											<input onclick="CountChecked(this)" type="checkbox" id="${data.genre }" name="interest" value="${data.gname }" faking-checkbox>
+											<label class="gangre" for="${data.genre }">${data.gname }</label>
+											</div>
+										</c:if>
+										</c:forEach>
+									</div>
 								</div>
-							</div>
 							<!-- //관심분야 -->
 							<!-- 간단소개 -->
-							<div class="w3-row">
-								<label class="w3-col m3 w3-right-align w3-padding w3-border" for="describe">간단소개</label>
-								<div class="w3-col m9 w3-padding w3-border">
+							<div class="w3-row w3-border-top">
+								<label class="w3-col m3 w3-right-align w3-padding" for="describe">간단소개</label>
+								<div class="w3-col m9 w3-padding ">
 									<input class="w3-col m12" type="text" id="describe" name="describe" value="${LIST.get(0).describe }">
 								</div>
 							</div>
 							<!-- //간단소개 -->
 							<!-- 정보공개설정 -->
-							<div class="w3-row">
-								<label class="w3-col m3 w3-right-align w3-padding w3-border" for="gen">정보공개설정</label>
-								<div class="w3-col m9 w3-padding w3-border">
+							<div class="w3-row w3-border-top">
+								<label class="w3-col m3 w3-right-align w3-padding" for="gen">정보공개설정</label>
+								<div class="w3-col m9 w3-padding ">
 									<span class="w3-col m10">관심분야
 										<input type="radio" id="intershowY" name="intershow" value="Y"><label for="intershowY">공개</label>
 										<input type="radio" id="intershowN" name="intershow" value="N"><label for="intershowN">비공개</label>
@@ -280,10 +311,10 @@ function CountChecked(check) {
 					<!-- //정보수정-->
 						<div class="w3-col m12 w3-padding w3-card w3-center w3-blue w3-button" id="ebtn">정보수정</div>
 							<!-- 회원탈퇴 -->
-						<div class="w3-col w3-padding w3-border w3-card" style="margin-top: 10px;">
+						<div class="w3-col w3-padding  w3-card" style="margin-top: 10px;">
 							<div class="w3-row">
-								<label class="w3-col m3 w3-right-align w3-padding w3-border" for="name">회원탈퇴</label>
-								<div class="w3-col m9 w3-padding w3-border">
+								<label class="w3-col m3 w3-right-align w3-padding" for="name">회원탈퇴</label>
+								<div class="w3-col m9 w3-padding ">
 									<button style="display: inline-block; border: 2px solid gray;" id="delete">회원탈퇴하시겠습니까?</button>
 								</div>
 							</div>

@@ -55,19 +55,6 @@
 			<artifactId>aspectjtools</artifactId>
 			<version>${org.aspectj-version}</version>
 		</dependency>
-		
-		<!-- AspectJ Weaver -->
-		<dependency>
-		   <groupId>org.aspectj</groupId>
-		   <artifactId>aspectjweaver</artifactId>
-		   <version>${org.aspectj-version}</version>
-		</dependency>
-		<!-- AspectJ Tools -->
-		<dependency>
-		   <groupId>org.aspectj</groupId>
-		   <artifactId>aspectjtools</artifactId>
-		   <version>${org.aspectj-version}</version>
-		</dependency>
 
 		<!-- Logging -->
 		<dependency>

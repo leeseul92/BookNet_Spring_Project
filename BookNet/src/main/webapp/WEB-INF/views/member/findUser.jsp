@@ -74,24 +74,39 @@
 					return;
 				}
 				if(cert_no == '') {
-					alert(cert_no);
-					alert(cert);
+// 					alert(cert_no);
+// 					alert(cert);
 					alert('인증번호를 입력하세요');
 					return;
 				}
 				if(cert == cert_no) {
-					alert(cert);
-					alert(cert_no);
-					alert('*****************');
+// 					alert(cert);
+// 					alert(cert_no);
+// 					alert('*****************');
 				}else {
-					alert(cert);
-					alert(cert_no);
-					alert("#mail val : " + cert.length);
-					alert("#input val : " + cert_no.length);
-					alert('인증번호가 일치하지 않습니다');
+// 					alert(cert);
+// 					alert(cert_no);
+// 					alert("#mail val : " + cert.length);
+// 					alert("#input val : " + cert_no.length);
+// 					alert('인증번호가 일치하지 않습니다');
 					return;
 				}
-				$('#frm').attr('action','/cls/member/findIDProc.cls');
+				$.ajax({
+					url: '/cls/member/findIDProc.cls',
+					type: 'post',
+					dataType: 'json',
+					data:{
+						'name': name
+					},
+					success: function(obj){
+						alert('회원님의 ID는 ' + obj + ' 입니다');
+						$(location).attr('href', '/cls/member/findID.cls');
+					},
+					error: function(){
+						alert('통신에러');
+					}
+				});
+// 				$('#frm').attr('action','/cls/member/findIDProc.cls');
 			} else {
 				if(name == '') {
 					alert('이름을 입력하세요');

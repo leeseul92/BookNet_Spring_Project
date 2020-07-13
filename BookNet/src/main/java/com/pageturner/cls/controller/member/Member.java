@@ -70,12 +70,20 @@ public class Member {
 
 	// 이명환
 	// 아이디 찾기 처리
+//	@RequestMapping("/findIDProc.cls")
+//	public ModelAndView findIDProc(ModelAndView mv, MemberVO mVO) {
+//		String fid = mDAO.findID(mVO);
+//		mv.addObject("FID", fid);
+//		mv.setView(new RedirectView("비회원메인"));
+//		return mv;
+//	}
 	@RequestMapping("/findIDProc.cls")
-	public ModelAndView findIDProc(ModelAndView mv, MemberVO mVO) {
+	@ResponseBody
+	public String findIDProc(HttpServletRequest req, MemberVO mVO) {
+		System.out.println(mVO.toString());
 		String fid = mDAO.findID(mVO);
-		mv.addObject("FID", fid);
-		mv.setView(new RedirectView("비회원메인"));
-		return mv;
+		String str = "{\"id\": \"" + fid + "\"}";
+		return str;
 	}
 
 	// 이명환
@@ -152,9 +160,10 @@ public class Member {
 //		System.out.println(mVO.toString());
 		int cnt = mDAO.editUser(mVO);
 
-		if (cnt == 1) {
+		if (cnt == 1 && fVO.getFile().getSize() != 0) {
 //			System.out.println("파일업로드들어옴");
-//			System.out.println(fVO.toString());
+			System.out.println(fVO.toString());
+			System.out.println(fVO.getFile().getSize());
 			fVO.setId(mVO.getId());
 			mDAO.updateProfile(fVO);
 			String savename = pSrvc.uploadProc(req.getSession(), fVO.getFile());
