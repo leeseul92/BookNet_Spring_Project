@@ -8,9 +8,15 @@ import org.apache.ibatis.type.*;
 
 @Alias("alVO")
 public class AlarmVO {
-	private String type, extime, bname, id, save_loc, dday;
+	private String type, extime, bname, id, save_name, save_loc, dday;
 	private int pno;
 	
+	public String getSave_name() {
+		return save_name;
+	}
+	public void setSave_name(String save_name) {
+		this.save_name = save_name;
+	}
 	public String getSave_loc() {
 		return save_loc;
 	}

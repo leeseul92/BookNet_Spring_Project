@@ -100,7 +100,7 @@
              					${INFO.describe}
            					</h5>
          				</div>
-	           			 <!-- 본인이 접속한 경우 정보수정 페이지로 갈 수 있는 링크와 알ㅌ람리스트가 보인다. -->
+	           			 <!-- 본인이 접속한 경우 정보수정 페이지로 갈 수 있는 링크와 알람리스트가 보인다. -->
 	            		<c:if test="${SID eq INFO.id}">
               				<!-- 정보수정 페이지로 갈 수 있는 링크 -->
               				<div class="w3-col" style="margin-right: 0px; height: 44.8px;">

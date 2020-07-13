@@ -31,7 +31,7 @@
 		VALUES(
 			#{recomdate_no},
 			(SELECT NVL(MAX(recomdate_start) + 7, '2020-06-30') FROM recomdatetab),
-			(SELECT NVL(MAX(recomdate_end) + 7, '2020-07-06') FROM recomdatetab)
+			(SELECT NVL(MAX(recomdate_end) + 7, '2020-07-07') FROM recomdatetab)
 		)
 	</insert>
 	

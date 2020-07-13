@@ -44,7 +44,6 @@ public class MyPage {
 			if(id == null || id.equals(sid)) {
 				mVO.setId(sid);
 			}
-			
 			mVO = mpSrvc.getInfo(mVO);
 			int cnt = mpSrvc.countPosts(mVO);
 			int cntFallow = falSrvc.cntFallow(mVO);

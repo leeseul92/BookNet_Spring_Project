@@ -28,7 +28,7 @@
 		    membertab mt, profilepictab pt
 		WHERE
 		    mt.mno = pt.mno(+)
-		    AND mt.mno = ${mno}
+		    AND mt.mno = #{mno}
 		    AND pt.isshow = 'Y'
 	</select>
 	
