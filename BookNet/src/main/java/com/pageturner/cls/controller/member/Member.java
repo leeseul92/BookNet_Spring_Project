@@ -89,12 +89,20 @@ public class Member {
 	// 이명환
 	// 비번 찾기 처리
 	// **사용자에게 비번을 어떻게 제공해줄건지?**
+//	@RequestMapping("/findPWProc.cls")
+//	public ModelAndView findPWProc(ModelAndView mv, MemberVO mVO) {
+//		String fpw = mDAO.findPW(mVO);
+//		mv.addObject("FPW", fpw);
+//		mv.setView(new RedirectView("비회원메인"));
+//		return mv;
+//	}
 	@RequestMapping("/findPWProc.cls")
-	public ModelAndView findPWProc(ModelAndView mv, MemberVO mVO) {
+	@ResponseBody
+	public String findPWProc(HttpServletRequest req, MemberVO mVO) {
+		System.out.println(mVO.toString());
 		String fpw = mDAO.findPW(mVO);
-		mv.addObject("FPW", fpw);
-		mv.setView(new RedirectView("비회원메인"));
-		return mv;
+		String str = "{\"pw\": \"" + fpw + "\"}";
+		return str;
 	}
 
 	// 이명환

@@ -109,15 +109,15 @@
 		select
 			id
 		from
-			member
+			membertab
 		where
 			mail = #{mail}
 	</select>
 	<select id="findPW" resultType="String" parameterType="mVO">
 		select
-			pw
+			LPAD(substr(pw,3),length(pw),'*')
 		from
-			member
+			membertab
 		where
 			id = #{id}
 			and mail = #{mail}

@@ -96,10 +96,10 @@
 					type: 'post',
 					dataType: 'json',
 					data:{
-						'name': name
+						'mail': mail
 					},
 					success: function(obj){
-						alert('회원님의 ID는 ' + obj + ' 입니다');
+						alert('회원님의 ID는 ' + obj.id + ' 입니다');
 						$(location).attr('href', '/cls/member/findID.cls');
 					},
 					error: function(){
@@ -125,7 +125,23 @@
 					alert('인증번호가 일치하지 않습니다');
 					return;
 				}
-				$('#frm').attr('action','/cls/member/findPWProc.cls');
+				$.ajax({
+					url: '/cls/member/findPWProc.cls',
+					type: 'post',
+					dataType: 'json',
+					data:{
+						'id': id,
+						'mail': mail
+					},
+					success: function(obj){
+						alert('회원님의 PW는 ' + obj.pw + ' 입니다');
+						$(location).attr('href', '/cls/member/findID.cls');
+					},
+					error: function(){
+						alert('통신에러');
+					}
+				});
+// 				$('#frm').attr('action','/cls/member/findPWProc.cls');
 			}
 			
 			$('#frm').submit();
