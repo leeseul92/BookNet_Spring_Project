@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>지도 생성하기</title>
+<title>지도 생성하기(최종)</title>
 </head>
 <body>
 	<!-- 지도를 표시할 div 입니다 -->
