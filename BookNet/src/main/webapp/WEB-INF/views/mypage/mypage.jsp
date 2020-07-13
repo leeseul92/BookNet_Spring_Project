@@ -25,7 +25,7 @@
           		<!-- 좌측 : 회원 프로필 사진 및 게시글과 팔로우, 팔로워 수, 팔로우하기(언팔로우하기) -->
           		<div class="w3-col m3">
             	<!-- 회원 프로필 사진 -->
-            		<img class="w3-col" style="height: 298px;" src="/cls/img/${INFO.save_name}" />
+            		<img class="w3-col" style="width: 225px; height: auto;" src="/cls/img/${INFO.save_name}" />
             		<div class="w3-col">
               			<!-- 게시글 수 -->
               			<h3 class="w3-col w3-center">
