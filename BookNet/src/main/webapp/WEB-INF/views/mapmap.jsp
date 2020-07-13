@@ -20,7 +20,10 @@
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = {
 	        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-	        level: 3 // 지도의 확대 레벨
+	        level: 3, // 지도의 확대 레벨
+	        draggable: false,	// 마우스 휠, 드래그 동작 막기
+	        disableDoubleClickZoom: true,	// 더블클릭 확대 막기
+	        keyboardShortcuts: true	// 키보드 +,-로 확대축소 기능 켜기
 	    };  
 
 	// 1. 지도를 생성합니다    
