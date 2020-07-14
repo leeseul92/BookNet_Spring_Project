@@ -30,7 +30,7 @@ public class LoginAOP {
 		String sid = (String) req.getSession().getAttribute("SID");
 		if (sid == null) { // 로그인 안되있는 경우
 			((ModelAndView) obj[1]).addObject("isLogin", false);
-			((ModelAndView) obj[1]).setView(new RedirectView("/member/login.cls"));
+			((ModelAndView) obj[1]).setView(new RedirectView("/cls/member/login.cls"));
 		} else { // 로그인 되있는 경우
 			((ModelAndView) obj[1]).addObject("isLogin", true);
 		}

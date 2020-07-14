@@ -29,46 +29,38 @@
 	// 1. 지도를 생성합니다    
 	var map = new kakao.maps.Map(mapContainer, mapOption); 
 	
+	// 현재 위치의 위도와 경도를 알아내어 변수에 담고, 지도 중심을 설정합니다
 	navigator.geolocation.getCurrentPosition(function(position){
-// 		alert('현재위치 실행');
 		lat = position.coords.latitude;	// 위도
 		lon = position.coords.longitude;// 경도
-// 		alert(lat);
-// 		alert(lon);
 		map.setCenter(new kakao.maps.LatLng(lat, lon));
 	});
 	
 	// 2. 주소-좌표 변환 객체를 생성합니다
 	var geocoder = new kakao.maps.services.Geocoder();
 	
-	setTimeout(function(){
+	setTimeout(function(){	// 3.
 		geocoder.coord2RegionCode(lon, lat, displayInfo);
 	}, 50);
 	
 	// 3. 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
 	function displayInfo(result, status) {
-// 		alert('# displayCenterInfo');
 		if (status === kakao.maps.services.Status.OK) {
 
 			for (var i = 0; i < result.length; i++) {
 				// 행정동의 region_type 값은 'H' 이므로
 				if (result[i].region_type === 'H') {
-					qwer = result[i].address_name;
-// 					alert(qwer);
+					hname = result[i].address_name;	// 행정동 풀네임 변수에 담기
 					break;
 				}
 			}
 		}
-//			alert(qwer);
-//			alert(typeof qwer);
 	}
 	
+	// 행정동 풀네임에서 원하는 키워드 뽑아내기
 	setTimeout(function(){
-// 		alert(qwer);
-		asdf = qwer.lastIndexOf('동');
-// 		alert(asdf);
-		keyword = qwer.substring(0, asdf+1) + ' 서점';
-// 		alert(keyword);
+		addrname = hname.lastIndexOf('동');
+		keyword = hname.substring(0, addrname+1) + ' 서점';
 	}, 150);
 
 	// 장소 검색 객체를 생성합니다
@@ -79,13 +71,13 @@
 		ps.keywordSearch(keyword, placesSearchCB); 
 	}, 300);
 	
+	// '내 위치'마커 표시
 	setTimeout(function(){
 		myLoc();
 	}, 450);
 
 	// 키워드 검색 완료 시 호출되는 콜백함수 입니다
 	function placesSearchCB (data, status, pagination) {
-// 		alert('키워드검색 시작');
 	    if (status === kakao.maps.services.Status.OK) {
 
 	        // 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
@@ -96,13 +88,10 @@
 	            displayMarker(data[i]);    
 	            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
 	        }       
-// 			alert('마커 종료');
 
 	        // 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-// 			alert('지도범위 재설정');
 	        map.setBounds(bounds);
 	    } 
-// 		alert('키워드검색 종료');
 	}
 
 	// 5. 지도에 마커를 표시하는 함수입니다

@@ -47,7 +47,7 @@
 		<property name="port" value="465" />
 		<property name="username" value="gusdn602@gmail.com" />
 		<property name="password" value="akdltmxj753" />
-<!-- 		<property name="defaultEncoding" value="utf-8" /> -->
+	<!-- <property name="defaultEncoding" value="utf-8" /> -->
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.smtp.auth">true</prop>

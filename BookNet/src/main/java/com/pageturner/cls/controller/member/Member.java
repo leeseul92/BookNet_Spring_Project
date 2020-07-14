@@ -70,17 +70,9 @@ public class Member {
 
 	// 이명환
 	// 아이디 찾기 처리
-//	@RequestMapping("/findIDProc.cls")
-//	public ModelAndView findIDProc(ModelAndView mv, MemberVO mVO) {
-//		String fid = mDAO.findID(mVO);
-//		mv.addObject("FID", fid);
-//		mv.setView(new RedirectView("비회원메인"));
-//		return mv;
-//	}
 	@RequestMapping("/findIDProc.cls")
 	@ResponseBody
 	public String findIDProc(HttpServletRequest req, MemberVO mVO) {
-		System.out.println(mVO.toString());
 		String fid = mDAO.findID(mVO);
 		String str = "{\"id\": \"" + fid + "\"}";
 		return str;
@@ -88,45 +80,36 @@ public class Member {
 
 	// 이명환
 	// 비번 찾기 처리
-	// **사용자에게 비번을 어떻게 제공해줄건지?**
-//	@RequestMapping("/findPWProc.cls")
-//	public ModelAndView findPWProc(ModelAndView mv, MemberVO mVO) {
-//		String fpw = mDAO.findPW(mVO);
-//		mv.addObject("FPW", fpw);
-//		mv.setView(new RedirectView("비회원메인"));
-//		return mv;
-//	}
 	@RequestMapping("/findPWProc.cls")
 	@ResponseBody
 	public String findPWProc(HttpServletRequest req, MemberVO mVO) {
-		System.out.println(mVO.toString());
 		String fpw = mDAO.findPW(mVO);
 		String str = "{\"pw\": \"" + fpw + "\"}";
 		return str;
 	}
 
 	// 이명환
-	// 메일인증 처리
+	// 인증번호 메일 보내기 처리
 	@RequestMapping("/mail.cls")
 	@ResponseBody
 	public String mailProc(HttpServletRequest req) {
 		Dice dice = new Dice();
-		String cout = dice.Dice();
+		String cout = dice.Dice();	// 랜덤문자 변수에 담기
 
 		try {
 			MimeMessage msg = mailSender.createMimeMessage();
 			MimeMessageHelper msgHelper = new MimeMessageHelper(msg, true, "UTF-8");
-			msgHelper.setFrom("pageTurner");
-			msgHelper.setTo(req.getParameter("mail"));
-			msgHelper.setSubject("회원가입 인증메일 발송");
-			msgHelper.setText("인증번호는 " + cout + " 입니다");
+			msgHelper.setFrom("pageTurner");	// 보내는 사람
+			msgHelper.setTo(req.getParameter("mail"));	// 받는 사람
+			msgHelper.setSubject("회원가입 인증메일 발송");	// 제목
+			msgHelper.setText("인증번호는 " + cout + " 입니다");	// 내용
 
-			mailSender.send(msg);
+			mailSender.send(msg);	// 보내기
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		String str = "{\"tno\": \"" + cout + "\"}";
+		String str = "{\"tno\": \"" + cout + "\"}";	// js에 기억시키기 위해 랜덤문자 전달
 
 		return str;
 	}
@@ -165,23 +148,16 @@ public class Member {
 	@RequestMapping("/editUser.cls")
 	public ModelAndView editUser(HttpServletRequest req, ModelAndView mv, MemberVO mVO, ProfileVO fVO) {
 		mVO.setId((String) req.getSession().getAttribute("SID"));
-//		System.out.println(mVO.toString());
 		int cnt = mDAO.editUser(mVO);
 
+		// editUser() 실행 후, 파일이 선택된 경우(size가 있는 경우) 업로드 함수 실행
 		if (cnt == 1 && fVO.getFile().getSize() != 0) {
-//			System.out.println("파일업로드들어옴");
-			System.out.println(fVO.toString());
-			System.out.println(fVO.getFile().getSize());
 			fVO.setId(mVO.getId());
 			mDAO.updateProfile(fVO);
 			String savename = pSrvc.uploadProc(req.getSession(), fVO.getFile());
 			fVO.setOri_name(fVO.getFile().getOriginalFilename());
 			fVO.setSave_name(savename);
-//			String path = req.getSession().getServletContext().getRealPath("resources");
-//			path = path + "/profile";
 			mVO.setSave_name(savename);
-//			System.out.println("fVO 세팅 끝");
-//			System.out.println(fVO.toString());
 			int ck = mDAO.editProfile(fVO);
 			if(ck != 1) {
 				System.out.println("정보수정(프사업로드) 에러");
@@ -205,7 +181,7 @@ public class Member {
 			System.out.println("정보수정(탈퇴)처리 에러");
 		}
 		req.getSession().removeAttribute("SID");
-		mv.setView(new RedirectView("비회원메인페이지"));
+		mv.setView(new RedirectView("/cls/main/non.cls"));
 		return mv;
 	}
 

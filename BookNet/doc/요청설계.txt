@@ -125,3 +125,59 @@
 	처리함수	: Member.influencer()
 	뷰		: /WEB-INF/views/member/influencer.jsp
 --------------------------------------------------------------
+# 아이디/비밀번호 찾기 폼 요청 --> 이명환
+	요청내용	: /cls/member/findID.cls
+	파라미터	: 무
+	컨트롤러	: com.pageturner.cls.controller.member.Member
+	처리함수	: Member.findUser()
+	뷰		: /WEB-INF/views/member/findUser.jsp
+--------------------------------------------------------------
+# 아이디 찾기 비동기 처리 요청 --> 이명환
+	요청내용	: /cls/member/findIDProc.cls
+	파라미터	: id (mVO)
+	컨트롤러	: com.pageturner.cls.controller.member.Member
+	처리함수	: Member.findIDProc()
+	뷰		: 무 (/WEB-INF/views/member/findUser.jsp)
+--------------------------------------------------------------
+# 비밀번호 찾기 비동기 처리 요청 --> 이명환
+	요청내용	: /cls/member/findPWProc.cls
+	파라미터	: pw (mVO)
+	컨트롤러	: com.pageturner.cls.controller.member.Member
+	처리함수	: Member.findPWProc()
+	뷰		: 무 (/WEB-INF/views/member/findUser.jsp)
+--------------------------------------------------------------
+# 인증번호 메일 보내기 비동기 처리 요청 --> 이명환
+	요청내용	: /cls/member/mail.cls
+	파라미터	: mail
+	컨트롤러	: com.pageturner.cls.controller.member.Member
+	처리함수	: Member.mailProc()
+	뷰		: 무
+--------------------------------------------------------------
+# 정보수정페이지 요청 --> 이명환
+	요청내용	: /cls/member/editMemInfo.cls
+	파라미터	: 무
+	컨트롤러	: com.pageturner.cls.controller.member.Member
+	처리함수	: Member.edit()
+	뷰		: /WEB-INF/views/mypage/editMemb.jsp
+--------------------------------------------------------------
+# 정보수정(비밀번호 변경) 처리 요청 --> 이명환
+	요청내용	: /cls/member/editPW.cls
+	파라미터	: pw (mVO)
+	컨트롤러	: com.pageturner.cls.controller.member.Member
+	처리함수	: Member.editPW()
+	뷰		: /WEB-INF/views/mypage/mypage.jsp
+--------------------------------------------------------------
+# 정보수정(프로필사진 및 회원정보수정) 처리 요청 --> 이명환
+	요청내용	: /cls/member/editUser.cls
+	파라미터	: file, interest, intershow, birthshow, genshow (mVO, fVO)
+	컨트롤러	: com.pageturner.cls.controller.member.Member
+	처리함수	: Member.editUser()
+	뷰		: /WEB-INF/views/mypage/mypage.jsp
+--------------------------------------------------------------
+# 회원탈퇴 처리 요청 --> 이명환
+	요청내용	: /cls/member/delUser.cls
+	파라미터	: 무
+	컨트롤러	: com.pageturner.cls.controller.member.Member
+	처리함수	: Member.delUser()
+	뷰		: /WEB-INF/views/main/non_main.jsp
+--------------------------------------------------------------
