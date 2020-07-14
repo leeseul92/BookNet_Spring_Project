@@ -76,7 +76,6 @@ public class MyPage {
 			mv.setViewName(view);
 			return mv;
 		} else {
-			mv.setView(new RedirectView("/member/login.cls"));
 			return mv;
 		}
 	}
